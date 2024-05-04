@@ -10,6 +10,7 @@
 		"@types/node": "^20.12.8",
 		"@vitejs/plugin-vue": "^5.0.4",
 		"@vueuse/core": "^10.9.0",
+		"remeda": "^1.61.0",
 		"typescript": "^5.4.5",
 		"unocss": "^0.59.4",
 		"vite": "^5.2.11",
