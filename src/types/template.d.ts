@@ -1,4 +1,4 @@
-import { BindingStatus } from '@/core/enums.ts'
+import { BindingStatus } from '@/core/enums'
 
 export interface BindingData {
 	readonly game_type: string
