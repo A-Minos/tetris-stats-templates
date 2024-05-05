@@ -1,11 +1,8 @@
 import 'virtual:uno.css'
 import '@/styles/main.scss'
 
-import Binding from '@/components/Binding.vue'
-import Home from '@/components/Home.vue'
-
-import { createApp, h } from 'vue'
-import { createMemoryHistory, createRouter, RouterView } from 'vue-router'
+import { type Component, createApp, h } from 'vue'
+import { createMemoryHistory, createRouter, type RouteRecordRaw, RouterView } from 'vue-router'
 
 (async () => {
 	try {
@@ -16,16 +13,28 @@ import { createMemoryHistory, createRouter, RouterView } from 'vue-router'
 
 		const router = createRouter({
 			history: createMemoryHistory(),
-			routes: [
-				{
-					path: '/',
-					component: Home
-				},
-				{
-					path: '/binding',
-					component: Binding
-				}
-			]
+			routes: await Promise.all(
+				Object.entries(
+					import.meta.glob<{
+						readonly default: Component
+					}>('@/pages/**/*.vue')
+				).map(async ([path, loadPage]) => {
+					const name = path
+						.replace(/(.*)(\/)(pages)(\/)/g, '')
+						.replace(/(index)/g, '')
+						.replace(/(\.vue)$/g, '')
+
+					return {
+						path: `/${name}`,
+						component: async () => {
+							return await loadPage()
+								.then(page => {
+									return page.default
+								})
+						}
+					} satisfies RouteRecordRaw
+				})
+			)
 		})
 
 		app.use(router)
