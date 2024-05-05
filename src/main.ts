@@ -1,8 +1,8 @@
 import 'virtual:uno.css'
 import '@/styles/main.scss'
+
 import Binding from '@/components/Binding.vue'
 import Home from '@/components/Home.vue'
-import { data } from '@/core/template'
 
 import { createApp, h } from 'vue'
 import { createMemoryHistory, createRouter, RouterView } from 'vue-router'
@@ -31,18 +31,27 @@ import { createMemoryHistory, createRouter, RouterView } from 'vue-router'
 		app.use(router)
 		app.mount(element)
 
-		const targetPath = `/${data.value.type}`
+		const handlePathUpdate = async () => {
+			const path = `/${document.querySelector<HTMLTemplateElement>('template#path')!.innerHTML.trim()}`
 
-		const routes = router.getRoutes()
-		const routeExists = routes.some(route => {
-			return targetPath === route.path
-		})
-
-		if (routeExists) {
-			await router.push({
-				path: targetPath
-			})
+			if (
+				router.getRoutes()
+					.some(record => {
+						return path === record.path
+					})
+			) {
+				await router.push({
+					path
+				})
+			}
 		}
+
+		new MutationObserver(handlePathUpdate)
+			.observe(document.querySelector<HTMLTemplateElement>('template#path')!.content, {
+				childList: true
+			})
+
+		await handlePathUpdate()
 
 		document.body.appendChild(element)
 	} catch (e) {
