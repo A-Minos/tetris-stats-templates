@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { BindingStatus } from '@/core/enums'
+import { data } from '@/core/template'
 import { asyncComputed } from '@vueuse/core'
 import { isNonNullish } from 'remeda'
-import { data } from '@/core/template'
 
 const _ = data.value
 
@@ -90,7 +90,7 @@ const stateImage = asyncComputed(async () => {
 }
 
 .avatar {
-	@apply w-24 h-24 rounded-5;
+	@apply w-24 h-24 rounded-5 drop-shadow-[0_.75rem_1.5rem_#00000038];
 }
 
 .bot_name {
