@@ -3,7 +3,7 @@ const test_binding = () => {
 	document.querySelector<HTMLTemplateElement>('template#path')!.innerHTML = 'binding'
 
 	document.querySelector<HTMLTemplateElement>('template#data')!.innerHTML = JSON.stringify({
-		game_type: prompt('游戏类型', 'tetr.io'),
+		game_type: prompt('游戏类型 (tos, top, tetr.io)', 'tetr.io'),
 		status: prompt('类型 (error, success, unverified, unknown, unlink)', 'unknown'),
 		user_name: prompt('用户名', 'creeperqwq'),
 		user_avatar: prompt('用户头像', 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSczMDAnIGhlaWdodD0nMzAwJyBzdHlsZT0nYmFja2dyb3VuZC1jb2xvcjpyZ2JhKDgsMTAsNiwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoNDMsMjAyLDUwLDEpOyBzdHJva2U6cmdiYSg0MywyMDIsNTAsMSk7IHN0cm9rZS13aWR0aDoxLjU7Jz48cmVjdCAgeD0nMTI5JyB5PScxMjknIHdpZHRoPSc0MicgaGVpZ2h0PSc0MicvPjxyZWN0ICB4PScxMjknIHk9JzE3MScgd2lkdGg9JzQyJyBoZWlnaHQ9JzQyJy8+PHJlY3QgIHg9Jzg3JyB5PScxMjknIHdpZHRoPSc0MicgaGVpZ2h0PSc0MicvPjxyZWN0ICB4PScxNzEnIHk9JzEyOScgd2lkdGg9JzQyJyBoZWlnaHQ9JzQyJy8+PHJlY3QgIHg9Jzg3JyB5PScxNzEnIHdpZHRoPSc0MicgaGVpZ2h0PSc0MicvPjxyZWN0ICB4PScxNzEnIHk9JzE3MScgd2lkdGg9JzQyJyBoZWlnaHQ9JzQyJy8+PHJlY3QgIHg9Jzg3JyB5PScyMTMnIHdpZHRoPSc0MicgaGVpZ2h0PSc0MicvPjxyZWN0ICB4PScxNzEnIHk9JzIxMycgd2lkdGg9JzQyJyBoZWlnaHQ9JzQyJy8+PHJlY3QgIHg9JzQ1JyB5PSc4Nycgd2lkdGg9JzQyJyBoZWlnaHQ9JzQyJy8+PHJlY3QgIHg9JzIxMycgeT0nODcnIHdpZHRoPSc0MicgaGVpZ2h0PSc0MicvPjxyZWN0ICB4PSc0NScgeT0nMTI5JyB3aWR0aD0nNDInIGhlaWdodD0nNDInLz48cmVjdCAgeD0nMjEzJyB5PScxMjknIHdpZHRoPSc0MicgaGVpZ2h0PSc0MicvPjwvZz48L3N2Zz4='),
