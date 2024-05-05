@@ -1,4 +1,10 @@
 <script lang="ts">
+enum GAME_TYPE {
+	TOS = 'tos',
+	TOP = 'top',
+	TETR_IO = 'tetr.io'
+}
+
 enum BindingStatus {
 	ERROR = 'error',
 	SUCCESS = 'success',
@@ -8,7 +14,7 @@ enum BindingStatus {
 }
 
 interface Data {
-	readonly game_type: string
+	readonly game_type: GAME_TYPE
 	readonly status: BindingStatus
 	readonly user_name: string
 	readonly user_avatar: string
