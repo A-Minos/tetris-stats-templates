@@ -115,8 +115,12 @@ img.status {
 	@apply text-7 fw-350 leading-9 text-center;
 }
 
-.game_type, .user_name {
+.game_type {
 	@apply fw-800 mx-2;
+}
+
+.user_name {
+	@extend .game_type;
 }
 
 .bot_name {
