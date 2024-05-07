@@ -33,19 +33,11 @@ import InfoAdpm from '@/components/info-adpm.vue'
 import InfoApm from '@/components/info-apm.vue'
 import InfoBlitz from '@/components/info-blitz.vue'
 import InfoLpm from '@/components/info-lpm.vue'
-import { asyncComputed } from '@vueuse/core'
-import { isEmpty, isNonNullish } from 'remeda'
+import { isEmpty } from 'remeda'
 
 const data: Data = JSON.parse(
 	document.querySelector<HTMLTemplateElement>('template#data')!.innerHTML.trim()
 )
-
-const rankImage = asyncComputed(async () => {
-	return await import(`@/assets/images/rank/${data.rank}.svg?url`)
-		.then(module => {
-			return module.default
-		})
-})
 </script>
 
 <template>
