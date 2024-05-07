@@ -27,7 +27,7 @@ const stateImage = asyncComputed(async () => {
 </script>
 
 <template>
-	<div class="w-fit h-fit p-7.5 bg-[#f1f1f1] font-template">
+	<div class="w-fit p-7.5 bg-[#f1f1f1] font-template">
 		<div class="flex flex-col gap-3.75">
 			<div class="flex justify-center items-center gap-8">
 				<img :src="data.user_avatar" alt="玩家头像" class="w-24 h-24 rounded-5"/>
