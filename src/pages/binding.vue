@@ -120,7 +120,7 @@ img.status {
 }
 
 .user_name {
-	@extend .game_type;
+	@apply fw-800 mx-2;
 }
 
 .bot_name {
