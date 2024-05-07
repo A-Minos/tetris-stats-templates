@@ -41,7 +41,7 @@ const stateImage = asyncComputed(async () => {
 </script>
 
 <template>
-	<div class="w-132 p-8 bg-[#f1f1f1] font-[CabinetGrotesk-Variable,SourceHanSansSC-VF]">
+	<div class="w-132 p-8 bg-[#f1f1f1] font-template">
 		<div class="flex flex-col items-center gap-5">
 			<div class="flex items-center gap-8">
 				<img :src="data.user_avatar" alt="用户头像" class="avatar"/>
@@ -99,18 +99,6 @@ const stateImage = asyncComputed(async () => {
 </template>
 
 <style lang="scss" scoped>
-@font-face {
-	font-family: SourceHanSansSC-VF;
-	src: url('@/assets/fonts/SourceHanSans/SourceHanSansSC-VF.otf.woff2') format('woff2');
-	font-display: swap;
-}
-
-@font-face {
-	font-family: CabinetGrotesk-Variable;
-	src: url('@/assets/fonts/CabinetGrotesk/CabinetGrotesk-Variable.woff2') format('woff2');
-	font-display: swap;
-}
-
 .avatar {
 	@apply w-24 h-24 rounded-5 drop-shadow-[0_.75rem_1.5rem_#00000038];
 }

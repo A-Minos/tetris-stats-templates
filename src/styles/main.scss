@@ -1,3 +1,19 @@
 :root, body {
-	@apply m-0 p-0 font-sans text-[16px];
+	@apply m-0 p-0;
+}
+
+@font-face {
+	font-family: SourceHanSansSC-VF;
+	src: url('@/assets/fonts/SourceHanSans/SourceHanSansSC-VF.otf.woff2') format('woff2');
+	font-display: swap;
+}
+
+@font-face {
+	font-family: CabinetGrotesk-Variable;
+	src: url('@/assets/fonts/CabinetGrotesk/CabinetGrotesk-Variable.woff2') format('woff2');
+	font-display: swap;
+}
+
+.font-template {
+	@apply font-[CabinetGrotesk-Variable, SourceHanSansSC-VF];
 }
