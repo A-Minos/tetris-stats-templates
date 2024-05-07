@@ -1,9 +1,5 @@
 <script lang="ts">
-enum GAME_TYPE {
-	TOS = 'tos',
-	TOP = 'top',
-	TETR_IO = 'tetr.io'
-}
+import type GAME_TYPE from '@/enums/GameType.ts'
 
 enum BindingStatus {
 	ERROR = 'error',
