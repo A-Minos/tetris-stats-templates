@@ -37,9 +37,6 @@ import { createMemoryHistory, createRouter, type RouteRecordRaw, RouterView } fr
 			)
 		})
 
-		app.use(router)
-		app.mount(element)
-
 		const handlePathUpdate = async () => {
 			const path = `/${document.querySelector<HTMLTemplateElement>('template#path')!.innerHTML.trim()}`
 
@@ -61,6 +58,9 @@ import { createMemoryHistory, createRouter, type RouteRecordRaw, RouterView } fr
 			})
 
 		await handlePathUpdate()
+
+		app.use(router)
+		app.mount(element)
 
 		document.body.appendChild(element)
 	} catch (e) {
