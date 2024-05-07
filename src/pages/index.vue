@@ -63,24 +63,13 @@ const test_tetrio_info = () => {
 			prompt('用户 vs', '175.93')
 		)
 
+		readonly lpm = Number(this.pps * 24)
+		readonly apl = Number(this.apm / this.lpm)
+		readonly adpm = Number(this.vs * 0.6)
+		readonly adpl = Number(this.adpm / this.lpm)
+
 		readonly sprint = prompt('用户 40l', '33s')
 		readonly blitz = prompt('用户 blitz', 'N/A')
-
-		get adpm() {
-			return Number(this.vs * 0.6)
-		}
-
-		get adpl() {
-			return Number(this.adpm / this.lpm)
-		}
-
-		get apl() {
-			return Number(this.apm / this.lpm)
-		}
-
-		get lpm() {
-			return Number(this.pps / 24)
-		}
 	})
 }
 </script>
