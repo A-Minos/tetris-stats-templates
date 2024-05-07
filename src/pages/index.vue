@@ -25,7 +25,7 @@ const test_binding = () => {
 	})
 }
 
-const test_tetr_dot_io_info = () => {
+const test_tetrio_info = () => {
 	document.querySelector<HTMLTemplateElement>('template#path')!.innerHTML = 'tetrio/info'
 
 	document.querySelector<HTMLTemplateElement>('template#data')!.innerHTML = JSON.stringify(new class {
@@ -91,7 +91,7 @@ const test_tetr_dot_io_info = () => {
 
 		<div class="flex gap-1 p-2">
 			<button @click="test_binding">测试 绑定</button>
-			<button @click="test_tetr_dot_io_info">测试 tetrio 个人信息</button>
+			<button @click="test_tetrio_info">测试 tetrio 个人信息</button>
 		</div>
 	</div>
 </template>
