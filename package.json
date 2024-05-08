@@ -10,12 +10,14 @@
 		"@types/node": "^20.12.8",
 		"@vitejs/plugin-vue": "^5.0.4",
 		"@vueuse/core": "^10.9.0",
+		"echarts": "^5.5.0",
 		"remeda": "^1.61.0",
 		"sass": "^1.76.0",
 		"typescript": "^5.4.5",
 		"unocss": "^0.59.4",
 		"vite": "^5.2.11",
 		"vue": "^3.4.26",
+		"vue-echarts": "^6.7.2",
 		"vue-router": "^4.3.2",
 		"vue-tsc": "^2.0.16"
 	}
