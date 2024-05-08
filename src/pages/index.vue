@@ -160,7 +160,7 @@ const test_tetrio_info = () => {
 						continue
 					}
 
-					new_min_tr = this.min_tr - offset - overflow
+					new_min_tr = this.min_tr - offset + overflow
 
 					if (new_min_tr < 0) {
 						overflow++
@@ -181,6 +181,8 @@ const test_tetrio_info = () => {
 						this.split_interval = (range_max - range_min) / 4
 						break
 					}
+
+					offset++
 				}
 
 				this.offset = offset
