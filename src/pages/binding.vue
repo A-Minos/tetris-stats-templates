@@ -2,10 +2,17 @@
 interface Data {
 	readonly platform: string
 	readonly status: 'error' | 'success' | 'unknown' | 'unlink' | 'unverified'
-	readonly user_name: string
-	readonly user_avatar: string
-	readonly bot_name: string
-	readonly bot_avatar: string
+
+	readonly user: {
+		readonly avatar: string
+		readonly name: string
+	}
+
+	readonly bot: {
+		readonly avatar: string
+		readonly name: string
+	}
+
 	readonly command: string
 }
 </script>
@@ -30,13 +37,13 @@ const stateImage = asyncComputed(async () => {
 	<div class="w-fit p-7.5 bg-[#f1f1f1] font-template">
 		<div class="flex flex-col gap-3.75">
 			<div class="flex justify-center items-center gap-8">
-				<img :src="data.user_avatar" alt="玩家头像" class="w-24 h-24 rounded-5"/>
+				<img :src="data.user.avatar" alt="玩家头像" class="w-24 h-24 rounded-5"/>
 
 				<template v-if="isNonNullish(stateImage)">
 					<img :src="stateImage" alt="状态" class="w-32 h-14 rounded-5"/>
 				</template>
 
-				<img :src="data.bot_avatar" alt="Bot 头像" class="w-24 h-24 rounded-5"/>
+				<img :src="data.bot.avatar" alt="Bot 头像" class="w-24 h-24 rounded-5"/>
 			</div>
 
 			<div/>
@@ -48,12 +55,12 @@ const stateImage = asyncComputed(async () => {
 
 				<br/>
 
-				<span class="fw-extrabold">&nbsp;{{ data.user_name }}&nbsp;</span>
+				<span class="fw-extrabold">&nbsp;{{ data.user.name }}&nbsp;</span>
 
 				<br/>
 
 				<span>成功验证并绑定至</span>
-				<span>&nbsp;{{ data.bot_name }}</span>
+				<span>&nbsp;{{ data.bot.name }}</span>
 				<span>.</span>
 			</div>
 
