@@ -7,7 +7,7 @@ import Background from '@/assets/images/cards/ADPM.svg?url'
 		<img :src="Background" alt="背景"/>
 
 		<div class="absolute top-0 left-0 w-full h-full">
-			<div class="absolute bottom-4.25 left-6 text-[#235db4] text-11">
+			<div class="absolute bottom-4.25 left-6 text-[#235db4] text-11 font-medium">
 				<div class="w-48 overflow-hidden text-ellipsis">
 					<slot/>
 				</div>
