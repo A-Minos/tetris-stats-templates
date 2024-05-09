@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import point from '@/assets/images/chart/point.svg?url'
 import type { TetraLeagueHistoryRecord } from '@/types/shared'
-import { resetTime } from '@/utils/date.ts'
 import type { LineSeriesOption } from 'echarts/charts'
 import { LineChart } from 'echarts/charts'
 import type { GridComponentOption, MarkLineComponentOption } from 'echarts/components'
@@ -52,12 +51,12 @@ const option = computed<ChartOption>(() => {
 						return ''
 					}
 					const month = Number(date.getMonth() + 1)
-					.toString()
-					.padStart(2, '0')
+						.toString()
+						.padStart(2, '0')
 
 					const day = date.getDate()
-					.toString()
-					.padStart(2, '0')
+						.toString()
+						.padStart(2, '0')
 
 					// value 是 echarts 分割后的, 不能拿 data 里的数据来判断
 					// 同时输入数据的范围是固定的, 分割时长是固定的, 所以用硬编码 index 来判断是否为最后一组(应显示的)数据
@@ -217,14 +216,14 @@ onMounted(() => {
 
 <template>
 	<div class="relative w-143.75 h-68.75 bg-[linear-gradient(222.34deg,#525252_11.97%,#1d1916_89.73%)]">
-		<v-chart v-if="show" :option="option"/>
+		<v-chart v-if="show" :option="option" />
 
 		<div class="absolute left-6 top-4.75 text-6.25 fw-extrabold text-white">
 			Tetra Rating (TR)
 		</div>
 
 		<div class="absolute left-6 top-22.5">
-			<slot/>
+			<slot />
 		</div>
 	</div>
 </template>
