@@ -1,7 +1,9 @@
 <script lang="ts">
+import type { Avatar, TetraLeagueHistoryRecord } from '@/types/shared'
+
 interface Data {
 	readonly user: {
-		readonly avatar: string
+		readonly avatar: Avatar
 		readonly name: string
 		readonly bio: string
 	}
@@ -28,7 +30,7 @@ interface Data {
 	}
 
 	readonly tetra_league_history: {
-		readonly data: [record_at: number, tr: number][]
+		readonly data: TetraLeagueHistoryRecord[]
 		readonly split_interval: number
 		readonly min_tr: number
 		readonly max_tr: number
@@ -74,8 +76,6 @@ const rankImage = asyncComputed(async () => {
 			return module.default
 		})
 })
-
-console.log(data)
 </script>
 
 <template>

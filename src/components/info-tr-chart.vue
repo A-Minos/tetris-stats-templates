@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import point from '@/assets/images/chart/point.svg?url'
+import type { TetraLeagueHistoryRecord } from '@/types/shared'
 import type { LineSeriesOption } from 'echarts/charts'
 import { LineChart } from 'echarts/charts'
 import type { GridComponentOption, MarkLineComponentOption } from 'echarts/components'
@@ -13,7 +14,7 @@ use([GridComponent, MarkLineComponent, LineChart, SVGRenderer])
 
 const props = defineProps<{
 	readonly current_tr: number
-	readonly data: [record_at: number, tr: number][]
+	readonly data: TetraLeagueHistoryRecord[]
 	readonly split_interval: number
 	readonly min_tr: number
 	readonly max_tr: number

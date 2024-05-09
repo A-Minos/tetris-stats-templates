@@ -1,10 +1,12 @@
 <script lang="ts">
+import type { Avatar } from '@/types/shared'
+
 interface Data {
 	readonly platform: string
 	readonly status: 'error' | 'success' | 'unknown' | 'unlink' | 'unverified'
 
 	readonly user: {
-		readonly avatar: string
+		readonly avatar: Avatar
 		readonly name: string
 	}
 
