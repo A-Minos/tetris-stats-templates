@@ -8,9 +8,6 @@ importers:
 
   .:
     devDependencies:
-      '@types/blueimp-md5':
-        specifier: ^2.18.2
-        version: 2.18.2
       '@types/identicon.js':
         specifier: ^2.3.4
         version: 2.3.4
@@ -23,9 +20,6 @@ importers:
       '@vueuse/core':
         specifier: ^10.9.0
         version: 10.9.0(vue@3.4.26(typescript@5.4.5))
-      blueimp-md5:
-        specifier: ^2.19.0
-        version: 2.19.0
       date-fns:
         specifier: ^3.6.0
         version: 3.6.0
@@ -490,9 +484,6 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@types/blueimp-md5@2.18.2':
-    resolution: {integrity: sha512-dJ9yRry9Olt5GAWlgCtE5dK9d/Dfhn/V7hna86eEO2Pn76+E8Y0S0n61iEUEGhWXXgtKtHxtZLVNwL8X+vLHzg==}
-
   '@types/estree@1.0.5':
     resolution: {integrity: sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==}
 
@@ -675,9 +666,6 @@ packages:
   binary-extensions@2.3.0:
     resolution: {integrity: sha512-Ceh+7ox5qe7LJuLHoY0feh3pHuUDHAcRUeyL2VYghZwfpkNIy/+8Ocg0a3UuSoYzavmylwuLWQOf3hl0jjMMIw==}
     engines: {node: '>=8'}
-
-  blueimp-md5@2.19.0:
-    resolution: {integrity: sha512-DRQrD6gJyy8FbiE4s+bDoXS9hiW3Vbx5uCdwvcCf3zLHL+Iv7LtGHLpr+GZV8rHG8tK766FGYBwRbu8pELTt+w==}
 
   brace-expansion@2.0.1:
     resolution: {integrity: sha512-XnAIvQ8eM+kC6aULx6wuQiwVsnzsi9d3WxzV3FpWTGA19F621kwdbsAcFKXgKUHZWsy+mY6iL1sHTxWEFCytDA==}
@@ -1610,8 +1598,6 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.17.2':
     optional: true
 
-  '@types/blueimp-md5@2.18.2': {}
-
   '@types/estree@1.0.5': {}
 
   '@types/identicon.js@2.3.4': {}
@@ -1893,8 +1879,6 @@ snapshots:
   balanced-match@1.0.2: {}
 
   binary-extensions@2.3.0: {}
-
-  blueimp-md5@2.19.0: {}
 
   brace-expansion@2.0.1:
     dependencies:
