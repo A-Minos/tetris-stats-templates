@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import point from '@/assets/images/chart/point.svg?url'
 import type { TetraLeagueHistoryRecord } from '@/types/shared'
+import { resetTime } from '@/utils/date.ts'
 import type { LineSeriesOption } from 'echarts/charts'
 import { LineChart } from 'echarts/charts'
 import type { GridComponentOption, MarkLineComponentOption } from 'echarts/components'
@@ -57,7 +58,13 @@ const option = computed<ChartOption>(() => {
 						.toString()
 						.padStart(2, '0')
 
-					if (index === props.data.length - 1) {
+					const lastDay = Math.max(
+						...props.data.map(data => {
+							return +new Date(data.record_at)
+						})
+					)
+
+					if (value === lastDay) {
 						return `{last_month|${month}}\n{last_day|${day}}`
 					}
 
@@ -134,8 +141,10 @@ const option = computed<ChartOption>(() => {
 		series: [
 			{
 				data: props.data.map(data => {
+					const date = new Date(data.record_at)
+
 					return [
-						+data.record_at,
+						+resetTime(date),
 						Number(
 							Number(data.tr).toFixed(2)
 						)

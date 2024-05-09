@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { resetTime } from '@/utils/date.ts'
 import { useKeyModifier } from '@vueuse/core'
 
 const controlPressed = useKeyModifier('Control')
@@ -118,10 +119,7 @@ const test_tetrio_info = () => {
 				}
 			].map(data => {
 				const date = new Date(data.record_at)
-				date.setHours(0)
-				date.setMinutes(0)
-				date.setSeconds(0)
-				data.record_at = date
+				data.record_at = resetTime(date)
 
 				return data
 			})
