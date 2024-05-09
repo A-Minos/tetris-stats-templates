@@ -8,7 +8,7 @@ import Background from '@/assets/images/cards/APM.svg?url'
 
 		<div class="absolute top-0 left-0 w-full h-full">
 			<div class="absolute bottom-4.25 left-6 text-[#b5530a] text-11">
-				<div class="w-40 overflow-hidden text-ellipsis">
+				<div class="w-48 overflow-hidden text-ellipsis">
 					<slot/>
 				</div>
 			</div>
