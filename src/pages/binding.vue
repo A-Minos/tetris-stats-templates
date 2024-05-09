@@ -40,13 +40,15 @@ const stateImage = asyncComputed(async () => {
 	<div class="w-fit p-7.5 bg-[#f1f1f1] font-template">
 		<div class="flex flex-col gap-3.75">
 			<div class="flex justify-center items-center gap-8">
-				<img :src="data.user.avatar" alt="玩家头像" class="w-24 h-24 rounded-5"/>
+				<Avatar :avatar="data.user.avatar" alt="玩家头像"
+						class="w-24 h-24 drop-shadow-[0_0.6875rem_1.4375rem_#00000038] rounded-5"/>
 
 				<template v-if="isNonNullish(stateImage)">
 					<img :src="stateImage" alt="状态" class="w-32 h-14 rounded-5"/>
 				</template>
 
-				<img :src="data.bot.avatar" alt="Bot 头像" class="w-24 h-24 rounded-5"/>
+				<img :src="data.bot.avatar" alt="Bot 头像"
+					 class="w-24 h-24 drop-shadow-(0_0.6875rem_1.4375rem_#00000038) rounded-5"/>
 			</div>
 
 			<div/>
