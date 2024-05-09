@@ -86,9 +86,10 @@ const rankImage = asyncComputed(async () => {
 		<div class="mt-2.5">
 			<div class="flex flex-col gap-6.25">
 				<div class="flex gap-6.25">
-					<div class="w-68.75 max-h-68.75 rounded-7.5 bg-white">
+					<div class="w-68.75 max-h-68.75 drop-shadow-[0_0.5625rem_1.5625rem_#00000026] rounded-7.5 bg-white">
 						<div class="flex flex-col items-center p-6.25 gap-2.5">
-							<img :src="data.user.avatar" alt="用户头像" class="w-31.25 h-31.25 rounded-full"/>
+							<Avatar :avatar="data.user.avatar" alt="用户头像"
+									class="w-31.25 h-31.25 drop-shadow-[0_0.6875rem_1.4375rem_#00000038] rounded-full"/>
 
 							<div class="break-all">
 								<span class="text-6.25 font-extrabold">{{ data.user.name }}</span>
@@ -104,7 +105,7 @@ const rankImage = asyncComputed(async () => {
 						</div>
 					</div>
 
-					<div class="w-68.75 max-h-68.75 rounded-7.5 bg-white">
+					<div class="w-68.75 max-h-68.75 drop-shadow-[0_0.5625rem_1.5625rem_#00000026] rounded-7.5 bg-white">
 						<div class="flex flex-col p-6.25">
 							<img :src="logo" alt="Logo" class="w-15 h-15 rounded-2.5"/>
 							<span class="text-7.5 fw-extrabold">TETR.IO</span>
@@ -119,7 +120,7 @@ const rankImage = asyncComputed(async () => {
 					</div>
 				</div>
 
-				<div class="rounded-7.5 overflow-hidden">
+				<div class="drop-shadow-[0_0.9375rem_1.875rem_#0000004d] rounded-7.5 overflow-hidden">
 					<info-tr-chart :current_tr="data.tetra_league.tr" :data="data.tetra_league_history.data"
 								   :max_tr="data.tetra_league_history.max_tr" :min_tr="data.tetra_league_history.min_tr"
 								   :offset="data.tetra_league_history.offset"
@@ -143,39 +144,51 @@ const rankImage = asyncComputed(async () => {
 
 				<div class="flex gap-6.25">
 					<div class="flex flex-col gap-6.25">
-						<info-lpm>
-							{{ Number(data.tetra_league.lpm).toFixed(2) }}
+						<div class="drop-shadow-[0_0.5625rem_1.5625rem_#00000026]">
+							<info-lpm>
+								{{ Number(data.tetra_league.lpm).toFixed(2) }}
 
-							<template #extra>
-								<span class="whitespace-nowrap">{{
-										Number(data.tetra_league.pps).toFixed(2)
-									}} pps</span>
-							</template>
-						</info-lpm>
+								<template #extra>
+								<span class="whitespace-nowrap">
+									{{ Number(data.tetra_league.pps).toFixed(2) }} pps
+								</span>
+								</template>
+							</info-lpm>
+						</div>
 
-						<info-apm>
-							{{ Number(data.tetra_league.apm).toFixed(2) }}
+						<div class="drop-shadow-[0_0.5625rem_1.5625rem_#00000026]">
+							<info-apm>
+								{{ Number(data.tetra_league.apm).toFixed(2) }}
 
-							<template #extra>
-								<span class="whitespace-nowrap">x{{ Number(data.tetra_league.apl).toFixed(2) }}</span>
-							</template>
-						</info-apm>
+								<template #extra>
+									<span class="whitespace-nowrap">
+										x{{ Number(data.tetra_league.apl).toFixed(2) }}
+									</span>
+								</template>
+							</info-apm>
+						</div>
 
-						<info-adpm>
-							{{ Number(data.tetra_league.adpm).toFixed(2) }}
+						<div class="drop-shadow-[0_0.5625rem_1.5625rem_#00000026]">
+							<info-adpm>
+								{{ Number(data.tetra_league.adpm).toFixed(2) }}
 
-							<template #extra>
-								<span class="whitespace-nowrap">{{ Number(data.tetra_league.vs).toFixed(2) }} vs</span>
+								<template #extra>
+									<span class="whitespace-nowrap">
+										{{ Number(data.tetra_league.vs).toFixed(2) }} vs
+									</span>
 
-								<br/>
+									<br/>
 
-								<span class="whitespace-nowrap">x{{ Number(data.tetra_league.adpl).toFixed(2) }}</span>
-							</template>
-						</info-adpm>
+									<span class="whitespace-nowrap">
+										x{{ Number(data.tetra_league.adpl).toFixed(2) }}
+									</span>
+								</template>
+							</info-adpm>
+						</div>
 					</div>
 
 					<div
-						class="w-68.75 h-68.75 bg-[linear-gradient(222.34deg,#525252_11.97%,#1d1916_89.73%),linear-gradient(222.34deg,#4f9dff_11.97%,#2563ea_89.73%)] rounded-7.5">
+						class="w-68.75 h-68.75 bg-[linear-gradient(222.34deg,#525252_11.97%,#1d1916_89.73%),linear-gradient(222.34deg,#4f9dff_11.97%,#2563ea_89.73%)] drop-shadow-[0_0.9375rem_1.875rem_#0000004d] rounded-7.5">
 						<info-radar-chart :app="data.radar.app" :ci="data.radar.ci" :dspp="data.radar.dspp"
 										  :dsps="data.radar.dsps" :ge="data.radar.ge" :pps="data.tetra_league.pps"/>
 					</div>
@@ -184,8 +197,13 @@ const rankImage = asyncComputed(async () => {
 				<span class="text-8.75 fw-black mt-4.5">Singleplayer Stats</span>
 
 				<div class="flex gap-6.25">
-					<info-40l>{{ data.sprint }}</info-40l>
-					<info-blitz>{{ data.blitz }}</info-blitz>
+					<div class="drop-shadow-[0_0.5625rem_1.5625rem_#00000026]">
+						<info-40l>{{ data.sprint }}</info-40l>
+					</div>
+
+					<div class="drop-shadow-[0_0.5625rem_1.5625rem_#00000026]">
+						<info-blitz>{{ data.blitz }}</info-blitz>
+					</div>
 				</div>
 
 				<div class="text-7.5 text-center fw-750">
