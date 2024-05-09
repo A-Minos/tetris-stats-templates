@@ -31,5 +31,5 @@ const url = computed(() => {
 </script>
 
 <template>
-	<img :src="url" alt="玩家头像" class="w-24 h-24 rounded-5"/>
+	<img :src="url" alt="头像"/>
 </template>
