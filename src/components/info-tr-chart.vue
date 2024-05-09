@@ -37,6 +37,7 @@ const option = computed<ChartOption>(() => {
 		xAxis: {
 			type: 'time',
 			minInterval: 3600 * 24 * 1000,
+			maxInterval: 3600 * 24 * 1000, // 防止 echarts 放大间隔
 			axisTick: {
 				show: false
 			},
@@ -47,24 +48,20 @@ const option = computed<ChartOption>(() => {
 				formatter: (value, index) => {
 					const date = new Date(value)
 
-					if (index <= 0 || index >= props.data.length) {
+					if (index % 2 !== 0 || index === 0) {
 						return ''
 					}
 					const month = Number(date.getMonth() + 1)
-						.toString()
-						.padStart(2, '0')
+					.toString()
+					.padStart(2, '0')
 
 					const day = date.getDate()
-						.toString()
-						.padStart(2, '0')
+					.toString()
+					.padStart(2, '0')
 
-					const lastDay = Math.max(
-						...props.data.map(data => {
-							return +new Date(data.record_at)
-						})
-					)
-
-					if (value === lastDay) {
+					// value 是 echarts 分割后的, 不能拿 data 里的数据来判断
+					// 同时输入数据的范围是固定的, 分割时长是固定的, 所以用硬编码 index 来判断是否为最后一组(应显示的)数据
+					if (index === 10) {
 						return `{last_month|${month}}\n{last_day|${day}}`
 					}
 
@@ -141,13 +138,9 @@ const option = computed<ChartOption>(() => {
 		series: [
 			{
 				data: props.data.map(data => {
-					const date = new Date(data.record_at)
-
 					return [
-						+resetTime(date),
-						Number(
-							Number(data.tr).toFixed(2)
-						)
+						new Date(data.record_at),
+						Number(data.tr)
 					]
 				}),
 				type: 'line',
