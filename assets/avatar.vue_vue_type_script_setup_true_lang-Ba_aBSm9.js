@@ -1,4 +1,4 @@
-import{d as B,g as I,c as E,o as q}from"./index-vjZEPcQl.js";const L=(h,f,z)=>{const a=h[f];return a?typeof a=="function"?a():Promise.resolve(a):new Promise((i,r)=>{(typeof queueMicrotask=="function"?queueMicrotask:setTimeout)(r.bind(null,new Error("Unknown variable dynamic import: "+f+(f.split("/").length!==z?". Note that variables only represent file names one level deep.":""))))})};function R(h){return h&&h.__esModule&&Object.prototype.hasOwnProperty.call(h,"default")?h.default:h}var P={exports:{}},D={exports:{}};/**
+import{d as B,g as I,c as E,o as q}from"./index-nyf96vZJ.js";const L=(h,f,z)=>{const a=h[f];return a?typeof a=="function"?a():Promise.resolve(a):new Promise((i,r)=>{(typeof queueMicrotask=="function"?queueMicrotask:setTimeout)(r.bind(null,new Error("Unknown variable dynamic import: "+f+(f.split("/").length!==z?". Note that variables only represent file names one level deep.":""))))})};function R(h){return h&&h.__esModule&&Object.prototype.hasOwnProperty.call(h,"default")?h.default:h}var P={exports:{}},D={exports:{}};/**
 * A handy class to calculate color values.
 *
 * @version 1.0
