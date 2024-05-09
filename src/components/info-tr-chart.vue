@@ -134,7 +134,12 @@ const option: ComposeOption<
 	series: [
 		{
 			data: props.data.map(data => {
-				return [data.record_at, data.tr]
+				return [
+					data.record_at,
+					Number(
+						Number(data.tr).toFixed(2)
+					)
+				]
 			}),
 			type: 'line',
 			smooth: true,

@@ -86,7 +86,11 @@ const option: ComposeOption<RadarSeriesOption> = {
 			},
 			data: [
 				{
-					value: [props.pps, props.app, props.dsps, props.dspp, props.ci, props.ge]
+					value: [props.pps, props.app, props.dsps, props.dspp, props.ci, props.ge].map(value => {
+						return Number(
+							Number(value).toFixed(2)
+						)
+					})
 				}
 			]
 		}
