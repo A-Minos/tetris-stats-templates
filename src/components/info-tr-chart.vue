@@ -135,7 +135,7 @@ const option = computed<ChartOption>(() => {
 			{
 				data: props.data.map(data => {
 					return [
-						data.record_at,
+						+data.record_at,
 						Number(
 							Number(data.tr).toFixed(2)
 						)

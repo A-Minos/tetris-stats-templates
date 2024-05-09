@@ -108,12 +108,12 @@ const test_tetrio_info = () => {
 					date.setDate(date.getDate() - index - 1)
 
 					return {
-						record_at: +date,
+						record_at: date,
 						tr: random(tr - tr_chart_offset_range, tr + tr_chart_offset_range)
 					}
 				}).reverse(),
 				{
-					record_at: Date.now(),
+					record_at: new Date(),
 					tr
 				}
 			].map(data => {
@@ -121,7 +121,7 @@ const test_tetrio_info = () => {
 				date.setHours(0)
 				date.setMinutes(0)
 				date.setSeconds(0)
-				data.record_at = +date
+				data.record_at = date
 
 				return data
 			})
