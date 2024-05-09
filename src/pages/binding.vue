@@ -1,12 +1,12 @@
 <script lang="ts">
-import type { Avatar } from '@/types/shared'
+import type { Avatar as AvatarType } from '@/types/shared'
 
 interface Data {
 	readonly platform: string
 	readonly status: 'error' | 'success' | 'unknown' | 'unlink' | 'unverified'
 
 	readonly user: {
-		readonly avatar: Avatar
+		readonly avatar: AvatarType
 		readonly name: string
 	}
 
@@ -20,6 +20,7 @@ interface Data {
 </script>
 
 <script lang="ts" setup>
+import Avatar from '@/components/avatar.vue'
 import { asyncComputed } from '@vueuse/core'
 import { isNonNullish } from 'remeda'
 
