@@ -33,7 +33,6 @@ const option: ComposeOption<
 		width: '90%',
 		height: '70%'
 	},
-
 	xAxis: {
 		type: 'time',
 		minInterval: 3600 * 24 * 1000,
@@ -134,7 +133,9 @@ const option: ComposeOption<
 	},
 	series: [
 		{
-			data: props.data,
+			data: props.data.map(data => {
+				return [data.record_at, data.tr]
+			}),
 			type: 'line',
 			smooth: true,
 			symbol: (_, series) => {

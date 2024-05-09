@@ -107,18 +107,21 @@ const test_tetrio_info = () => {
 					const date = new Date()
 					date.setDate(date.getDate() - index - 1)
 
-					return [
-						+date,
-						random(tr - tr_chart_offset_range, tr + tr_chart_offset_range)
-					]
+					return {
+						record_at: +date,
+						tr: random(tr - tr_chart_offset_range, tr + tr_chart_offset_range)
+					}
 				}).reverse(),
-				[Date.now(), tr]
+				{
+					record_at: Date.now(),
+					tr
+				}
 			].map(data => {
-				const date = new Date(data[0])
+				const date = new Date(data.record_at)
 				date.setHours(0)
 				date.setMinutes(0)
 				date.setSeconds(0)
-				data[0] = +date
+				data.record_at = +date
 
 				return data
 			})
@@ -126,7 +129,7 @@ const test_tetrio_info = () => {
 			readonly min_tr = Number(
 				10 * Math.floor(
 					Math.min(
-						...this.data.map(data => data[1])
+						...this.data.map(data => data.tr)
 					) / 10
 				)
 			)
@@ -134,7 +137,7 @@ const test_tetrio_info = () => {
 			readonly max_tr = Number(
 				10 * Math.ceil(
 					Math.max(
-						...this.data.map(data => data[1])
+						...this.data.map(data => data.tr)
 					) / 10
 				)
 			)

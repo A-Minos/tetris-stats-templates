@@ -4,4 +4,8 @@ interface IdenticonAvatar {
 }
 
 export type Avatar = string | IdenticonAvatar
-export type TetraLeagueHistoryRecord = [record_at: number, tr: number]
+
+export interface TetraLeagueHistoryRecord {
+	readonly record_at: number,
+	readonly tr: number
+}
