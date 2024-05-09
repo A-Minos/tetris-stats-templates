@@ -1,9 +1,9 @@
 <script lang="ts">
-import type { Avatar, TetraLeagueHistoryRecord } from '@/types/shared'
+import type { Avatar as AvatarType, TetraLeagueHistoryRecord } from '@/types/shared'
 
 interface Data {
 	readonly user: {
-		readonly avatar: Avatar
+		readonly avatar: AvatarType
 		readonly name: string
 		readonly bio: string
 	}
@@ -52,6 +52,7 @@ interface Data {
 
 <script lang="ts" setup>
 import logo from '@/assets/images/logo/tetrio.svg'
+import Avatar from '@/components/avatar.vue'
 import Info40l from '@/components/info-40l.vue'
 import InfoAdpm from '@/components/info-adpm.vue'
 import InfoApm from '@/components/info-apm.vue'
