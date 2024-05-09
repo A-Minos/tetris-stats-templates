@@ -8,6 +8,7 @@ import { GridComponent, MarkLineComponent } from 'echarts/components'
 import type { ComposeOption } from 'echarts/core'
 import { use } from 'echarts/core'
 import { SVGRenderer } from 'echarts/renderers'
+import { computed, onMounted, ref } from 'vue'
 import VChart from 'vue-echarts'
 
 use([GridComponent, MarkLineComponent, LineChart, SVGRenderer])
@@ -21,194 +22,200 @@ const props = defineProps<{
 	readonly offset: number
 }>()
 
-const option: ComposeOption<
-	| GridComponentOption
-	| MarkLineComponentOption
-	| LineSeriesOption
-> = {
-	animation: false,
-	grid: {
-		left: '-5%',
-		bottom: '17%',
-		width: '90%',
-		height: '70%'
-	},
-	xAxis: {
-		type: 'time',
-		minInterval: 3600 * 24 * 1000,
-		axisTick: {
-			show: false
+type ChartOption = ComposeOption<GridComponentOption | MarkLineComponentOption | LineSeriesOption>
+
+const option = computed<ChartOption>(() => {
+	return {
+		animation: false,
+		grid: {
+			left: '-5%',
+			bottom: '17%',
+			width: '90%',
+			height: '70%'
 		},
-		axisLine: {
-			show: false
-		},
-		axisLabel: {
-			formatter: (value, index) => {
-				const date = new Date(value)
-
-				if (index <= 0 || index >= props.data.length) {
-					return ''
-				}
-				const month = Number(date.getMonth() + 1)
-					.toString()
-					.padStart(2, '0')
-
-				const day = date.getDate()
-					.toString()
-					.padStart(2, '0')
-
-				if (index === props.data.length - 1) {
-					return `{last_month|${month}}\n{last_day|${day}}`
-				}
-
-				return `{month|${month}}\n{day|${day}}`
+		xAxis: {
+			type: 'time',
+			minInterval: 3600 * 24 * 1000,
+			axisTick: {
+				show: false
 			},
-			rich: {
-				month: {
-					fontFamily: 'CabinetGrotesk-Variable',
-					fontSize: 13,
-					fontWeight: 400,
-					color: '#ffffff99'
+			axisLine: {
+				show: false
+			},
+			axisLabel: {
+				formatter: (value, index) => {
+					const date = new Date(value)
+
+					if (index <= 0 || index >= props.data.length) {
+						return ''
+					}
+					const month = Number(date.getMonth() + 1)
+						.toString()
+						.padStart(2, '0')
+
+					const day = date.getDate()
+						.toString()
+						.padStart(2, '0')
+
+					if (index === props.data.length - 1) {
+						return `{last_month|${month}}\n{last_day|${day}}`
+					}
+
+					return `{month|${month}}\n{day|${day}}`
 				},
-				day: {
-					fontFamily: 'CabinetGrotesk-Variable',
-					fontSize: 20,
-					fontWeight: 800,
-					color: '#ffffff99'
-				},
-				last_month: {
-					fontFamily: 'CabinetGrotesk-Variable',
-					fontSize: 13,
-					fontWeight: 400,
-					color: '#373533',
-					backgroundColor: '#fafafa',
-					borderRadius: 6,
-					padding: [-10, 0, 10, 0],
-					width: 36,
-					height: 37,
-					lineHeight: 32
-				},
-				last_day: {
-					fontFamily: 'CabinetGrotesk-Variable',
-					fontSize: 20,
-					fontWeight: 800,
-					color: '#373533',
-					padding: [-18, 0, 0, 0],
-					lineHeight: 0
+				rich: {
+					month: {
+						fontFamily: 'CabinetGrotesk-Variable',
+						fontSize: 13,
+						fontWeight: 400,
+						color: '#ffffff99'
+					},
+					day: {
+						fontFamily: 'CabinetGrotesk-Variable',
+						fontSize: 20,
+						fontWeight: 800,
+						color: '#ffffff99'
+					},
+					last_month: {
+						fontFamily: 'CabinetGrotesk-Variable',
+						fontSize: 13,
+						fontWeight: 400,
+						color: '#373533',
+						backgroundColor: '#fafafa',
+						borderRadius: 6,
+						padding: [-10, 0, 10, 0],
+						width: 36,
+						height: 37,
+						lineHeight: 32
+					},
+					last_day: {
+						fontFamily: 'CabinetGrotesk-Variable',
+						fontSize: 20,
+						fontWeight: 800,
+						color: '#373533',
+						padding: [-18, 0, 0, 0],
+						lineHeight: 0
+					}
 				}
-			}
+			},
+			zlevel: 1
 		},
-		zlevel: 1
-	},
-	yAxis: {
-		type: 'value',
-		interval: props.split_interval,
-		position: 'right',
-		splitLine: {
-			show: false
-		},
-		axisLine: {
-			show: false
-		},
-		axisLabel: {
-			align: 'right',
-			formatter: (value) => {
-				const tr = value.toString()
-					.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',')
+		yAxis: {
+			type: 'value',
+			interval: props.split_interval,
+			position: 'right',
+			splitLine: {
+				show: false
+			},
+			axisLine: {
+				show: false
+			},
+			axisLabel: {
+				align: 'right',
+				formatter: (value) => {
+					const tr = value.toString()
+						.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',')
 
-				return `{value|${tr}}`
-			},
-			rich: {
-				value: {
-					fontFamily: 'CabinetGrotesk-Variable',
-					fontSize: 15,
-					fontWeight: 500,
-					color: '#ffffff99'
+					return `{value|${tr}}`
+				},
+				rich: {
+					value: {
+						fontFamily: 'CabinetGrotesk-Variable',
+						fontSize: 15,
+						fontWeight: 500,
+						color: '#ffffff99'
+					}
 				}
-			}
+			},
+			offset: 70,
+			max: props.max_tr + props.offset,
+			min: props.min_tr - props.offset
 		},
-		offset: 70,
-		max: props.max_tr + props.offset,
-		min: props.min_tr - props.offset
-	},
-	series: [
-		{
-			data: props.data.map(data => {
-				return [
-					data.record_at,
-					Number(
-						Number(data.tr).toFixed(2)
-					)
-				]
-			}),
-			type: 'line',
-			smooth: true,
-			symbol: (_, series) => {
-				if (series.dataIndex === props.data.length - 1) {
-					return `image://${point}`
-				}
-
-				return 'none'
-			},
-			symbolSize: 75,
-			symbolOffset: [0.79, 0],
-			lineStyle: {
-				color: '#fafafa99'
-			},
-			areaStyle: {
-				color: {
-					type: 'linear',
-					x: 0,
-					y: 0,
-					x2: 0,
-					y2: 1,
-					colorStops: [
-						{
-							offset: 0,
-							color: '#fafafa4d'
-						},
-						{
-							offset: 1,
-							color: '#fafafa00'
-						}
-					],
-					global: false
-				}
-			},
-			markLine: {
-				data: [
-					[
-						{
-							xAxis: 'max',
-							yAxis: props.current_tr
-						},
-						{
-							xAxis: 'max',
-							y: '300'
-						}
+		series: [
+			{
+				data: props.data.map(data => {
+					return [
+						data.record_at,
+						Number(
+							Number(data.tr).toFixed(2)
+						)
 					]
-				],
-				label: {
-					show: false
+				}),
+				type: 'line',
+				smooth: true,
+				symbol: (_, series) => {
+					if (series.dataIndex === props.data.length - 1) {
+						return `image://${point}`
+					}
+
+					return 'none'
 				},
+				symbolSize: 75,
+				symbolOffset: [0.79, 0],
 				lineStyle: {
-					color: '#fafafa',
-					width: 3,
-					type: 'dashed',
-					cap: 'round'
+					color: '#fafafa99'
 				},
-				symbol: 'none',
-				animation: false
-			},
-			z: 5
-		}
-	]
-}
+				areaStyle: {
+					color: {
+						type: 'linear',
+						x: 0,
+						y: 0,
+						x2: 0,
+						y2: 1,
+						colorStops: [
+							{
+								offset: 0,
+								color: '#fafafa4d'
+							},
+							{
+								offset: 1,
+								color: '#fafafa00'
+							}
+						],
+						global: false
+					}
+				},
+				markLine: {
+					data: [
+						[
+							{
+								xAxis: 'max',
+								yAxis: props.current_tr
+							},
+							{
+								xAxis: 'max',
+								y: '300'
+							}
+						]
+					],
+					label: {
+						show: false
+					},
+					lineStyle: {
+						color: '#fafafa',
+						width: 3,
+						type: 'dashed',
+						cap: 'round'
+					},
+					symbol: 'none',
+					animation: false
+				},
+				z: 5
+			}
+		]
+	}
+})
+
+const show = ref(false)
+
+onMounted(() => {
+	show.value = true
+})
 </script>
 
 <template>
 	<div class="relative w-143.75 h-68.75 bg-[linear-gradient(222.34deg,#525252_11.97%,#1d1916_89.73%)]">
-		<v-chart :option="option"/>
+		<v-chart v-if="show" :option="option"/>
 
 		<div class="absolute left-6 top-4.75 text-6.25 fw-extrabold text-white">
 			Tetra Rating (TR)
