@@ -77,6 +77,12 @@ const rankImage = asyncComputed(async () => {
 			return module.default
 		})
 })
+
+const unescape = (content: string) => {
+	const element = document.createElement('div')
+	element.innerHTML = content
+	return element.textContent
+}
 </script>
 
 <template>
@@ -100,7 +106,7 @@ const rankImage = asyncComputed(async () => {
 								<template v-if="!isEmpty(data.user.bio)">
 									<div class="break-all line-clamp-3">
 										<span class="text-4.5">
-											{{ data.user.bio }}
+											{{ unescape(data.user.bio) }}
 										</span>
 									</div>
 								</template>
