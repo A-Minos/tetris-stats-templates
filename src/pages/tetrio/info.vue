@@ -217,7 +217,7 @@ const rankImage = asyncComputed(async () => {
 
 					<br/>
 
-					<span>Nonebot2 x nonebot-plugin-tetris-stats</span>
+					<span>NoneBot2 x nonebot-plugin-tetris-stats</span>
 				</div>
 			</div>
 		</div>
