@@ -88,31 +88,33 @@ const rankImage = asyncComputed(async () => {
 				<div class="flex gap-6.25">
 					<div
 						class="w-68.75 max-h-68.75 drop-shadow-[0_0.5625rem_1.5625rem_#00000026] rounded-7.5 bg-[#fafafa]">
-						<div class="flex flex-col items-center p-6.25 gap-2.5">
-							<Avatar :avatar="data.user.avatar" alt="用户头像"
-								class="w-31.25 h-31.25 drop-shadow-[0_0.6875rem_1.4375rem_#00000038] rounded-full" />
+						<div class="flex flex-col justify-center h-full">
+							<div class="flex flex-col items-center p-6.25 gap-2.5">
+								<Avatar :avatar="data.user.avatar" alt="用户头像"
+										class="w-31.25 h-31.25 drop-shadow-[0_0.6875rem_1.4375rem_#00000038] rounded-full"/>
 
-							<div class="break-all">
-								<span class="text-6.25 font-extrabold">{{ data.user.name }}</span>
-							</div>
-
-							<template v-if="!isEmpty(data.user.bio)">
-								<div class="break-all line-clamp-3">
-									<span class="text-4.5">
-										{{ data.user.bio }}
-									</span>
+								<div class="break-all">
+									<span class="text-6.25 font-extrabold">{{ data.user.name }}</span>
 								</div>
-							</template>
+
+								<template v-if="!isEmpty(data.user.bio)">
+									<div class="break-all line-clamp-3">
+										<span class="text-4.5">
+											{{ data.user.bio }}
+										</span>
+									</div>
+								</template>
+							</div>
 						</div>
 					</div>
 
 					<div
 						class="w-68.75 max-h-68.75 drop-shadow-[0_0.5625rem_1.5625rem_#00000026] rounded-7.5 bg-[#fafafa]">
 						<div class="flex flex-col p-6.25">
-							<img :src="logo" alt="Logo" class="w-15 h-15 rounded-2.5" />
+							<img :src="logo" alt="Logo" class="w-15 h-15 rounded-2.5"/>
 							<span class="text-7.5 fw-extrabold">TETR.IO</span>
 
-							<div class="w-full border-b-(1 solid #bababa) my-2.5" />
+							<div class="w-full border-b-(1 solid #bababa) my-2.5"/>
 
 							<span class="text-6.25 fw-extrabold">Ranking</span>
 
@@ -124,18 +126,18 @@ const rankImage = asyncComputed(async () => {
 
 				<div class="drop-shadow-[0_0.9375rem_1.875rem_#0000004d] rounded-7.5 overflow-hidden">
 					<info-tr-chart :data="data.tetra_league_history.data" :max_tr="data.tetra_league_history.max_tr"
-						:min_tr="data.tetra_league_history.min_tr" :offset="data.tetra_league_history.offset"
-						:split_interval="data.tetra_league_history.split_interval">
+								   :min_tr="data.tetra_league_history.min_tr" :offset="data.tetra_league_history.offset"
+								   :split_interval="data.tetra_league_history.split_interval">
 						<div class="flex flex-col">
 							<template v-if="isNonNullish(rankImage)">
-								<img :alt="data.tetra_league.rank" :src="rankImage" class="w-12.5 h-12.5" />
+								<img :alt="data.tetra_league.rank" :src="rankImage" class="w-12.5 h-12.5"/>
 							</template>
 
 							<div class="flex items-center">
 								<span class="text-11.25 fw-extrabold text-white">{{ data.tetra_league.tr }}</span>
 								<span class="text-7.5 text-[#fafafa]">&nbsp;(#{{
-									data.tetra_league.global_rank
-								}})</span>
+										data.tetra_league.global_rank
+									}})</span>
 							</div>
 						</div>
 					</info-tr-chart>
@@ -178,7 +180,7 @@ const rankImage = asyncComputed(async () => {
 										{{ Number(data.tetra_league.vs).toFixed(2) }} vs
 									</span>
 
-									<br />
+									<br/>
 
 									<span class="whitespace-nowrap">
 										x{{ Number(data.tetra_league.adpl).toFixed(2) }}
@@ -191,7 +193,7 @@ const rankImage = asyncComputed(async () => {
 					<div
 						class="w-68.75 h-68.75 bg-[linear-gradient(222.34deg,#525252_11.97%,#1d1916_89.73%),linear-gradient(222.34deg,#4f9dff_11.97%,#2563ea_89.73%)] drop-shadow-[0_0.9375rem_1.875rem_#0000004d] rounded-7.5">
 						<info-radar-chart :app="data.radar.app" :ci="data.radar.ci" :dspp="data.radar.dspp"
-							:dsps="data.radar.dsps" :ge="data.radar.ge" :pps="data.tetra_league.pps" />
+										  :dsps="data.radar.dsps" :ge="data.radar.ge" :pps="data.tetra_league.pps"/>
 					</div>
 				</div>
 
@@ -210,7 +212,7 @@ const rankImage = asyncComputed(async () => {
 				<div class="text-7.5 text-center fw-750">
 					<span>Powered by</span>
 
-					<br />
+					<br/>
 
 					<span>Nonebot2 x nonebot-plugin-tetris-stats</span>
 				</div>
