@@ -89,7 +89,7 @@ const rankImage = asyncComputed(async () => {
 					<div
 						class="w-68.75 max-h-68.75 drop-shadow-[0_0.5625rem_1.5625rem_#00000026] rounded-7.5 bg-[#fafafa]">
 						<div class="flex flex-col justify-center h-full">
-							<div class="flex flex-col items-center p-6.25 gap-2.5">
+							<div class="flex flex-col justify-evenly items-center h-full p-6.25 gap-2.5">
 								<Avatar :avatar="data.user.avatar" alt="用户头像"
 										class="w-31.25 h-31.25 drop-shadow-[0_0.6875rem_1.4375rem_#00000038] rounded-full"/>
 
