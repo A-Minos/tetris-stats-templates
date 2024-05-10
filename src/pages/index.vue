@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import { resetTime } from '@/utils/date.ts'
 import { useKeyModifier } from '@vueuse/core'
+import { formatISO, setHours, setMinutes, setSeconds, subDays } from 'date-fns'
+import { map, pipe, sortBy } from 'remeda'
 
 const controlPressed = useKeyModifier('Control')
 
@@ -50,8 +52,8 @@ const test_tetrio_info = () => {
 		prompt('用户 tr', '24295.88')
 	)
 
-	const tr_chart_data_count = Number(
-		prompt('TR 图要多少份数据', '6')
+	const tr_chart_day_data_count = Number(
+		prompt('TR 图每日数据量', '3')
 	)
 
 	const tr_chart_offset_range = Number(
@@ -101,28 +103,51 @@ const test_tetrio_info = () => {
 		}
 
 		readonly tetra_league_history = new class {
-			readonly data = [
-				...Array.from(
-					new Array(tr_chart_data_count - 1).keys()
-				).map(index => {
-					const date = new Date()
-					date.setDate(date.getDate() - index - 1)
-
-					return {
-						record_at: date,
+			readonly data = pipe(
+				[
+					{
+						record_at: (() => {
+							let date = new Date()
+							date = subDays(date, 10)
+							return formatISO(date)
+						})(),
 						tr: random(tr - tr_chart_offset_range, tr + tr_chart_offset_range)
-					}
-				}).reverse(),
-				{
-					record_at: new Date(),
-					tr
-				}
-			].map(data => {
-				const date = new Date(data.record_at)
-				data.record_at = resetTime(date)
+					},
+					...Array.from(
+						new Array(9).keys()
+					).map(index => {
+						return pipe(
+							Array.from(
+								new Array(tr_chart_day_data_count).keys()
+							),
+							map(() => {
+								let date = new Date()
 
-				return data
-			})
+								date = subDays(date, index + 1)
+								date = setHours(date, random(0, 24))
+								date = setMinutes(date, random(0, 60))
+								date = setSeconds(date, random(0, 60))
+
+								return {
+									record_at: formatISO(date),
+									tr: random(tr - tr_chart_offset_range, tr + tr_chart_offset_range)
+								}
+							})
+						)
+					}).flat(),
+					{
+						record_at: (() => {
+							let date = new Date()
+							date = resetTime(date)
+							return formatISO(date)
+						})(),
+						tr
+					}
+				],
+				sortBy(data => {
+					return +new Date(data.record_at)
+				})
+			)
 
 			readonly min_tr = Number(
 				10 * Math.floor(
