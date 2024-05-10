@@ -123,9 +123,8 @@ const rankImage = asyncComputed(async () => {
 				</div>
 
 				<div class="drop-shadow-[0_0.9375rem_1.875rem_#0000004d] rounded-7.5 overflow-hidden">
-					<info-tr-chart :current_tr="data.tetra_league.tr" :data="data.tetra_league_history.data"
-						:max_tr="data.tetra_league_history.max_tr" :min_tr="data.tetra_league_history.min_tr"
-						:offset="data.tetra_league_history.offset"
+					<info-tr-chart :data="data.tetra_league_history.data" :max_tr="data.tetra_league_history.max_tr"
+						:min_tr="data.tetra_league_history.min_tr" :offset="data.tetra_league_history.offset"
 						:split_interval="data.tetra_league_history.split_interval">
 						<div class="flex flex-col">
 							<template v-if="isNonNullish(rankImage)">

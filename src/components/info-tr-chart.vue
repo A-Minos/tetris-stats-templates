@@ -14,7 +14,6 @@ import VChart from 'vue-echarts'
 use([GridComponent, MarkLineComponent, LineChart, SVGRenderer])
 
 const props = defineProps<{
-	readonly current_tr: number
 	readonly data: TetraLeagueHistoryRecord[]
 	readonly split_interval: number
 	readonly min_tr: number
@@ -181,7 +180,7 @@ const option = computed<ChartOption>(() => {
 						[
 							{
 								xAxis: 'max',
-								yAxis: props.current_tr
+								yAxis: props.data[props.data.length - 1]['tr']
 							},
 							{
 								xAxis: 'max',
