@@ -215,14 +215,14 @@ onMounted(() => {
 
 <template>
 	<div class="relative w-143.75 h-68.75 bg-[linear-gradient(222.34deg,#525252_11.97%,#1d1916_89.73%)]">
-		<v-chart v-if="show" :option="option" />
+		<v-chart v-if="show" :option="option"/>
 
 		<div class="absolute left-6 top-4.75 text-6.25 fw-extrabold text-[#fafafa]">
 			Tetra Rating (TR)
 		</div>
 
 		<div class="absolute left-6 top-22.5">
-			<slot />
+			<slot/>
 		</div>
 	</div>
 </template>
