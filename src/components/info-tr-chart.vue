@@ -24,6 +24,8 @@ const props = defineProps<{
 type ChartOption = ComposeOption<GridComponentOption | MarkLineComponentOption | LineSeriesOption>
 
 const option = computed<ChartOption>(() => {
+	const interval = 3600 * 24 * 1000
+
 	return {
 		animation: false,
 		grid: {
@@ -34,8 +36,8 @@ const option = computed<ChartOption>(() => {
 		},
 		xAxis: {
 			type: 'time',
-			minInterval: 3600 * 24 * 1000,
-			maxInterval: 3600 * 24 * 1000, // 防止 echarts 放大间隔
+			minInterval: interval,
+			maxInterval: interval,
 			axisTick: {
 				show: false
 			},
@@ -46,9 +48,10 @@ const option = computed<ChartOption>(() => {
 				formatter: (value, index) => {
 					const date = new Date(value)
 
-					if (index % 2 !== 0 || index === 0) {
+					if (index === 0 || index % 2 !== 0) {
 						return ''
 					}
+
 					const month = Number(date.getMonth() + 1)
 						.toString()
 						.padStart(2, '0')
@@ -57,8 +60,6 @@ const option = computed<ChartOption>(() => {
 						.toString()
 						.padStart(2, '0')
 
-					// value 是 echarts 分割后的, 不能拿 data 里的数据来判断
-					// 同时输入数据的范围是固定的, 分割时长是固定的, 所以用硬编码 index 来判断是否为最后一组(应显示的)数据
 					if (index === 10) {
 						return `{last_month|${month}}\n{last_day|${day}}`
 					}
