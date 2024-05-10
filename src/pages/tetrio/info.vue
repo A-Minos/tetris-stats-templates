@@ -133,11 +133,14 @@ const rankImage = asyncComputed(async () => {
 								<img :alt="data.tetra_league.rank" :src="rankImage" class="w-12.5 h-12.5"/>
 							</template>
 
-							<div class="flex items-center">
-								<span class="text-11.25 fw-extrabold text-white">{{ data.tetra_league.tr }}</span>
-								<span class="text-7.5 text-[#fafafa]">&nbsp;(#{{
-										data.tetra_league.global_rank
-									}})</span>
+							<div class="flex items-end">
+								<span class="text-11.25 fw-extrabold text-white">
+									{{ data.tetra_league.tr }}
+								</span>
+
+								<span class="text-7.5 align-bottom text-[#fafafa] ml-1 mb-1">
+									(#{{ data.tetra_league.global_rank }})
+								</span>
 							</div>
 						</div>
 					</info-tr-chart>
