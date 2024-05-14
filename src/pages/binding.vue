@@ -37,41 +37,76 @@ const stateImage = asyncComputed(async () => {
 </script>
 
 <template>
-	<div class="w-fit p-7.5 bg-[#f1f1f1] font-template">
-		<div class="flex flex-col gap-3.75">
-			<div class="flex justify-center items-center gap-8">
-				<Avatar :avatar="data.user.avatar" alt="玩家头像"
-						class="w-24 h-24 drop-shadow-[0_0.6875rem_1.4375rem_#00000038] rounded-5"/>
+	<div class="binding">
+		<div class="binding__container">
+			<div class="binding__header">
+				<Avatar :avatar="data.user.avatar" alt="玩家头像" class="binding__header__avatar"/>
 
 				<template v-if="isNonNullish(stateImage)">
-					<img :src="stateImage" alt="状态" class="w-32 h-14 rounded-5"/>
+					<img :src="stateImage" alt="状态" class="binding__header__state"/>
 				</template>
 
-				<img :src="data.bot.avatar" alt="Bot 头像"
-					 class="w-24 h-24 drop-shadow-(0_0.6875rem_1.4375rem_#00000038) rounded-5"/>
+				<img :src="data.bot.avatar" alt="Bot 头像" class="binding__header__avatar"/>
 			</div>
 
 			<div/>
 
-			<div class="text-6.25 text-center">
+			<div class="binding__content">
 				<span>已将你在</span>
-				<span class="fw-extrabold">&nbsp;{{ data.platform.toUpperCase() }}&nbsp;</span>
+				<span class="binding__content__platform">&nbsp;{{ data.platform.toUpperCase() }}&nbsp;</span>
 				<span>上的账号</span>
 
 				<br/>
 
-				<span class="fw-extrabold">&nbsp;{{ data.user.name }}&nbsp;</span>
+				<span class="binding__content__user-name">&nbsp;{{ data.user.name }}&nbsp;</span>
 
 				<br/>
 
 				<span>成功验证并绑定至</span>
-				<span>&nbsp;{{ data.bot.name }}</span>
+				<span class="binding__content__bot-name">&nbsp;{{ data.bot.name }}</span>
 				<span>.</span>
 			</div>
 
-			<div class="text-[#52525c] text-center">
+			<div class="binding__footer">
 				<span>你可以输入 “{{ data.command }}” 命令来查找你在该平台上的统计数据.</span>
 			</div>
 		</div>
 	</div>
 </template>
+
+<style lang="scss" scoped>
+.binding {
+	@apply w-fit p-7.5 bg-[#f1f1f1] font-template;
+
+	&__container {
+		@apply flex flex-col gap-3.75;
+	}
+
+	&__header {
+		@apply flex justify-center items-center gap-8;
+
+		&__avatar {
+			@apply w-24 h-24;
+			@apply rounded-5;
+			@apply drop-shadow-[0_0.6875rem_1.4375rem_#00000038];
+		}
+
+		&__state {
+			@apply w-32 h-14;
+			@apply rounded-5;
+		}
+	}
+
+	&__content {
+		@apply text-6.25 text-center;
+
+		&__platform, &__user-name {
+			@apply fw-extrabold;
+		}
+	}
+
+	&__footer {
+		@apply text-[#52525c] text-center;
+	}
+}
+</style>
