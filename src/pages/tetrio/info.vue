@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { Avatar as AvatarType, TetraLeagueHistoryRecord } from '@/types/shared'
 
-interface Data {
+export interface Data {
 	readonly user: {
 		readonly avatar: AvatarType
 		readonly name: string

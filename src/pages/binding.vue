@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { Avatar as AvatarType } from '@/types/shared'
 
-interface Data {
+export interface Data {
 	readonly platform: string
 	readonly status: 'error' | 'success' | 'unknown' | 'unlink' | 'unverified'
 
