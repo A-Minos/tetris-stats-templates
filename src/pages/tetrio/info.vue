@@ -9,7 +9,7 @@ interface Data {
 	}
 
 	readonly ranking: {
-		readonly rating: string
+		readonly rating: number
 		readonly rd: number
 	}
 
