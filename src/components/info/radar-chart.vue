@@ -1,21 +1,21 @@
 <script lang="ts" setup>
+import Chart from '@/components/info/_chart.vue'
 import type { RadarSeriesOption } from 'echarts/charts'
 import { RadarChart } from 'echarts/charts'
 import type { ComposeOption } from 'echarts/core'
 import { use } from 'echarts/core'
-import { SVGRenderer } from 'echarts/renderers'
-import { computed, onMounted, ref } from 'vue'
-import VChart from 'vue-echarts'
+import { computed } from 'vue'
 
-use([RadarChart, SVGRenderer])
+use([RadarChart])
 
 const props = defineProps<{
-	readonly pps: number
-	readonly app: number
-	readonly dsps: number
-	readonly dspp: number
-	readonly ci: number
-	readonly ge: number
+	readonly data: ({
+		readonly label: string
+		readonly value: number
+	} & Partial<{
+		readonly min: number
+		readonly max: number
+	}>)[]
 }>()
 
 type ChartOption = ComposeOption<RadarSeriesOption>
@@ -25,14 +25,16 @@ const option = computed<ChartOption>(() => {
 		animation: false,
 		radar: [
 			{
-				indicator: [
-					{ name: 'PPS' },
-					{ name: 'APP', nameRotate: 60 },
-					{ name: 'DSPS', nameRotate: -60 },
-					{ name: 'DSPP' },
-					{ name: 'CI', nameRotate: 60 },
-					{ name: 'GE', nameRotate: -60 }
-				],
+				indicator: (() => {
+					return props.data.map((data, index) => {
+						return {
+							name: data.label,
+							nameRotate: 360 / props.data.length * index,
+							min: data.min,
+							max: data.max
+						}
+					})
+				})(),
 				center: ['50%', '50%'],
 				radius: '65%',
 				startAngle: 90,
@@ -90,9 +92,9 @@ const option = computed<ChartOption>(() => {
 				},
 				data: [
 					{
-						value: [props.pps, props.app, props.dsps, props.dspp, props.ci, props.ge].map(value => {
+						value: props.data.map(data => {
 							return Number(
-								Number(value).toFixed(2)
+								Number(data.value).toFixed(2)
 							)
 						})
 					}
@@ -101,14 +103,8 @@ const option = computed<ChartOption>(() => {
 		]
 	}
 })
-
-const show = ref(false)
-
-onMounted(() => {
-	show.value = true
-})
 </script>
 
 <template>
-	<v-chart v-if="show" :option="option"/>
+	<chart :option="option"/>
 </template>
