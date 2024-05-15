@@ -205,7 +205,10 @@ const test = () => {
 		}
 
 		readonly sprint = prompt('用户 40l', '33s')
-		readonly blitz = prompt('用户 blitz', 'N/A')
+
+		readonly blitz = Number(
+			prompt('用户 blitz', '0')
+		)
 	} satisfies Data)
 
 	document.querySelector<HTMLTemplateElement>('template#path')!.innerHTML = path

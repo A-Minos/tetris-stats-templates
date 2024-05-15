@@ -29,12 +29,7 @@ export interface Data {
 import InfoLpm from '@/components/info/lpm.vue'
 import logo from '@/assets/images/logo/top.svg'
 import Avatar from '@/components/avatar.vue'
-import Info40l from '@/components/info/40l.vue'
-import InfoChallenge from '@/components/info/challenge.vue'
-import InfoMarathon from '@/components/info/marathon.vue'
-import InfoAdpm from '@/components/info/adpm.vue'
 import InfoApm from '@/components/info/apm.vue'
-import InfoRadarChart from '@/components/info/radar-chart.vue'
 import { inject } from 'vue'
 import { THEME_KEY } from 'vue-echarts'
 
