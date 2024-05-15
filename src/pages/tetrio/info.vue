@@ -235,11 +235,25 @@ const radar_chart_data = [
 				</div>
 
 				<div class="tetrio-info__footer">
-					<span>Powered by</span>
+					<div class="tetrio-info__footer__powered-by">
+						<span class="tetrio-info__footer__powered-by__title">Powered by</span>
+						<br/>
+						<span
+							class="tetrio-info__footer__powered-by__content">NoneBot2 x nonebot-plugin-tetris-stats</span>
+					</div>
 
-					<br/>
+					<div class="tetrio-info__footer__designer">
+						<span class="tetrio-info__footer__designer__title">Graphic Design by</span>
 
-					<span>NoneBot2 x nonebot-plugin-tetris-stats</span>
+						<span>C</span>
+						<span class="tetrio-info__footer__designer__sub">29</span>
+						<span>H</span>
+						<span class="tetrio-info__footer__designer__sub">25</span>
+						<span>N</span>
+						<span class="tetrio-info__footer__designer__sub">3</span>
+						<span>O</span>
+						<span class="tetrio-info__footer__designer__sub">5</span>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -276,9 +290,10 @@ const radar_chart_data = [
 
 	&__user {
 		@extend .tetrio-info__box;
+		@apply py-6.25;
 
 		&__container {
-			@apply flex flex-col justify-evenly items-center p-6.25 gap-2.5;
+			@apply flex flex-col justify-evenly items-center h-full gap-2.5;
 		}
 
 		&__avatar {
@@ -383,7 +398,31 @@ const radar_chart_data = [
 	}
 
 	&__footer {
-		@apply text-7.5 text-center fw-750;
+		@apply text-5 text-[#71717b] text-center;
+
+		&__powered-by {
+			@apply leading-5;
+
+			&__title {
+				@apply fw-black;
+			}
+
+			&__content {
+				@apply fw-medium;
+			}
+		}
+
+		&__designer {
+			@apply mt-1.5 fw-medium;
+
+			&__title {
+				@apply mr-1;
+			}
+
+			&__sub {
+				@apply text-4 align-sub;
+			}
+		}
 	}
 }
 </style>

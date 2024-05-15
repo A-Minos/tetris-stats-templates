@@ -29,7 +29,20 @@ const option = computed<ChartOption>(() => {
 					return props.data.map((data, index) => {
 						return {
 							name: data.label,
-							nameRotate: 360 / props.data.length * index,
+							nameRotate: (() => {
+								if (props.data.length === 6) {
+									switch (index) {
+										case 2:
+											return -60
+										case 3:
+											return 0
+										case 4:
+											return 60
+									}
+								}
+
+								return 360 / props.data.length * index
+							})(),
 							min: data.min,
 							max: data.max
 						}
