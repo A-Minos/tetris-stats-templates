@@ -75,8 +75,11 @@ const stateImage = asyncComputed(async () => {
 </template>
 
 <style lang="scss" scoped>
+@import '@/styles/main';
+
 .binding {
-	@apply w-fit p-7.5 bg-[#f1f1f1] font-template;
+	@extend .font-template;
+	@apply w-fit p-7.5 bg-[#f1f1f1];
 
 	&__container {
 		@apply flex flex-col gap-3.75;

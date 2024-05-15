@@ -247,8 +247,11 @@ const radar_chart_data = [
 </template>
 
 <style lang="scss" scoped>
+@import '@/styles/main';
+
 .tetrio-info {
-	@apply w-fit p-6.25 bg-[#f1f1f1] font-template;
+	@extend .font-template;
+	@apply w-fit p-6.25 bg-[#f1f1f1];
 
 	&__title {
 		@apply text-8.75 fw-black;
