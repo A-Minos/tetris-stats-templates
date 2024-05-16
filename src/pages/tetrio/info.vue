@@ -153,9 +153,8 @@ const radar_chart_data = [
 								   :min_tr="data.tetra_league_history.min_tr" :offset="data.tetra_league_history.offset"
 								   :split_interval="data.tetra_league_history.split_interval">
 						<div class="flex flex-col">
-							<template v-if="isNonNullish(rankImage)">
-								<img :alt="data.tetra_league.rank" :src="rankImage" class="w-12.5 h-12.5"/>
-							</template>
+							<img v-if="isNonNullish(rankImage)" :alt="data.tetra_league.rank" :src="rankImage"
+								 class="w-12.5 h-12.5"/>
 
 							<div class="tetrio-info__tr-chart__tr-rank">
 								<span class="tetrio-info__tr-chart__tr-rank__tr">
