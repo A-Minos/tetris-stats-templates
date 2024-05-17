@@ -206,8 +206,8 @@ const test = () => {
 
 		readonly sprint = prompt('用户 40l', '33s')
 
-		readonly blitz = Number(
-			prompt('用户 blitz', '0')
+		readonly blitz = String(
+			prompt('用户 blitz', 'N/A')
 		)
 	} satisfies Data)
 

@@ -64,12 +64,12 @@ const test = () => {
 
 		readonly sprint = prompt('用户 40l', '33s')
 
-		readonly challenge = Number(
-			prompt('用户 challenge', '114514')
+		readonly challenge = String(
+			prompt('用户 challenge', '114,514')
 		)
 
-		readonly marathon = Number(
-			prompt('用户 马拉松', '143036')
+		readonly marathon = String(
+			prompt('用户 马拉松', '143,036')
 		)
 	} satisfies Data)
 
