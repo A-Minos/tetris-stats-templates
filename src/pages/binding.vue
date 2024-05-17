@@ -2,7 +2,7 @@
 import type { Avatar as AvatarType } from '@/types/shared'
 
 export interface Data {
-	readonly platform: string
+	readonly platform: 'TETR.IO' | 'TOP' | 'TOS'
 	readonly status: 'error' | 'success' | 'unknown' | 'unlink' | 'unverified'
 
 	readonly user: {

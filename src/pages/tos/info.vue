@@ -33,8 +33,8 @@ export interface Data {
 	}
 
 	readonly sprint: string
-	readonly challenge: number
-	readonly marathon: number
+	readonly challenge: string
+	readonly marathon: string
 }
 </script>
 

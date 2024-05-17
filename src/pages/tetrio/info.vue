@@ -14,7 +14,7 @@ export interface Data {
 	}
 
 	readonly tetra_league: {
-		readonly rank: string
+		readonly rank: 'x' | 'u' | 'ss' | 's+' | 's' | 's-' | 'a+' | 'a' | 'a-' | 'b+' | 'b' | 'b-' | 'c+' | 'c' | 'c-' | 'd+' | 'd' | 'z'
 		readonly tr: number
 		readonly global_rank: number
 
@@ -46,7 +46,7 @@ export interface Data {
 	}
 
 	readonly sprint: string
-	readonly blitz: number
+	readonly blitz: string
 }
 </script>
 
