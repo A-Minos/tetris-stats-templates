@@ -294,6 +294,10 @@ const radar_chart_data = [
 	&__user {
 		@extend .tetrio-info__box;
 
+		&__wrapper {
+			@apply flex flex-col justify-center items-center h-full;
+		}
+
 		&__container {
 			@apply flex flex-col justify-evenly items-center h-full gap-2.5 p-6.25;
 		}

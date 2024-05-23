@@ -48,11 +48,13 @@ inject(THEME_KEY, 'dark')
 			<div class="tos-info__col">
 				<div class="tos-info__row">
 					<div class="tos-info__user">
-						<div class="tos-info__user__container">
-							<Avatar :avatar="data.user.avatar" alt="用户头像" class="tos-info__user__avatar"/>
+						<div class="tos-info__user__wrapper">
+							<div class="tos-info__user__container">
+								<Avatar :avatar="data.user.avatar" alt="用户头像" class="tos-info__user__avatar"/>
 
-							<div class="tos-info__user__name__container">
-								<span class="tos-info__user__name__body">{{ data.user.name }}</span>
+								<div class="tos-info__user__name__container">
+									<span class="tos-info__user__name__body">{{ data.user.name }}</span>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -182,8 +184,12 @@ inject(THEME_KEY, 'dark')
 	&__user {
 		@extend .tos-info__box;
 
+		&__wrapper {
+			@apply flex flex-col justify-center items-center h-full;
+		}
+
 		&__container {
-			@apply flex justify-center items-center h-full gap-7;
+			@apply flex justify-center items-center h-full gap-7 p-7.5;
 		}
 
 		&__avatar {

@@ -93,11 +93,13 @@ const radar_chart_data = [
 			<div class="tos-info__col">
 				<div class="tos-info__row">
 					<div class="tos-info__user">
-						<div class="tos-info__user__container">
-							<Avatar :avatar="data.user.avatar" alt="用户头像" class="tos-info__user__avatar"/>
+						<div class="tos-info__user__wrapper">
+							<div class="tos-info__user__container">
+								<Avatar :avatar="data.user.avatar" alt="用户头像" class="tos-info__user__avatar"/>
 
-							<div class="tos-info__user__name__container">
-								<span class="tos-info__user__name__body">{{ data.user.name }}</span>
+								<div class="tos-info__user__name__container">
+									<span class="tos-info__user__name__body">{{ data.user.name }}</span>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -248,10 +250,13 @@ const radar_chart_data = [
 
 	&__user {
 		@extend .tos-info__box;
-		@apply py-7.5;
+
+		&__wrapper {
+			@apply flex flex-col justify-center items-center h-full;
+		}
 
 		&__container {
-			@apply flex flex-col justify-evenly items-center h-full gap-2.5;
+			@apply flex flex-col justify-evenly items-center h-full gap-2.5 p-7.5;
 		}
 
 		&__avatar {
