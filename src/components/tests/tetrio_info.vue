@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { Data } from '@/pages/tetrio/info.vue'
-import { resetTime } from '@/utils/date.ts'
-import prompt from '@/utils/prompt.ts'
+import { resetTime } from '@/utils/date'
+import prompt from '@/utils/prompt'
 import { setHours, setMinutes, setSeconds, subDays } from 'date-fns'
 import { map, pipe, sortBy } from 'remeda'
 

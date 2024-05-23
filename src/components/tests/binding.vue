@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import prompt from '@/utils/prompt.ts'
+import prompt from '@/utils/prompt'
 
 const path = 'binding'
 

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { Data } from '@/pages/tos/info.vue'
-import prompt from '@/utils/prompt.ts'
+import prompt from '@/utils/prompt'
 
 const path = 'tos/info'
 
