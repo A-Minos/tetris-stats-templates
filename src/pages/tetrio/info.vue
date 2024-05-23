@@ -120,30 +120,34 @@ const radar_chart_data = [
 			<div class="tetrio-info__col">
 				<div class="tetrio-info__row">
 					<div class="tetrio-info__user">
-						<div class="tetrio-info__user__container">
-							<Avatar :avatar="data.user.avatar" alt="用户头像" class="tetrio-info__user__avatar"/>
+						<div class="tetrio-info__user__wrapper">
+							<div class="tetrio-info__user__container">
+								<Avatar :avatar="data.user.avatar" alt="用户头像" class="tetrio-info__user__avatar"/>
 
-							<div class="tetrio-info__user__name__container">
-								<span class="tetrio-info__user__name__body">{{ data.user.name }}</span>
-							</div>
+								<div class="tetrio-info__user__name__container">
+									<span class="tetrio-info__user__name__body">{{ data.user.name }}</span>
+								</div>
 
-							<div v-if="!isEmpty(data.user.bio)" class="tetrio-info__user__bio__container">
-								<span class="tetrio-info__user__bio__body">{{ unescape(data.user.bio) }}</span>
+								<div v-if="!isEmpty(data.user.bio)" class="tetrio-info__user__bio__container">
+									<span class="tetrio-info__user__bio__body">{{ unescape(data.user.bio) }}</span>
+								</div>
 							</div>
 						</div>
 					</div>
 
 					<div class="tetrio-info__game-ranking">
-						<div class="tetrio-info__game-ranking__container">
-							<img :src="logo" alt="Logo" class="tetrio-info__game-ranking__game-logo"/>
-							<span class="tetrio-info__game-ranking__game-name">TETR.IO</span>
+						<div class="tetrio-info__game-ranking__wrapper">
+							<div class="tetrio-info__game-ranking__container">
+								<img :src="logo" alt="Logo" class="tetrio-info__game-ranking__game-logo"/>
+								<span class="tetrio-info__game-ranking__game-name">TETR.IO</span>
 
-							<div class="tetrio-info__game-ranking__divider"/>
+								<div class="tetrio-info__game-ranking__divider"/>
 
-							<span class="tetrio-info__game-ranking__ranking-title">Ranking</span>
+								<span class="tetrio-info__game-ranking__ranking-title">Ranking</span>
 
-							<span class="tetrio-info__game-ranking__ranking-rating">{{ data.ranking.rating }}</span>
-							<span class="tetrio-info__game-ranking__ranking-rd">±{{ data.ranking.rd }}</span>
+								<span class="tetrio-info__game-ranking__ranking-rating">{{ data.ranking.rating }}</span>
+								<span class="tetrio-info__game-ranking__ranking-rd">±{{ data.ranking.rd }}</span>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -289,10 +293,9 @@ const radar_chart_data = [
 
 	&__user {
 		@extend .tetrio-info__box;
-		@apply py-6.25;
 
 		&__container {
-			@apply flex flex-col justify-evenly items-center h-full gap-2.5;
+			@apply flex flex-col justify-evenly items-center h-full gap-2.5 p-6.25;
 		}
 
 		&__avatar {
