@@ -51,15 +51,15 @@ export interface Data {
 </script>
 
 <script lang="ts" setup>
-import InfoLpm from '@/components/info/lpm.vue'
+import InfoLpm from '@/components/info/card/lpm.vue'
 import logo from '@/assets/images/logo/tetrio.svg'
 import Avatar from '@/components/avatar.vue'
-import Info40l from '@/components/info/40l.vue'
-import InfoAdpm from '@/components/info/adpm.vue'
-import InfoApm from '@/components/info/apm.vue'
-import InfoBlitz from '@/components/info/blitz.vue'
-import InfoRadarChart from '@/components/info/radar-chart.vue'
-import InfoTrChart from '@/components/info/tr-chart.vue'
+import Info40l from '@/components/info/card/40l.vue'
+import InfoAdpm from '@/components/info/card/adpm.vue'
+import InfoApm from '@/components/info/card/apm.vue'
+import InfoBlitz from '@/components/info/card/blitz.vue'
+import InfoRadarChart from '@/components/info/chart/radar-chart.vue'
+import InfoTrChart from '@/components/info/chart/tr-chart.vue'
 import { asyncComputed } from '@vueuse/core'
 import { isEmpty, isNonNullish } from 'remeda'
 import { inject } from 'vue'

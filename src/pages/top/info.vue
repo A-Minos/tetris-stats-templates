@@ -26,10 +26,10 @@ export interface Data {
 </script>
 
 <script lang="ts" setup>
-import InfoLpm from '@/components/info/lpm.vue'
+import InfoLpm from '@/components/info/card/lpm.vue'
 import logo from '@/assets/images/logo/top.svg'
 import Avatar from '@/components/avatar.vue'
-import InfoApm from '@/components/info/apm.vue'
+import InfoApm from '@/components/info/card/apm.vue'
 import { inject } from 'vue'
 import { THEME_KEY } from 'vue-echarts'
 

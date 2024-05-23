@@ -39,15 +39,15 @@ export interface Data {
 </script>
 
 <script lang="ts" setup>
-import InfoLpm from '@/components/info/lpm.vue'
+import InfoLpm from '@/components/info/card/lpm.vue'
 import logo from '@/assets/images/logo/tos.svg'
 import Avatar from '@/components/avatar.vue'
-import Info40l from '@/components/info/40l.vue'
-import InfoChallenge from '@/components/info/challenge.vue'
-import InfoMarathon from '@/components/info/marathon.vue'
-import InfoAdpm from '@/components/info/adpm.vue'
-import InfoApm from '@/components/info/apm.vue'
-import InfoRadarChart from '@/components/info/radar-chart.vue'
+import Info40l from '@/components/info/card/40l.vue'
+import InfoChallenge from '@/components/info/card/challenge.vue'
+import InfoMarathon from '@/components/info/card/marathon.vue'
+import InfoAdpm from '@/components/info/card/adpm.vue'
+import InfoApm from '@/components/info/card/apm.vue'
+import InfoRadarChart from '@/components/info/chart/radar-chart.vue'
 import { inject } from 'vue'
 import { THEME_KEY } from 'vue-echarts'
 

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import point from '@/assets/images/chart/point.svg?url'
-import Chart from '@/components/info/_chart.vue'
+import Chart from '@/components/info/chart/_base.vue'
 import type { TetraLeagueHistoryRecord } from '@/types/shared'
 import type { LineSeriesOption } from 'echarts/charts'
 import { LineChart } from 'echarts/charts'

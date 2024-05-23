@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import Chart from '@/components/info/_chart.vue'
+import Chart from '@/components/info/chart/_base.vue'
 import type { RadarSeriesOption } from 'echarts/charts'
 import { RadarChart } from 'echarts/charts'
 import type { ComposeOption } from 'echarts/core'

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import background from '@/assets/images/cards/Blitz.svg?url'
-import Card from '@/components/info/_card.vue'
+import Card from '@/components/info/card/_base.vue'
 </script>
 
 <template>
