@@ -265,7 +265,7 @@ const radar_chart_data = [
 
 		&__name {
 			&__container {
-				@apply break-all;
+				@apply break-all line-clamp-4;
 			}
 
 			&__body {

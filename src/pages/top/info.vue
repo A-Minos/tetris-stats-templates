@@ -198,7 +198,7 @@ inject(THEME_KEY, 'dark')
 
 		&__name {
 			&__container {
-				@apply break-all;
+				@apply break-all line-clamp-2;
 			}
 
 			&__body {

@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { isNullish } from 'remeda'
+
 defineProps<{
 	readonly background: string
 	readonly color: string
@@ -11,7 +13,8 @@ defineProps<{
 
 		<div class="info-card__container">
 			<div class="info-card__content">
-				<div class="info-card__content__body">
+				<div :class="{ 'info-card__content__body--no-extra': isNullish($slots.extra) }"
+					 class="info-card__content__body">
 					<slot/>
 				</div>
 			</div>
@@ -41,7 +44,20 @@ defineProps<{
 		@apply absolute bottom-4.25 left-6 text-[var(--color)] text-11 font-medium;
 
 		&__body {
-			@apply w-48 overflow-hidden text-ellipsis;
+			@apply w-45 overflow-hidden text-ellipsis;
+			@apply break-all line-clamp-1;
+
+			&--no-extra {
+				@apply w-60;
+			}
+		}
+	}
+
+	@container style (--extra: 1) {
+		&__content {
+			&__body {
+				@apply \!w-45;
+			}
 		}
 	}
 
@@ -49,7 +65,7 @@ defineProps<{
 		@apply absolute bottom-6.75 right-6.25 text-[var(--color)] text-3.75;
 
 		&__body {
-			@apply w-20 text-right overflow-hidden text-ellipsis;
+			@apply w-15 text-right overflow-hidden text-ellipsis;
 		}
 	}
 }
