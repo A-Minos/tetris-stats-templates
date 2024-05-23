@@ -179,11 +179,11 @@ const radar_chart_data = [
 					<div class="tetrio-info__col">
 						<div class="tetrio-info__card">
 							<info-lpm>
-								{{ Number(data.tetra_league.lpm).toFixed(2) }}
+								{{ data.tetra_league.lpm }}
 
 								<template #extra>
 									<span class="whitespace-nowrap">
-										{{ Number(data.tetra_league.pps).toFixed(2) }} pps
+										{{ data.tetra_league.pps }} pps
 									</span>
 								</template>
 							</info-lpm>
@@ -191,11 +191,11 @@ const radar_chart_data = [
 
 						<div class="tetrio-info__card">
 							<info-apm>
-								{{ Number(data.tetra_league.apm).toFixed(2) }}
+								{{ data.tetra_league.apm }}
 
 								<template #extra>
 									<span class="whitespace-nowrap">
-										x{{ Number(data.tetra_league.apl).toFixed(2) }}
+										x{{ data.tetra_league.apl }}
 									</span>
 								</template>
 							</info-apm>
@@ -203,17 +203,17 @@ const radar_chart_data = [
 
 						<div class="tetrio-info__card">
 							<info-adpm>
-								{{ Number(data.tetra_league.adpm).toFixed(2) }}
+								{{ data.tetra_league.adpm }}
 
 								<template #extra>
 									<span class="whitespace-nowrap">
-										{{ Number(data.tetra_league.vs).toFixed(2) }} vs
+										{{ data.tetra_league.vs }} vs
 									</span>
 
 									<br/>
 
 									<span class="whitespace-nowrap">
-										x{{ Number(data.tetra_league.adpl).toFixed(2) }}
+										x{{ data.tetra_league.adpl }}
 									</span>
 								</template>
 							</info-adpm>

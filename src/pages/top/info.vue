@@ -76,11 +76,11 @@ inject(THEME_KEY, 'dark')
 				<div class="tos-info__row">
 					<div class="tos-info__card">
 						<info-lpm>
-							{{ Number(data.today.lpm).toFixed(2) }}
+							{{ data.today.lpm }}
 
 							<template #extra>
 									<span class="whitespace-nowrap">
-										{{ Number(data.today.pps).toFixed(2) }} pps
+										{{ data.today.pps }} pps
 									</span>
 							</template>
 						</info-lpm>
@@ -88,11 +88,11 @@ inject(THEME_KEY, 'dark')
 
 					<div class="tos-info__card">
 						<info-apm>
-							{{ Number(data.today.apm).toFixed(2) }}
+							{{ data.today.apm }}
 
 							<template #extra>
 									<span class="whitespace-nowrap">
-										x{{ Number(data.today.apl).toFixed(2) }}
+										x{{ data.today.apl }}
 									</span>
 							</template>
 						</info-apm>
@@ -104,11 +104,11 @@ inject(THEME_KEY, 'dark')
 				<div class="tos-info__row">
 					<div class="tos-info__card">
 						<info-lpm>
-							{{ Number(data.history.lpm).toFixed(2) }}
+							{{ data.history.lpm }}
 
 							<template #extra>
 									<span class="whitespace-nowrap">
-										{{ Number(data.history.pps).toFixed(2) }} pps
+										{{ data.history.pps }} pps
 									</span>
 							</template>
 						</info-lpm>
@@ -116,11 +116,11 @@ inject(THEME_KEY, 'dark')
 
 					<div class="tos-info__card">
 						<info-apm>
-							{{ Number(data.history.apm).toFixed(2) }}
+							{{ data.history.apm }}
 
 							<template #extra>
 									<span class="whitespace-nowrap">
-										x{{ Number(data.history.apl).toFixed(2) }}
+										x{{ data.history.apl }}
 									</span>
 							</template>
 						</info-apm>

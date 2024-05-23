@@ -128,11 +128,11 @@ const radar_chart_data = [
 					<div class="tos-info__col">
 						<div class="tos-info__card">
 							<info-lpm>
-								{{ Number(data.multiplayer.lpm).toFixed(2) }}
+								{{ data.multiplayer.lpm }}
 
 								<template #extra>
 									<span class="whitespace-nowrap">
-										{{ Number(data.multiplayer.pps).toFixed(2) }} pps
+										{{ data.multiplayer.pps }} pps
 									</span>
 								</template>
 							</info-lpm>
@@ -140,11 +140,11 @@ const radar_chart_data = [
 
 						<div class="tos-info__card">
 							<info-apm>
-								{{ Number(data.multiplayer.apm).toFixed(2) }}
+								{{ data.multiplayer.apm }}
 
 								<template #extra>
 									<span class="whitespace-nowrap">
-										x{{ Number(data.multiplayer.apl).toFixed(2) }}
+										x{{ data.multiplayer.apl }}
 									</span>
 								</template>
 							</info-apm>
@@ -152,17 +152,17 @@ const radar_chart_data = [
 
 						<div class="tos-info__card">
 							<info-adpm>
-								{{ Number(data.multiplayer.adpm).toFixed(2) }}
+								{{ data.multiplayer.adpm }}
 
 								<template #extra>
 									<span class="whitespace-nowrap">
-										{{ Number(data.multiplayer.vs).toFixed(2) }} vs
+										{{ data.multiplayer.vs }} vs
 									</span>
 
 									<br/>
 
 									<span class="whitespace-nowrap">
-										x{{ Number(data.multiplayer.adpl).toFixed(2) }}
+										x{{ data.multiplayer.adpl }}
 									</span>
 								</template>
 							</info-adpm>

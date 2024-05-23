@@ -63,14 +63,8 @@ const test = () => {
 		}
 
 		readonly sprint = prompt('用户 40l', '33s')
-
-		readonly challenge = String(
-			prompt('用户 challenge', '114,514')
-		)
-
-		readonly marathon = String(
-			prompt('用户 马拉松', '143,036')
-		)
+		readonly challenge = prompt('用户 challenge', '114,514')
+		readonly marathon = prompt('用户 马拉松', '143,036')
 	} satisfies Data)
 
 	document.querySelector<HTMLTemplateElement>('template#path')!.innerHTML = path

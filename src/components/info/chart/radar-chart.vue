@@ -106,9 +106,7 @@ const option = computed<ChartOption>(() => {
 				data: [
 					{
 						value: props.data.map(data => {
-							return Number(
-								Number(data.value).toFixed(2)
-							)
+							return data.value
 						})
 					}
 				]
