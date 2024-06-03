@@ -1,6 +1,9 @@
 import Vue from '@vitejs/plugin-vue'
 import path from 'node:path'
 import UnoCSS from 'unocss/vite'
+import AutoImport from 'unplugin-auto-import/vite'
+import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
+import Components from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vite'
 
 // https://vitejs.dev/config
@@ -13,6 +16,17 @@ export default defineConfig({
 	},
 	plugins: [
 		UnoCSS(),
-		Vue()
+		Vue(),
+		AutoImport({
+			imports: [
+				'vue',
+				'vue-router'
+			]
+		}),
+		Components({
+			resolvers: [
+				NaiveUiResolver()
+			]
+		})
 	]
 })
