@@ -19,7 +19,7 @@ import { createMemoryHistory, createRouter, type RouteRecordRaw, RouterView } fr
 					}>('@/pages/**/*.vue')
 				).map(async ([path, loadPage]) => {
 					const name = path
-						.replace(/(.*)(\/)(pages)(\/)/g, '')
+						.replace(/^(.*)(\/)(pages)(\/)/g, '')
 						.replace(/(index)/g, '')
 						.replace(/(\.vue)$/g, '')
 
