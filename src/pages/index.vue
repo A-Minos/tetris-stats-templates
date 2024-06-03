@@ -34,6 +34,10 @@ const testTetrioInfo = () => {
 				wins: 3004
 			}
 		},
+		statistic: {
+			total: 7625,
+			wins: 3747
+		},
 		sprint: {
 			time: '0:22.293',
 			global_rank: 367,

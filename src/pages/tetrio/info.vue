@@ -33,6 +33,11 @@ export interface Data {
 		}
 	}
 
+	readonly statistic: {
+		readonly total: number
+		readonly wins: number
+	}
+
 	readonly sprint: {
 		readonly time: string
 		readonly global_rank: number
@@ -53,7 +58,7 @@ export interface Data {
 </script>
 
 <script lang="ts" setup>
-import { CheckCircleOutlined, HeartFilled, StarFilled } from '@vicons/antd'
+import { CheckCircleOutlined, ClockCircleOutlined, HeartFilled, StarFilled } from '@vicons/antd'
 import { darkTheme } from 'naive-ui'
 import logo from '@/assets/images/logos/tetrio.svg'
 import { isEmpty, isNonNullish } from 'remeda'
@@ -84,7 +89,11 @@ const level = computed(() => {
 									<n-flex vertical>
 										<n-flex align="center" size="small">
 											<n-avatar :size="4 * 12" :src="data.user.avatar"/>
-											<n-text class="text-8 fw-bold">{{ data.user.name }}</n-text>
+
+											<n-flex :size="0" vertical>
+												<n-text class="text-8 fw-bold">{{ data.user.name }}</n-text>
+												<n-text :depth="3" class="text-xs">{{ data.user.id }}</n-text>
+											</n-flex>
 
 											<n-image :src="(`https://tetr.io/res/flags/${data.user.country}.png`)"
 													 :width="4 * 6"
@@ -96,7 +105,7 @@ const level = computed(() => {
 										</n-flex>
 
 										<n-flex :size="0" align="center" justify="space-between">
-											<n-flex align="center" class="!gap-1">
+											<n-flex :size="1" align="center">
 												<n-icon :component="HeartFilled" :size="4 * 5"/>
 												<n-text>{{ data.user.friend_count }}</n-text>
 											</n-flex>
@@ -113,7 +122,7 @@ const level = computed(() => {
 								</div>
 
 								<div class="bg-black rounded p-2 bg-opacity-80">
-									<n-flex :size="0" align="center" vertical>
+									<n-flex :size="1" align="center" vertical>
 										<n-image :src="logo" :width="4 * 8"/>
 										<n-text class="mt-2 fw-bold">TETR.IO</n-text>
 									</n-flex>
@@ -140,7 +149,7 @@ const level = computed(() => {
 							</n-flex>
 
 							<n-flex :size="0" align="center" justify="space-between">
-								<n-flex align="center" class="!gap-1">
+								<n-flex :size="0" align="center">
 									<n-icon :component="HeartFilled" :size="4 * 5"/>
 									<n-text>{{ data.user.friend_count }}</n-text>
 								</n-flex>
@@ -180,52 +189,51 @@ const level = computed(() => {
 
 					<n-divider class="!my-0">多人游戏</n-divider>
 
+					<!-- 勋章 -->
+
+					<n-card v-if="!isEmpty(data.user.badges)" size="small">
+						<n-flex align="center" class="h-full" justify="center" vertical>
+							<n-flex justify="center">
+								<template v-for="badge in data.user.badges">
+									<n-image :src="badge" :width="4 * 6"/>
+								</template>
+							</n-flex>
+						</n-flex>
+					</n-card>
+
 					<n-grid :cols="2" :x-gap="10">
 						<n-grid-item>
 							<n-flex class="h-full" vertical>
-								<n-flex :wrap="false">
+								<!-- 等级 -->
 
-									<!-- 勋章 -->
+								<n-card size="small">
+									<n-flex vertical>
+										<div class="text-center">
+											<n-text class="fw-bold">
+												{{ Math.trunc(level) }} 级 ({{ data.user.xp }} XP)
+											</n-text>
+										</div>
 
-									<n-card v-if="!isEmpty(data.user.badges)" size="small">
-										<n-flex align="center" class="h-full" justify="center" vertical>
-											<n-flex justify="center">
-												<template v-for="badge in data.user.badges">
-													<n-image :src="badge" :width="4 * 6"/>
-												</template>
-											</n-flex>
-										</n-flex>
-									</n-card>
-
-									<!-- 等级 -->
-
-									<n-card size="small">
-										<n-flex vertical>
-											<div class="text-center">
-												<n-text class="fw-bold">
-													{{ Math.trunc(level) }} 级 ({{ data.user.xp }} XP)
-												</n-text>
-											</div>
-
-											<n-progress :percentage="Math.trunc((level % 1) * 100)"
-														indicator-placement="inside"/>
-										</n-flex>
-									</n-card>
-								</n-flex>
+										<n-progress :percentage="Math.trunc((level % 1) * 100)"
+													indicator-placement="inside"/>
+									</n-flex>
+								</n-card>
 
 								<!-- 额外信息 -->
 
 								<n-card class="h-full" size="small">
-									<n-flex align="center" class="h-full !gap-1" justify="center" vertical>
-										<div class="text-center">
-											<n-text :depth="3" class="text-sm">
-												游玩时长: {{ data.user.playtime }}
-											</n-text>
-										</div>
+									<n-flex :size="0" align="center" class="h-full" justify="center" vertical>
+										<n-flex :size="1" align="center" class="mb-5">
+											<n-icon :component="ClockCircleOutlined" :size="4 * 6"/>
+											<n-text>{{ data.user.playtime }}</n-text>
+										</n-flex>
 
 										<div class="text-center">
-											<n-text :depth="3" class="text-sm">
-												用户 ID: {{ data.user.id }}
+											<n-text :depth="3" class="text-sm">胜率: {{ data.statistic.wins }} /
+												{{ data.statistic.total }}
+												({{
+													(data.statistic.wins / data.statistic.total * 100).toFixed(2)
+												}}%)
 											</n-text>
 										</div>
 
@@ -277,10 +285,12 @@ const level = computed(() => {
 										</n-flex>
 
 										<div class="text-center">
-											<n-text :depth="3" class="text-sm">{{ data.tetra_league.statistic.wins }} /
+											<n-text :depth="3" class="text-sm">胜率: {{
+													data.tetra_league.statistic.wins
+												}} /
 												{{ data.tetra_league.statistic.total }}
 												({{
-													(data.tetra_league.statistic.wins / data.tetra_league.statistic.total * 100).toFixed(1)
+													(data.tetra_league.statistic.wins / data.tetra_league.statistic.total * 100).toFixed(2)
 												}}%)
 											</n-text>
 										</div>
@@ -292,26 +302,28 @@ const level = computed(() => {
 								<n-card size="small">
 									<div class="text-center">
 										<n-flex justify="space-evenly">
-											<n-statistic :value="data.tetra_league.apm" label="APM">
-												<template #suffix>
+											<n-statistic :value="data.tetra_league.pps" label="PPS"/>
+
+											<n-statistic label="APM">
+												<n-flex :size="0" vertical>
+													<n-text>{{ data.tetra_league.apm }}</n-text>
 													<n-text :depth="3" class="text-sm">
 														(x{{
 															(data.tetra_league.apm / data.tetra_league.pps / 24).toFixed(2)
 														}})
 													</n-text>
-												</template>
+												</n-flex>
 											</n-statistic>
 
-											<n-statistic :value="data.tetra_league.pps" label="PPS"/>
-
-											<n-statistic :value="data.tetra_league.vs" label="VS">
-												<template #suffix>
+											<n-statistic label="VS">
+												<n-flex :size="0" vertical>
+													<n-text>{{ data.tetra_league.vs }}</n-text>
 													<n-text :depth="3" class="text-sm">
 														(x{{
 															(data.tetra_league.vs / data.tetra_league.pps / 24).toFixed(2)
 														}})
 													</n-text>
-												</template>
+												</n-flex>
 											</n-statistic>
 										</n-flex>
 									</div>
@@ -367,6 +379,14 @@ const level = computed(() => {
 							<n-text class="text-3xl fw-bold">{{ data.zen.score }}</n-text>
 							<n-text :depth="3" class="text-3xl fw-bold">Level {{ data.zen.level }}</n-text>
 						</n-flex>
+					</n-card>
+
+					<n-card size="small">
+						<div class="text-center">
+							<n-text class="text-2xl fw-bold" type="warning">
+								Powered by NoneBot2 x nonebot-plugin-tetris-stats
+							</n-text>
+						</div>
 					</n-card>
 				</n-flex>
 			</n-layout-content>
