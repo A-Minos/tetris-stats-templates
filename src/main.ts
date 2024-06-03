@@ -1,5 +1,4 @@
 import 'virtual:uno.css'
-import '@/styles/main.scss'
 
 import { type Component, createApp, h } from 'vue'
 import { createMemoryHistory, createRouter, type RouteRecordRaw, RouterView } from 'vue-router'
