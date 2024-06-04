@@ -3,29 +3,42 @@ export interface Data {
 	readonly user: {
 		readonly id: string
 		readonly name: string
-		readonly bio: string
-		readonly banner: string
+		readonly country?: string
+
 		readonly avatar: string
-		readonly badges: string[]
-		readonly country: string
-		readonly xp: number
+		readonly banner?: string
+
+		readonly bio?: string
+
 		readonly friend_count: number
 		readonly supporter_tier: number
-		readonly bad_standing: boolean
+
 		readonly verified: boolean
-		readonly playtime: string
-		readonly join_at: Date
+		readonly bad_standing: boolean
+
+		readonly badges: string[]
+		readonly xp: number
+
+		readonly playtime?: string
+		readonly join_at?: Date
 	}
 
-	readonly tetra_league: {
+	readonly tetra_league?: {
 		readonly tr: number
+
 		readonly glicko: number
 		readonly rd: number
+
 		readonly global_rank: number
 		readonly country_rank: number
-		readonly apm: number
+
 		readonly pps: number
+
+		readonly apm: number
+		readonly adpm: number
+
 		readonly vs: number
+		readonly adpl: number
 
 		readonly statistic: {
 			readonly total: number
@@ -33,24 +46,24 @@ export interface Data {
 		}
 	}
 
-	readonly statistic: {
+	readonly statistic?: {
 		readonly total: number
 		readonly wins: number
 	}
 
-	readonly sprint: {
+	readonly sprint?: {
 		readonly time: string
-		readonly global_rank: number
+		readonly global_rank?: number
 		readonly play_at: Date
 	}
 
-	readonly blitz: {
+	readonly blitz?: {
 		readonly score: number
-		readonly global_rank: number
+		readonly global_rank?: number
 		readonly play_at: Date
 	}
 
-	readonly zen: {
+	readonly zen?: {
 		readonly score: number
 		readonly level: number
 	}
@@ -61,7 +74,7 @@ export interface Data {
 import { CheckCircleOutlined, ClockCircleOutlined, HeartFilled, StarFilled } from '@vicons/antd'
 import { darkTheme } from 'naive-ui'
 import logo from '@/assets/images/logos/tetrio.svg'
-import { isEmpty, isNonNullish } from 'remeda'
+import { isNonNullish, isNullish } from 'remeda'
 
 const data: Data = JSON.parse(
 	document.querySelector('template#data')!.innerHTML
@@ -70,6 +83,11 @@ const data: Data = JSON.parse(
 const level = computed(() => {
 	return Math.pow(data.user.xp / 500, 0.6) + data.user.xp / (5000 + Math.max(0, data.user.xp - 4000000) / 5000) + 1
 })
+
+const calculateWinRate = (total: number, wins: number) => {
+	const rate = (wins / total * 100).toFixed(2)
+	return `${wins}/${total} (${rate})`
+}
 </script>
 
 <template>
@@ -80,7 +98,7 @@ const level = computed(() => {
 
 					<!-- 顶部: 有头图 -->
 
-					<div v-if="!isEmpty(data.user.banner)" class="relative">
+					<div v-if="isNonNullish(data.user.banner)" class="relative">
 						<n-image :src="data.user.banner" class="[&>img]:(w-full h-full)"/>
 
 						<div class="absolute top-1/2 left-1/2 -translate-1/2 w-[99%]">
@@ -95,13 +113,17 @@ const level = computed(() => {
 												<n-text :depth="3" class="text-xs">{{ data.user.id }}</n-text>
 											</n-flex>
 
-											<n-image :src="(`https://tetr.io/res/flags/${data.user.country}.png`)"
-													 :width="4 * 6"
-													 class="rounded"/>
+											<template v-if="isNonNullish(data.user.country)">
+												<n-image :src="(`https://tetr.io/res/flags/${data.user.country}.png`)"
+														 :width="4 * 6"
+														 class="rounded"/>
+											</template>
 
-											<n-icon v-if="data.user.verified" :component="CheckCircleOutlined"
-													:size="4 * 5"
-													color="#9CCA95"/>
+											<template v-if="data.user.verified">
+												<n-icon :component="CheckCircleOutlined"
+														:size="4 * 5"
+														color="#9CCA95"/>
+											</template>
 										</n-flex>
 
 										<n-flex :size="0" align="center" justify="space-between">
@@ -183,23 +205,27 @@ const level = computed(() => {
 
 					<!-- Bio -->
 
-					<n-card v-if="!isEmpty(data.user.bio)" size="small">
-						{{ data.user.bio }}
-					</n-card>
+					<template v-if="isNonNullish(data.user.bio)">
+						<n-card size="small">
+							{{ data.user.bio }}
+						</n-card>
+					</template>
 
 					<n-divider class="!my-0">多人游戏</n-divider>
 
 					<!-- 勋章 -->
 
-					<n-card v-if="!isEmpty(data.user.badges)" size="small">
-						<n-flex align="center" class="h-full" justify="center" vertical>
-							<n-flex justify="center">
-								<template v-for="badge in data.user.badges">
-									<n-image :src="badge" :width="4 * 6"/>
-								</template>
+					<template v-if="isNonNullish(data.user.badges)">
+						<n-card size="small">
+							<n-flex align="center" class="h-full" justify="center" vertical>
+								<n-flex justify="center">
+									<template v-for="badge in data.user.badges">
+										<n-image :src="(`https://tetr.io/res/badges/${badge}.png`)" :width="4 * 6"/>
+									</template>
+								</n-flex>
 							</n-flex>
-						</n-flex>
-					</n-card>
+						</n-card>
+					</template>
 
 					<n-grid :cols="2" :x-gap="10">
 						<n-grid-item>
@@ -221,165 +247,181 @@ const level = computed(() => {
 
 								<!-- 额外信息 -->
 
-								<n-card class="h-full" size="small">
-									<n-flex :size="0" align="center" class="h-full" justify="center" vertical>
-										<n-flex :size="1" align="center" class="mb-5">
-											<n-icon :component="ClockCircleOutlined" :size="4 * 6"/>
-											<n-text>{{ data.user.playtime }}</n-text>
+								<template
+									v-if="isNonNullish(data.user.playtime) || isNonNullish(data.statistic) || isNonNullish(data.user.join_at)">
+									<n-card class="h-full" size="small">
+										<n-flex :size="0" align="center" class="h-full" justify="center" vertical>
+											<template v-if="isNonNullish(data.user.playtime)">
+												<n-flex :size="1" align="center" class="mb-5">
+													<n-icon :component="ClockCircleOutlined" :size="4 * 6"/>
+													<n-text>{{ data.user.playtime }}</n-text>
+												</n-flex>
+											</template>
+
+											<template v-if="isNonNullish(data.statistic)">
+												<div class="text-center">
+													<n-text :depth="3" class="text-sm">
+														胜率: {{
+															calculateWinRate(data.statistic.total, data.statistic.wins)
+														}}
+													</n-text>
+												</div>
+											</template>
+
+											<template v-if="isNonNullish(data.user.join_at)">
+												<div class="text-center">
+													<n-text :depth="3" class="text-sm">
+														注册时间: {{ new Date(data.user.join_at).toLocaleString() }}
+													</n-text>
+												</div>
+											</template>
 										</n-flex>
-
-										<div class="text-center">
-											<n-text :depth="3" class="text-sm">胜率: {{ data.statistic.wins }} /
-												{{ data.statistic.total }}
-												({{
-													(data.statistic.wins / data.statistic.total * 100).toFixed(2)
-												}}%)
-											</n-text>
-										</div>
-
-										<div class="text-center">
-											<n-text :depth="3" class="text-sm">
-												注册时间: {{ new Date(data.user.join_at).toLocaleString() }}
-											</n-text>
-										</div>
-									</n-flex>
-								</n-card>
+									</n-card>
+								</template>
 							</n-flex>
 						</n-grid-item>
 
 						<n-grid-item>
 							<n-flex vertical>
-								<n-card size="small">
-									<n-flex :size="0" vertical>
-										<n-flex align="center" justify="space-between">
+								<template v-if="isNonNullish(data.tetra_league)">
+									<n-card size="small">
+										<n-flex :size="0" vertical>
+											<n-flex align="center" justify="space-between">
 
-											<!-- Tetra League -->
+												<!-- Tetra League -->
 
-											<n-flex :size="0" align="center">
-												<n-image :width="4 * 15" src="https://tetr.io/res/league-ranks/x.png"/>
+												<n-flex :size="0" align="center">
+													<n-image :width="4 * 15"
+															 src="https://tetr.io/res/league-ranks/x.png"/>
 
-												<n-flex :size="0" vertical>
-													<n-text class="text-2xl fw-bold">{{ data.tetra_league.tr }} TR
-													</n-text>
+													<n-flex :size="0" vertical>
+														<n-text class="text-2xl fw-bold">{{ data.tetra_league.tr }} TR
+														</n-text>
 
-													<n-text :depth="3" class="text-sm">
-														{{ data.tetra_league.glicko }}±{{ data.tetra_league.rd }}
-													</n-text>
+														<n-text :depth="3" class="text-sm">
+															{{ data.tetra_league.glicko }}±{{ data.tetra_league.rd }}
+														</n-text>
+													</n-flex>
 												</n-flex>
+
+												<!-- 排名 -->
+
+												<div class="text-right">
+													<n-flex :size="0" vertical>
+														<n-text class="text-xl fw-bold" type="success">
+															#{{ data.tetra_league.global_rank }}
+														</n-text>
+
+														<template
+															v-if="isNonNullish(data.user.country) && isNonNullish(data.tetra_league.country_rank)">
+															<n-text class="text-xl fw-bold" type="info">
+																{{
+																	data.user.country.toUpperCase()
+																}}#{{ data.tetra_league.country_rank }}
+															</n-text>
+														</template>
+													</n-flex>
+												</div>
 											</n-flex>
 
-											<!-- 排名 -->
-
-											<div class="text-right">
-												<n-flex :size="0" vertical>
-													<n-text class="text-xl fw-bold" type="success">
-														#{{ data.tetra_league.global_rank }}
-													</n-text>
-													<n-text class="text-xl fw-bold" type="info">
-														{{
-															data.user.country.toUpperCase()
-														}}#{{ data.tetra_league.country_rank }}
-													</n-text>
-												</n-flex>
+											<div class="text-center">
+												<n-text :depth="3" class="text-sm">
+													胜率: {{
+														calculateWinRate(data.tetra_league.statistic.total, data.tetra_league.statistic.wins)
+													}}
+												</n-text>
 											</div>
 										</n-flex>
+									</n-card>
 
+									<!-- 数据 -->
+
+									<n-card size="small">
 										<div class="text-center">
-											<n-text :depth="3" class="text-sm">胜率: {{
-													data.tetra_league.statistic.wins
-												}} /
-												{{ data.tetra_league.statistic.total }}
-												({{
-													(data.tetra_league.statistic.wins / data.tetra_league.statistic.total * 100).toFixed(2)
-												}}%)
-											</n-text>
+											<n-flex justify="space-evenly">
+												<n-statistic :value="data.tetra_league.pps" label="PPS"/>
+
+												<n-statistic label="APM">
+													<n-flex :size="0" vertical>
+														<n-text>{{ data.tetra_league.apm }}</n-text>
+														<n-text :depth="3" class="text-sm">
+															(x{{ data.tetra_league.adpm }})
+														</n-text>
+													</n-flex>
+												</n-statistic>
+
+												<n-statistic label="VS">
+													<n-flex :size="0" vertical>
+														<n-text>{{ data.tetra_league.vs }}</n-text>
+														<n-text :depth="3" class="text-sm">
+															(x{{ data.tetra_league.adpl }})
+														</n-text>
+													</n-flex>
+												</n-statistic>
+											</n-flex>
 										</div>
-									</n-flex>
-								</n-card>
-
-								<!-- 数据 -->
-
-								<n-card size="small">
-									<div class="text-center">
-										<n-flex justify="space-evenly">
-											<n-statistic :value="data.tetra_league.pps" label="PPS"/>
-
-											<n-statistic label="APM">
-												<n-flex :size="0" vertical>
-													<n-text>{{ data.tetra_league.apm }}</n-text>
-													<n-text :depth="3" class="text-sm">
-														(x{{
-															(data.tetra_league.apm / data.tetra_league.pps / 24).toFixed(2)
-														}})
-													</n-text>
-												</n-flex>
-											</n-statistic>
-
-											<n-statistic label="VS">
-												<n-flex :size="0" vertical>
-													<n-text>{{ data.tetra_league.vs }}</n-text>
-													<n-text :depth="3" class="text-sm">
-														(x{{
-															(data.tetra_league.vs / data.tetra_league.pps / 24).toFixed(2)
-														}})
-													</n-text>
-												</n-flex>
-											</n-statistic>
-										</n-flex>
-									</div>
-								</n-card>
+									</n-card>
+								</template>
 							</n-flex>
 						</n-grid-item>
 					</n-grid>
 
-					<n-divider class="!my-0">单人游戏</n-divider>
+					<template v-if="isNonNullish(data.sprint) || isNonNullish(data.blitz) || isNonNullish(data.zen)">
+						<n-divider class="!my-0">单人游戏</n-divider>
+					</template>
 
-					<n-grid :cols="2" :x-gap="10">
+					<n-grid :cols="isNullish(data.sprint) || isNullish(data.blitz) ? 1 : 2" :x-gap="10">
 						<n-grid-item>
-							<n-card size="small" title="40L">
-								<n-flex align="center" justify="space-between">
-									<n-flex :size="0" vertical>
-										<n-text class="text-3xl fw-bold">{{ data.sprint.time }}</n-text>
+							<template v-if="isNonNullish(data.sprint)">
+								<n-card size="small" title="40L">
+									<n-flex align="center" justify="space-between">
+										<n-flex :size="0" vertical>
+											<n-text class="text-3xl fw-bold">{{ data.sprint.time }}</n-text>
 
-										<n-text :depth="3" class="text-sm">
-											达成时间: {{ new Date(data.sprint.play_at).toLocaleString() }}
+											<n-text :depth="3" class="text-sm">
+												达成时间: {{ new Date(data.sprint.play_at).toLocaleString() }}
+											</n-text>
+										</n-flex>
+
+										<n-text v-if="isNonNullish(data.sprint.global_rank)" class="text-xl fw-bold"
+												type="success">
+											#{{ data.sprint.global_rank }}
 										</n-text>
 									</n-flex>
-
-									<n-text v-if="isNonNullish(data.sprint.global_rank)" class="text-xl fw-bold"
-											type="success">
-										#{{ data.sprint.global_rank }}
-									</n-text>
-								</n-flex>
-							</n-card>
+								</n-card>
+							</template>
 						</n-grid-item>
 
 						<n-grid-item>
-							<n-card size="small" title="Blitz">
-								<n-flex align="center" justify="space-between">
-									<n-flex :size="0" vertical>
-										<n-text class="text-3xl fw-bold">{{ data.blitz.score }}</n-text>
+							<template v-if="isNonNullish(data.blitz)">
+								<n-card size="small" title="Blitz">
+									<n-flex align="center" justify="space-between">
+										<n-flex :size="0" vertical>
+											<n-text class="text-3xl fw-bold">{{ data.blitz.score }}</n-text>
 
-										<n-text :depth="3" class="text-sm">
-											达成时间: {{ new Date(data.blitz.play_at).toLocaleString() }}
+											<n-text :depth="3" class="text-sm">
+												达成时间: {{ new Date(data.blitz.play_at).toLocaleString() }}
+											</n-text>
+										</n-flex>
+
+										<n-text v-if="isNonNullish(data.blitz.global_rank)" class="text-xl fw-bold"
+												type="success">
+											#{{ data.blitz.global_rank }}
 										</n-text>
 									</n-flex>
-
-									<n-text v-if="isNonNullish(data.blitz.global_rank)" class="text-xl fw-bold"
-											type="success">
-										#{{ data.blitz.global_rank }}
-									</n-text>
-								</n-flex>
-							</n-card>
+								</n-card>
+							</template>
 						</n-grid-item>
 					</n-grid>
 
-					<n-card size="small" title="Zen">
-						<n-flex align="center" justify="space-between">
-							<n-text class="text-3xl fw-bold">{{ data.zen.score }}</n-text>
-							<n-text :depth="3" class="text-3xl fw-bold">Level {{ data.zen.level }}</n-text>
-						</n-flex>
-					</n-card>
+					<template v-if="isNonNullish(data.zen)">
+						<n-card size="small" title="Zen">
+							<n-flex align="center" justify="space-between">
+								<n-text class="text-3xl fw-bold">{{ data.zen.score }}</n-text>
+								<n-text :depth="3" class="text-3xl fw-bold">Level {{ data.zen.level }}</n-text>
+							</n-flex>
+						</n-card>
+					</template>
 
 					<n-card size="small">
 						<div class="text-center">

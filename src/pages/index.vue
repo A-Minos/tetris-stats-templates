@@ -6,17 +6,13 @@ const testTetrioInfo = () => {
 		user: {
 			id: '5eb3a6530b29196c155074e8',
 			name: 'WOSHIZHAZHA120',
-			avatar: 'https://tetr.io/user-content/avatars/5eb3a6530b29196c155074e8.jpg?rv=1713869635827',
-			banner: 'https://tetr.io/user-content/banners/605468e1d8bf2a23b076eba5.jpg?rv=1676715072965',
-			badges: ['https://tetr.io/res/badges/secretgrade.png', 'https://tetr.io/res/badges/100player.png', 'https://tetr.io/res/badges/20tsd.png'],
+			avatar: 'https://tetr.io/user-content/avatars/5eb3a6530b29196c155074e8.jpg',
+			badges: ['secretgrade', '100player', '20tsd'],
 			country: 'cn',
 			xp: 15033024,
 			friend_count: 184,
 			playtime: '1079 小时',
-			supporter_tier: 3,
-			bad_standing: true,
-			verified: true,
-			bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+			bio: 'https://zhazha120.cn',
 			join_at: '2020/5/7 14:10:27'
 		},
 		tetra_league: {
