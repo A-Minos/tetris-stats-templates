@@ -159,19 +159,27 @@ const calculateWinRate = (total: number, wins: number) => {
 						<n-flex vertical>
 							<n-flex align="center" size="small">
 								<n-avatar :size="4 * 12" :src="data.user.avatar"/>
-								<n-text class="text-8 fw-bold">{{ data.user.name }}</n-text>
 
-								<n-image :src="(`https://tetr.io/res/flags/${data.user.country}.png`)"
-										 :width="4 * 6"
-										 class="rounded"/>
+								<n-flex :size="0" vertical>
+									<n-text class="text-8 fw-bold">{{ data.user.name }}</n-text>
+									<n-text :depth="3" class="text-xs">{{ data.user.id }}</n-text>
+								</n-flex>
 
-								<n-icon v-if="data.user.verified" :component="CheckCircleOutlined"
-										:size="4 * 5"
-										color="#9CCA95"/>
+								<template v-if="isNonNullish(data.user.country)">
+									<n-image :src="(`https://tetr.io/res/flags/${data.user.country}.png`)"
+											 :width="4 * 6"
+											 class="rounded"/>
+								</template>
+
+								<template v-if="data.user.verified">
+									<n-icon :component="CheckCircleOutlined"
+											:size="4 * 5"
+											color="#9CCA95"/>
+								</template>
 							</n-flex>
 
 							<n-flex :size="0" align="center" justify="space-between">
-								<n-flex :size="0" align="center">
+								<n-flex :size="1" align="center">
 									<n-icon :component="HeartFilled" :size="4 * 5"/>
 									<n-text>{{ data.user.friend_count }}</n-text>
 								</n-flex>
@@ -371,6 +379,8 @@ const calculateWinRate = (total: number, wins: number) => {
 					</template>
 
 					<n-grid :cols="isNullish(data.sprint) || isNullish(data.blitz) ? 1 : 2" :x-gap="10">
+						<!-- 40L -->
+
 						<n-grid-item>
 							<template v-if="isNonNullish(data.sprint)">
 								<n-card size="small" title="40L">
@@ -391,6 +401,8 @@ const calculateWinRate = (total: number, wins: number) => {
 								</n-card>
 							</template>
 						</n-grid-item>
+
+						<!-- Blitz -->
 
 						<n-grid-item>
 							<template v-if="isNonNullish(data.blitz)">
@@ -414,6 +426,8 @@ const calculateWinRate = (total: number, wins: number) => {
 						</n-grid-item>
 					</n-grid>
 
+					<!-- Zen -->
+
 					<template v-if="isNonNullish(data.zen)">
 						<n-card size="small" title="Zen">
 							<n-flex align="center" justify="space-between">
@@ -422,6 +436,8 @@ const calculateWinRate = (total: number, wins: number) => {
 							</n-flex>
 						</n-card>
 					</template>
+
+					<!-- 底部 -->
 
 					<n-card size="small">
 						<div class="text-center">
