@@ -22,6 +22,7 @@ const test = () => {
 			join_at: '2020/5/7 14:10:27'
 		},
 		tetra_league: {
+			rank: 'x',
 			tr: 24830.47,
 			glicko: 2806.04,
 			rd: 62.27,

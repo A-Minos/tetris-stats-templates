@@ -26,6 +26,7 @@ export interface Data {
 	}
 
 	readonly tetra_league?: {
+		readonly rank: string
 		readonly tr: number
 
 		readonly glicko: number
@@ -340,8 +341,8 @@ const numberFormatter = new Intl.NumberFormat()
 												<!-- Tetra League -->
 
 												<n-flex :size="0" align="center">
-													<n-image :width="4 * 15"
-															 src="https://tetr.io/res/league-ranks/x.png"/>
+													<n-image :src="(`https://tetr.io/res/league-ranks/${data.tetra_league.rank}.png`)"
+															 :width="4 * 15"/>
 
 													<n-flex :size="0" vertical>
 														<n-text class="text-2xl fw-bold">{{ data.tetra_league.tr }} TR
