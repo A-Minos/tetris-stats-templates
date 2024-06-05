@@ -33,12 +33,8 @@ export interface Data {
 		readonly country_rank: number
 
 		readonly pps: number
-
 		readonly apm: number
-		readonly adpm: number
-
 		readonly vs: number
-		readonly adpl: number
 
 		readonly statistic: {
 			readonly total: number
@@ -72,6 +68,7 @@ export interface Data {
 
 <script lang="ts" setup>
 import { CheckCircleOutlined, ClockCircleOutlined, HeartFilled, StarFilled } from '@vicons/antd'
+import { createReusableTemplate } from '@vueuse/core'
 import { darkTheme } from 'naive-ui'
 import logo from '@/assets/images/logos/tetrio.svg'
 import { isNonNullish, isNullish } from 'remeda'
@@ -86,8 +83,29 @@ const level = computed(() => {
 
 const calculateWinRate = (total: number, wins: number) => {
 	const rate = (wins / total * 100).toFixed(2)
-	return `${wins}/${total} (${rate})`
+	return `${wins}/${total} (${rate}%)`
 }
+
+const adpm = computed(() => {
+	if (isNullish(data.tetra_league)) {
+		return 0
+	}
+
+	return data.tetra_league.apm / data.tetra_league.pps / 24
+})
+
+const adpl = computed(() => {
+	if (isNullish(data.tetra_league)) {
+		return 0
+	}
+
+	return (data.tetra_league.vs / data.tetra_league.pps / 24) * 0.6
+})
+
+const { define: UserDefine, reuse: User } = createReusableTemplate()
+const { define: LogoDefine, reuse: Logo } = createReusableTemplate()
+
+const numberFormatter = new Intl.NumberFormat()
 </script>
 
 <template>
@@ -96,108 +114,87 @@ const calculateWinRate = (total: number, wins: number) => {
 			<n-layout-content class="p-2 max-w-1/2">
 				<n-flex vertical>
 
+					<!-- 顶部: 复用 -->
+
+					<UserDefine>
+						<div class="text-white">
+							<n-flex size="small" vertical>
+								<n-flex align="center" size="small">
+									<n-avatar :size="4 * 12" :src="data.user.avatar"/>
+
+									<n-flex :size="0" vertical>
+										<n-text class="text-(6 current) fw-bold leading-none">
+											{{ data.user.name }}
+										</n-text>
+
+										<n-text :depth="3" class="text-xs">{{ data.user.id }}</n-text>
+									</n-flex>
+
+									<template v-if="isNonNullish(data.user.country)">
+										<n-image :src="(`https://tetr.io/res/flags/${data.user.country}.png`)"
+												 :width="4 * 6"
+												 class="rounded"/>
+									</template>
+
+									<template v-if="data.user.verified">
+										<n-icon :component="CheckCircleOutlined"
+												:size="4 * 5"
+												color="#9CCA95"/>
+									</template>
+								</n-flex>
+
+								<n-flex :size="0" align="center" justify="space-between">
+									<n-flex align="center" class="!gap-0.5">
+										<n-icon :component="HeartFilled" :size="4 * 5"/>
+										<n-text class="text-current">{{ data.user.friend_count }}</n-text>
+									</n-flex>
+
+									<n-flex v-if="data.user.supporter_tier > 0" :size="0" align="center"
+											class="ml-5">
+										<template v-for="_ in data.user.supporter_tier">
+											<n-icon :component="StarFilled" :size="4 * 5"
+													class="drop-shadow-[0_0_0.5rem_#FF4A19]"/>
+										</template>
+									</n-flex>
+								</n-flex>
+							</n-flex>
+						</div>
+					</UserDefine>
+
+					<LogoDefine>
+						<div class="text-white">
+							<n-flex :size="0" align="center" vertical>
+								<n-image :src="logo" :width="4 * 8"/>
+								<n-text class="text-current mt-2 fw-bold">TETR.IO</n-text>
+							</n-flex>
+						</div>
+					</LogoDefine>
+
 					<!-- 顶部: 有头图 -->
 
 					<div v-if="isNonNullish(data.user.banner)" class="relative">
-						<n-image :src="data.user.banner" class="[&>img]:(w-full h-full)"/>
+						<n-image :src="data.user.banner" class="[&>img]:(w-full)"/>
 
-						<div class="absolute top-1/2 left-1/2 -translate-1/2 w-[99%]">
-							<n-flex align="center" justify="space-between">
-								<div class="bg-black rounded p-2 bg-opacity-80">
-									<n-flex vertical>
-										<n-flex align="center" size="small">
-											<n-avatar :size="4 * 12" :src="data.user.avatar"/>
+						<div class="absolute top-1/2 left-1/2 -translate-1/2 w-full">
+							<div class="px-2.5">
+								<n-flex align="center" justify="space-between">
+									<div class="backdrop-(blur-sm brightness-50) p-2.5">
+										<User/>
+									</div>
 
-											<n-flex :size="0" vertical>
-												<n-text class="text-8 fw-bold">{{ data.user.name }}</n-text>
-												<n-text :depth="3" class="text-xs">{{ data.user.id }}</n-text>
-											</n-flex>
-
-											<template v-if="isNonNullish(data.user.country)">
-												<n-image :src="(`https://tetr.io/res/flags/${data.user.country}.png`)"
-														 :width="4 * 6"
-														 class="rounded"/>
-											</template>
-
-											<template v-if="data.user.verified">
-												<n-icon :component="CheckCircleOutlined"
-														:size="4 * 5"
-														color="#9CCA95"/>
-											</template>
-										</n-flex>
-
-										<n-flex :size="0" align="center" justify="space-between">
-											<n-flex :size="1" align="center">
-												<n-icon :component="HeartFilled" :size="4 * 5"/>
-												<n-text>{{ data.user.friend_count }}</n-text>
-											</n-flex>
-
-											<n-flex v-if="data.user.supporter_tier > 0" :size="0" align="center"
-													class="ml-5">
-												<template v-for="_ in data.user.supporter_tier">
-													<n-icon :component="StarFilled" :size="4 * 5"
-															class="drop-shadow-[0_0_0.5rem_#FF4A19]"/>
-												</template>
-											</n-flex>
-										</n-flex>
-									</n-flex>
-								</div>
-
-								<div class="bg-black rounded p-2 bg-opacity-80">
-									<n-flex :size="1" align="center" vertical>
-										<n-image :src="logo" :width="4 * 8"/>
-										<n-text class="mt-2 fw-bold">TETR.IO</n-text>
-									</n-flex>
-								</div>
-							</n-flex>
+									<div class="backdrop-(blur-sm brightness-50) p-1">
+										<Logo/>
+									</div>
+								</n-flex>
+							</div>
 						</div>
 					</div>
 
 					<!-- 顶部: 无头图 -->
 
 					<n-flex v-else align="center" justify="space-between">
-						<n-flex vertical>
-							<n-flex align="center" size="small">
-								<n-avatar :size="4 * 12" :src="data.user.avatar"/>
-
-								<n-flex :size="0" vertical>
-									<n-text class="text-8 fw-bold">{{ data.user.name }}</n-text>
-									<n-text :depth="3" class="text-xs">{{ data.user.id }}</n-text>
-								</n-flex>
-
-								<template v-if="isNonNullish(data.user.country)">
-									<n-image :src="(`https://tetr.io/res/flags/${data.user.country}.png`)"
-											 :width="4 * 6"
-											 class="rounded"/>
-								</template>
-
-								<template v-if="data.user.verified">
-									<n-icon :component="CheckCircleOutlined"
-											:size="4 * 5"
-											color="#9CCA95"/>
-								</template>
-							</n-flex>
-
-							<n-flex :size="0" align="center" justify="space-between">
-								<n-flex :size="1" align="center">
-									<n-icon :component="HeartFilled" :size="4 * 5"/>
-									<n-text>{{ data.user.friend_count }}</n-text>
-								</n-flex>
-
-								<n-flex v-if="data.user.supporter_tier > 0" :size="0" align="center"
-										class="ml-5">
-									<template v-for="_ in data.user.supporter_tier">
-										<n-icon :component="StarFilled" :size="4 * 5"
-												class="drop-shadow-[0_0_0.5rem_#FF4A19]"/>
-									</template>
-								</n-flex>
-							</n-flex>
-						</n-flex>
-
-						<n-flex :size="0" align="center" vertical>
-							<n-image :src="logo" :width="4 * 8"/>
-							<n-text class="mt-2 fw-bold">TETR.IO</n-text>
-						</n-flex>
+						<User/>
+						<Logo/>
 					</n-flex>
 
 					<!-- Bad Standing -->
@@ -205,7 +202,7 @@ const calculateWinRate = (total: number, wins: number) => {
 					<n-alert v-if="data.user.bad_standing" :show-icon="false" type="error">
 						<div class="text-center">
 							<n-flex :size="0" vertical>
-								<n-text class="text-2xl fw-bold">坏的站立</n-text>
+								<n-text class="text-2xl fw-bold">Bad Standing</n-text>
 								<n-text class="my-2">近期有一次或多次违禁行为</n-text>
 							</n-flex>
 						</div>
@@ -225,17 +222,15 @@ const calculateWinRate = (total: number, wins: number) => {
 
 					<template v-if="isNonNullish(data.user.badges)">
 						<n-card size="small">
-							<n-flex align="center" class="h-full" justify="center" vertical>
-								<n-flex justify="center">
-									<template v-for="badge in data.user.badges">
-										<n-image :src="(`https://tetr.io/res/badges/${badge}.png`)" :width="4 * 6"/>
-									</template>
-								</n-flex>
+							<n-flex justify="center">
+								<template v-for="badge in data.user.badges">
+									<n-image :src="(`https://tetr.io/res/badges/${badge}.png`)" :width="4 * 6"/>
+								</template>
 							</n-flex>
 						</n-card>
 					</template>
 
-					<n-grid :cols="2" :x-gap="10">
+					<n-grid :cols="isNullish(data.tetra_league) ? 1 : 2" :x-gap="10">
 						<n-grid-item>
 							<n-flex class="h-full" vertical>
 								<!-- 等级 -->
@@ -244,7 +239,7 @@ const calculateWinRate = (total: number, wins: number) => {
 									<n-flex vertical>
 										<div class="text-center">
 											<n-text class="fw-bold">
-												{{ Math.trunc(level) }} 级 ({{ data.user.xp }} XP)
+												{{ Math.trunc(level) }} 级 ({{ numberFormatter.format(data.user.xp) }} XP)
 											</n-text>
 										</div>
 
@@ -256,12 +251,13 @@ const calculateWinRate = (total: number, wins: number) => {
 								<!-- 额外信息 -->
 
 								<template
-									v-if="isNonNullish(data.user.playtime) || isNonNullish(data.statistic) || isNonNullish(data.user.join_at)">
+									v-if="[data.user.playtime, data.statistic, data.user.join_at].some(isNonNullish)">
 									<n-card class="h-full" size="small">
-										<n-flex :size="0" align="center" class="h-full" justify="center" vertical>
+										<div class="flex flex-col justify-center items-center h-full">
+
 											<template v-if="isNonNullish(data.user.playtime)">
-												<n-flex :size="1" align="center" class="mb-5">
-													<n-icon :component="ClockCircleOutlined" :size="4 * 6"/>
+												<n-flex align="center" class="!gap-1 mb-5">
+													<n-icon :component="ClockCircleOutlined" :size="4 * 5"/>
 													<n-text>{{ data.user.playtime }}</n-text>
 												</n-flex>
 											</template>
@@ -283,7 +279,8 @@ const calculateWinRate = (total: number, wins: number) => {
 													</n-text>
 												</div>
 											</template>
-										</n-flex>
+
+										</div>
 									</n-card>
 								</template>
 							</n-flex>
@@ -294,6 +291,7 @@ const calculateWinRate = (total: number, wins: number) => {
 								<template v-if="isNonNullish(data.tetra_league)">
 									<n-card size="small">
 										<n-flex :size="0" vertical>
+
 											<n-flex align="center" justify="space-between">
 
 												<!-- Tetra League -->
@@ -339,6 +337,7 @@ const calculateWinRate = (total: number, wins: number) => {
 													}}
 												</n-text>
 											</div>
+
 										</n-flex>
 									</n-card>
 
@@ -347,13 +346,14 @@ const calculateWinRate = (total: number, wins: number) => {
 									<n-card size="small">
 										<div class="text-center">
 											<n-flex justify="space-evenly">
+
 												<n-statistic :value="data.tetra_league.pps" label="PPS"/>
 
 												<n-statistic label="APM">
 													<n-flex :size="0" vertical>
 														<n-text>{{ data.tetra_league.apm }}</n-text>
 														<n-text :depth="3" class="text-sm">
-															(x{{ data.tetra_league.adpm }})
+															(x{{ adpm.toFixed(2) }})
 														</n-text>
 													</n-flex>
 												</n-statistic>
@@ -362,10 +362,11 @@ const calculateWinRate = (total: number, wins: number) => {
 													<n-flex :size="0" vertical>
 														<n-text>{{ data.tetra_league.vs }}</n-text>
 														<n-text :depth="3" class="text-sm">
-															(x{{ data.tetra_league.adpl }})
+															(x{{ adpl.toFixed(2) }})
 														</n-text>
 													</n-flex>
 												</n-statistic>
+
 											</n-flex>
 										</div>
 									</n-card>
@@ -374,64 +375,66 @@ const calculateWinRate = (total: number, wins: number) => {
 						</n-grid-item>
 					</n-grid>
 
-					<template v-if="isNonNullish(data.sprint) || isNonNullish(data.blitz) || isNonNullish(data.zen)">
+					<template v-if="[data.sprint, data.blitz, data.zen].some(isNonNullish)">
 						<n-divider class="!my-0">单人游戏</n-divider>
 					</template>
 
-					<n-grid :cols="isNullish(data.sprint) || isNullish(data.blitz) ? 1 : 2" :x-gap="10">
-						<!-- 40L -->
+					<template v-if="![data.sprint, data.blitz].map(isNonNullish).includes(false)">
+						<n-grid :cols="[data.sprint, data.blitz].filter(isNonNullish).length" :x-gap="10">
+							<!-- 40L -->
 
-						<n-grid-item>
-							<template v-if="isNonNullish(data.sprint)">
-								<n-card size="small" title="40L">
-									<n-flex align="center" justify="space-between">
-										<n-flex :size="0" vertical>
-											<n-text class="text-3xl fw-bold">{{ data.sprint.time }}</n-text>
+							<n-grid-item>
+								<template v-if="isNonNullish(data.sprint)">
+									<n-card size="small" title="40L">
+										<n-flex align="center" justify="space-between">
+											<n-flex :size="0" vertical>
+												<n-text class="text-3xl fw-bold">{{ data.sprint.time }}</n-text>
 
-											<n-text :depth="3" class="text-sm">
-												达成时间: {{ new Date(data.sprint.play_at).toLocaleString() }}
+												<n-text :depth="3" class="text-sm">
+													达成时间: {{ new Date(data.sprint.play_at).toLocaleString() }}
+												</n-text>
+											</n-flex>
+
+											<n-text v-if="isNonNullish(data.sprint.global_rank)" class="text-xl fw-bold"
+													type="success">
+												#{{ data.sprint.global_rank }}
 											</n-text>
 										</n-flex>
+									</n-card>
+								</template>
+							</n-grid-item>
 
-										<n-text v-if="isNonNullish(data.sprint.global_rank)" class="text-xl fw-bold"
-												type="success">
-											#{{ data.sprint.global_rank }}
-										</n-text>
-									</n-flex>
-								</n-card>
-							</template>
-						</n-grid-item>
+							<!-- Blitz -->
 
-						<!-- Blitz -->
+							<n-grid-item>
+								<template v-if="isNonNullish(data.blitz)">
+									<n-card size="small" title="Blitz">
+										<n-flex align="center" justify="space-between">
+											<n-flex :size="0" vertical>
+												<n-text class="text-3xl fw-bold">{{ numberFormatter.format(data.blitz.score) }}</n-text>
 
-						<n-grid-item>
-							<template v-if="isNonNullish(data.blitz)">
-								<n-card size="small" title="Blitz">
-									<n-flex align="center" justify="space-between">
-										<n-flex :size="0" vertical>
-											<n-text class="text-3xl fw-bold">{{ data.blitz.score }}</n-text>
+												<n-text :depth="3" class="text-sm">
+													达成时间: {{ new Date(data.blitz.play_at).toLocaleString() }}
+												</n-text>
+											</n-flex>
 
-											<n-text :depth="3" class="text-sm">
-												达成时间: {{ new Date(data.blitz.play_at).toLocaleString() }}
+											<n-text v-if="isNonNullish(data.blitz.global_rank)" class="text-xl fw-bold"
+													type="success">
+												#{{ data.blitz.global_rank }}
 											</n-text>
 										</n-flex>
-
-										<n-text v-if="isNonNullish(data.blitz.global_rank)" class="text-xl fw-bold"
-												type="success">
-											#{{ data.blitz.global_rank }}
-										</n-text>
-									</n-flex>
-								</n-card>
-							</template>
-						</n-grid-item>
-					</n-grid>
+									</n-card>
+								</template>
+							</n-grid-item>
+						</n-grid>
+					</template>
 
 					<!-- Zen -->
 
 					<template v-if="isNonNullish(data.zen)">
 						<n-card size="small" title="Zen">
 							<n-flex align="center" justify="space-between">
-								<n-text class="text-3xl fw-bold">{{ data.zen.score }}</n-text>
+								<n-text class="text-3xl fw-bold">{{ numberFormatter.format(data.zen.score) }}</n-text>
 								<n-text :depth="3" class="text-3xl fw-bold">Level {{ data.zen.level }}</n-text>
 							</n-flex>
 						</n-card>
@@ -446,6 +449,7 @@ const calculateWinRate = (total: number, wins: number) => {
 							</n-text>
 						</div>
 					</n-card>
+
 				</n-flex>
 			</n-layout-content>
 		</n-layout>
