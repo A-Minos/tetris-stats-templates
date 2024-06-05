@@ -1,0 +1,1 @@
+const e="data:image/svg+xml,%3csvg%20width='200'%20height='200'%20viewBox='0%200%20200%20200'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20fill-rule='evenodd'%20clip-rule='evenodd'%20d='M50%20160V200H0V0H160L200%2040V200H150V142L50%20160ZM150%2050H50V108L150%2090V50Z'%20fill='%23D8FA9C'/%3e%3c/svg%3e";export{e as default};
