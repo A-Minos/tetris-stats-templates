@@ -245,7 +245,7 @@ const numberFormatter = new Intl.NumberFormat()
 					<n-alert v-if="data.user.bad_standing" :show-icon="false" type="error">
 						<div class="text-center">
 							<n-flex :size="0" vertical>
-								<n-text class="text-2xl fw-bold">Bad Standing</n-text>
+								<n-text class="text-2xl fw-bold">BAD STANDING</n-text>
 								<n-text class="my-2">近期有一次或多次违禁行为</n-text>
 							</n-flex>
 						</div>
