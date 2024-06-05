@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import type { Data } from '@/pages/top/info.vue'
-import prompt from '@/utils/prompt'
+import type { Data } from '@/pages/v1/top/info.vue'
+import prompt from '@/utils/prompt.ts'
 
-const path = 'top/info'
+const path = 'v1/top/info'
 
 const test = () => {
 	const apm = Number(

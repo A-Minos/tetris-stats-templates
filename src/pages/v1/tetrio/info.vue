@@ -51,15 +51,15 @@ export interface Data {
 </script>
 
 <script lang="ts" setup>
-import InfoLpm from '@/components/info/card/lpm.vue'
-import logo from '@/assets/images/logo/tetrio.svg'
+import InfoLpm from '@/components/v1/info/card/lpm.vue'
+import logo from '@/assets/v1/images/logo/tetrio.svg'
 import Avatar from '@/components/avatar.vue'
-import Info40l from '@/components/info/card/40l.vue'
-import InfoAdpm from '@/components/info/card/adpm.vue'
-import InfoApm from '@/components/info/card/apm.vue'
-import InfoBlitz from '@/components/info/card/blitz.vue'
-import InfoRadarChart from '@/components/info/chart/radar-chart.vue'
-import InfoTrChart from '@/components/info/chart/tr-chart.vue'
+import Info40l from '@/components/v1/info/card/40l.vue'
+import InfoAdpm from '@/components/v1/info/card/adpm.vue'
+import InfoApm from '@/components/v1/info/card/apm.vue'
+import InfoBlitz from '@/components/v1/info/card/blitz.vue'
+import InfoRadarChart from '@/components/v1/info/chart/radar-chart.vue'
+import InfoTrChart from '@/components/v1/info/chart/tr-chart.vue'
 import { asyncComputed } from '@vueuse/core'
 import { isEmpty, isNonNullish } from 'remeda'
 import { inject } from 'vue'
@@ -72,7 +72,7 @@ const data: Data = JSON.parse(
 inject(THEME_KEY, 'dark')
 
 const rankImage = asyncComputed(async () => {
-	return await import(`@/assets/images/rank/${data.tetra_league.rank}.svg?url`)
+	return await import(`@/assets/v1/images/rank/${data.tetra_league.rank}.svg?url`)
 		.then(module => {
 			return module.default
 		})

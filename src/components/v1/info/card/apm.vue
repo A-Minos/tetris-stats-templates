@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import background from '@/assets/images/cards/APM.svg?url'
-import Card from '@/components/info/card/_base.vue'
+import background from '@/assets/v1/images/cards/APM.svg?url'
+import Card from '@/components/v1/info/card/_base.vue'
 </script>
 
 <template>

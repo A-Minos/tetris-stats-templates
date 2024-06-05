@@ -7,47 +7,29 @@ export interface Data {
 		readonly name: string
 	}
 
-	readonly ranking: {
-		readonly rating: number
-		readonly rd: number
-	}
-
-	readonly multiplayer: {
+	readonly today: {
 		readonly pps: number
 		readonly lpm: number
 
 		readonly apm: number
 		readonly apl: number
-
-		readonly vs: number
-		readonly adpm: number
-		readonly adpl: number
 	}
 
-	readonly radar: {
-		readonly app: number
-		readonly or: number
-		readonly dspp: number
-		readonly ci: number
-		readonly ge: number
-	}
+	readonly history: {
+		readonly pps: number
+		readonly lpm: number
 
-	readonly sprint: string
-	readonly challenge: string
-	readonly marathon: string
+		readonly apm: number
+		readonly apl: number
+	}
 }
 </script>
 
 <script lang="ts" setup>
-import InfoLpm from '@/components/info/card/lpm.vue'
-import logo from '@/assets/images/logo/tos.svg'
+import InfoLpm from '@/components/v1/info/card/lpm.vue'
+import logo from '@/assets/v1/images/logo/top.svg'
 import Avatar from '@/components/avatar.vue'
-import Info40l from '@/components/info/card/40l.vue'
-import InfoChallenge from '@/components/info/card/challenge.vue'
-import InfoMarathon from '@/components/info/card/marathon.vue'
-import InfoAdpm from '@/components/info/card/adpm.vue'
-import InfoApm from '@/components/info/card/apm.vue'
-import InfoRadarChart from '@/components/info/chart/radar-chart.vue'
+import InfoApm from '@/components/v1/info/card/apm.vue'
 import { inject } from 'vue'
 import { THEME_KEY } from 'vue-echarts'
 
@@ -56,33 +38,6 @@ const data: Data = JSON.parse(
 )
 
 inject(THEME_KEY, 'dark')
-
-const radar_chart_data = [
-	{
-		label: 'APP',
-		value: data.radar.app
-	},
-	{
-		label: 'CI',
-		value: data.radar.ci
-	},
-	{
-		label: 'DSPP',
-		value: data.radar.dspp
-	},
-	{
-		label: 'OR',
-		value: data.radar.or
-	},
-	{
-		label: 'GE',
-		value: data.radar.ge
-	},
-	{
-		label: 'PPS',
-		value: data.multiplayer.pps
-	}
-]
 </script>
 
 <template>
@@ -106,91 +61,69 @@ const radar_chart_data = [
 
 					<div class="tos-info__game-ranking">
 						<div class="tos-info__game-ranking__container">
-							<div class="tos-info__game-ranking__game-logo__container">
-								<img :src="logo" alt="Logo" class="tos-info__game-ranking__game-logo__body"/>
-							</div>
-
-							<span class="tos-info__game-ranking__game-name">T.O.S.</span>
-
-							<div class="tos-info__game-ranking__divider"/>
-
-							<span class="tos-info__game-ranking__ranking-title">Ranking</span>
-
-							<span class="tos-info__game-ranking__ranking-rating">{{ data.ranking.rating }}</span>
-							<span class="tos-info__game-ranking__ranking-rd">±{{ data.ranking.rd }}</span>
+							<img :src="logo" alt="Logo" class="tos-info__game-ranking__game-logo"/>
+							<span class="tos-info__game-ranking__game-name">
+								Tetris Online
+								<br/>
+								Poland
+							</span>
 						</div>
 					</div>
 				</div>
 
-				<span class="tos-info__multiplayer-stats-title">Multiplayer Stats</span>
+				<span class="tos-info__today-stats-title">Today’s Stats</span>
 
 				<div class="tos-info__row">
-					<div class="tos-info__col">
-						<div class="tos-info__card">
-							<info-lpm>
-								{{ data.multiplayer.lpm }}
+					<div class="tos-info__card">
+						<info-lpm>
+							{{ data.today.lpm }}
 
-								<template #extra>
+							<template #extra>
 									<span class="whitespace-nowrap">
-										{{ data.multiplayer.pps }} pps
+										{{ data.today.pps }} pps
 									</span>
-								</template>
-							</info-lpm>
-						</div>
-
-						<div class="tos-info__card">
-							<info-apm>
-								{{ data.multiplayer.apm }}
-
-								<template #extra>
-									<span class="whitespace-nowrap">
-										x{{ data.multiplayer.apl }}
-									</span>
-								</template>
-							</info-apm>
-						</div>
-
-						<div class="tos-info__card">
-							<info-adpm>
-								{{ data.multiplayer.adpm }}
-
-								<template #extra>
-									<span class="whitespace-nowrap">
-										{{ data.multiplayer.vs }} vs
-									</span>
-
-									<br/>
-
-									<span class="whitespace-nowrap">
-										x{{ data.multiplayer.adpl }}
-									</span>
-								</template>
-							</info-adpm>
-						</div>
+							</template>
+						</info-lpm>
 					</div>
 
-					<div class="tos-info__radar-chart">
-						<info-radar-chart :data="radar_chart_data"/>
+					<div class="tos-info__card">
+						<info-apm>
+							{{ data.today.apm }}
+
+							<template #extra>
+									<span class="whitespace-nowrap">
+										x{{ data.today.apl }}
+									</span>
+							</template>
+						</info-apm>
 					</div>
 				</div>
 
-				<span class="tos-info__singleplayer-stats-title">Singleplayer Stats</span>
+				<span class="tos-info__historical-stats-title">Historical Stats</span>
 
-				<div class="tos-info__col">
-					<div class="tos-info__row">
-						<div class="tos-info__card">
-							<info-40l>{{ data.sprint }}</info-40l>
-						</div>
+				<div class="tos-info__row">
+					<div class="tos-info__card">
+						<info-lpm>
+							{{ data.history.lpm }}
 
-						<div class="tos-info__card">
-							<info-challenge>{{ data.challenge }}</info-challenge>
-						</div>
+							<template #extra>
+									<span class="whitespace-nowrap">
+										{{ data.history.pps }} pps
+									</span>
+							</template>
+						</info-lpm>
 					</div>
 
-					<div class="tos-info__row">
-						<div class="tos-info__card">
-							<info-marathon>{{ data.marathon }}</info-marathon>
-						</div>
+					<div class="tos-info__card">
+						<info-apm>
+							{{ data.history.apm }}
+
+							<template #extra>
+									<span class="whitespace-nowrap">
+										x{{ data.history.apl }}
+									</span>
+							</template>
+						</info-apm>
 					</div>
 				</div>
 
@@ -244,7 +177,7 @@ const radar_chart_data = [
 	}
 
 	&__box {
-		@apply w-68.75 max-h-68.75 rounded-7.5 bg-[#fafafa];
+		@apply w-68.75 h-31.25 rounded-7.5 bg-[#fafafa];
 		@apply drop-shadow-[0_0.5625rem_1.5625rem_#00000026];
 	}
 
@@ -256,20 +189,20 @@ const radar_chart_data = [
 		}
 
 		&__container {
-			@apply flex flex-col justify-evenly items-center h-full gap-2.5 p-7.5;
+			@apply flex justify-center items-center h-full gap-7 p-7.5;
 		}
 
 		&__avatar {
-			@apply w-31.25 h-31.25 drop-shadow-[0_0.6875rem_1.4375rem_#00000038] rounded-full;
+			@apply w-15 h-15 drop-shadow-[0_0.6875rem_1.4375rem_#00000038] rounded-full;
 		}
 
 		&__name {
 			&__container {
-				@apply break-all line-clamp-4;
+				@apply break-all line-clamp-2;
 			}
 
 			&__body {
-				@apply text-6.25 font-extrabold;
+				@apply text-7.5 font-extrabold;
 			}
 		}
 	}
@@ -277,42 +210,22 @@ const radar_chart_data = [
 	&__game-ranking {
 		@extend .tos-info__box;
 
+		@apply flex justify-center items-center;
+
 		&__container {
-			@apply flex flex-col p-6.25;
+			@apply flex justify-center gap-5;
 		}
 
 		&__game-logo {
-			&__container {
-				@apply w-15 h-15 rounded-2.5 bg-black;
-			}
-
-			&__body {
-				@apply w-full h-full scale-9/10;
-			}
+			@apply w-15 h-15 rounded-2.5;
 		}
 
 		&__game-name {
-			@apply text-7.5 fw-extrabold;
-		}
-
-		&__divider {
-			@apply w-full border-b-(1 solid #bababa) my-2.5;
-		}
-
-		&__ranking-title {
 			@apply text-6.25 fw-extrabold;
-		}
-
-		&__ranking-rating {
-			@apply text-12.5 leading-15;
-		}
-
-		&__ranking-rd {
-			@apply text-7.5 leading-9 fw-light -mt-4;
 		}
 	}
 
-	&__multiplayer-stats-title {
+	&__today-stats-title {
 		@extend .tos-info__title;
 		@apply mt-4.5;
 	}
@@ -327,7 +240,7 @@ const radar_chart_data = [
 		@apply drop-shadow-[0_0.9375rem_1.875rem_#0000004d] rounded-7.5;
 	}
 
-	&__singleplayer-stats-title {
+	&__historical-stats-title {
 		@extend .tos-info__title;
 		@apply mt-4.5;
 	}

@@ -2,7 +2,7 @@ import 'virtual:uno.css'
 import '@/styles/main.scss'
 
 import { type Component, createApp, h } from 'vue'
-import { createMemoryHistory, createRouter, type RouteRecordRaw, RouterView } from 'vue-router'
+import { createRouter, createWebHashHistory, type RouteRecordRaw, RouterView } from 'vue-router'
 
 (async () => {
 	try {
@@ -12,7 +12,7 @@ import { createMemoryHistory, createRouter, type RouteRecordRaw, RouterView } fr
 		})
 
 		const router = createRouter({
-			history: createMemoryHistory(),
+			history: createWebHashHistory(),
 			routes: await Promise.all(
 				Object.entries(
 					import.meta.glob<{

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import prompt from '@/utils/prompt'
+import prompt from '@/utils/prompt.ts'
 
-const path = 'binding'
+const path = 'v1/binding'
 
 const test = () => {
 	document.querySelector<HTMLTemplateElement>('template#data')!.innerHTML = JSON.stringify(new class {

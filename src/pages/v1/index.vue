@@ -7,7 +7,7 @@ const tests = asyncComputed(async () => {
 		Object.values(
 			import.meta.glob<{
 				readonly default: Component
-			}>('@/components/tests/*.vue')
+			}>('@/components/v1/tests/*.vue')
 		).map(async loadModule => {
 			const module = await loadModule()
 			return h(module.default)
