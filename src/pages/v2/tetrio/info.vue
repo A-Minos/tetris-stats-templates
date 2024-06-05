@@ -71,6 +71,7 @@ export interface Data {
 <script lang="ts" setup>
 import { CheckCircleOutlined, ClockCircleOutlined, HeartFilled, StarFilled } from '@vicons/antd'
 import { createReusableTemplate } from '@vueuse/core'
+import Identicon from 'identicon.js'
 import {
 	darkTheme,
 	NConfigProvider,
@@ -90,12 +91,33 @@ import {
 	NStatistic
 } from 'naive-ui'
 import logo from '@/assets/v2/images/logos/tetrio.svg'
-import { isNonNullish, isNullish } from 'remeda'
+import { isNonNullish, isNullish, isString } from 'remeda'
 import { computed } from 'vue'
 
 const data: Data = JSON.parse(
 	document.querySelector('template#data')!.innerHTML
 )
+
+const avatar = computed(() => {
+	if (isString(data.user.avatar)) {
+		return data.user.avatar
+	}
+
+	switch (data.user.avatar.type) {
+		case 'identicon':
+			// @ts-ignore
+			const data = new Identicon(props.avatar.hash, {
+				background: [8, 10, 6, 255],
+				margin: 0.15,
+				size: 300,
+				brightness: 0.48,
+				saturation: 0.65,
+				format: 'svg'
+			}).toString()
+
+			return `data:image/svg+xml;base64,${data}`
+	}
+})
 
 const level = computed(() => {
 	return Math.pow(data.user.xp / 500, 0.6) + data.user.xp / (5000 + Math.max(0, data.user.xp - 4000000) / 5000) + 1
@@ -140,7 +162,7 @@ const numberFormatter = new Intl.NumberFormat()
 						<div class="text-white">
 							<n-flex size="small" vertical>
 								<n-flex align="center" size="small">
-									<n-avatar :size="4 * 12" :src="data.user.avatar"/>
+									<n-avatar :size="4 * 12" :src="avatar"/>
 
 									<n-flex :size="0" vertical>
 										<n-text class="text-(6 current) fw-bold leading-none">
