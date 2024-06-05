@@ -27,6 +27,8 @@ export interface Data {
 
 	readonly tetra_league?: {
 		readonly rank: string
+		readonly highest_rank: string
+
 		readonly tr: number
 
 		readonly glicko: number
@@ -341,8 +343,9 @@ const numberFormatter = new Intl.NumberFormat()
 												<!-- Tetra League -->
 
 												<n-flex :size="0" align="center">
-													<n-image :src="(`https://tetr.io/res/league-ranks/${data.tetra_league.rank}.png`)"
-															 :width="4 * 15"/>
+													<n-image
+														:src="(`https://tetr.io/res/league-ranks/${data.tetra_league.rank}.png`)"
+														:width="4 * 15"/>
 
 													<n-flex :size="0" vertical>
 														<n-text class="text-2xl fw-bold">{{ data.tetra_league.tr }} TR
@@ -374,13 +377,21 @@ const numberFormatter = new Intl.NumberFormat()
 												</div>
 											</n-flex>
 
-											<div class="text-center">
+											<n-flex :size="0" align="center" justify="center">
 												<n-text :depth="3" class="text-sm">
 													胜率: {{
 														calculateWinRate(data.tetra_league.statistic.total, data.tetra_league.statistic.wins)
 													}}
 												</n-text>
-											</div>
+
+												<n-divider vertical/>
+
+												<n-text :depth="3">历史最高:</n-text>
+
+												<n-image
+													:src="(`https://tetr.io/res/league-ranks/${data.tetra_league.highest_rank}.png`)"
+													:width="4 * 4"/>
+											</n-flex>
 
 										</n-flex>
 									</n-card>

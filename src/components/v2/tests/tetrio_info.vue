@@ -23,6 +23,8 @@ const test = () => {
 		},
 		tetra_league: {
 			rank: 'x',
+			highest_rank: 'x',
+
 			tr: 24830.47,
 			glicko: 2806.04,
 			rd: 62.27,
