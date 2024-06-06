@@ -1,5 +1,4 @@
 import 'virtual:uno.css'
-import '@/styles/main.scss'
 
 import { type Component, createApp, h } from 'vue'
 import { createRouter, createWebHashHistory, type RouteRecordRaw, RouterView } from 'vue-router'
@@ -14,18 +13,24 @@ import { createRouter, createWebHashHistory, type RouteRecordRaw, RouterView } f
 		const router = createRouter({
 			history: createWebHashHistory(),
 			routes: await Promise.all(
-				Object.entries(
-					import.meta.glob<{
-						readonly default: Component
-					}>('@/pages/**/*.vue')
-				).map(async ([path, loadPage]) => {
-					const name = path
-						.replace(/(.*)(\/)(pages)(\/)/g, '')
-						.replace(/(index)/g, '')
-						.replace(/(\.vue)$/g, '')
-
+				[
+					...Object.entries(
+						import.meta.glob<{
+							readonly default: Component
+						}>('@/v1/pages/**/*.vue')
+					),
+					...Object.entries(
+						import.meta.glob<{
+							readonly default: Component
+						}>('@/v2/pages/**/*.vue')
+					)
+				].map(async ([path, loadPage]) => {
 					return {
-						path: `/${name}`,
+						path: path
+							.replace('/src', '')
+							.replace('/pages', '')
+							.replace('index', '')
+							.replace('.vue', ''),
 						component: async () => {
 							return await loadPage()
 								.then(page => {
