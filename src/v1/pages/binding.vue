@@ -37,7 +37,7 @@ const stateImage = asyncComputed(async () => {
 </script>
 
 <template>
-	<div class="binding">
+	<div id="content" class="binding">
 		<div class="binding__container">
 			<div class="binding__header">
 				<Avatar :avatar="data.user.avatar" alt="玩家头像" class="binding__header__avatar"/>

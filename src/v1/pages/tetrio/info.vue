@@ -114,7 +114,7 @@ const radar_chart_data = [
 </script>
 
 <template>
-	<div class="tetrio-info">
+	<div id="content" class="tetrio-info">
 		<span class="tetrio-info__title">Account & Rankings</span>
 
 		<div class="tetrio-info__container">

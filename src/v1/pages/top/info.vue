@@ -41,7 +41,7 @@ inject(THEME_KEY, 'dark')
 </script>
 
 <template>
-	<div class="tos-info">
+	<div id="content" class="tos-info">
 		<span class="tos-info__title">Account & Rankings</span>
 
 		<div class="tos-info__container">
