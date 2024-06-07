@@ -30,9 +30,14 @@ const test = () => {
 			rd: 62.27,
 			global_rank: 327,
 			country_rank: 16,
-			apm: 119.32,
+
 			pps: 2.97,
+
+			apm: 119.32,
+			adpm: 1.67,
+
 			vs: 234.00,
+			adpl: 1.96,
 
 			statistic: {
 				total: 5700,
