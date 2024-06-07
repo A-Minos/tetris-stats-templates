@@ -38,8 +38,12 @@ export interface Data {
 		readonly country_rank: number
 
 		readonly pps: number
+
 		readonly apm: number
+		readonly adpm: number
+
 		readonly vs: number
+		readonly adpl: number
 
 		readonly statistic: {
 			readonly total: number
@@ -130,22 +134,6 @@ const calculateWinRate = (total: number, wins: number) => {
 	const rate = (wins / total * 100).toFixed(2)
 	return `${wins}/${total} (${rate}%)`
 }
-
-const adpm = computed(() => {
-	if (isNullish(data.tetra_league)) {
-		return 0
-	}
-
-	return data.tetra_league.apm / data.tetra_league.pps / 24
-})
-
-const adpl = computed(() => {
-	if (isNullish(data.tetra_league)) {
-		return 0
-	}
-
-	return (data.tetra_league.vs / data.tetra_league.pps / 24) * 0.6
-})
 
 const { define: UserDefine, reuse: User } = createReusableTemplate()
 const { define: LogoDefine, reuse: Logo } = createReusableTemplate()
@@ -408,7 +396,7 @@ const numberFormatter = new Intl.NumberFormat()
 													<n-flex :size="0" vertical>
 														<n-text>{{ data.tetra_league.apm }}</n-text>
 														<n-text :depth="3" class="text-sm">
-															(x{{ adpm.toFixed(2) }})
+															(x{{ data.tetra_league.adpm }})
 														</n-text>
 													</n-flex>
 												</n-statistic>
@@ -417,7 +405,7 @@ const numberFormatter = new Intl.NumberFormat()
 													<n-flex :size="0" vertical>
 														<n-text>{{ data.tetra_league.vs }}</n-text>
 														<n-text :depth="3" class="text-sm">
-															(x{{ adpl.toFixed(2) }})
+															(x{{ data.tetra_league.adpl }})
 														</n-text>
 													</n-flex>
 												</n-statistic>
