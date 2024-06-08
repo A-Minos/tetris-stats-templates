@@ -502,3 +502,7 @@ const numberFormatter = new Intl.NumberFormat()
 		</n-layout>
 	</n-config-provider>
 </template>
+
+<style lang="scss">
+@import '@/v2/styles/main';
+</style>
