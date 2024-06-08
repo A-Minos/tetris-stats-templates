@@ -153,7 +153,7 @@ const numberFormatter = new Intl.NumberFormat()
 						<div class="text-white">
 							<n-flex size="small" vertical>
 								<n-flex align="center" size="small">
-									<n-avatar :size="4 * 12" :src="avatar"/>
+									<n-avatar :src="avatar" class="[&,&>img]:size-12"/>
 
 									<n-flex :size="0" vertical>
 										<n-text class="text-(6 current) fw-bold leading-none">
@@ -166,28 +166,27 @@ const numberFormatter = new Intl.NumberFormat()
 									<template v-if="isNonNullish(data.user.country)">
 										<n-image
 											:src="(`https://tetr.io/res/flags/${data.user.country.toLowerCase()}.png`)"
-											:width="4 * 6"
-											class="rounded"/>
+											class="[&>img]:(h-6) rounded-sm"/>
 									</template>
 
 									<template v-if="data.user.verified">
 										<n-icon :component="CheckCircleOutlined"
-												:size="4 * 5"
+												class="text-5"
 												color="#9CCA95"/>
 									</template>
 								</n-flex>
 
 								<n-flex :size="0" align="center" justify="space-between">
 									<n-flex align="center" class="!gap-0.5">
-										<n-icon :component="HeartFilled" :size="4 * 5"/>
+										<n-icon :component="HeartFilled" class="text-5"/>
 										<n-text class="text-current">{{ data.user.friend_count }}</n-text>
 									</n-flex>
 
 									<n-flex v-if="data.user.supporter_tier > 0" :size="0" align="center"
 											class="ml-5">
 										<template v-for="_ in data.user.supporter_tier">
-											<n-icon :component="StarFilled" :size="4 * 5"
-													class="drop-shadow-[0_0_0.5rem_#FF4A19]"/>
+											<n-icon :component="StarFilled"
+													class="text-5 drop-shadow-[0_0_0.5rem_#FF4A19]"/>
 										</template>
 									</n-flex>
 								</n-flex>
@@ -198,7 +197,7 @@ const numberFormatter = new Intl.NumberFormat()
 					<LogoDefine>
 						<div class="text-white">
 							<n-flex :size="0" align="center" vertical>
-								<n-image :src="logo" :width="4 * 8"/>
+								<n-image :src="logo" class="[&>img]:size-8"/>
 								<n-text class="text-current mt-2 fw-bold">TETR.IO</n-text>
 							</n-flex>
 						</div>
@@ -258,7 +257,7 @@ const numberFormatter = new Intl.NumberFormat()
 						<n-card size="small">
 							<n-flex justify="center">
 								<template v-for="badge in data.user.badges">
-									<n-image :src="(`https://tetr.io/res/badges/${badge}.png`)" :width="4 * 6"/>
+									<n-image :src="(`https://tetr.io/res/badges/${badge}.png`)" class="[&>img]:size-6"/>
 								</template>
 							</n-flex>
 						</n-card>
@@ -292,7 +291,7 @@ const numberFormatter = new Intl.NumberFormat()
 
 											<template v-if="isNonNullish(data.user.playtime)">
 												<n-flex align="center" class="!gap-1 mb-5">
-													<n-icon :component="ClockCircleOutlined" :size="4 * 5"/>
+													<n-icon :component="ClockCircleOutlined" class="text-5"/>
 													<n-text>{{ data.user.playtime }}</n-text>
 												</n-flex>
 											</template>
@@ -334,7 +333,7 @@ const numberFormatter = new Intl.NumberFormat()
 												<n-flex :size="0" align="center">
 													<n-image
 														:src="(`https://tetr.io/res/league-ranks/${data.tetra_league.rank}.png`)"
-														:width="4 * 15"/>
+														class="[&>img]:size-15"/>
 
 													<n-flex :size="0" vertical>
 														<n-text class="text-2xl fw-bold">{{ data.tetra_league.tr }} TR
@@ -379,7 +378,7 @@ const numberFormatter = new Intl.NumberFormat()
 
 												<n-image
 													:src="(`https://tetr.io/res/league-ranks/${data.tetra_league.highest_rank}.png`)"
-													:width="4 * 4"/>
+													class="[&>img]:size-4"/>
 											</n-flex>
 
 										</n-flex>
