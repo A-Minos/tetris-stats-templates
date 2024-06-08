@@ -52,8 +52,8 @@ export interface Data {
 	}
 
 	readonly statistic?: {
-		readonly total: number
-		readonly wins: number
+		readonly total?: number
+		readonly wins?: number
 	}
 
 	readonly sprint?: {
@@ -299,9 +299,20 @@ const numberFormatter = new Intl.NumberFormat()
 											<template v-if="isNonNullish(data.statistic)">
 												<div class="text-center">
 													<n-text :depth="3" class="text-sm">
-														胜率: {{
-															calculateWinRate(data.statistic.total, data.statistic.wins)
-														}}
+														<template
+															v-if="isNonNullish(data.statistic.total) && isNonNullish(data.statistic.wins)">
+															胜率: {{
+																calculateWinRate(data.statistic.total, data.statistic.wins)
+															}}
+														</template>
+
+														<template v-else-if="isNonNullish(data.statistic.total)">
+															游玩次数: {{ data.statistic.total }}
+														</template>
+
+														<template v-else-if="isNonNullish(data.statistic.wins)">
+															胜场数: {{ data.statistic.wins }}
+														</template>
 													</n-text>
 												</div>
 											</template>
