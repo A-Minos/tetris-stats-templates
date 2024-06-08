@@ -211,11 +211,11 @@ const numberFormatter = new Intl.NumberFormat()
 						<div class="absolute top-1/2 left-1/2 -translate-1/2 w-full">
 							<div class="px-2.5">
 								<n-flex align="center" justify="space-between">
-									<div class="bg-(black opacity-75) backdrop-(blur-sm brightness-50) p-2.5">
+									<div class="bg-(black opacity-75) rounded backdrop-(blur-sm brightness-50) p-2.5">
 										<User/>
 									</div>
 
-									<div class="bg-(black opacity-75) backdrop-(blur-sm brightness-50) p-1">
+									<div class="bg-(black opacity-75) rounded backdrop-(blur-sm brightness-50) p-1">
 										<Logo/>
 									</div>
 								</n-flex>
