@@ -309,7 +309,9 @@ const numberFormatter = new Intl.NumberFormat()
 											<template v-if="isNonNullish(data.user.join_at)">
 												<div class="text-center">
 													<n-text :depth="3" class="text-sm">
-														注册时间: {{ new Date(data.user.join_at).toLocaleString() }}
+														注册时间: {{
+															new Date(data.user.join_at).toLocaleString('zh-CN')
+														}}
 													</n-text>
 												</div>
 											</template>
@@ -436,7 +438,9 @@ const numberFormatter = new Intl.NumberFormat()
 												<n-text class="text-3xl fw-bold">{{ data.sprint.time }}</n-text>
 
 												<n-text :depth="3" class="text-sm">
-													达成时间: {{ new Date(data.sprint.play_at).toLocaleString() }}
+													达成时间: {{
+														new Date(data.sprint.play_at).toLocaleString('zh-CN')
+													}}
 												</n-text>
 											</n-flex>
 
@@ -461,7 +465,7 @@ const numberFormatter = new Intl.NumberFormat()
 												</n-text>
 
 												<n-text :depth="3" class="text-sm">
-													达成时间: {{ new Date(data.blitz.play_at).toLocaleString() }}
+													达成时间: {{ new Date(data.blitz.play_at).toLocaleString('zh-CN') }}
 												</n-text>
 											</n-flex>
 
