@@ -361,7 +361,7 @@ const numberFormatter = new Intl.NumberFormat()
 												<!-- 排名 -->
 
 												<template
-													v-if="!isNonNullish(data.tetra_league.global_rank) || !isNonNullish(data.tetra_league.country_rank)">
+													v-if="isNonNullish(data.tetra_league.global_rank) || isNonNullish(data.tetra_league.country_rank)">
 													<div class="text-right">
 														<n-flex :size="0" vertical>
 															<template
