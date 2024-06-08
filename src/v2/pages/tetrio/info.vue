@@ -139,6 +139,60 @@ const { define: UserDefine, reuse: User } = createReusableTemplate()
 const { define: LogoDefine, reuse: Logo } = createReusableTemplate()
 
 const numberFormatter = new Intl.NumberFormat()
+
+const zen_level_icons = computed(() => {
+	let result = ''
+
+	if (isNullish(data.zen) || isNullish(data.zen.level)) {
+		return result
+	}
+
+	const symbols = {
+		500000: 'ǰ',
+		400000: 'ǯǰ',
+		100000: 'ǯ',
+		90000: 'ǭǯ',
+		50000: 'Ǯ',
+		40000: 'ǭǮ',
+		10000: 'ǭ',
+		9000: 'ǫǭ',
+		5000: 'Ǭ',
+		4000: 'ǫǬ',
+		1000: 'ǫ',
+		900: 'ǩǫ',
+		500: 'Ǫ',
+		400: 'ǩǪ',
+		100: 'ǩ',
+		90: 'ǧǩ',
+		50: 'Ǩ',
+		40: 'ǧǨ',
+		10: 'ǧ',
+		9: 'ǥǧ',
+		5: 'Ǧ',
+		4: 'ǥǦ',
+		1: 'ǥ'
+	}
+
+	let level = Math.max(Math.floor(data.zen.level), 0)
+
+	const keys = Object.keys(symbols)
+
+	while (level >= 1) {
+		for (let i = keys.length - 1; i >= 0; i--) {
+			const key = keys[i]
+
+			if (level / parseInt(key) >= 1) {
+				level -= parseInt(key)
+
+				// @ts-ignore ???
+				result += symbols[key]
+				break
+			}
+		}
+	}
+
+	return result
+})
 </script>
 
 <template>
@@ -343,7 +397,7 @@ const numberFormatter = new Intl.NumberFormat()
 
 												<!-- Tetra League -->
 
-												<n-flex :size="0" align="center">
+												<n-flex align="center" size="small">
 													<n-image
 														:src="(`https://tetr.io/res/league-ranks/${data.tetra_league.rank}.png`)"
 														class="[&>img]:size-15"/>
@@ -366,14 +420,14 @@ const numberFormatter = new Intl.NumberFormat()
 														<n-flex :size="0" vertical>
 															<template
 																v-if="isNonNullish(data.tetra_league.global_rank)">
-																<n-text class="text-xl fw-bold" type="success">
+																<n-text class="text-sm fw-bold" type="success">
 																	#{{ data.tetra_league.global_rank }}
 																</n-text>
 															</template>
 
 															<template
 																v-if="isNonNullish(data.user.country) && isNonNullish(data.tetra_league.country_rank)">
-																<n-text class="text-xl fw-bold" type="info">
+																<n-text class="text-sm fw-bold" type="info">
 																	{{
 																		data.user.country.toUpperCase()
 																	}}#{{ data.tetra_league.country_rank }}
@@ -459,7 +513,7 @@ const numberFormatter = new Intl.NumberFormat()
 												</n-text>
 											</n-flex>
 
-											<n-text v-if="isNonNullish(data.sprint.global_rank)" class="text-xl fw-bold"
+											<n-text v-if="isNonNullish(data.sprint.global_rank)" class="text-sm fw-bold"
 													type="success">
 												#{{ data.sprint.global_rank }}
 											</n-text>
@@ -484,7 +538,7 @@ const numberFormatter = new Intl.NumberFormat()
 												</n-text>
 											</n-flex>
 
-											<n-text v-if="isNonNullish(data.blitz.global_rank)" class="text-xl fw-bold"
+											<n-text v-if="isNonNullish(data.blitz.global_rank)" class="text-sm fw-bold"
 													type="success">
 												#{{ data.blitz.global_rank }}
 											</n-text>
@@ -501,7 +555,14 @@ const numberFormatter = new Intl.NumberFormat()
 						<n-card size="small" title="Zen">
 							<n-flex align="center" justify="space-between">
 								<n-text class="text-3xl fw-bold">{{ numberFormatter.format(data.zen.score) }}</n-text>
-								<n-text :depth="3" class="text-3xl fw-bold">Level {{ data.zen.level }}</n-text>
+
+								<n-flex :size="0" align="end" vertical>
+									<n-text :depth="3" class="text-xl fw-bold">Level {{ data.zen.level }}</n-text>
+
+									<n-text :depth="3" class="text-4xl font-[HUN] tracking-0.1">
+										{{ zen_level_icons }}
+									</n-text>
+								</n-flex>
 							</n-flex>
 						</n-card>
 					</template>
