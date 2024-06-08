@@ -360,24 +360,28 @@ const numberFormatter = new Intl.NumberFormat()
 
 												<!-- 排名 -->
 
-												<div class="text-right">
-													<n-flex :size="0" vertical>
-														<template v-if="data.tetra_league.global_rank !== -1">
-															<n-text class="text-xl fw-bold" type="success">
-																#{{ data.tetra_league.global_rank }}
-															</n-text>
-														</template>
+												<template
+													v-if="!isNonNullish(data.tetra_league.global_rank) || !isNonNullish(data.tetra_league.country_rank)">
+													<div class="text-right">
+														<n-flex :size="0" vertical>
+															<template
+																v-if="isNonNullish(data.tetra_league.global_rank)">
+																<n-text class="text-xl fw-bold" type="success">
+																	#{{ data.tetra_league.global_rank }}
+																</n-text>
+															</template>
 
-														<template
-															v-if="isNonNullish(data.user.country) && isNonNullish(data.tetra_league.country_rank) && data.tetra_league.country_rank !== -1">
-															<n-text class="text-xl fw-bold" type="info">
-																{{
-																	data.user.country.toUpperCase()
-																}}#{{ data.tetra_league.country_rank }}
-															</n-text>
-														</template>
-													</n-flex>
-												</div>
+															<template
+																v-if="isNonNullish(data.user.country) && isNonNullish(data.tetra_league.country_rank)">
+																<n-text class="text-xl fw-bold" type="info">
+																	{{
+																		data.user.country.toUpperCase()
+																	}}#{{ data.tetra_league.country_rank }}
+																</n-text>
+															</template>
+														</n-flex>
+													</div>
+												</template>
 											</n-flex>
 
 											<n-flex :size="0" align="center" justify="center">
