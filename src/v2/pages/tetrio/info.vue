@@ -113,7 +113,7 @@ const avatar = computed(() => {
 	switch (data.user.avatar.type) {
 		case 'identicon':
 			// @ts-ignore
-			const data = new Identicon(props.avatar.hash, {
+			const result = new Identicon(data.user.avatar.hash, {
 				background: [8, 10, 6, 255],
 				margin: 0.15,
 				size: 300,
@@ -122,7 +122,7 @@ const avatar = computed(() => {
 				format: 'svg'
 			}).toString()
 
-			return `data:image/svg+xml;base64,${data}`
+			return `data:image/svg+xml;base64,${result}`
 	}
 })
 
