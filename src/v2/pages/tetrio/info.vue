@@ -164,9 +164,10 @@ const numberFormatter = new Intl.NumberFormat()
 									</n-flex>
 
 									<template v-if="isNonNullish(data.user.country)">
-										<n-image :src="(`https://tetr.io/res/flags/${data.user.country}.png`)"
-												 :width="4 * 6"
-												 class="rounded"/>
+										<n-image
+											:src="(`https://tetr.io/res/flags/${data.user.country.toLowerCase()}.png`)"
+											:width="4 * 6"
+											class="rounded"/>
 									</template>
 
 									<template v-if="data.user.verified">
