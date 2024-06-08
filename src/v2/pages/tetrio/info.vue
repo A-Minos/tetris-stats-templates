@@ -257,7 +257,7 @@ const numberFormatter = new Intl.NumberFormat()
 						<n-card size="small">
 							<n-flex justify="center">
 								<template v-for="badge in data.user.badges">
-									<n-image :src="(`https://tetr.io/res/badges/${badge}.png`)" class="[&>img]:size-6"/>
+									<n-image :src="(`https://tetr.io/res/badges/${badge}.png`)" class="[&>img]:h-8"/>
 								</template>
 							</n-flex>
 						</n-card>
