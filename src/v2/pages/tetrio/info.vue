@@ -144,7 +144,7 @@ const numberFormatter = new Intl.NumberFormat()
 <template>
 	<n-config-provider :theme="darkTheme" class="font-sans">
 		<n-layout position="absolute">
-			<n-layout-content id="content" class="max-w-320">
+			<n-layout-content id="content" class="p-2 max-w-320">
 				<n-flex vertical>
 
 					<!-- 顶部: 复用 -->
