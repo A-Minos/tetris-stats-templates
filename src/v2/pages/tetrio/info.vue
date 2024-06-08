@@ -40,7 +40,7 @@ export interface Data {
 		readonly pps: number
 
 		readonly apm: number
-		readonly adpm: number
+		readonly apl: number
 
 		readonly vs: number
 		readonly adpl: number
@@ -397,7 +397,7 @@ const numberFormatter = new Intl.NumberFormat()
 													<n-flex :size="0" vertical>
 														<n-text>{{ data.tetra_league.apm }}</n-text>
 														<n-text :depth="3" class="text-sm">
-															(x{{ data.tetra_league.adpm }})
+															(x{{ data.tetra_league.apl }})
 														</n-text>
 													</n-flex>
 												</n-statistic>
