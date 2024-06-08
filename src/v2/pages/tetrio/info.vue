@@ -34,8 +34,8 @@ export interface Data {
 		readonly glicko: number
 		readonly rd: number
 
-		readonly global_rank: number
-		readonly country_rank: number
+		readonly global_rank?: number
+		readonly country_rank?: number
 
 		readonly pps: number
 
