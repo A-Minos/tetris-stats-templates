@@ -1,0 +1,1 @@
+import{d as y}from"./light-DNPe8-ex.js";const s=o=>{const{textColorBase:t,opacity1:c,opacity2:p,opacity3:a,opacity4:i,opacity5:e}=o;return{color:t,opacity1Depth:c,opacity2Depth:p,opacity3Depth:a,opacity4Depth:i,opacity5Depth:e}},r={name:"Icon",common:y,self:s};export{r as i,s};
