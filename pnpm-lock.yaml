@@ -39,8 +39,8 @@ importers:
         specifier: ^2.38.2
         version: 2.38.2(vue@3.4.27(typescript@5.4.5))
       remeda:
-        specifier: ^2.0.6
-        version: 2.0.6
+        specifier: ^2.0.7
+        version: 2.0.7
       sass:
         specifier: ^1.77.4
         version: 1.77.4
@@ -1115,8 +1115,8 @@ packages:
   regenerator-runtime@0.14.1:
     resolution: {integrity: sha512-dYnhHh0nJoMfnkZs6GmmhFknAGRrLznOu5nc9ML+EJxGvrx6H7teuevqVqCuPcPK//3eDrrjQhehXVx9cnkGdw==}
 
-  remeda@2.0.6:
-    resolution: {integrity: sha512-/O24BLRTujXtVCFkbrerV5+peTbis5VS6mCIzL1mGa99nJvAikAKxsRvQQHDZqxlMUIRCB6BFfWSDLukWh7yIQ==}
+  remeda@2.0.7:
+    resolution: {integrity: sha512-KEHBQ2piVctzFPNOXDCWkLqBKeKZXWifl2AYtoCGB7LfDVaBhq251HXYyvAO2Lj1dJqlvAbQIbMNFyZS8yCYtw==}
 
   resize-detector@0.3.0:
     resolution: {integrity: sha512-R/tCuvuOHQ8o2boRP6vgx8hXCCy87H1eY9V5imBYeVNyNVpuL9ciReSccLj2gDcax9+2weXy3bc8Vv+NRXeEvQ==}
@@ -2504,7 +2504,7 @@ snapshots:
 
   regenerator-runtime@0.14.1: {}
 
-  remeda@2.0.6:
+  remeda@2.0.7:
     dependencies:
       type-fest: 4.20.0
 
