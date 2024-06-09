@@ -39,5 +39,16 @@ export default defineConfig({
 			]
 		}),
 		Vue()
-	]
+	],
+	server: {
+		proxy: {
+			'^/_proxy/tetrio/.*': {
+				target: 'https://ch.tetr.io/api',
+				changeOrigin: true,
+				rewrite: path => {
+					return path.replace(/^\/_proxy\/tetrio/, '')
+				}
+			}
+		}
+	}
 })
