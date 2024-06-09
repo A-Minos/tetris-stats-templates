@@ -71,7 +71,7 @@ const data: Data = JSON.parse(
 inject(THEME_KEY, 'dark')
 
 const rankImage = asyncComputed(async () => {
-	return await import(`@/v1/assets/images/rank/${data.tetra_league.rank}.svg?url`)
+	return await import(`@/shared/assets/images/ranks/${data.tetra_league.rank}.svg?url`)
 		.then(module => {
 			return module.default
 		})

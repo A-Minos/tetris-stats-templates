@@ -110,22 +110,18 @@ import { isNonNullish } from 'remeda'
 						<info_bs/>
 					</template>
 
-					<!-- Bio -->
-
 					<template v-if="isNonNullish(data.user.bio)">
 						<info_bio :content="data.user.bio"/>
 					</template>
 
 					<n-divider class="!my-0">多人游戏</n-divider>
 
-					<!-- 勋章 -->
-
 					<template v-if="isNonNullish(data.user.badges)">
 						<info_badges :badges="data.user.badges"/>
 					</template>
 
 					<n-flex :wrap="false" class="[&>*]:(h-full flex-1)">
-						<n-flex class="h-full" vertical>
+						<n-flex vertical>
 							<info_xp :value="data.user.xp"/>
 
 							<template v-if="[data.user.playtime, data.statistic, data.user.join_at].some(isNonNullish)">

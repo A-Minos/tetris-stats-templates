@@ -29,12 +29,18 @@ const props = defineProps<{
 	readonly highest_rank: string | null
 }>()
 
-const rank_url = computed(() => {
-	return `https://tetr.io/res/league-ranks/${props.rank}.png`
+const rank_url = asyncComputed(async () => {
+	return await import(`@/shared/assets/images/ranks/${props.rank}.svg?url`)
+		.then(module => {
+			return module.default
+		})
 })
 
-const highest_rank_url = computed(() => {
-	return `https://tetr.io/res/league-ranks/${props.highest_rank}.png`
+const highest_rank_url = asyncComputed(async () => {
+	return await import(`@/shared/assets/images/ranks/${props.rank}.svg?url`)
+		.then(module => {
+			return module.default
+		})
 })
 
 const country_code = computed(() => {
@@ -85,8 +91,8 @@ const country_code = computed(() => {
 				<n-flex :size="0" align="center" justify="center">
 					<template v-if="isNonNullish(statistic)">
 						<n-text :depth="3" class="text-sm">
-							胜率: {{ statistic.total }} / {{ statistic.wins }}
-							({{ (statistic.wins / statistic.total).toFixed(2) }}%)
+							胜率: {{ statistic.wins }} / {{ statistic.total }}
+							({{ (statistic.wins / statistic.total * 100).toFixed(2) }}%)
 						</n-text>
 
 						<n-divider vertical/>

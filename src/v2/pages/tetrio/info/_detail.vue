@@ -28,8 +28,8 @@ defineProps<{
 				<div class="text-center">
 					<n-text :depth="3" class="text-sm">
 						<template v-if="isNonNullish(statistic.total) && isNonNullish(statistic.wins)">
-							胜率: {{ statistic.total }} / {{ statistic.wins }}
-							({{ (statistic.wins / statistic.total).toFixed(2) }}%)
+							胜率: {{ statistic.wins }} / {{ statistic.total }}
+							({{ (statistic.wins / statistic.total * 100).toFixed(2) }}%)
 						</template>
 
 						<template v-else-if="isNonNullish(statistic.total)">

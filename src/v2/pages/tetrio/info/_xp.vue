@@ -21,7 +21,9 @@ const progress = computed(() => {
 				</n-text>
 			</div>
 
-			<n-progress :percentage="progress" indicator-placement="inside"/>
+			<div class="w-1/2 mx-auto">
+				<n-progress :percentage="progress" indicator-placement="inside"/>
+			</div>
 		</n-flex>
 	</n-card>
 </template>
