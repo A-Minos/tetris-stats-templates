@@ -65,7 +65,7 @@ defineProps<{
 		@apply absolute bottom-6.75 right-6.25 text-[var(--color)] text-3.75;
 
 		&__body {
-			@apply w-15 text-right overflow-hidden text-ellipsis;
+			@apply w-25 text-right overflow-hidden text-ellipsis;
 		}
 	}
 }
