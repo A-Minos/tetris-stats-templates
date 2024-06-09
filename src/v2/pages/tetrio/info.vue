@@ -245,14 +245,11 @@ const zen_level_icons = computed(() => {
 
 						<div class="absolute top-1/2 left-1/2 -translate-1/2 w-full">
 							<div class="px-2.5">
-								<n-flex align="center" justify="space-between">
-									<div class="bg-(black opacity-75) rounded backdrop-(blur-sm brightness-50) p-2.5">
-										<User/>
-									</div>
-
-									<div class="bg-(black opacity-75) rounded backdrop-(blur-sm brightness-50) p-1">
-										<Logo/>
-									</div>
+								<n-flex align="center"
+										class="[&>*]:(bg-(black opacity-75) rounded backdrop-(blur-sm brightness-50) p-2.5)"
+										justify="space-between">
+									<User/>
+									<Logo/>
 								</n-flex>
 							</div>
 						</div>
@@ -298,179 +295,175 @@ const zen_level_icons = computed(() => {
 						</n-card>
 					</template>
 
-					<n-grid :cols="isNullish(data.tetra_league) ? 1 : 2" :x-gap="10">
-						<n-grid-item>
-							<n-flex class="h-full" vertical>
-								<!-- 等级 -->
+					<n-flex :wrap="false" class="[&>*]:(h-full flex-1)">
+						<n-flex class="h-full" vertical>
+							<!-- 等级 -->
 
+							<n-card size="small">
+								<n-flex vertical>
+									<div class="text-center">
+										<n-text class="fw-bold">
+											{{ Math.trunc(level) }} 级 ({{ numberFormatter.format(data.user.xp) }}
+											XP)
+										</n-text>
+									</div>
+
+									<n-progress :percentage="Math.trunc((level % 1) * 100)"
+												indicator-placement="inside"/>
+								</n-flex>
+							</n-card>
+
+							<!-- 额外信息 -->
+
+							<template
+								v-if="[data.user.playtime, data.statistic, data.user.join_at].some(isNonNullish)">
+								<n-card class="h-full" size="small">
+									<div class="flex flex-col justify-center items-center h-full">
+
+										<template v-if="isNonNullish(data.user.playtime)">
+											<n-flex align="center" class="!gap-1 mb-5">
+												<n-icon :component="ClockCircleOutlined" class="text-5"/>
+												<n-text>{{ data.user.playtime }}</n-text>
+											</n-flex>
+										</template>
+
+										<template v-if="isNonNullish(data.statistic)">
+											<div class="text-center">
+												<n-text :depth="3" class="text-sm">
+													<template
+														v-if="isNonNullish(data.statistic.total) && isNonNullish(data.statistic.wins)">
+														胜率: {{
+															calculateWinRate(data.statistic.total, data.statistic.wins)
+														}}
+													</template>
+
+													<template v-else-if="isNonNullish(data.statistic.total)">
+														游玩次数: {{ data.statistic.total }}
+													</template>
+
+													<template v-else-if="isNonNullish(data.statistic.wins)">
+														胜场数: {{ data.statistic.wins }}
+													</template>
+												</n-text>
+											</div>
+										</template>
+
+										<template v-if="isNonNullish(data.user.join_at)">
+											<div class="text-center">
+												<n-text :depth="3" class="text-sm">
+													注册时间: {{
+														new Date(data.user.join_at).toLocaleString('zh-CN')
+													}}
+												</n-text>
+											</div>
+										</template>
+
+									</div>
+								</n-card>
+							</template>
+						</n-flex>
+
+						<n-flex vertical>
+							<template v-if="isNonNullish(data.tetra_league)">
 								<n-card size="small">
-									<n-flex vertical>
-										<div class="text-center">
-											<n-text class="fw-bold">
-												{{ Math.trunc(level) }} 级 ({{ numberFormatter.format(data.user.xp) }}
-												XP)
-											</n-text>
-										</div>
+									<n-flex :size="0" vertical>
 
-										<n-progress :percentage="Math.trunc((level % 1) * 100)"
-													indicator-placement="inside"/>
+										<n-flex align="center" justify="space-between">
+
+											<!-- Tetra League -->
+
+											<n-flex align="center" size="small">
+												<n-image
+													:src="(`https://tetr.io/res/league-ranks/${data.tetra_league.rank}.png`)"
+													class="[&>img]:size-15"/>
+
+												<n-flex :size="0" vertical>
+													<n-text class="text-2xl fw-bold">{{ data.tetra_league.tr }} TR
+													</n-text>
+
+													<n-text :depth="3" class="text-sm">
+														{{ data.tetra_league.glicko }}±{{ data.tetra_league.rd }}
+													</n-text>
+												</n-flex>
+											</n-flex>
+
+											<!-- 排名 -->
+
+											<template
+												v-if="isNonNullish(data.tetra_league.global_rank) || isNonNullish(data.tetra_league.country_rank)">
+												<div class="text-right">
+													<n-flex :size="0" vertical>
+														<template
+															v-if="isNonNullish(data.tetra_league.global_rank)">
+															<n-text class="text-sm fw-bold" type="success">
+																#{{ data.tetra_league.global_rank }}
+															</n-text>
+														</template>
+
+														<template
+															v-if="isNonNullish(data.user.country) && isNonNullish(data.tetra_league.country_rank)">
+															<n-text class="text-sm fw-bold" type="info">
+																{{
+																	data.user.country.toUpperCase()
+																}}#{{ data.tetra_league.country_rank }}
+															</n-text>
+														</template>
+													</n-flex>
+												</div>
+											</template>
+										</n-flex>
+
+										<n-flex :size="0" align="center" justify="center">
+											<n-text :depth="3" class="text-sm">
+												胜率: {{
+													calculateWinRate(data.tetra_league.statistic.total, data.tetra_league.statistic.wins)
+												}}
+											</n-text>
+
+											<n-divider vertical/>
+
+											<n-text :depth="3">历史最高:</n-text>
+
+											<n-image
+												:src="(`https://tetr.io/res/league-ranks/${data.tetra_league.highest_rank}.png`)"
+												class="[&>img]:size-4"/>
+										</n-flex>
+
 									</n-flex>
 								</n-card>
 
-								<!-- 额外信息 -->
+								<!-- 数据 -->
 
-								<template
-									v-if="[data.user.playtime, data.statistic, data.user.join_at].some(isNonNullish)">
-									<n-card class="h-full" size="small">
-										<div class="flex flex-col justify-center items-center h-full">
+								<n-card size="small">
+									<div class="text-center">
+										<n-flex justify="space-evenly">
 
-											<template v-if="isNonNullish(data.user.playtime)">
-												<n-flex align="center" class="!gap-1 mb-5">
-													<n-icon :component="ClockCircleOutlined" class="text-5"/>
-													<n-text>{{ data.user.playtime }}</n-text>
-												</n-flex>
-											</template>
+											<n-statistic :value="data.tetra_league.pps" label="PPS"/>
 
-											<template v-if="isNonNullish(data.statistic)">
-												<div class="text-center">
+											<n-statistic label="APM">
+												<n-flex :size="0" vertical>
+													<n-text>{{ data.tetra_league.apm }}</n-text>
 													<n-text :depth="3" class="text-sm">
-														<template
-															v-if="isNonNullish(data.statistic.total) && isNonNullish(data.statistic.wins)">
-															胜率: {{
-																calculateWinRate(data.statistic.total, data.statistic.wins)
-															}}
-														</template>
-
-														<template v-else-if="isNonNullish(data.statistic.total)">
-															游玩次数: {{ data.statistic.total }}
-														</template>
-
-														<template v-else-if="isNonNullish(data.statistic.wins)">
-															胜场数: {{ data.statistic.wins }}
-														</template>
+														(x{{ data.tetra_league.apl }})
 													</n-text>
-												</div>
-											</template>
-
-											<template v-if="isNonNullish(data.user.join_at)">
-												<div class="text-center">
-													<n-text :depth="3" class="text-sm">
-														注册时间: {{
-															new Date(data.user.join_at).toLocaleString('zh-CN')
-														}}
-													</n-text>
-												</div>
-											</template>
-
-										</div>
-									</n-card>
-								</template>
-							</n-flex>
-						</n-grid-item>
-
-						<n-grid-item>
-							<n-flex vertical>
-								<template v-if="isNonNullish(data.tetra_league)">
-									<n-card size="small">
-										<n-flex :size="0" vertical>
-
-											<n-flex align="center" justify="space-between">
-
-												<!-- Tetra League -->
-
-												<n-flex align="center" size="small">
-													<n-image
-														:src="(`https://tetr.io/res/league-ranks/${data.tetra_league.rank}.png`)"
-														class="[&>img]:size-15"/>
-
-													<n-flex :size="0" vertical>
-														<n-text class="text-2xl fw-bold">{{ data.tetra_league.tr }} TR
-														</n-text>
-
-														<n-text :depth="3" class="text-sm">
-															{{ data.tetra_league.glicko }}±{{ data.tetra_league.rd }}
-														</n-text>
-													</n-flex>
 												</n-flex>
+											</n-statistic>
 
-												<!-- 排名 -->
-
-												<template
-													v-if="isNonNullish(data.tetra_league.global_rank) || isNonNullish(data.tetra_league.country_rank)">
-													<div class="text-right">
-														<n-flex :size="0" vertical>
-															<template
-																v-if="isNonNullish(data.tetra_league.global_rank)">
-																<n-text class="text-sm fw-bold" type="success">
-																	#{{ data.tetra_league.global_rank }}
-																</n-text>
-															</template>
-
-															<template
-																v-if="isNonNullish(data.user.country) && isNonNullish(data.tetra_league.country_rank)">
-																<n-text class="text-sm fw-bold" type="info">
-																	{{
-																		data.user.country.toUpperCase()
-																	}}#{{ data.tetra_league.country_rank }}
-																</n-text>
-															</template>
-														</n-flex>
-													</div>
-												</template>
-											</n-flex>
-
-											<n-flex :size="0" align="center" justify="center">
-												<n-text :depth="3" class="text-sm">
-													胜率: {{
-														calculateWinRate(data.tetra_league.statistic.total, data.tetra_league.statistic.wins)
-													}}
-												</n-text>
-
-												<n-divider vertical/>
-
-												<n-text :depth="3">历史最高:</n-text>
-
-												<n-image
-													:src="(`https://tetr.io/res/league-ranks/${data.tetra_league.highest_rank}.png`)"
-													class="[&>img]:size-4"/>
-											</n-flex>
+											<n-statistic label="VS">
+												<n-flex :size="0" vertical>
+													<n-text>{{ data.tetra_league.vs }}</n-text>
+													<n-text :depth="3" class="text-sm">
+														(x{{ data.tetra_league.adpl }})
+													</n-text>
+												</n-flex>
+											</n-statistic>
 
 										</n-flex>
-									</n-card>
-
-									<!-- 数据 -->
-
-									<n-card size="small">
-										<div class="text-center">
-											<n-flex justify="space-evenly">
-
-												<n-statistic :value="data.tetra_league.pps" label="PPS"/>
-
-												<n-statistic label="APM">
-													<n-flex :size="0" vertical>
-														<n-text>{{ data.tetra_league.apm }}</n-text>
-														<n-text :depth="3" class="text-sm">
-															(x{{ data.tetra_league.apl }})
-														</n-text>
-													</n-flex>
-												</n-statistic>
-
-												<n-statistic label="VS">
-													<n-flex :size="0" vertical>
-														<n-text>{{ data.tetra_league.vs }}</n-text>
-														<n-text :depth="3" class="text-sm">
-															(x{{ data.tetra_league.adpl }})
-														</n-text>
-													</n-flex>
-												</n-statistic>
-
-											</n-flex>
-										</div>
-									</n-card>
-								</template>
-							</n-flex>
-						</n-grid-item>
-					</n-grid>
+									</div>
+								</n-card>
+							</template>
+						</n-flex>
+					</n-flex>
 
 					<template v-if="[data.sprint, data.blitz, data.zen].some(isNonNullish)">
 						<n-divider class="!my-0">单人游戏</n-divider>
@@ -555,7 +548,6 @@ const zen_level_icons = computed(() => {
 							<n-text class="text-2xl fw-bold" type="warning">
 								Powered by NoneBot2 x nonebot-plugin-tetris-stats
 							</n-text>
-							'
 						</div>
 					</n-card>
 
