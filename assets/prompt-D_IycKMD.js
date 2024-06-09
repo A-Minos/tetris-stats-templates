@@ -1,1 +1,0 @@
-import{l as t}from"./chunk-GK5I7C4J-5krRHSV_.js";import{u as i}from"./index-D7RAih9H.js";const n=i("Control"),m=(e,o)=>{if(n.value){let r;for(;r=window.prompt(e,o),!t(r););return r}return o};export{m as p};
