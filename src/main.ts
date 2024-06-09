@@ -27,10 +27,11 @@ import { createRouter, createWebHashHistory, type RouteRecordRaw, RouterView } f
 				].map(async ([path, loadPage]) => {
 					return {
 						path: path
-							.replace('/src', '')
-							.replace('/pages', '')
-							.replace('index', '')
-							.replace('.vue', ''),
+							.replace(/(\/)(src)/g, '')
+							.replace(/(\/)(pages)/g, '')
+							.replace(/(index)/g, '')
+							.replace(/(\.vue)/g, '')
+							.replace(/(\/)$/g, ''),
 						component: async () => {
 							return await loadPage()
 								.then(page => {
