@@ -39,7 +39,7 @@ const rank_url = asyncComputed(async () => {
 })
 
 const highest_rank_url = asyncComputed(async () => {
-	return await import(`@/shared/assets/images/ranks/${props.rank}.svg?url`)
+	return await import(`@/shared/assets/images/ranks/${props.highest_rank}.svg?url`)
 		.then(module => {
 			return module.default
 		})
