@@ -48,6 +48,8 @@ const test = async () => {
 							readonly gamesplayed: number
 							readonly gameswon: number
 							readonly decaying: number
+							readonly standing: number
+							readonly standing_local: number
 						}
 
 						readonly banner_revision: number
@@ -117,7 +119,7 @@ const test = async () => {
 			country: user.country,
 			xp: user.xp,
 			friend_count: user.friend_count,
-			playtime: `${Math.trunc(user.gametime / 3600)} 小时`,
+			playtime: user.gametime !== -1 ? `${Math.trunc(user.gametime / 3600)} 小时` : null,
 			supporter_tier: user.supporter_tier,
 			bad_standing: user.badstanding ?? false,
 			verified: user.verified,
@@ -137,8 +139,8 @@ const test = async () => {
 			rd: Number(
 				user.league.rd.toFixed(2)
 			),
-			global_rank: 327,
-			country_rank: 16,
+			global_rank: user.league.standing !== -1 ? user.league.standing : null,
+			country_rank: user.league.standing_local !== -1 ? user.league.standing_local : null,
 
 			pps: user.league.pps,
 
