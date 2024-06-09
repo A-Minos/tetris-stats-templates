@@ -58,7 +58,6 @@ const { define: LogoDefine, reuse: Logo } = createReusableTemplate()
 		<UserDefine>
 			<div>
 				<n-flex size="small" vertical>
-
 					<n-flex align="center" size="small">
 						<n-avatar :src="avatar_url" class="[&,&>img]:size-12"/>
 
@@ -70,13 +69,15 @@ const { define: LogoDefine, reuse: Logo } = createReusableTemplate()
 							<n-text :depth="3" class="text-xs">{{ id }}</n-text>
 						</n-flex>
 
-						<template v-if="isNonNullish(country)">
-							<n-image :src="country_url" class="[&>img]:(h-4) rounded-sm"/>
-						</template>
+						<n-flex align="center" size="small" vertical>
+							<template v-if="isNonNullish(country)">
+								<n-image :src="country_url" class="[&>img]:(h-4) rounded-sm"/>
+							</template>
 
-						<template v-if="verified">
-							<n-icon :component="CheckCircleOutlined" class="text-5" color="#9CCA95"/>
-						</template>
+							<template v-if="verified">
+								<n-icon :component="CheckCircleOutlined" class="text-5" color="#9CCA95"/>
+							</template>
+						</n-flex>
 					</n-flex>
 
 					<n-flex :size="0" align="center" justify="space-between">
