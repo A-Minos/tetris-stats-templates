@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { ArrowUpOutlined } from '@vicons/antd'
 import type { TextProps } from 'naive-ui'
 import { isNonNullish, isNullish } from 'remeda'
 
@@ -101,8 +100,8 @@ const rd_props = computed(() => {
 								<n-text :depth="rd_props.depth" :type="rd_props.status">{{ rd }}</n-text>
 
 								<template v-if="decaying">
-									<n-text :depth="rd_props.arrow.depth" :type="rd_props.arrow.status">
-										<n-icon :component="ArrowUpOutlined" class="text-4 rotate-45"/>
+									<n-text :depth="rd_props.arrow.depth" :type="rd_props.arrow.status" class="text-4 font-[HUN]">
+										Ƿ
 									</n-text>
 								</template>
 							</n-flex>
