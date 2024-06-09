@@ -27,7 +27,7 @@ const avatar_url = computed(() => {
 	switch (props.avatar.type) {
 		case 'identicon':
 			// @ts-ignore
-			const result = new Identicon(data.user.avatar.hash, {
+			const result = new Identicon(props.avatar.hash, {
 				background: [8, 10, 6, 255],
 				margin: 0.15,
 				size: 300,
