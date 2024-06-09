@@ -9,7 +9,6 @@ import type { GridComponentOption, MarkLineComponentOption } from 'echarts/compo
 import { GridComponent, MarkLineComponent } from 'echarts/components'
 import type { ComposeOption } from 'echarts/core'
 import { use } from 'echarts/core'
-import { computed } from 'vue'
 
 use([GridComponent, MarkLineComponent, LineChart])
 

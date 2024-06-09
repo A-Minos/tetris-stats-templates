@@ -4,7 +4,6 @@ import type { RadarSeriesOption } from 'echarts/charts'
 import { RadarChart } from 'echarts/charts'
 import type { ComposeOption } from 'echarts/core'
 import { use } from 'echarts/core'
-import { computed } from 'vue'
 
 use([RadarChart])
 

@@ -30,7 +30,6 @@ import InfoLpm from '@/v1/components/info/card/lpm.vue'
 import logo from '@/v1/assets/images/logo/top.svg'
 import Avatar from '@/shared/components/avatar.vue'
 import InfoApm from '@/v1/components/info/card/apm.vue'
-import { inject } from 'vue'
 import { THEME_KEY } from 'vue-echarts'
 
 const data: Data = JSON.parse(

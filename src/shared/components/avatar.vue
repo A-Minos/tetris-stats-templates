@@ -1,8 +1,7 @@
 <script lang="ts" setup>
+import Avatar from '@/shared/types/avatar'
 import Identicon from 'identicon.js'
 import { isString } from 'remeda'
-import { computed } from 'vue'
-import Avatar from "@/shared/types/avatar";
 
 const props = defineProps<{
 	readonly avatar: Avatar

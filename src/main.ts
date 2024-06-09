@@ -1,6 +1,6 @@
 import 'virtual:uno.css'
 
-import { type Component, createApp, h } from 'vue'
+import { type Component } from 'vue'
 import { createRouter, createWebHashHistory, type RouteRecordRaw, RouterView } from 'vue-router'
 
 (async () => {

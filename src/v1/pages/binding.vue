@@ -21,7 +21,6 @@ export interface Data {
 
 <script lang="ts" setup>
 import Avatar from '@/shared/components/avatar.vue'
-import { asyncComputed } from '@vueuse/core'
 import { isNonNullish } from 'remeda'
 
 const data: Data = JSON.parse(

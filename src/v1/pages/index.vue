@@ -1,6 +1,5 @@
 <script lang="ts" setup>
-import { asyncComputed } from '@vueuse/core'
-import { type Component, h } from 'vue'
+import { type Component } from 'vue'
 
 const tests = asyncComputed(async () => {
 	return await Promise.all(

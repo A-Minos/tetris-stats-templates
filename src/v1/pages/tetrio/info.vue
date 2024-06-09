@@ -61,9 +61,7 @@ import InfoApm from '@/v1/components/info/card/apm.vue'
 import InfoBlitz from '@/v1/components/info/card/blitz.vue'
 import InfoRadarChart from '@/v1/components/info/chart/radar-chart.vue'
 import InfoTrChart from '@/v1/components/info/chart/tr-chart.vue'
-import { asyncComputed } from '@vueuse/core'
 import { isEmpty, isNonNullish } from 'remeda'
-import { inject } from 'vue'
 import { THEME_KEY } from 'vue-echarts'
 
 const data: Data = JSON.parse(

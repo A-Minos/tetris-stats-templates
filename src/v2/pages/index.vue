@@ -1,6 +1,5 @@
 <script lang="ts" setup>
-import { asyncComputed } from '@vueuse/core'
-import { darkTheme, NConfigProvider, NLayout, NLayoutContent } from 'naive-ui'
+import { darkTheme } from 'naive-ui'
 import { type Component, h } from 'vue'
 
 const tests = asyncComputed(async () => {

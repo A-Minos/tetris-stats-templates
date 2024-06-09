@@ -1,4 +1,3 @@
-import { useKeyModifier } from '@vueuse/core'
 import { isNonNullish } from 'remeda'
 
 const controlPressed = useKeyModifier('Control')

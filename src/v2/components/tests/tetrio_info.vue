@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { NButton } from 'naive-ui'
-
 const path = 'v2/tetrio/info'
 
 const test = () => {

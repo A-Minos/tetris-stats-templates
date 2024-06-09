@@ -1,7 +1,6 @@
 <script generic="T" lang="ts" setup>
 import { use } from 'echarts/core'
 import { SVGRenderer } from 'echarts/renderers'
-import { onMounted, ref } from 'vue'
 import VChart from 'vue-echarts'
 
 use([SVGRenderer])

@@ -48,7 +48,6 @@ import InfoMarathon from '@/v1/components/info/card/marathon.vue'
 import InfoAdpm from '@/v1/components/info/card/adpm.vue'
 import InfoApm from '@/v1/components/info/card/apm.vue'
 import InfoRadarChart from '@/v1/components/info/chart/radar-chart.vue'
-import { inject } from 'vue'
 import { THEME_KEY } from 'vue-echarts'
 
 const data: Data = JSON.parse(

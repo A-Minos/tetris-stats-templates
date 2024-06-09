@@ -77,29 +77,10 @@ export interface Data {
 
 <script lang="ts" setup>
 import { CheckCircleOutlined, ClockCircleOutlined, HeartFilled, StarFilled } from '@vicons/antd'
-import { createReusableTemplate } from '@vueuse/core'
+import { darkTheme } from 'naive-ui'
 import Identicon from 'identicon.js'
-import {
-	darkTheme,
-	NConfigProvider,
-	NLayout,
-	NLayoutContent,
-	NImage,
-	NAvatar,
-	NFlex,
-	NCard,
-	NDivider,
-	NGrid,
-	NGridItem,
-	NText,
-	NIcon,
-	NAlert,
-	NProgress,
-	NStatistic
-} from 'naive-ui'
 import logo from '@/v2/assets/images/logos/tetrio.svg'
 import { isNonNullish, isNullish, isString } from 'remeda'
-import { computed } from 'vue'
 
 const data: Data = JSON.parse(
 	document.querySelector('template#data')!.innerHTML
@@ -574,6 +555,7 @@ const zen_level_icons = computed(() => {
 							<n-text class="text-2xl fw-bold" type="warning">
 								Powered by NoneBot2 x nonebot-plugin-tetris-stats
 							</n-text>
+							'
 						</div>
 					</n-card>
 
