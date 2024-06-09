@@ -495,7 +495,7 @@ const zen_level_icons = computed(() => {
 						<n-divider class="!my-0">单人游戏</n-divider>
 					</template>
 
-					<template v-if="![data.sprint, data.blitz].map(isNonNullish).includes(false)">
+					<template v-if="[data.sprint, data.blitz].some(isNonNullish)">
 						<n-grid :cols="[data.sprint, data.blitz].filter(isNonNullish).length" :x-gap="10">
 							<!-- 40L -->
 
