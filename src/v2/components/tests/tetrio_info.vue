@@ -8,7 +8,26 @@ const test = () => {
 			name: 'WOSHIZHAZHA120',
 			avatar: 'https://tetr.io/user-content/avatars/5eb3a6530b29196c155074e8.jpg',
 			banner: 'https://tetr.io/user-content/banners/605468e1d8bf2a23b076eba5.jpg',
-			badges: ['secretgrade', '100player', '20tsd'],
+			badges: [
+				{
+					id: 'secretgrade',
+					label: 'Achieved the full Secret Grade',
+					group: null,
+					ts: null
+				},
+				{
+					id: '100player',
+					label: 'Emerged victorious in a 100+ player game',
+					group: null,
+					ts: '2023-06-02T13:20:29.225Z'
+				},
+				{
+					id: '20tsd',
+					label: 'Cleared 40 LINES with only T-Spin Doubles',
+					group: null,
+					ts: '2023-08-19T09:00:24.017Z'
+				}
+			],
 			country: 'cn',
 			xp: 15033024,
 			friend_count: 184,
