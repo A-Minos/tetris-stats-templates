@@ -10,7 +10,7 @@ defineProps<{
 	<n-card size="small">
 		<n-flex justify="center">
 			<template v-for="badge in badges">
-				<n-image :src="(`https://tetr.io/res/badges/${badge.id}.png`)" class="[&>img]:h-8"/>
+				<n-image :src="(`https://tetr.io/res/badges/${badge.id}.png`)" class="[&>img]:h-6"/>
 			</template>
 		</n-flex>
 	</n-card>
