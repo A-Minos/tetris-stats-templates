@@ -51,6 +51,8 @@ const data: {
 			readonly total: number
 			readonly wins: number
 		}
+
+		readonly decaying: boolean
 	} | null
 
 	readonly statistic: {
@@ -133,7 +135,8 @@ import { isNonNullish } from 'remeda'
 						<template v-if="isNonNullish(data.tetra_league)">
 							<info_tl :adpl="data.tetra_league.adpl" :apl="data.tetra_league.apl"
 									 :apm="data.tetra_league.apm" :country="data.user.country"
-									 :country_rank="data.tetra_league.country_rank" :glicko="data.tetra_league.glicko"
+									 :country_rank="data.tetra_league.country_rank"
+									 :decaying="data.tetra_league.decaying" :glicko="data.tetra_league.glicko"
 									 :global_rank="data.tetra_league.global_rank"
 									 :highest_rank="data.tetra_league.highest_rank" :pps="data.tetra_league.pps"
 									 :rank="data.tetra_league.rank" :rd="data.tetra_league.rd"

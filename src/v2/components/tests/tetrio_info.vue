@@ -59,7 +59,9 @@ const test = () => {
 			statistic: {
 				total: 5700,
 				wins: 3004
-			}
+			},
+
+			decaying: false
 		},
 		statistic: {
 			total: 7625,

@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { ArrowUpOutlined } from '@vicons/antd'
+import type { TextProps } from 'naive-ui'
 import { isNonNullish, isNullish } from 'remeda'
 
 const props = defineProps<{
@@ -26,6 +28,7 @@ const props = defineProps<{
 		readonly wins: number
 	} | null
 
+	readonly decaying: boolean
 	readonly highest_rank: string | null
 }>()
 
@@ -50,6 +53,34 @@ const country_code = computed(() => {
 
 	return props.country.toUpperCase()
 })
+
+const rd_props = computed(() => {
+	const result = {
+		depth: 3 as TextProps['depth'],
+		status: 'default',
+
+		arrow: {
+			depth: 3 as TextProps['depth'],
+			status: 'default'
+		}
+	}
+
+	if (props.decaying) {
+		delete result.arrow.depth
+		result.arrow.status = 'warning'
+
+		if (props.rd >= 98) {
+			result.arrow.status = 'error'
+		}
+	}
+
+	if (props.rd >= 100) {
+		delete result.depth
+		result.status = 'error'
+	}
+
+	return result
+})
 </script>
 
 <template>
@@ -63,9 +94,18 @@ const country_code = computed(() => {
 						<n-flex :size="0" vertical>
 							<n-text class="text-2xl fw-bold">{{ tr }} TR</n-text>
 
-							<n-text :depth="3" class="text-sm">
-								{{ glicko }}±{{ rd }}
-							</n-text>
+							<n-flex :size="0">
+								<n-text :depth="3">{{ glicko }}</n-text>
+								<n-text :depth="3">±</n-text>
+
+								<n-text :depth="rd_props.depth" :type="rd_props.status">{{ rd }}</n-text>
+
+								<template v-if="decaying">
+									<n-text :depth="rd_props.arrow.depth" :type="rd_props.arrow.status">
+										<n-icon :component="ArrowUpOutlined" class="text-4 rotate-45"/>
+									</n-text>
+								</template>
+							</n-flex>
 						</n-flex>
 					</n-flex>
 
