@@ -61,7 +61,7 @@ import InfoApm from '@/v1/components/info/card/apm.vue'
 import InfoBlitz from '@/v1/components/info/card/blitz.vue'
 import InfoRadarChart from '@/v1/components/info/chart/radar-chart.vue'
 import InfoTrChart from '@/v1/components/info/chart/tr-chart.vue'
-import { isEmpty, isNonNullish } from 'remeda'
+import { isNonNullish } from 'remeda'
 import { THEME_KEY } from 'vue-echarts'
 
 const data: Data = JSON.parse(
@@ -127,7 +127,7 @@ const radar_chart_data = [
 									<span class="tetrio-info__user__name__body">{{ data.user.name }}</span>
 								</div>
 
-								<div v-if="!isEmpty(data.user.bio)" class="tetrio-info__user__bio__container">
+								<div v-if="isNonNullish(data.user.bio)" class="tetrio-info__user__bio__container">
 									<span class="tetrio-info__user__bio__body">{{ unescape(data.user.bio) }}</span>
 								</div>
 							</div>
