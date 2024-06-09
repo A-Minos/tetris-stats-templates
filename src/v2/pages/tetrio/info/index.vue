@@ -1,6 +1,7 @@
 <script lang="ts">
 import Avatar from '@/shared/types/avatar'
 import type { Badge } from '@/v2/types/tetrio'
+import type { BackendTime } from '@/v2/types/utils'
 
 const data: {
 	readonly user: {
@@ -23,7 +24,7 @@ const data: {
 		readonly xp: number
 
 		readonly playtime: string | null
-		readonly join_at: Date | null
+		readonly join_at: BackendTime | null
 	}
 
 	readonly tetra_league: {
@@ -60,13 +61,13 @@ const data: {
 	readonly sprint: {
 		readonly time: string
 		readonly global_rank: number | null
-		readonly play_at: Date
+		readonly play_at: string
 	} | null
 
 	readonly blitz: {
 		readonly score: number
 		readonly global_rank: number | null
-		readonly play_at: Date
+		readonly play_at: string
 	} | null
 
 	readonly zen: {

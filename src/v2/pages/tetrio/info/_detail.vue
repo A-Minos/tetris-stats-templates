@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import type { BackendTime } from '@/v2/types/utils'
 import { ClockCircleOutlined } from '@vicons/antd'
 import { isNonNullish } from 'remeda'
 
@@ -9,7 +10,7 @@ defineProps<{
 	} | null
 
 	readonly playtime: string | null
-	readonly join_at: Date | null
+	readonly join_at: BackendTime | null
 }>()
 </script>
 

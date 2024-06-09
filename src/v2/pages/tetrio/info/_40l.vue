@@ -1,10 +1,11 @@
 <script lang="ts" setup>
+import type { BackendTime } from '@/v2/types/utils'
 import { isNonNullish } from 'remeda'
 
 defineProps<{
 	readonly time: string
 	readonly global_rank: number | null
-	readonly play_at: Date
+	readonly play_at: BackendTime
 }>()
 </script>
 
