@@ -1,6 +1,5 @@
 <script lang="ts">
 import Avatar from '@/shared/types/avatar'
-import type { Badge } from '@/v2/types/tetrio'
 import type { BackendTime } from '@/v2/types/utils'
 
 const data: {
@@ -20,7 +19,13 @@ const data: {
 		readonly verified: boolean
 		readonly bad_standing: boolean
 
-		readonly badges: Badge[]
+		readonly badges: {
+			readonly id: string
+			readonly description: string
+			readonly group: string | null
+			readonly receive_at: BackendTime | null
+		}[]
+
 		readonly xp: number
 
 		readonly playtime: string | null
@@ -79,6 +84,8 @@ const data: {
 } = JSON.parse(
 	document.querySelector('template#data')!.innerHTML
 )
+
+export type Data = typeof data
 </script>
 
 <script lang="ts" setup>

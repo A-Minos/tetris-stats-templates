@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import type { Data } from '@/v2/pages/tetrio/info/index.vue'
+import type { User } from '@/v2/types/tetrio'
 import { md5 } from 'hash-wasm'
 import { isNonNullish } from 'remeda'
 
@@ -10,52 +12,7 @@ const test = async () => {
 			return response.json()
 		})
 		.then(result => {
-			return (result as {
-				readonly data: {
-					readonly user: {
-						readonly _id: string
-						readonly username: string
-
-						readonly badges: {
-							readonly id: string
-							readonly label: string
-							readonly group: string | null
-							readonly ts: string | null
-						}[]
-
-						readonly country: string
-						readonly supporter_tier: number
-						readonly xp: number
-						readonly avatar_revision: number
-						readonly gametime: number
-						readonly friend_count: number
-						readonly verified: boolean
-						readonly badstanding?: boolean
-						readonly gamesplayed: number
-						readonly gameswon: number
-						readonly bio: string
-						readonly ts: string
-
-						readonly league: {
-							readonly rank: string
-							readonly bestrank: string
-							readonly rating: number
-							readonly glicko: number
-							readonly rd: number
-							readonly pps: number
-							readonly apm: number
-							readonly vs: number
-							readonly gamesplayed: number
-							readonly gameswon: number
-							readonly decaying: number
-							readonly standing: number
-							readonly standing_local: number
-						}
-
-						readonly banner_revision: number
-					}
-				}
-			}).data.user
+			return result.data.user as User
 		})
 
 	const data = await fetch(`/_proxy/tetrio/users/${user._id}/records`)
@@ -63,40 +20,7 @@ const test = async () => {
 			return response.json()
 		})
 		.then(result => {
-			return (result as {
-				readonly data: {
-					readonly records: {
-						readonly '40l': {
-							readonly record: {
-								readonly endcontext: {
-									readonly finalTime: number
-								}
-
-								readonly ts: string
-							} | null
-
-							readonly rank: number | null
-						}
-
-						readonly blitz: {
-							readonly record: {
-								readonly endcontext: {
-									readonly score: number
-								}
-
-								readonly ts: string
-							} | null
-
-							readonly rank: number | null
-						}
-					}
-
-					readonly zen: {
-						readonly level: number
-						readonly score: number
-					}
-				}
-			}).data
+			return result.data
 		})
 
 	document.querySelector('template#data')!.innerHTML = JSON.stringify({
@@ -107,7 +31,7 @@ const test = async () => {
 				type: 'identicon',
 				hash: await md5(user._id)
 			},
-			banner: user.banner_revision > 0 ? `https://tetr.io/user-content/banners/${user._id}.jpg?rv=${user.banner_revision}` : null,
+			banner: isNonNullish(user.banner_revision) && user.banner_revision > 0 ? `https://tetr.io/user-content/banners/${user._id}.jpg?rv=${user.banner_revision}` : null,
 			badges: user.badges.map(badge => {
 				return {
 					id: badge.id,
@@ -133,26 +57,26 @@ const test = async () => {
 			tr: Number(
 				user.league.rating.toFixed(2)
 			),
-			glicko: Number(
+			glicko: isNonNullish(user.league.glicko) ? Number(
 				user.league.glicko.toFixed(2)
-			),
-			rd: Number(
+			) : null,
+			rd: isNonNullish(user.league.rd) ? Number(
 				user.league.rd.toFixed(2)
-			),
+			) : null,
 			global_rank: user.league.standing !== -1 ? user.league.standing : null,
 			country_rank: user.league.standing_local !== -1 ? user.league.standing_local : null,
 
 			pps: user.league.pps,
 
 			apm: user.league.apm,
-			apl: Number(
+			apl: isNonNullish(user.league.apm) && isNonNullish(user.league.pps) ? Number(
 				(user.league.apm / user.league.pps / 24).toFixed(2)
-			),
+			) : null,
 
 			vs: user.league.vs,
-			adpl: Number(
+			adpl: isNonNullish(user.league.vs) && isNonNullish(user.league.pps) ? Number(
 				(user.league.vs / user.league.pps / 24 * 0.6).toFixed(2)
-			),
+			) : null,
 
 			statistic: {
 				total: user.league.gamesplayed,
@@ -187,7 +111,7 @@ const test = async () => {
 			score: data.zen.score,
 			level: data.zen.level
 		} : null
-	})
+	} as Data)
 
 	document.querySelector('template#path')!.innerHTML = path
 }

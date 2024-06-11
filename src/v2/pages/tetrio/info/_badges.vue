@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import type { Badge } from '@/v2/types/tetrio'
+import type { Data } from '@/v2/pages/tetrio/info/index.vue'
 
 defineProps<{
-	readonly badges: Badge[]
+	readonly badges: Data['user']['badges']
 }>()
 </script>
 
