@@ -6,10 +6,10 @@ export interface User {
 	readonly botmaster?: string
 
 	readonly badges: {
-		readonly id: string;
-		readonly label: string;
-		readonly group?: string;
-		readonly ts?: string;
+		readonly id: string
+		readonly label: string
+		readonly group?: string
+		readonly ts?: string
 	}[]
 
 	readonly xp: number
@@ -68,5 +68,31 @@ export interface User {
 	readonly friend_count: number
 	readonly distinguishment?: {
 		readonly type: string
+	}
+}
+
+export interface Record {
+	readonly records: Record<'40l' | 'blitz', {
+		readonly record: {
+			readonly _id: string
+			readonly stream: `${'40l' | 'blitz' | 'any'}_${'global' | 'userbest' | 'userrecent'}${'' | `_${'userbest' | 'userrecent' | string}`}`
+			readonly replayid: string
+
+			readonly user: {
+				readonly _id: string
+				readonly username: string
+			}
+
+			readonly ts: string
+			readonly ismulti?: boolean
+			readonly endcontext: Record<unknown, unknown>[] | Record<unknown, unknown>
+		}
+
+		rank: number | null
+	}>
+
+	readonly zen: {
+		readonly level: number
+		readonly score: number
 	}
 }

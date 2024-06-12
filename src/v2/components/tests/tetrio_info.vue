@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { Data } from '@/v2/pages/tetrio/info/index.vue'
-import type { User } from '@/v2/types/tetrio'
+import type { Record, User } from '@/v2/types/tetrio'
 import { md5 } from 'hash-wasm'
 import { isNonNullish } from 'remeda'
 
@@ -20,7 +20,7 @@ const test = async () => {
 			return response.json()
 		})
 		.then(result => {
-			return result.data
+			return result.data as Record
 		})
 
 	document.querySelector('template#data')!.innerHTML = JSON.stringify({
