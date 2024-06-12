@@ -72,24 +72,44 @@ export interface User {
 }
 
 export interface Record {
-	readonly records: Record<'40l' | 'blitz', {
-		readonly record: {
-			readonly _id: string
-			readonly stream: `${'40l' | 'blitz' | 'any'}_${'global' | 'userbest' | 'userrecent'}${'' | `_${'userbest' | 'userrecent' | string}`}`
-			readonly replayid: string
-
-			readonly user: {
+	readonly records: {
+		'40l': {
+			readonly record: {
 				readonly _id: string
-				readonly username: string
+				readonly stream: `${'40l' | 'blitz' | 'any'}_${'global' | 'userbest' | 'userrecent'}${'' | `_${'userbest' | 'userrecent' | string}`}`
+				readonly replayid: string
+
+				readonly user: {
+					readonly _id: string
+					readonly username: string
+				}
+
+				readonly ts: string
+				readonly ismulti?: boolean
+				readonly endcontext: Record<unknown, unknown>[] | Record<unknown, unknown>
 			}
 
-			readonly ts: string
-			readonly ismulti?: boolean
-			readonly endcontext: Record<unknown, unknown>[] | Record<unknown, unknown>
-		}
+			rank: number | null
+		},
+		blitz: {
+			readonly record: {
+				readonly _id: string
+				readonly stream: `${'40l' | 'blitz' | 'any'}_${'global' | 'userbest' | 'userrecent'}${'' | `_${'userbest' | 'userrecent' | string}`}`
+				readonly replayid: string
 
-		rank: number | null
-	}>
+				readonly user: {
+					readonly _id: string
+					readonly username: string
+				}
+
+				readonly ts: string
+				readonly ismulti?: boolean
+				readonly endcontext: Record<unknown, unknown>[] | Record<unknown, unknown>
+			}
+
+			rank: number | null
+		}
+	}
 
 	readonly zen: {
 		readonly level: number
