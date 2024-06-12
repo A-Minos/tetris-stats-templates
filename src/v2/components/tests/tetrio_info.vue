@@ -15,7 +15,7 @@ const test = async () => {
 			return result.data.user as User
 		})
 
-	const data = await fetch(`/_proxy/tetrio/users/${user._id}/records`)
+	const records = await fetch(`/_proxy/tetrio/users/${user._id}/records`)
 		.then(response => {
 			return response.json()
 		})
@@ -89,9 +89,9 @@ const test = async () => {
 			total: user.gamesplayed === -1 ? null : user.gamesplayed,
 			wins: user.gameswon === -1 ? null : user.gameswon
 		},
-		sprint: data.records['40l'].record ? {
+		sprint: records.records['40l'].record ? {
 			time: (() => {
-				const time = data.records['40l'].record!.endcontext.finalTime / 1000
+				const time = records.records['40l'].record!.endcontext.finalTime / 1000
 
 				const hours = Math.trunc(time / 60)
 				const seconds = Math.trunc(time % 60)
@@ -99,17 +99,17 @@ const test = async () => {
 
 				return `${hours}:${seconds}.${milliseconds}`
 			})(),
-			global_rank: data.records['40l'].rank,
-			play_at: data.records['40l'].record.ts
+			global_rank: records.records['40l'].rank,
+			play_at: records.records['40l'].record.ts
 		} : null,
-		blitz: data.records.blitz.record ? {
-			score: data.records.blitz.record.endcontext.score,
-			global_rank: data.records.blitz.rank,
-			play_at: data.records.blitz.record.ts
+		blitz: records.records.blitz.record ? {
+			score: records.records.blitz.record.endcontext.score,
+			global_rank: records.records.blitz.rank,
+			play_at: records.records.blitz.record.ts
 		} : null,
-		zen: data.zen.score > 0 ? {
-			score: data.zen.score,
-			level: data.zen.level
+		zen: records.zen.score > 0 ? {
+			score: records.zen.score,
+			level: records.zen.level
 		} : null
 	} as Data)
 
