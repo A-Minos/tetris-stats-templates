@@ -89,6 +89,8 @@ export type Data = typeof data
 </script>
 
 <script lang="ts" setup>
+import layout from '@/v2/components/common/layout.vue'
+
 import info_header from '@/v2/pages/tetrio/info/_header.vue'
 import info_detail from '@/v2/pages/tetrio/info/_detail.vue'
 import info_bs from '@/v2/pages/tetrio/info/_bad-standing.vue'
@@ -101,82 +103,75 @@ import info_blitz from '@/v2/pages/tetrio/info/_blitz.vue'
 import info_zen from '@/v2/pages/tetrio/info/_zen.vue'
 import info_footer from '@/v2/pages/tetrio/info/_footer.vue'
 
-import { darkTheme } from 'naive-ui'
 import { isNonNullish } from 'remeda'
 </script>
 
 <template>
-	<n-config-provider :theme="darkTheme" class="font-sans">
-		<n-layout position="absolute">
-			<n-layout-content id="content" class="p-2 max-w-320">
-				<n-flex vertical>
-					<info_header :id="data.user.id" :avatar="data.user.avatar" :banner="data.user.banner"
-								 :country="data.user.country" :friend_count="data.user.friend_count"
-								 :name="data.user.name"
-								 :supporter_tier="data.user.supporter_tier" :verified="data.user.verified"/>
+	<layout>
+		<info_header :id="data.user.id" :avatar="data.user.avatar" :banner="data.user.banner"
+					 :country="data.user.country" :friend_count="data.user.friend_count"
+					 :name="data.user.name"
+					 :supporter_tier="data.user.supporter_tier" :verified="data.user.verified"/>
 
-					<template v-if="data.user.bad_standing">
-						<info_bs/>
-					</template>
+		<template v-if="data.user.bad_standing">
+			<info_bs/>
+		</template>
 
-					<template v-if="isNonNullish(data.user.bio)">
-						<info_bio :content="data.user.bio"/>
-					</template>
+		<template v-if="isNonNullish(data.user.bio)">
+			<info_bio :content="data.user.bio"/>
+		</template>
 
-					<n-divider class="!my-0">多人游戏</n-divider>
+		<n-divider class="!my-0">多人游戏</n-divider>
 
-					<template v-if="isNonNullish(data.user.badges)">
-						<info_badges :badges="data.user.badges"/>
-					</template>
+		<template v-if="isNonNullish(data.user.badges)">
+			<info_badges :badges="data.user.badges"/>
+		</template>
 
-					<n-flex :wrap="false" class="[&>*]:(h-full flex-1)">
-						<n-flex vertical>
-							<info_xp :value="data.user.xp"/>
+		<n-flex :wrap="false" class="[&>*]:(h-full flex-1)">
+			<n-flex vertical>
+				<info_xp :value="data.user.xp"/>
 
-							<template v-if="[data.user.playtime, data.statistic, data.user.join_at].some(isNonNullish)">
-								<info_detail :join_at="data.user.join_at" :playtime="data.user.playtime"
-											 :statistic="data.statistic"/>
-							</template>
-						</n-flex>
+				<template v-if="[data.user.playtime, data.statistic, data.user.join_at].some(isNonNullish)">
+					<info_detail :join_at="data.user.join_at" :playtime="data.user.playtime"
+								 :statistic="data.statistic"/>
+				</template>
+			</n-flex>
 
-						<template v-if="isNonNullish(data.tetra_league)">
-							<info_tl :adpl="data.tetra_league.adpl" :apl="data.tetra_league.apl"
-									 :apm="data.tetra_league.apm" :country="data.user.country"
-									 :country_rank="data.tetra_league.country_rank"
-									 :decaying="data.tetra_league.decaying" :glicko="data.tetra_league.glicko"
-									 :global_rank="data.tetra_league.global_rank"
-									 :highest_rank="data.tetra_league.highest_rank" :pps="data.tetra_league.pps"
-									 :rank="data.tetra_league.rank" :rd="data.tetra_league.rd"
-									 :statistic="data.tetra_league.statistic" :tr="data.tetra_league.tr"
-									 :vs="data.tetra_league.vs"/>
-						</template>
-					</n-flex>
+			<template v-if="isNonNullish(data.tetra_league)">
+				<info_tl :adpl="data.tetra_league.adpl" :apl="data.tetra_league.apl"
+						 :apm="data.tetra_league.apm" :country="data.user.country"
+						 :country_rank="data.tetra_league.country_rank"
+						 :decaying="data.tetra_league.decaying" :glicko="data.tetra_league.glicko"
+						 :global_rank="data.tetra_league.global_rank"
+						 :highest_rank="data.tetra_league.highest_rank" :pps="data.tetra_league.pps"
+						 :rank="data.tetra_league.rank" :rd="data.tetra_league.rd"
+						 :statistic="data.tetra_league.statistic" :tr="data.tetra_league.tr"
+						 :vs="data.tetra_league.vs"/>
+			</template>
+		</n-flex>
 
-					<template v-if="[data.sprint, data.blitz, data.zen].some(isNonNullish)">
-						<n-divider class="!my-0">单人游戏</n-divider>
-					</template>
+		<template v-if="[data.sprint, data.blitz, data.zen].some(isNonNullish)">
+			<n-divider class="!my-0">单人游戏</n-divider>
+		</template>
 
-					<n-flex :wrap="false" class="[&>*]:(h-full flex-1)">
-						<template v-if="isNonNullish(data.sprint)">
-							<info_40l :global_rank="data.sprint.global_rank" :play_at="data.sprint.play_at"
-									  :time="data.sprint.time"/>
-						</template>
+		<n-flex :wrap="false" class="[&>*]:(h-full flex-1)">
+			<template v-if="isNonNullish(data.sprint)">
+				<info_40l :global_rank="data.sprint.global_rank" :play_at="data.sprint.play_at"
+						  :time="data.sprint.time"/>
+			</template>
 
-						<template v-if="isNonNullish(data.blitz)">
-							<info_blitz :global_rank="data.blitz.global_rank" :play_at="data.blitz.play_at"
-										:score="data.blitz.score"/>
-						</template>
-					</n-flex>
+			<template v-if="isNonNullish(data.blitz)">
+				<info_blitz :global_rank="data.blitz.global_rank" :play_at="data.blitz.play_at"
+							:score="data.blitz.score"/>
+			</template>
+		</n-flex>
 
-					<template v-if="isNonNullish(data.zen)">
-						<info_zen :level="data.zen.level" :score="data.zen.score"/>
-					</template>
+		<template v-if="isNonNullish(data.zen)">
+			<info_zen :level="data.zen.level" :score="data.zen.score"/>
+		</template>
 
-					<info_footer/>
-				</n-flex>
-			</n-layout-content>
-		</n-layout>
-	</n-config-provider>
+		<info_footer/>
+	</layout>
 </template>
 
 <style lang="scss">
