@@ -1,9 +1,11 @@
 <script lang="ts" setup>
 import type Avatar from '@/shared/types/avatar'
+
 import logo from '@/v2/assets/images/logos/tetrio.svg'
+import avatar from '@/v2/components/common/avatar.vue'
+
 import { CheckCircleOutlined, HeartFilled, StarFilled } from '@vicons/antd'
-import Identicon from 'identicon.js'
-import { isNonNullish, isNullish, isString } from 'remeda'
+import { isNonNullish, isNullish } from 'remeda'
 
 const props = defineProps<{
 	readonly banner: string | null
@@ -18,27 +20,6 @@ const props = defineProps<{
 	readonly friend_count: number
 	readonly supporter_tier: number
 }>()
-
-const avatar_url = computed(() => {
-	if (isString(props.avatar)) {
-		return props.avatar
-	}
-
-	switch (props.avatar.type) {
-		case 'identicon':
-			// @ts-ignore
-			const result = new Identicon(props.avatar.hash, {
-				background: [8, 10, 6, 255],
-				margin: 0.15,
-				size: 300,
-				brightness: 0.48,
-				saturation: 0.65,
-				format: 'svg'
-			}).toString()
-
-			return `data:image/svg+xml;base64,${result}`
-	}
-})
 
 const country_url = computed(() => {
 	if (isNullish(props.country)) {
@@ -59,7 +40,7 @@ const { define: LogoDefine, reuse: Logo } = createReusableTemplate()
 			<div>
 				<n-flex size="small" vertical>
 					<n-flex align="center" size="small">
-						<n-avatar :src="avatar_url" class="[&,&>img]:size-12"/>
+						<avatar :avatar="avatar" class="[&,&>img]:size-12"/>
 
 						<n-flex :size="0" vertical>
 							<n-text class="text-(6 current) fw-bold leading-none">
