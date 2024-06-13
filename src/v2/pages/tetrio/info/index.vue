@@ -91,6 +91,7 @@ export type Data = typeof data
 
 <script lang="ts" setup>
 import layout from '@/v2/components/common/layout.vue'
+import powered from '@/v2/components/common/footer.vue'
 
 import info_header from '@/v2/pages/tetrio/info/_header.vue'
 import info_detail from '@/v2/pages/tetrio/info/_detail.vue'
@@ -102,7 +103,6 @@ import info_tl from '@/v2/pages/tetrio/info/_tetra-league.vue'
 import info_40l from '@/v2/pages/tetrio/info/_40l.vue'
 import info_blitz from '@/v2/pages/tetrio/info/_blitz.vue'
 import info_zen from '@/v2/pages/tetrio/info/_zen.vue'
-import info_footer from '@/v2/pages/tetrio/info/_footer.vue'
 
 import { isNonNullish } from 'remeda'
 </script>
@@ -171,7 +171,7 @@ import { isNonNullish } from 'remeda'
 			<info_zen :level="data.zen.level" :score="data.zen.score"/>
 		</template>
 
-		<info_footer/>
+		<powered/>
 	</layout>
 </template>
 
