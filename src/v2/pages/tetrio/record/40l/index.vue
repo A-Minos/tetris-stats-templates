@@ -78,11 +78,23 @@ import sprint_sm from '@/v2/pages/tetrio/record/40l/_statistic-max.vue'
 import sprint_sb from '@/v2/pages/tetrio/record/40l/_statistic-block.vue'
 import sprint_sc from '@/v2/pages/tetrio/record/40l/_statistic-clear.vue'
 import sprint_sf from '@/v2/pages/tetrio/record/40l/_statistic-finesse.vue'
+
+const title = computed(() => {
+	if (data.statistic.tspins.total >= 20) {
+		return '20TSD'
+	}
+
+	if (data.statistic.all_clear >= 10) {
+		return '10PC'
+	}
+
+	return '40L'
+})
 </script>
 
 <template>
 	<layout content_class="max-w-320">
-		<sprint_result :play_at="data.play_at" :rank="data.rank" :time="data.time"/>
+		<sprint_result :play_at="data.play_at" :rank="data.rank" :time="data.time" :title="title"/>
 
 		<n-flex :wrap="false">
 			<sprint_user :id="data.user.id" :avatar="data.user.avatar" :name="data.user.name"

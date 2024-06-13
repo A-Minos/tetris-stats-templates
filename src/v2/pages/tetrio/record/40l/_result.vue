@@ -3,6 +3,8 @@ import type { BackendTime } from '@/v2/types/utils'
 import { isNonNullish } from 'remeda'
 
 defineProps<{
+	readonly title: string
+
 	readonly time: string
 	readonly rank: number | null
 	readonly play_at: BackendTime
@@ -10,7 +12,7 @@ defineProps<{
 </script>
 
 <template>
-	<n-alert :show-icon="false" title="40L" type="warning">
+	<n-alert :show-icon="false" :title="title" type="warning">
 		<n-flex vertical>
 			<div class="text-(center 5xl) fw-bold">
 				{{ time }}
