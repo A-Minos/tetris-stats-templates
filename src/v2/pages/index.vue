@@ -22,7 +22,9 @@ const tests = asyncComputed(async () => {
 			<n-layout-content class="relative">
 				<div class="w-screen h-screen">
 					<div class="absolute top-1/2 left-1/2 -translate-1/2">
-						<Component :is="test" v-for="test in tests"/>
+						<n-flex justify="center">
+							<Component :is="test" v-for="test in tests"/>
+						</n-flex>
 					</div>
 				</div>
 			</n-layout-content>
