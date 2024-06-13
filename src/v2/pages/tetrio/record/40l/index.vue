@@ -80,7 +80,7 @@ import sprint_sc from '@/v2/pages/tetrio/record/40l/_statistic-clear.vue'
 import sprint_sf from '@/v2/pages/tetrio/record/40l/_statistic-finesse.vue'
 
 const title = computed(() => {
-	if (data.statistic.tspins.total >= 20) {
+	if (data.statistic.tspins.double >= 20) {
 		return '20TSD'
 	}
 
