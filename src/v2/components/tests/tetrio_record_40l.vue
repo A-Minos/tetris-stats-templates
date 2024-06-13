@@ -6,7 +6,7 @@ import { isNonNullish } from 'remeda'
 const path = 'v2/tetrio/record/40l'
 
 const test = async () => {
-	const user = await fetch('/_proxy/tetrio/users/5eb3a6530b29196c155074e8')
+	const user = await fetch('/_proxy/tetrio/users/fesh')
 		.then(response => {
 			return response.json()
 		})
@@ -26,7 +26,7 @@ const test = async () => {
 		user: {
 			id: user._id,
 			name: user.username,
-			avatar: isNonNullish(user.avatar_revision) ? `https://tetr.io/user-content/avatars/${user._id}.jpg?rv=${user.avatar_revision}` : {
+			avatar: isNonNullish(user.avatar_revision) && user.avatar_revision > 0 ? `https://tetr.io/user-content/avatars/${user._id}.jpg?rv=${user.avatar_revision}` : {
 				type: 'identicon',
 				hash: await md5(user._id)
 			},

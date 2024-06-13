@@ -27,7 +27,7 @@ const test = async () => {
 		user: {
 			id: user._id,
 			name: user.username,
-			avatar: isNonNullish(user.avatar_revision) ? `https://tetr.io/user-content/avatars/${user._id}.jpg?rv=${user.avatar_revision}` : {
+			avatar: isNonNullish(user.avatar_revision) && user.avatar_revision > 0 ? `https://tetr.io/user-content/avatars/${user._id}.jpg?rv=${user.avatar_revision}` : {
 				type: 'identicon',
 				hash: await md5(user._id)
 			},
