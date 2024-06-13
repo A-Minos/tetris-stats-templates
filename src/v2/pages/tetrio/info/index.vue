@@ -1,5 +1,6 @@
 <script lang="ts">
 import Avatar from '@/shared/types/avatar'
+import type { User } from '@/v2/types/tetrio'
 import type { BackendTime } from '@/v2/types/utils'
 
 const data: {
@@ -33,8 +34,8 @@ const data: {
 	}
 
 	readonly tetra_league: {
-		readonly rank: string
-		readonly highest_rank: string
+		readonly rank: User['league']['rank']
+		readonly highest_rank: User['league']['rank']
 
 		readonly tr: number
 

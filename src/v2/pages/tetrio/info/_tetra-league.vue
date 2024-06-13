@@ -1,9 +1,11 @@
 <script lang="ts" setup>
+import rank from '@/v2/components/common/rank.vue'
+import type { User } from '@/v2/types/tetrio'
 import type { TextProps } from 'naive-ui'
 import { isNonNullish, isNullish } from 'remeda'
 
 const props = defineProps<{
-	readonly rank: string
+	readonly rank: User['league']['rank']
 	readonly tr: number
 
 	readonly glicko: number
@@ -28,15 +30,8 @@ const props = defineProps<{
 	} | null
 
 	readonly decaying: boolean
-	readonly highest_rank: string | null
+	readonly highest_rank: User['league']['rank'] | null
 }>()
-
-const rank_url = asyncComputed(async () => {
-	return await import(`@/shared/assets/images/ranks/${props.rank}.svg?url`)
-		.then(module => {
-			return module.default
-		})
-})
 
 const highest_rank_url = asyncComputed(async () => {
 	return await import(`@/shared/assets/images/ranks/${props.highest_rank}.svg?url`)
@@ -88,7 +83,7 @@ const rd_props = computed(() => {
 			<n-flex :size="0" vertical>
 				<n-flex align="center" justify="space-between">
 					<n-flex align="center" size="small">
-						<n-image :src="rank_url" class="[&>img]:size-15"/>
+						<rank :rank="props.rank" class="[&>img]:size-15"/>
 
 						<n-flex :size="0" vertical>
 							<n-text class="text-2xl fw-bold">{{ tr }} TR</n-text>
@@ -100,7 +95,8 @@ const rd_props = computed(() => {
 								<n-text :depth="rd_props.depth" :type="rd_props.status">{{ rd }}</n-text>
 
 								<template v-if="decaying">
-									<n-text :depth="rd_props.arrow.depth" :type="rd_props.arrow.status" class="text-4 font-[HUN]">
+									<n-text :depth="rd_props.arrow.depth" :type="rd_props.arrow.status"
+											class="text-4 font-[HUN]">
 										Ƿ
 									</n-text>
 								</template>
