@@ -1,6 +1,5 @@
 <script lang="ts">
 import type Avatar from '@/shared/types/avatar'
-import type { User } from '@/v2/types/tetrio'
 import type { BackendTime } from '@/v2/types/utils'
 
 const data: {
@@ -8,14 +7,10 @@ const data: {
 		readonly id: string
 		readonly name: string
 		readonly avatar: Avatar
-
-		readonly tetra_league: {
-			readonly rank: User['league']['rank']
-			readonly tr: number
-		} | null
 	}
 
 	readonly time: string
+	readonly replay_id: string
 	readonly rank: number | null
 
 	readonly statistic: {
@@ -75,6 +70,7 @@ import sprint_result from '@/v2/pages/tetrio/record/40l/_result.vue'
 import sprint_user from '@/v2/pages/tetrio/record/40l/_user.vue'
 import sprint_sk from '@/v2/pages/tetrio/record/40l/_statistic-key.vue'
 import sprint_sm from '@/v2/pages/tetrio/record/40l/_statistic-max.vue'
+import sprint_sr from '@/v2/pages/tetrio/record/40l/_statistic-replay.vue'
 import sprint_sb from '@/v2/pages/tetrio/record/40l/_statistic-block.vue'
 import sprint_sc from '@/v2/pages/tetrio/record/40l/_statistic-clear.vue'
 import sprint_sf from '@/v2/pages/tetrio/record/40l/_statistic-finesse.vue'
@@ -97,8 +93,7 @@ const title = computed(() => {
 		<sprint_result :play_at="data.play_at" :rank="data.rank" :time="data.time" :title="title"/>
 
 		<n-flex :wrap="false">
-			<sprint_user :id="data.user.id" :avatar="data.user.avatar" :name="data.user.name"
-						 :tetra_league="data.user.tetra_league"/>
+			<sprint_user :id="data.user.id" :avatar="data.user.avatar" :name="data.user.name"/>
 
 			<n-flex class="flex-1" vertical>
 				<n-flex :wrap="false">
@@ -115,6 +110,8 @@ const title = computed(() => {
 							   :quad="data.statistic.quad" :single="data.statistic.single"
 							   :triple="data.statistic.triple" :tspins="data.statistic.tspins"/>
 				</n-flex>
+
+				<sprint_sr :replay_id="data.replay_id"/>
 
 				<sprint_sf :accuracy="data.statistic.finesse.accuracy" :faults="data.statistic.finesse.faults"/>
 			</n-flex>

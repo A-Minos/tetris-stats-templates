@@ -29,13 +29,7 @@ const test = async () => {
 			avatar: isNonNullish(user.avatar_revision) && user.avatar_revision > 0 ? `https://tetr.io/user-content/avatars/${user._id}.jpg?rv=${user.avatar_revision}` : {
 				type: 'identicon',
 				hash: await md5(user._id)
-			},
-			tetra_league: user.league.rating !== -1 ? {
-				rank: user.league.rank,
-				tr: Number(
-					user.league.rating.toFixed(2)
-				)
-			} : null
+			}
 		},
 		time: (() => {
 			const time = records.records['blitz'].record.endcontext.finalTime / 1000
@@ -46,6 +40,7 @@ const test = async () => {
 
 			return `${hours}:${seconds}.${milliseconds}`
 		})(),
+		replay_id: records.records['blitz'].record.replayid,
 		rank: records.records['blitz'].rank,
 		statistic: {
 			pieces: records.records['blitz'].record.endcontext.piecesplaced,
