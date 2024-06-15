@@ -13,7 +13,7 @@ const props = defineProps<{
 	<n-card class="w-fit">
 		<div class="flex flex-col justify-center items-center h-full">
 			<n-flex align="center" vertical>
-				<avatar :avatar="props.avatar" class="[&,&>img]:size-32"/>
+				<avatar :user_id="id" :avatar="props.avatar" class="[&,&>img]:size-32"/>
 
 				<n-text class="text-(6 current) fw-bold leading-none">
 					{{ name }}

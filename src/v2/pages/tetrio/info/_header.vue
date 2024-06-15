@@ -40,7 +40,7 @@ const { define: LogoDefine, reuse: Logo } = createReusableTemplate()
 			<div>
 				<n-flex size="small" vertical>
 					<n-flex align="center" size="small">
-						<avatar :avatar="props.avatar" class="[&,&>img]:size-12"/>
+						<avatar :avatar="props.avatar" :user_id="id" class="[&,&>img]:size-12"/>
 
 						<n-flex :size="0" vertical>
 							<n-text class="text-(6 current) fw-bold leading-none">
