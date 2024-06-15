@@ -56,15 +56,14 @@ const symbols = computed(() => {
 <template>
 	<n-card size="small" title="Zen">
 		<n-flex align="center" justify="space-between">
-			<n-text class="text-3xl fw-bold">{{ new Intl.NumberFormat('zh-CN').format(score) }}</n-text>
-
-			<n-flex :size="0" align="end" vertical>
+			<n-flex :size="0" align="start" vertical>
+				<n-text class="text-3xl fw-bold">{{ new Intl.NumberFormat('zh-CN').format(score) }}</n-text>
 				<n-text :depth="3" class="text-xl fw-bold">Level {{ level }}</n-text>
-
-				<n-text :depth="3" class="text-4xl font-[HUN] tracking-0.1">
-					{{ symbols }}
-				</n-text>
 			</n-flex>
+
+			<n-text :depth="3" class="text-4xl font-[HUN] tracking-0.1">
+				{{ symbols }}
+			</n-text>
 		</n-flex>
 	</n-card>
 </template>

@@ -78,7 +78,7 @@ const rd_props = computed(() => {
 </script>
 
 <template>
-	<n-flex vertical>
+	<n-flex :wrap="false">
 		<n-card size="small">
 			<n-flex :size="0" vertical>
 				<n-flex align="center" justify="space-between">

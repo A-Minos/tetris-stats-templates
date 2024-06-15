@@ -128,16 +128,7 @@ import { isNonNullish } from 'remeda'
 			<info_badges :badges="data.user.badges"/>
 		</template>
 
-		<n-flex :wrap="false" class="[&>*]:(h-full flex-1)">
-			<n-flex vertical>
-				<info_xp :value="data.user.xp"/>
-
-				<template v-if="[data.user.playtime, data.statistic, data.user.join_at].some(isNonNullish)">
-					<info_detail :join_at="data.user.join_at" :playtime="data.user.playtime"
-								 :statistic="data.statistic"/>
-				</template>
-			</n-flex>
-
+		<n-flex vertical>
 			<template v-if="isNonNullish(data.tetra_league)">
 				<info_tl :adpl="data.tetra_league.adpl" :apl="data.tetra_league.apl"
 						 :apm="data.tetra_league.apm" :country="data.user.country"
@@ -149,6 +140,15 @@ import { isNonNullish } from 'remeda'
 						 :statistic="data.tetra_league.statistic" :tr="data.tetra_league.tr"
 						 :vs="data.tetra_league.vs"/>
 			</template>
+
+			<n-flex :wrap="false">
+				<info_xp :value="data.user.xp"/>
+
+				<template v-if="[data.user.playtime, data.statistic, data.user.join_at].some(isNonNullish)">
+					<info_detail :join_at="data.user.join_at" :playtime="data.user.playtime"
+								 :statistic="data.statistic"/>
+				</template>
+			</n-flex>
 		</n-flex>
 
 		<template v-if="[data.sprint, data.blitz, data.zen].some(isNonNullish)">
