@@ -6,7 +6,7 @@ import { isNonNullish } from 'remeda'
 const path = 'v2/tetrio/record/40l'
 
 const test = async () => {
-	const user = await fetch('/_proxy/tetrio/users/fesh')
+	const user = await fetch('/_proxy/tetrio/users/5eb3a6530b29196c155074e8')
 		.then(response => {
 			return response.json()
 		})
@@ -38,7 +38,7 @@ const test = async () => {
 			} : null
 		},
 		time: (() => {
-			const time = records.records['40l'].record!.endcontext.finalTime / 1000
+			const time = records.records['40l'].record.endcontext.finalTime / 1000
 
 			const hours = Math.trunc(time / 60)
 			const seconds = Math.trunc(time % 60)
@@ -51,7 +51,7 @@ const test = async () => {
 			pieces: records.records['40l'].record.endcontext.piecesplaced,
 			pps: Number(
 				(
-					records.records['40l'].record.endcontext.piecesplaced / (records.records['40l'].record!.endcontext.finalTime / 1000)
+					records.records['40l'].record.endcontext.piecesplaced / (records.records['40l'].record.endcontext.finalTime / 1000)
 				).toFixed(2)
 			),
 			keys: records.records['40l'].record.endcontext.inputs,
@@ -60,13 +60,13 @@ const test = async () => {
 			),
 			kps: Number(
 				(
-					records.records['40l'].record.endcontext.inputs / (records.records['40l'].record!.endcontext.finalTime / 1000)
+					records.records['40l'].record.endcontext.inputs / (records.records['40l'].record.endcontext.finalTime / 1000)
 				).toFixed(2)
 			),
 			lpm: Math.trunc(
 				Number(
 					(
-						records.records['40l'].record.endcontext.piecesplaced / (records.records['40l'].record!.endcontext.finalTime / 1000)
+						records.records['40l'].record.endcontext.piecesplaced / (records.records['40l'].record.endcontext.finalTime / 1000)
 					).toFixed(2)
 				) * 24
 			),
