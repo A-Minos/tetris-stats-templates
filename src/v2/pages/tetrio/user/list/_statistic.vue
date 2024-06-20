@@ -13,7 +13,7 @@ defineProps<{
 
 <template>
 	<n-flex :size="0" vertical>
-		<div class="text-center w-60">
+		<div class="text-center w-80">
 			<n-flex justify="space-between">
 				<n-flex :size="0" vertical>
 					<n-text :depth="3">PPS</n-text>
