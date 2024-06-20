@@ -4,8 +4,9 @@ import type Avatar from '@/shared/types/avatar'
 import logo from '@/v2/assets/images/logos/tetrio.svg'
 import avatar from '@/v2/components/common/avatar.vue'
 import country from '@/v2/components/common/country.vue'
+import verified from '@/v2/components/common/verified.vue'
 
-import { CheckCircleOutlined, HeartFilled, StarFilled } from '@vicons/antd'
+import { HeartFilled, StarFilled } from '@vicons/antd'
 import { isNonNullish } from 'remeda'
 
 const props = defineProps<{
@@ -47,8 +48,8 @@ const { define: LogoDefine, reuse: Logo } = createReusableTemplate()
 								<country :code="props.country" class="[&>img]:(h-4) rounded-sm"/>
 							</template>
 
-							<template v-if="verified">
-								<n-icon :component="CheckCircleOutlined" class="text-5" color="#9CCA95"/>
+							<template v-if="props.verified">
+								<verified/>
 							</template>
 						</n-flex>
 					</n-flex>

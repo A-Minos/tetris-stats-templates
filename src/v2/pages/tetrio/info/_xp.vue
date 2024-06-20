@@ -1,10 +1,12 @@
 <script lang="ts" setup>
+import { calculateXpLevel } from '@/v2/core/utils/xp.ts'
+
 const props = defineProps<{
 	readonly value: number
 }>()
 
 const level = computed(() => {
-	return Math.pow(props.value / 500, 0.6) + props.value / (5000 + Math.max(0, props.value - 4000000) / 5000) + 1
+	return calculateXpLevel(props.value)
 })
 
 const progress = computed(() => {

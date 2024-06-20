@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import rank from '@/v2/components/common/rank.vue'
+import tetra_rating from '@/v2/components/common/tetra_rating.vue'
 import type { User } from '@/v2/types/tetrio'
-import type { TextProps } from 'naive-ui'
 import { isNonNullish, isNullish } from 'remeda'
 
 const props = defineProps<{
@@ -42,38 +42,10 @@ const highest_rank_url = asyncComputed(async () => {
 
 const country_code = computed(() => {
 	if (isNullish(props.country)) {
-		return 'NA'
+		return
 	}
 
 	return props.country.toUpperCase()
-})
-
-const rd_props = computed(() => {
-	const result = {
-		depth: 3 as TextProps['depth'],
-		status: 'default',
-
-		arrow: {
-			depth: 3 as TextProps['depth'],
-			status: 'default'
-		}
-	}
-
-	if (props.decaying) {
-		delete result.arrow.depth
-		result.arrow.status = 'warning'
-
-		if (props.rd >= 98) {
-			result.arrow.status = 'error'
-		}
-	}
-
-	if (props.rd >= 100) {
-		delete result.depth
-		result.status = 'error'
-	}
-
-	return result
 })
 </script>
 
@@ -87,20 +59,7 @@ const rd_props = computed(() => {
 
 						<n-flex :size="0" vertical>
 							<n-text class="text-2xl fw-bold">{{ tr }} TR</n-text>
-
-							<n-flex :size="0">
-								<n-text :depth="3">{{ glicko }}</n-text>
-								<n-text :depth="3">±</n-text>
-
-								<n-text :depth="rd_props.depth" :type="rd_props.status">{{ rd }}</n-text>
-
-								<template v-if="decaying">
-									<n-text :depth="rd_props.arrow.depth" :type="rd_props.arrow.status"
-											class="text-4 font-[HUN]">
-										Ƿ
-									</n-text>
-								</template>
-							</n-flex>
+							<tetra_rating :decaying="decaying" :glicko="glicko" :rd="rd"/>
 						</n-flex>
 					</n-flex>
 
