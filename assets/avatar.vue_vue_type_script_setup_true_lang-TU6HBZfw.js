@@ -1,0 +1,30 @@
+import{m as W}from"./index.esm-DvbNZGsD.js";import{t as A,I as N}from"./chunk-SFZGYJFI-BJOfxVXo.js";import{d as K}from"./index-CtuIUDf1.js";import{o as G,i as U}from"./utils-CHNkHqW0.js";import{e as k,y as T,c as E,B as q,h as j,C as D,b as P,u as X,i as Y,f as J}from"./light-C_Y72ozn.js";import{a as Q}from"./light-BxtmVmU3.js";import{c as Z}from"./color-to-class-B0iQgAn2.js";import{a as ee,r as oe}from"./use-style-zT4CEviH.js";import{V as re}from"./VResizeObserver-BR_Rf9ki.js";import{d as H,q as b,l as w,k as O,s as te,B as ne,C as ae,A as se,h as B,u as I,o as ie,g as le,e as ce}from"./index-B32syGsN.js";const de={color:Object,type:{type:String,default:"default"},round:Boolean,size:{type:String,default:"medium"},closable:Boolean,disabled:{type:Boolean,default:void 0}};Object.assign(Object.assign(Object.assign({},k.props),de),{bordered:{type:Boolean,default:void 0},checked:Boolean,checkable:Boolean,strong:Boolean,triggerClickOnClose:Boolean,onClose:[Array,Function],onMouseenter:Function,onMouseleave:Function,"onUpdate:checked":Function,onUpdateChecked:Function,internalCloseFocusable:{type:Boolean,default:!0},internalCloseIsButtonTag:{type:Boolean,default:!0},onCheckedChange:Function});const ue=T("n-tag"),fe=T("n-avatar-group"),ve=E("avatar",`
+ width: var(--n-merged-size);
+ height: var(--n-merged-size);
+ color: #FFF;
+ font-size: var(--n-font-size);
+ display: inline-flex;
+ position: relative;
+ overflow: hidden;
+ text-align: center;
+ border: var(--n-border);
+ border-radius: var(--n-border-radius);
+ --n-merged-color: var(--n-color);
+ background-color: var(--n-merged-color);
+ transition:
+ border-color .3s var(--n-bezier),
+ background-color .3s var(--n-bezier),
+ color .3s var(--n-bezier);
+`,[q(j("&","--n-merged-color: var(--n-color-modal);")),D(j("&","--n-merged-color: var(--n-color-popover);")),j("img",`
+ width: 100%;
+ height: 100%;
+ `),P("text",`
+ white-space: nowrap;
+ display: inline-block;
+ position: absolute;
+ left: 50%;
+ top: 50%;
+ `),E("icon",`
+ vertical-align: bottom;
+ font-size: calc(var(--n-merged-size) - 6px);
+ `),P("text","line-height: 1.25")]),me=Object.assign(Object.assign({},k.props),{size:[String,Number],src:String,circle:{type:Boolean,default:void 0},objectFit:String,round:{type:Boolean,default:void 0},bordered:{type:Boolean,default:void 0},onError:Function,fallbackSrc:String,intersectionObserverOptions:Object,lazy:Boolean,onLoad:Function,renderPlaceholder:Function,renderFallback:Function,imgProps:Object,color:String}),ge=H({name:"Avatar",props:me,setup(o){const{mergedClsPrefixRef:n,inlineThemeDisabled:c}=X(o),a=b(!1);let d=null;const i=b(null),l=b(null),p=()=>{const{value:e}=i;if(e&&(d===null||d!==e.innerHTML)){d=e.innerHTML;const{value:r}=l;if(r){const{offsetWidth:t,offsetHeight:u}=r,{offsetWidth:s,offsetHeight:F}=e,C=.9,R=Math.min(t/s*C,u/F*C,1);e.style.transform=`translateX(-50%) translateY(-50%) scale(${R})`}}},y=w(fe,null),f=O(()=>{const{size:e}=o;if(e)return e;const{size:r}=y||{};return r||"medium"}),v=k("Avatar","-avatar",ve,Q,o,n),z=w(ue,null),m=O(()=>{if(y)return!0;const{round:e,circle:r}=o;return e!==void 0||r!==void 0?e||r:z?z.roundRef.value:!1}),g=O(()=>y?!0:o.bordered||!1),S=O(()=>{const e=f.value,r=m.value,t=g.value,{color:u}=o,{self:{borderRadius:s,fontSize:F,color:C,border:R,colorModal:M,colorPopover:$},common:{cubicBezierEaseInOut:V}}=v.value;let _;return typeof e=="number"?_=`${e}px`:_=v.value.self[Y("height",e)],{"--n-font-size":F,"--n-border":t?R:"none","--n-border-radius":r?"50%":s,"--n-color":u||C,"--n-color-modal":u||M,"--n-color-popover":u||$,"--n-bezier":V,"--n-merged-size":`var(--n-avatar-size-override, ${_})`}}),h=c?J("avatar",O(()=>{const e=f.value,r=m.value,t=g.value,{color:u}=o;let s="";return e&&(typeof e=="number"?s+=`a${e}`:s+=e[0]),r&&(s+="b"),t&&(s+="c"),u&&(s+=Z(u)),s}),S,o):void 0,x=b(!o.lazy);te(()=>{if(o.lazy&&o.intersectionObserverOptions){let e;const r=ne(()=>{e==null||e(),e=void 0,o.lazy&&(e=G(l.value,o.intersectionObserverOptions,x))});ae(()=>{r(),e==null||e()})}}),se(()=>{var e;return o.src||((e=o.imgProps)===null||e===void 0?void 0:e.src)},()=>{a.value=!1});const L=b(!o.lazy);return{textRef:i,selfRef:l,mergedRoundRef:m,mergedClsPrefix:n,fitTextTransform:p,cssVars:c?void 0:S,themeClass:h==null?void 0:h.themeClass,onRender:h==null?void 0:h.onRender,hasLoadError:a,shouldStartLoading:x,loaded:L,mergedOnError:e=>{if(!x.value)return;a.value=!0;const{onError:r,imgProps:{onError:t}={}}=o;r==null||r(e),t==null||t(e)},mergedOnLoad:e=>{const{onLoad:r,imgProps:{onLoad:t}={}}=o;r==null||r(e),t==null||t(e),L.value=!0}}},render(){var o,n;const{$slots:c,src:a,mergedClsPrefix:d,lazy:i,onRender:l,loaded:p,hasLoadError:y,imgProps:f={}}=this;l==null||l();let v;const z=!p&&!y&&(this.renderPlaceholder?this.renderPlaceholder():(n=(o=this.$slots).placeholder)===null||n===void 0?void 0:n.call(o));return this.hasLoadError?v=this.renderFallback?this.renderFallback():ee(c.fallback,()=>[B("img",{src:this.fallbackSrc,style:{objectFit:this.objectFit}})]):v=oe(c.default,m=>{if(m)return B(re,{onResize:this.fitTextTransform},{default:()=>B("span",{ref:"textRef",class:`${d}-avatar__text`},m)});if(a||f.src){const g=this.src||f.src;return B("img",Object.assign(Object.assign({},f),{loading:U&&!this.intersectionObserverOptions&&i?"lazy":"eager",src:i&&this.intersectionObserverOptions?this.shouldStartLoading?g:void 0:g,"data-image-src":g,onLoad:this.mergedOnLoad,onError:this.mergedOnError,style:[f.style||"",{objectFit:this.objectFit},z?{height:"0",width:"0",visibility:"hidden",position:"absolute"}:""]}))}}),B("span",{ref:"selfRef",class:[`${d}-avatar`,this.themeClass],style:this.cssVars},v,i&&z)}}),Re=H({__name:"avatar",props:{user_id:{},avatar:{}},setup(o){const n=o,c=i=>`data:image/svg+xml;base64,${new N(i,{background:[8,10,6,255],margin:.15,size:300,brightness:.48,saturation:.65,format:"svg"}).toString()}`,a=b(),d=async()=>{a.value=c(await W(n.user_id))};return K(async()=>{a.value=await(async()=>{if(A(n.avatar))return n.avatar;switch(n.avatar.type){case"identicon":return c(n.avatar.hash)}})()}),(i,l)=>{const p=ge;return I(a)?(ie(),le(p,{key:0,src:I(a),onError:d},null,8,["src"])):ce("",!0)}}});export{Re as _};

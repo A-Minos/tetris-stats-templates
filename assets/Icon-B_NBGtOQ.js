@@ -1,0 +1,13 @@
+import{G as S,H as R,S as u,I as C,q as M,c as A,h as $}from"./light-C_Y72ozn.js";import{d as c,l as k,R as x,h as I}from"./index-B32syGsN.js";import{u as T}from"./use-style-zT4CEviH.js";var j="[object Symbol]";function w(e){return typeof e=="symbol"||S(e)&&R(e)==j}function F(e,n){for(var r=-1,i=e==null?0:e.length,o=Array(i);++r<i;)o[r]=n(e[r],r,e);return o}var H=1/0,f=u?u.prototype:void 0,l=f?f.toString:void 0;function d(e){if(typeof e=="string")return e;if(C(e))return F(e,d)+"";if(w(e))return l?l.call(e):"";var n=e+"";return n=="0"&&1/e==-H?"-0":n}function P(e){return e==null?"":d(e)}function B(e,n,r){var i=-1,o=e.length;n<0&&(n=-n>o?0:o+n),r=r>o?o:r,r<0&&(r+=o),o=n>r?0:r-n>>>0,n>>>=0;for(var s=Array(o);++i<o;)s[i]=e[i+n];return s}function N(e,n,r){var i=e.length;return r=r===void 0?i:r,!n&&r>=i?e:B(e,n,r)}var O="\\ud800-\\udfff",U="\\u0300-\\u036f",q="\\ufe20-\\ufe2f",J="\\u20d0-\\u20ff",L=U+q+J,V="\\ufe0e\\ufe0f",Z="\\u200d",D=RegExp("["+Z+O+L+V+"]");function b(e){return D.test(e)}function E(e){return e.split("")}var m="\\ud800-\\udfff",G="\\u0300-\\u036f",W="\\ufe20-\\ufe2f",_="\\u20d0-\\u20ff",z=G+W+_,K="\\ufe0e\\ufe0f",Y="["+m+"]",t="["+z+"]",a="\\ud83c[\\udffb-\\udfff]",Q="(?:"+t+"|"+a+")",g="[^"+m+"]",p="(?:\\ud83c[\\udde6-\\uddff]){2}",h="[\\ud800-\\udbff][\\udc00-\\udfff]",X="\\u200d",v=Q+"?",y="["+K+"]?",ee="(?:"+X+"(?:"+[g,p,h].join("|")+")"+y+v+")*",re=y+v+ee,ne="(?:"+[g+t+"?",t,p,h,Y].join("|")+")",oe=RegExp(a+"(?="+a+")|"+ne+re,"g");function ie(e){return e.match(oe)||[]}function se(e){return b(e)?ie(e):E(e)}function te(e){return function(n){n=P(n);var r=b(n)?se(n):void 0,i=r?r[0]:n.charAt(0),o=r?N(r,1).join(""):n.slice(1);return i[e]()+o}}var ae=te("toUpperCase");function de(e,n){return c({name:ae(e),setup(){var r;const i=(r=k(M,null))===null||r===void 0?void 0:r.mergedIconsRef;return()=>{var o;const s=(o=i==null?void 0:i.value)===null||o===void 0?void 0:o[e];return s?s():n}}})}const ue=A("base-icon",`
+ height: 1em;
+ width: 1em;
+ line-height: 1em;
+ text-align: center;
+ display: inline-block;
+ position: relative;
+ fill: currentColor;
+ transform: translateZ(0);
+`,[$("svg",`
+ height: 1em;
+ width: 1em;
+ `)]),be=c({name:"BaseIcon",props:{role:String,ariaLabel:String,ariaDisabled:{type:Boolean,default:void 0},ariaHidden:{type:Boolean,default:void 0},clsPrefix:{type:String,required:!0},onClick:Function,onMousedown:Function,onMouseup:Function},setup(e){T("-base-icon",ue,x(e,"clsPrefix"))},render(){return I("i",{class:`${this.clsPrefix}-base-icon`,onClick:this.onClick,onMousedown:this.onMousedown,onMouseup:this.onMouseup,role:this.role,"aria-label":this.ariaLabel,"aria-hidden":this.ariaHidden,"aria-disabled":this.ariaDisabled},this.$slots)}});export{be as N,F as a,w as i,de as r,P as t};
