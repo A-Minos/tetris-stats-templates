@@ -3,9 +3,10 @@ import type Avatar from '@/shared/types/avatar'
 
 import logo from '@/v2/assets/images/logos/tetrio.svg'
 import avatar from '@/v2/components/common/avatar.vue'
+import country from '@/v2/components/common/country.vue'
 
 import { CheckCircleOutlined, HeartFilled, StarFilled } from '@vicons/antd'
-import { isNonNullish, isNullish } from 'remeda'
+import { isNonNullish } from 'remeda'
 
 const props = defineProps<{
 	readonly banner: string | null
@@ -20,15 +21,6 @@ const props = defineProps<{
 	readonly friend_count: number
 	readonly supporter_tier: number
 }>()
-
-const country_url = computed(() => {
-	if (isNullish(props.country)) {
-		return
-	}
-
-	const code = props.country.toLowerCase()
-	return `https://tetr.io/res/flags/${code}.png`
-})
 
 const { define: UserDefine, reuse: User } = createReusableTemplate()
 const { define: LogoDefine, reuse: Logo } = createReusableTemplate()
@@ -51,8 +43,8 @@ const { define: LogoDefine, reuse: Logo } = createReusableTemplate()
 						</n-flex>
 
 						<n-flex align="center" size="small" vertical>
-							<template v-if="isNonNullish(country)">
-								<n-image :src="country_url" class="[&>img]:(h-4) rounded-sm"/>
+							<template v-if="isNonNullish(props.country)">
+								<country :code="props.country" class="[&>img]:(h-4) rounded-sm"/>
 							</template>
 
 							<template v-if="verified">
