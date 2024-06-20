@@ -5,7 +5,7 @@ const props = defineProps<{
 	readonly rank: User['league']['rank']
 }>()
 
-const rank_url = asyncComputed(async () => {
+const url = asyncComputed(async () => {
 	return await import(`@/shared/assets/images/ranks/${props.rank}.svg?url`)
 		.then(module => {
 			return module.default
@@ -14,5 +14,5 @@ const rank_url = asyncComputed(async () => {
 </script>
 
 <template>
-	<n-image :src="rank_url"/>
+	<n-image :src="url"/>
 </template>
