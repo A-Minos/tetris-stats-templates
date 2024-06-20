@@ -3,6 +3,8 @@ import type { User } from '@/v2/types/tetrio'
 import type { BackendTime } from '@/v2/types/utils'
 
 const data: {
+	readonly show_index: boolean
+
 	readonly users: {
 		readonly id: string
 		readonly name: string
@@ -56,11 +58,11 @@ const checkDecaying = (user: Data['users'][number]) => {
 
 <template>
 	<layout content_class="max-w-320">
-		<template v-for="user in data.users">
+		<template v-for="(user, index) in data.users">
 			<n-card :class="{ 'opacity-50': checkDecaying(user) }" size="small">
 				<n-flex justify="space-between">
-					<list_user :id="user.id" :country="user.country" :name="user.name" :verified="user.verified"
-							   :xp="user.xp"/>
+					<list_user :id="user.id" :country="user.country" :index="data.show_index ? index + 1 : null"
+							   :name="user.name" :verified="user.verified" :xp="user.xp"/>
 
 					<list_statistic :adpl="user.tetra_league.adpl" :apl="user.tetra_league.apl"
 									:apm="user.tetra_league.apm" :pps="user.tetra_league.pps"

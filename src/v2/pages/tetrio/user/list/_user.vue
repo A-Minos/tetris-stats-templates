@@ -6,6 +6,8 @@ import { calculateXpLevel } from '@/v2/core/utils/xp.ts'
 import { isNonNullish } from 'remeda'
 
 const props = defineProps<{
+	readonly index: number | null
+
 	readonly id: string
 	readonly name: string
 	readonly country: string | null
@@ -16,6 +18,10 @@ const props = defineProps<{
 
 <template>
 	<n-flex align="center" size="small">
+		<template v-if="isNonNullish(index)">
+			<n-text class="text-4 fw-bold" type="info">#{{ index }}</n-text>
+		</template>
+
 		<n-flex :size="0" vertical>
 			<n-text class="text-(5 current) leading-none fw-bold">
 				{{ name }}

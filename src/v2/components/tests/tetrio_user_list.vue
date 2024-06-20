@@ -14,6 +14,7 @@ const test = async () => {
 		})
 
 	document.querySelector('template#data')!.innerHTML = JSON.stringify({
+		show_index: true,
 		users: users.map(user => {
 			return {
 				id: user._id,
