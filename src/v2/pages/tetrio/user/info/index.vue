@@ -95,17 +95,17 @@ export type Data = typeof data
 import layout from '@/v2/components/common/layout.vue'
 import powered from '@/v2/components/common/footer.vue'
 
-import info_header from '@/v2/pages/tetrio/info/_header.vue'
-import info_detail from '@/v2/pages/tetrio/info/_detail.vue'
-import info_bs from '@/v2/pages/tetrio/info/_bad-standing.vue'
-import info_bio from '@/v2/pages/tetrio/info/_bio.vue'
-import info_badges from '@/v2/pages/tetrio/info/_badges.vue'
-import info_xp from '@/v2/pages/tetrio/info/_xp.vue'
-import info_tl from '@/v2/pages/tetrio/info/_tetra-league.vue'
-import info_tl_history_chart from '@/v2/pages/tetrio/info/_tetra-league-history-chart.vue'
-import info_40l from '@/v2/pages/tetrio/info/_40l.vue'
-import info_blitz from '@/v2/pages/tetrio/info/_blitz.vue'
-import info_zen from '@/v2/pages/tetrio/info/_zen.vue'
+import info_header from '@/v2/pages/tetrio/user/info/_header.vue'
+import info_detail from '@/v2/pages/tetrio/user/info/_detail.vue'
+import info_bs from '@/v2/pages/tetrio/user/info/_bad-standing.vue'
+import info_bio from '@/v2/pages/tetrio/user/info/_bio.vue'
+import info_badges from '@/v2/pages/tetrio/user/info/_badges.vue'
+import info_xp from '@/v2/pages/tetrio/user/info/_xp.vue'
+import info_tl from '@/v2/pages/tetrio/user/info/_tetra-league.vue'
+import info_tl_history_chart from '@/v2/pages/tetrio/user/info/_tetra-league-history-chart.vue'
+import info_40l from '@/v2/pages/tetrio/user/info/_40l.vue'
+import info_blitz from '@/v2/pages/tetrio/user/info/_blitz.vue'
+import info_zen from '@/v2/pages/tetrio/user/info/_zen.vue'
 
 import { isNonNullish } from 'remeda'
 </script>
@@ -183,5 +183,5 @@ import { isNonNullish } from 'remeda'
 </template>
 
 <style lang="scss">
-@import '@/v2/styles/main';
+@import 'main';
 </style>
