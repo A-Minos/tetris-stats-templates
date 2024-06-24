@@ -2,7 +2,16 @@
 import type Avatar from '@/shared/types/avatar'
 import type { BackendTime } from '@/v2/types/utils'
 
+enum Type {
+	BEST = 'best',
+	PERSONAL_BEST = 'personal_best',
+	RECENT = 'recent',
+	DISPUTED = 'disputed'
+}
+
 const data: {
+	readonly type: Type | null
+
 	readonly user: {
 		readonly id: string
 		readonly name: string
@@ -11,6 +20,7 @@ const data: {
 
 	readonly replay_id: string
 	readonly rank: number | null
+	readonly personal_rank: number | null
 
 	readonly statistic: {
 		readonly keys: number
@@ -62,6 +72,8 @@ const data: {
 } = JSON.parse(
 	document.querySelector('template#data')!.innerHTML
 )
+
+export type Data = typeof data
 </script>
 
 <script lang="ts" setup>
@@ -76,11 +88,35 @@ import blitz_sr from '@/v2/pages/tetrio/record/blitz/_statistic-replay.vue'
 import blitz_sb from '@/v2/pages/tetrio/record/blitz/_statistic-block.vue'
 import blitz_sc from '@/v2/pages/tetrio/record/blitz/_statistic-clear.vue'
 import blitz_sf from '@/v2/pages/tetrio/record/blitz/_statistic-finesse.vue'
+import { isNullish } from 'remeda'
+
+const type = computed(() => {
+	if (isNullish(data.type)) {
+		return 'default'
+	}
+
+	if ([Type.BEST, Type.PERSONAL_BEST].includes(data.type)) {
+		return 'warning'
+	}
+
+	if (data.type === Type.RECENT) {
+		return 'info'
+	}
+
+	if (data.type === Type.DISPUTED) {
+		return 'error'
+	}
+
+	return 'default'
+})
 </script>
 
 <template>
 	<layout content_class="max-w-320">
-		<blitz_result :play_at="data.play_at" :rank="data.rank" :score="data.statistic.score" title="Blitz"/>
+		<blitz_result
+			:is_best="data.type === Type.BEST || (data.type === Type.PERSONAL_BEST && data.personal_rank === 1)"
+			:personal_rank="data.personal_rank" :play_at="data.play_at" :rank="data.rank" :score="data.statistic.score"
+			:type="type" title="Blitz"/>
 
 		<n-flex :wrap="false">
 			<blitz_user :id="data.user.id" :avatar="data.user.avatar" :name="data.user.name"/>

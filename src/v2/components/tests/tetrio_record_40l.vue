@@ -23,6 +23,7 @@ const test = async () => {
 		})
 
 	document.querySelector('template#data')!.innerHTML = JSON.stringify({
+		type: 'best',
 		user: {
 			id: user._id,
 			name: user.username,
@@ -42,6 +43,7 @@ const test = async () => {
 		})(),
 		replay_id: records.records['40l'].record.replayid,
 		rank: records.records['40l'].rank,
+		personal_rank: 1,
 		statistic: {
 			pieces: records.records['40l'].record.endcontext.piecesplaced,
 			pps: Number(

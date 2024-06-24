@@ -2,7 +2,16 @@
 import type Avatar from '@/shared/types/avatar'
 import type { BackendTime } from '@/v2/types/utils'
 
+enum Type {
+	BEST = 'best',
+	PERSONAL_BEST = 'personal_best',
+	RECENT = 'recent',
+	DISPUTED = 'disputed'
+}
+
 const data: {
+	readonly type: Type | null
+
 	readonly user: {
 		readonly id: string
 		readonly name: string
@@ -12,6 +21,7 @@ const data: {
 	readonly time: string
 	readonly replay_id: string
 	readonly rank: number | null
+	readonly personal_rank: number | null
 
 	readonly statistic: {
 		readonly keys: number
@@ -60,6 +70,8 @@ const data: {
 } = JSON.parse(
 	document.querySelector('template#data')!.innerHTML
 )
+
+export type Data = typeof data
 </script>
 
 <script lang="ts" setup>
@@ -74,6 +86,7 @@ import sprint_sr from '@/v2/pages/tetrio/record/40l/_statistic-replay.vue'
 import sprint_sb from '@/v2/pages/tetrio/record/40l/_statistic-block.vue'
 import sprint_sc from '@/v2/pages/tetrio/record/40l/_statistic-clear.vue'
 import sprint_sf from '@/v2/pages/tetrio/record/40l/_statistic-finesse.vue'
+import { isNullish } from 'remeda'
 
 const title = computed(() => {
 	if (data.statistic.tspins.double >= 20) {
@@ -86,11 +99,34 @@ const title = computed(() => {
 
 	return '40L'
 })
+
+const type = computed(() => {
+	if (isNullish(data.type)) {
+		return 'default'
+	}
+
+	if ([Type.BEST, Type.PERSONAL_BEST].includes(data.type)) {
+		return 'warning'
+	}
+
+	if (data.type === Type.RECENT) {
+		return 'info'
+	}
+
+	if (data.type === Type.DISPUTED) {
+		return 'error'
+	}
+
+	return 'default'
+})
 </script>
 
 <template>
 	<layout content_class="max-w-320">
-		<sprint_result :play_at="data.play_at" :rank="data.rank" :time="data.time" :title="title"/>
+		<sprint_result
+			:is_best="data.type === Type.BEST || (data.type === Type.PERSONAL_BEST && data.personal_rank === 1)"
+			:personal_rank="data.personal_rank" :play_at="data.play_at" :rank="data.rank" :time="data.time"
+			:title="title" :type="type"/>
 
 		<n-flex :wrap="false">
 			<sprint_user :id="data.user.id" :avatar="data.user.avatar" :name="data.user.name"/>
@@ -111,9 +147,10 @@ const title = computed(() => {
 							   :triple="data.statistic.triple" :tspins="data.statistic.tspins"/>
 				</n-flex>
 
-				<sprint_sr :replay_id="data.replay_id"/>
-
-				<sprint_sf :accuracy="data.statistic.finesse.accuracy" :faults="data.statistic.finesse.faults"/>
+				<n-flex :wrap="false">
+					<sprint_sr :replay_id="data.replay_id"/>
+					<sprint_sf :accuracy="data.statistic.finesse.accuracy" :faults="data.statistic.finesse.faults"/>
+				</n-flex>
 			</n-flex>
 		</n-flex>
 
