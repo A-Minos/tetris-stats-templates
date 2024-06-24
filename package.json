@@ -8,6 +8,7 @@
 		"preview": "vite preview"
 	},
 	"devDependencies": {
+		"@antv/g2": "^5.1.22",
 		"@types/identicon.js": "^2.3.4",
 		"@types/node": "^20.14.2",
 		"@vicons/antd": "^0.12.0",
