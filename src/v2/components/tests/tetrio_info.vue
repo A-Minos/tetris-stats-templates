@@ -1,8 +1,10 @@
 <script lang="ts" setup>
+import { resetTime } from '@/v1/utils/date.ts'
 import type { Data } from '@/v2/pages/tetrio/info/index.vue'
 import type { Record, User } from '@/v2/types/tetrio'
+import { setHours, setMinutes, setSeconds, subDays } from 'date-fns'
 import { md5 } from 'hash-wasm'
-import { isNonNullish } from 'remeda'
+import { isNonNullish, map, pipe, sortBy } from 'remeda'
 
 const path = 'v2/tetrio/info'
 
@@ -22,6 +24,11 @@ const test = async () => {
 		.then(result => {
 			return result.data as Record
 		})
+
+	const random = (min: number, max: number) => {
+		const range = max - min
+		return Math.round(Math.random() * range) + min
+	}
 
 	document.querySelector('template#data')!.innerHTML = JSON.stringify({
 		user: {
@@ -83,7 +90,69 @@ const test = async () => {
 				wins: user.league.gameswon
 			},
 
-			decaying: user.league.decaying
+			decaying: user.league.decaying,
+
+			history: pipe(
+				[
+					{
+						record_at: (() => {
+							let date = new Date()
+							date = subDays(date, 10)
+							return date.toLocaleString()
+						})(),
+						tr: random(
+							Number(
+								user.league.rating.toFixed(2)
+							) - 50,
+							Number(
+								user.league.rating.toFixed(2)
+							) + 50
+						)
+					},
+					...Array.from(
+						new Array(9).keys()
+					).map(index => {
+						return pipe(
+							Array.from(
+								new Array(7).keys()
+							),
+							map(() => {
+								let date = new Date()
+
+								date = subDays(date, index + 1)
+								date = setHours(date, random(0, 24))
+								date = setMinutes(date, random(0, 60))
+								date = setSeconds(date, random(0, 60))
+
+								return {
+									record_at: +date,
+									tr: random(
+										Number(
+											user.league.rating.toFixed(2)
+										) - 50,
+										Number(
+											user.league.rating.toFixed(2)
+										) + 50
+									)
+								}
+							})
+						)
+					}).flat(),
+					{
+						record_at: (() => {
+							let date = new Date()
+							date = resetTime(date)
+							return +date
+						})(),
+						tr: Number(
+							user.league.rating.toFixed(2)
+						)
+					}
+				],
+				sortBy(data => {
+					return +new Date(data.record_at)
+				})
+			)
 		} : null,
 		statistic: {
 			total: user.gamesplayed === -1 ? null : user.gamesplayed,

@@ -1,5 +1,6 @@
 <script lang="ts">
 import Avatar from '@/shared/types/avatar'
+import type { TetraLeagueHistory } from '@/v2/types/data'
 import type { User } from '@/v2/types/tetrio'
 import type { BackendTime } from '@/v2/types/utils'
 
@@ -59,6 +60,7 @@ const data: {
 		}
 
 		readonly decaying: boolean
+		readonly history: TetraLeagueHistory[] | null
 	} | null
 
 	readonly statistic: {
@@ -100,6 +102,7 @@ import info_bio from '@/v2/pages/tetrio/info/_bio.vue'
 import info_badges from '@/v2/pages/tetrio/info/_badges.vue'
 import info_xp from '@/v2/pages/tetrio/info/_xp.vue'
 import info_tl from '@/v2/pages/tetrio/info/_tetra-league.vue'
+import info_tl_history_chart from '@/v2/pages/tetrio/info/_tetra-league-history-chart.vue'
 import info_40l from '@/v2/pages/tetrio/info/_40l.vue'
 import info_blitz from '@/v2/pages/tetrio/info/_blitz.vue'
 import info_zen from '@/v2/pages/tetrio/info/_zen.vue'
@@ -130,6 +133,10 @@ import { isNonNullish } from 'remeda'
 
 		<n-flex vertical>
 			<template v-if="isNonNullish(data.tetra_league)">
+				<template v-if="isNonNullish(data.tetra_league.history)">
+					<info_tl_history_chart :current_tr="data.tetra_league.tr" :data="data.tetra_league.history"/>
+				</template>
+
 				<info_tl :adpl="data.tetra_league.adpl" :apl="data.tetra_league.apl"
 						 :apm="data.tetra_league.apm" :country="data.user.country"
 						 :country_rank="data.tetra_league.country_rank"
