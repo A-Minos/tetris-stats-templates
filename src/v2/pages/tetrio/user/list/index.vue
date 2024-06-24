@@ -1,4 +1,5 @@
 <script lang="ts">
+import Avatar from '@/shared/types/avatar'
 import type { User } from '@/v2/types/tetrio'
 import type { BackendTime } from '@/v2/types/utils'
 
@@ -8,6 +9,7 @@ const data: {
 	readonly users: {
 		readonly id: string
 		readonly name: string
+		readonly avatar: Avatar
 		readonly country: string | null
 		readonly verified: boolean
 
@@ -61,7 +63,8 @@ const checkDecaying = (user: Data['users'][number]) => {
 		<template v-for="(user, index) in data.users">
 			<n-card :class="{ 'opacity-50': checkDecaying(user) }" size="small">
 				<n-flex justify="space-between">
-					<list_user :id="user.id" :country="user.country" :index="data.show_index ? index + 1 : null"
+					<list_user :id="user.id" :avatar="user.avatar" :country="user.country"
+							   :index="data.show_index ? index + 1 : null"
 							   :name="user.name" :verified="user.verified" :xp="user.xp"/>
 
 					<list_statistic :adpl="user.tetra_league.adpl" :apl="user.tetra_league.apl"

@@ -15,45 +15,48 @@ const test = async () => {
 
 	document.querySelector('template#data')!.innerHTML = JSON.stringify({
 		show_index: true,
-		users: users.map(user => {
-			return {
-				id: user._id,
-				name: user.username,
-				country: user.country,
-				verified: user.verified,
+		users: await Promise.all(
+			users.map(async user => {
+				return {
+					id: user._id,
+					name: user.username,
+					avatar: `https://tetr.io/user-content/avatars/${user._id}.jpg`,
+					country: user.country,
+					verified: user.verified,
 
-				tetra_league: {
-					rank: user.league.rank,
-					tr: Number(
-						Number(user.league.rating).toFixed(2)
-					),
+					tetra_league: {
+						rank: user.league.rank,
+						tr: Number(
+							Number(user.league.rating).toFixed(2)
+						),
 
-					glicko: isNonNullish(user.league.glicko) ? Number(
-						user.league.glicko.toFixed(2)
-					) : null,
-					rd: isNonNullish(user.league.rd) ? Number(
-						user.league.rd.toFixed(2)
-					) : null,
+						glicko: isNonNullish(user.league.glicko) ? Number(
+							user.league.glicko.toFixed(2)
+						) : null,
+						rd: isNonNullish(user.league.rd) ? Number(
+							user.league.rd.toFixed(2)
+						) : null,
 
-					pps: user.league.pps,
+						pps: user.league.pps,
 
-					apm: user.league.apm,
-					apl: isNonNullish(user.league.apm) && isNonNullish(user.league.pps) ? Number(
-						(user.league.apm / user.league.pps / 24).toFixed(2)
-					) : null,
+						apm: user.league.apm,
+						apl: isNonNullish(user.league.apm) && isNonNullish(user.league.pps) ? Number(
+							(user.league.apm / user.league.pps / 24).toFixed(2)
+						) : null,
 
-					vs: user.league.vs,
-					adpl: isNonNullish(user.league.vs) && isNonNullish(user.league.pps) ? Number(
-						(user.league.vs / user.league.pps / 24 * 0.6).toFixed(2)
-					) : null,
+						vs: user.league.vs,
+						adpl: isNonNullish(user.league.vs) && isNonNullish(user.league.pps) ? Number(
+							(user.league.vs / user.league.pps / 24 * 0.6).toFixed(2)
+						) : null,
 
-					decaying: user.league.decaying
-				},
+						decaying: user.league.decaying
+					},
 
-				xp: user.xp,
-				join_at: user.ts
-			}
-		})
+					xp: user.xp,
+					join_at: user.ts
+				}
+			})
+		)
 	})
 
 	document.querySelector('template#path')!.innerHTML = path
