@@ -72,7 +72,9 @@ tryOnMounted(() => {
 		]
 	})
 
-	chart.render()
+	setTimeout(() => {
+		chart.render()
+	}, 0)
 })
 </script>
 
