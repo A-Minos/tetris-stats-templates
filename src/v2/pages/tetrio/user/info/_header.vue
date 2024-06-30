@@ -19,7 +19,7 @@ const props = defineProps<{
 	readonly country: string | null
 	readonly verified: boolean
 
-	readonly friend_count: number
+	readonly friend_count: number | null
 	readonly supporter_tier: number
 }>()
 
@@ -54,21 +54,26 @@ const { define: LogoDefine, reuse: Logo } = createReusableTemplate()
 						</n-flex>
 					</n-flex>
 
-					<n-flex :size="0" align="center" justify="space-between">
-						<n-flex align="center" class="!gap-0.5">
-							<n-icon :component="HeartFilled" class="text-5"/>
-							<n-text class="text-current">{{ friend_count }}</n-text>
-						</n-flex>
+					<template v-if="isNonNullish(friend_count) && supporter_tier > 0">
+						<n-flex :size="0" align="center" justify="space-between">
+							<template v-if="isNonNullish(friend_count)">
+								<n-flex align="center" class="!gap-0.5">
+									<n-icon :component="HeartFilled" class="text-5"/>
+									<n-text class="text-current">{{ friend_count }}</n-text>
+								</n-flex>
+							</template>
 
-						<template v-if="supporter_tier > 0">
-							<n-flex :size="0" align="center"
-									class="ml-5">
-								<template v-for="_ in supporter_tier">
-									<n-icon :component="StarFilled" class="text-5 drop-shadow-[0_0_0.5rem_#FF4A19]"/>
-								</template>
-							</n-flex>
-						</template>
-					</n-flex>
+							<template v-if="supporter_tier > 0">
+								<n-flex :size="0" align="center"
+										class="ml-5">
+									<template v-for="_ in supporter_tier">
+										<n-icon :component="StarFilled"
+												class="text-5 drop-shadow-[0_0_0.5rem_#FF4A19]"/>
+									</template>
+								</n-flex>
+							</template>
+						</n-flex>
+					</template>
 
 				</n-flex>
 			</div>

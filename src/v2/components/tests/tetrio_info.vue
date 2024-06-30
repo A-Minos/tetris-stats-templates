@@ -38,6 +38,7 @@ const test = async () => {
 				type: 'identicon',
 				hash: await md5(user._id)
 			},
+			role: user.role,
 			banner: isNonNullish(user.banner_revision) && user.banner_revision > 0 ? `https://tetr.io/user-content/banners/${user._id}.jpg?rv=${user.banner_revision}` : null,
 			badges: user.badges.map(badge => {
 				return {
@@ -49,7 +50,7 @@ const test = async () => {
 			}),
 			country: user.country,
 			xp: user.xp,
-			friend_count: user.friend_count,
+			friend_count: isNonNullish(user.friend_count) ? user.friend_count : null,
 			playtime: user.gametime !== -1 ? `${Math.trunc(user.gametime / 3600)} 小时` : null,
 			supporter_tier: user.supporter_tier,
 			bad_standing: user.badstanding ?? false,
