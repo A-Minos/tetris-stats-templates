@@ -4,10 +4,14 @@ const props = defineProps<{
 	readonly code: string
 }>()
 
+const isTW = computed(() => {
+	return props.code.toLowerCase() === 'tw'
+})
+
 const url = computed(() => {
 	let code = props.code.toLowerCase()
 
-	if (code === 'tw') {
+	if (isTW.value) {
 		code = 'cn'
 	}
 
@@ -16,5 +20,5 @@ const url = computed(() => {
 </script>
 
 <template>
-	<n-image :src="url"/>
+	<n-image :class="{ 'opacity-50': isTW }" :src="url"/>
 </template>
