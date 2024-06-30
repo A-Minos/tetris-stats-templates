@@ -43,31 +43,10 @@ tryOnMounted(() => {
 
 		children: [
 			{
-				type: 'line',
-				encode: {
-					shape: 'smooth'
-				},
-				labels: [
-					{
-						text: 'tr',
-						transform: [
-							{
-								type: 'overlapDodgeY'
-							}
-						],
-						style: {
-							dx: -16,
-							dy: -8,
-							fontSize: 8
-						}
-					}
-				]
+				type: 'line'
 			},
 			{
-				type: 'point',
-				encode: {
-					shape: 'point'
-				}
+				type: 'point'
 			}
 		]
 	})
