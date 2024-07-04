@@ -15,7 +15,7 @@ defineProps<{
 </script>
 
 <template>
-	<n-alert :show-icon="false" :title="title" type="warning">
+	<n-alert :show-icon="false" :title="title" :type="type">
 		<n-flex vertical>
 			<div class="text-(center 5xl) fw-bold">
 				<n-text :class="{ 'text-(yellow shadow-[0_0_1rem])': is_best }">
