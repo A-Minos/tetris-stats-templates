@@ -1,5 +1,4 @@
 <script lang="ts">
-import type Avatar from '@/shared/types/avatar'
 import type { BackendTime } from '@/v2/types/utils'
 
 enum Type {
@@ -15,7 +14,6 @@ const data: {
 	readonly user: {
 		readonly id: string
 		readonly name: string
-		readonly avatar: Avatar
 	}
 
 	readonly replay_id: string

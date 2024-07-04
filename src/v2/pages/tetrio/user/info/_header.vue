@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import type Avatar from '@/shared/types/avatar'
-
 import logo from '@/v2/assets/images/logos/tetrio.svg'
 import avatar from '@/v2/components/common/avatar.vue'
 import country from '@/v2/components/common/country.vue'
@@ -12,7 +10,6 @@ import { isNonNullish } from 'remeda'
 const props = defineProps<{
 	readonly banner: string | null
 
-	readonly avatar: Avatar
 	readonly name: string
 	readonly id: string
 
@@ -33,7 +30,7 @@ const { define: LogoDefine, reuse: Logo } = createReusableTemplate()
 			<div>
 				<n-flex size="small" vertical>
 					<n-flex align="center" size="small">
-						<avatar :avatar="props.avatar" :user_id="id" class="[&,&>img]:size-12"/>
+						<avatar :user_id="id" class="[&,&>img]:size-12"/>
 
 						<n-flex :size="0" vertical>
 							<n-text class="text-(6 current) fw-bold leading-none">

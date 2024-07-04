@@ -20,7 +20,6 @@ const test = async () => {
 				return {
 					id: user._id,
 					name: user.username,
-					avatar: `https://tetr.io/user-content/avatars/${user._id}.jpg`,
 					country: user.country,
 					verified: user.verified,
 

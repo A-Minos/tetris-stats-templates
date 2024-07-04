@@ -34,10 +34,6 @@ const test = async () => {
 		user: {
 			id: user._id,
 			name: user.username,
-			avatar: isNonNullish(user.avatar_revision) && user.avatar_revision > 0 ? `https://tetr.io/user-content/avatars/${user._id}.jpg?rv=${user.avatar_revision}` : {
-				type: 'identicon',
-				hash: await md5(user._id)
-			},
 			role: user.role,
 			banner: isNonNullish(user.banner_revision) && user.banner_revision > 0 ? `https://tetr.io/user-content/banners/${user._id}.jpg?rv=${user.banner_revision}` : null,
 			badges: user.badges.map(badge => {

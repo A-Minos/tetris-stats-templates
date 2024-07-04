@@ -1,5 +1,4 @@
 <script lang="ts">
-import Avatar from '@/shared/types/avatar'
 import type { User } from '@/v2/types/tetrio'
 import type { BackendTime } from '@/v2/types/utils'
 
@@ -9,7 +8,6 @@ const data: {
 	readonly users: {
 		readonly id: string
 		readonly name: string
-		readonly avatar: Avatar
 		readonly country: string | null
 		readonly verified: boolean
 

@@ -1,5 +1,4 @@
 <script lang="ts">
-import Avatar from '@/shared/types/avatar'
 import type { TetraLeagueHistory } from '@/v2/types/data'
 import type { User } from '@/v2/types/tetrio'
 import type { BackendTime } from '@/v2/types/utils'
@@ -12,7 +11,6 @@ const data: {
 
 		readonly role: User['role']
 
-		readonly avatar: Avatar
 		readonly banner: string | null
 
 		readonly bio: string | null
