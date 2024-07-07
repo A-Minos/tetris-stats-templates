@@ -1,4 +1,4 @@
-<script generic="T" lang="ts" setup>
+<script lang="ts" setup>
 import { use } from 'echarts/core'
 import { SVGRenderer } from 'echarts/renderers'
 import VChart from 'vue-echarts'
@@ -6,7 +6,7 @@ import VChart from 'vue-echarts'
 use([SVGRenderer])
 
 defineProps<{
-	readonly option: T
+	readonly option: {}
 }>()
 
 const show = ref(false)
