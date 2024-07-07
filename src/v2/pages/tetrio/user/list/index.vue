@@ -19,9 +19,9 @@ const data: {
 			readonly rd: number | null
 			readonly decaying: boolean
 
-			readonly pps: number
-			readonly apm: number
-			readonly apl: number
+			readonly pps: number | null
+			readonly apm: number | null
+			readonly apl: number | null
 
 			readonly vs: number | null
 			readonly adpl: number | null

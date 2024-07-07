@@ -3,7 +3,7 @@ import type { User } from '@/v2/types/tetrio'
 import type { BackendTime } from '@/v2/types/utils'
 
 const data: {
-	readonly items: Record<User['league']['rank'], {
+	readonly items: Record<Exclude<User['league']['rank'], 'Z'>, {
 		readonly require_tr: number
 		readonly trending: number
 

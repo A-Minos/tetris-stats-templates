@@ -1,9 +1,10 @@
 <script lang="ts" setup>
 import type { TextProps } from 'naive-ui'
+import { isNonNullish, isNullish } from 'remeda'
 
 const props = defineProps<{
-	readonly glicko: number
-	readonly rd: number
+	readonly glicko: number | null
+	readonly rd: number | null
 	readonly decaying: boolean
 }>()
 
@@ -16,6 +17,10 @@ const attributes = computed(() => {
 			depth: 3 as TextProps['depth'],
 			status: 'default'
 		}
+	}
+
+	if (isNullish(props.rd)) {
+		return result
 	}
 
 	if (props.decaying) {
@@ -38,10 +43,14 @@ const attributes = computed(() => {
 
 <template>
 	<n-flex :size="0">
-		<n-text :depth="3">{{ glicko }}</n-text>
-		<n-text :depth="3">±</n-text>
+		<template v-if="isNonNullish(glicko)">
+			<n-text :depth="3">{{ glicko }}</n-text>
+		</template>
 
-		<n-text :depth="attributes.depth" :type="attributes.status">{{ rd }}</n-text>
+		<template v-if="isNonNullish(rd)">
+			<n-text :depth="3">±</n-text>
+			<n-text :depth="attributes.depth" :type="attributes.status">{{ rd }}</n-text>
+		</template>
 
 		<template v-if="decaying">
 			<n-text :depth="attributes.arrow.depth" :type="attributes.arrow.status"

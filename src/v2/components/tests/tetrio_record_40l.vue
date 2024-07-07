@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { type Data, Type } from '@/v2/pages/tetrio/record/40l/index.vue'
 import type { Record, User } from '@/v2/types/tetrio'
 import { isNonNullish } from 'remeda'
 
@@ -22,7 +23,7 @@ const test = async () => {
 		})
 
 	document.querySelector('template#data')!.innerHTML = JSON.stringify({
-		type: 'best',
+		type: Type.BEST,
 		user: {
 			id: user._id,
 			name: user.username
@@ -95,7 +96,7 @@ const test = async () => {
 			}
 		},
 		play_at: records.records['40l'].record.ts
-	})
+	} satisfies Data)
 
 	document.querySelector('template#path')!.innerHTML = path
 }

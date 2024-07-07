@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { BackendTime } from '@/v2/types/utils'
 
-enum Type {
+export enum Type {
 	BEST = 'best',
 	PERSONAL_BEST = 'personal_best',
 	RECENT = 'recent',

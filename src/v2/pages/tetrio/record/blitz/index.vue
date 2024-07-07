@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { BackendTime } from '@/v2/types/utils'
 
-enum Type {
+export enum Type {
 	BEST = 'best',
 	PERSONAL_BEST = 'personal_best',
 	RECENT = 'recent',
@@ -16,6 +16,7 @@ const data: {
 		readonly name: string
 	}
 
+	readonly time: string
 	readonly replay_id: string
 	readonly rank: number | null
 	readonly personal_rank: number | null

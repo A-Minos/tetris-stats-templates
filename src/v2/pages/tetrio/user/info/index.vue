@@ -36,20 +36,20 @@ const data: {
 
 	readonly tetra_league: {
 		readonly rank: User['league']['rank']
-		readonly highest_rank: User['league']['rank']
+		readonly highest_rank: User['league']['bestrank']
 
 		readonly tr: number
 
-		readonly glicko: number
-		readonly rd: number
+		readonly glicko: number | null
+		readonly rd: number | null
 
 		readonly global_rank: number | null
 		readonly country_rank: number | null
 
-		readonly pps: number
+		readonly pps: number | null
 
-		readonly apm: number
-		readonly apl: number
+		readonly apm: number | null
+		readonly apl: number | null
 
 		readonly vs: number | null
 		readonly adpl: number | null

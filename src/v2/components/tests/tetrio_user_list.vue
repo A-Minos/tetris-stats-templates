@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import type { Data } from '@/v2/pages/tetrio/user/list/index.vue'
 import type { User } from '@/v2/types/tetrio'
 import { isNonNullish } from 'remeda'
 
@@ -20,7 +21,7 @@ const test = async () => {
 				return {
 					id: user._id,
 					name: user.username,
-					country: user.country,
+					country: user.country ?? null,
 					verified: user.verified,
 
 					tetra_league: {
@@ -36,14 +37,14 @@ const test = async () => {
 							user.league.rd.toFixed(2)
 						) : null,
 
-						pps: user.league.pps,
+						pps: user.league.pps ?? null,
 
-						apm: user.league.apm,
+						apm: user.league.apm ?? null,
 						apl: isNonNullish(user.league.apm) && isNonNullish(user.league.pps) ? Number(
 							(user.league.apm / user.league.pps / 24).toFixed(2)
 						) : null,
 
-						vs: user.league.vs,
+						vs: user.league.vs ?? null,
 						adpl: isNonNullish(user.league.vs) && isNonNullish(user.league.pps) ? Number(
 							(user.league.vs / user.league.pps / 24 * 0.6).toFixed(2)
 						) : null,
@@ -52,11 +53,11 @@ const test = async () => {
 					},
 
 					xp: user.xp,
-					join_at: user.ts
+					join_at: user.ts ?? null
 				}
 			})
 		)
-	})
+	} satisfies Data)
 
 	document.querySelector('template#path')!.innerHTML = path
 }

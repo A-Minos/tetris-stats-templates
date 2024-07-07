@@ -8,18 +8,18 @@ const props = defineProps<{
 	readonly rank: User['league']['rank']
 	readonly tr: number
 
-	readonly glicko: number
-	readonly rd: number
+	readonly glicko: number | null
+	readonly rd: number | null
 
 	readonly country: string | null
 
 	readonly global_rank: number | null
 	readonly country_rank: number | null
 
-	readonly pps: number
+	readonly pps: number | null
 
-	readonly apm: number
-	readonly apl: number
+	readonly apm: number | null
+	readonly apl: number | null
 
 	readonly vs: number | null
 	readonly adpl: number | null
@@ -103,17 +103,23 @@ const country_code = computed(() => {
 		<n-card size="small">
 			<div class="text-center">
 				<n-flex justify="space-evenly">
-					<n-statistic :value="pps" label="PPS"/>
+					<template v-if="isNonNullish(pps)">
+						<n-statistic :value="pps" label="PPS"/>
+					</template>
 
-					<n-statistic label="APM">
-						<n-flex :size="0" vertical>
-							<n-text>{{ apm }}</n-text>
+					<template v-if="isNonNullish(apm)">
+						<n-statistic label="APM">
+							<n-flex :size="0" vertical>
+								<n-text>{{ apm }}</n-text>
 
-							<n-text :depth="3" class="text-sm">
-								(x{{ apl }})
-							</n-text>
-						</n-flex>
-					</n-statistic>
+								<template v-if="isNonNullish(apl)">
+									<n-text :depth="3" class="text-sm">
+										(x{{ apl }})
+									</n-text>
+								</template>
+							</n-flex>
+						</n-statistic>
+					</template>
 
 					<template v-if="isNonNullish(vs)">
 						<n-statistic label="VS">

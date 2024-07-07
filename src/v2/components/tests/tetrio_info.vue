@@ -39,19 +39,19 @@ const test = async () => {
 				return {
 					id: badge.id,
 					description: badge.label,
-					group: badge.group,
-					receive_at: badge.ts
+					group: badge.group ?? null,
+					receive_at: badge.ts ?? null
 				}
 			}),
-			country: user.country,
+			country: user.country ?? null,
 			xp: user.xp,
 			friend_count: isNonNullish(user.friend_count) ? user.friend_count : null,
 			playtime: user.gametime !== -1 ? `${Math.trunc(user.gametime / 3600)} 小时` : null,
 			supporter_tier: user.supporter_tier,
 			bad_standing: user.badstanding ?? false,
 			verified: user.verified,
-			bio: user.bio,
-			join_at: user.ts
+			bio: user.bio ?? null,
+			join_at: user.ts ?? null
 		},
 		tetra_league: user.league.rating !== -1 ? {
 			rank: user.league.rank,
@@ -69,14 +69,14 @@ const test = async () => {
 			global_rank: user.league.standing !== -1 ? user.league.standing : null,
 			country_rank: user.league.standing_local !== -1 ? user.league.standing_local : null,
 
-			pps: user.league.pps,
+			pps: user.league.pps ?? null,
 
-			apm: user.league.apm,
+			apm: user.league.apm ?? null,
 			apl: isNonNullish(user.league.apm) && isNonNullish(user.league.pps) ? Number(
 				(user.league.apm / user.league.pps / 24).toFixed(2)
 			) : null,
 
-			vs: user.league.vs,
+			vs: user.league.vs ?? null,
 			adpl: isNonNullish(user.league.vs) && isNonNullish(user.league.pps) ? Number(
 				(user.league.vs / user.league.pps / 24 * 0.6).toFixed(2)
 			) : null,
@@ -121,7 +121,7 @@ const test = async () => {
 								date = setSeconds(date, random(0, 60))
 
 								return {
-									record_at: +date,
+									record_at: date.toLocaleString('zh-CN'),
 									tr: random(
 										Number(
 											user.league.rating.toFixed(2)
@@ -138,7 +138,7 @@ const test = async () => {
 						record_at: (() => {
 							let date = new Date()
 							date = resetTime(date)
-							return +date
+							return date.toLocaleString('zh-CN')
 						})(),
 						tr: Number(
 							user.league.rating.toFixed(2)
@@ -176,7 +176,7 @@ const test = async () => {
 			score: records.zen.score,
 			level: records.zen.level
 		} : null
-	} as Data)
+	} satisfies Data)
 
 	document.querySelector('template#path')!.innerHTML = path
 }
