@@ -32,7 +32,7 @@ const test = async () => {
 			apm: 13,
 			pps: 14,
 			vs: 15,
-			apl: 56,
+			apl: 16,
 			adpl: 17,
 			apm_holder: 'p7',
 			pps_holder: 'p8',
