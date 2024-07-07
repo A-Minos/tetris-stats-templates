@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import { CheckCircleOutlined } from '@vicons/antd'
 </script>
 

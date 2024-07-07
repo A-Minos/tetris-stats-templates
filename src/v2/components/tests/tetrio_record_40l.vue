@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import type { Record, User } from '@/v2/types/tetrio'
-import { md5 } from 'hash-wasm'
 import { isNonNullish } from 'remeda'
 
 const path = 'v2/tetrio/record/40l'

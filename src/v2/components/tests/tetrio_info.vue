@@ -3,7 +3,6 @@ import { resetTime } from '@/v1/utils/date.ts'
 import type { Data } from '@/v2/pages/tetrio/user/info/index.vue'
 import type { Record, User } from '@/v2/types/tetrio'
 import { setHours, setMinutes, setSeconds, subDays } from 'date-fns'
-import { md5 } from 'hash-wasm'
 import { isNonNullish, map, pipe, sortBy } from 'remeda'
 
 const path = 'v2/tetrio/user/info'
