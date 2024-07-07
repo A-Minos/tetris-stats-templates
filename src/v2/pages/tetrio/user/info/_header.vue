@@ -51,7 +51,7 @@ const { define: LogoDefine, reuse: Logo } = createReusableTemplate()
 						</n-flex>
 					</n-flex>
 
-					<template v-if="isNonNullish(friend_count) && supporter_tier > 0">
+					<template v-if="isNonNullish(friend_count) || supporter_tier > 0">
 						<n-flex :size="0" align="center" justify="space-between">
 							<template v-if="isNonNullish(friend_count)">
 								<n-flex align="center" class="!gap-0.5">
