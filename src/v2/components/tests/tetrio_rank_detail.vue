@@ -13,6 +13,7 @@ const test = async () => {
 		minimum_data: {
 			apm: 3,
 			pps: 4,
+			lpm: 21,
 			vs: 5,
 			adpm: 18,
 			apl: 6,
@@ -24,6 +25,7 @@ const test = async () => {
 		average_data: {
 			apm: 8,
 			pps: 9,
+			lpm: 22,
 			vs: 10,
 			adpm: 19,
 			apl: 11,
@@ -35,6 +37,7 @@ const test = async () => {
 		maximum_data: {
 			apm: 13,
 			pps: 14,
+			lpm: 23,
 			vs: 15,
 			adpm: 20,
 			apl: 16,

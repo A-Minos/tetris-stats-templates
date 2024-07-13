@@ -11,6 +11,7 @@ const data: {
 	readonly minimum_data: {
 		readonly apm: number
 		readonly pps: number
+		readonly lpm: number
 		readonly vs: number
 		readonly adpm: number
 		readonly apl: number | null
@@ -23,6 +24,7 @@ const data: {
 	readonly average_data: {
 		readonly apm: number
 		readonly pps: number
+		readonly lpm: number
 		readonly vs: number
 		readonly adpm: number
 		readonly apl: number | null
@@ -35,6 +37,7 @@ const data: {
 	readonly maximum_data: {
 		readonly apm: number
 		readonly pps: number
+		readonly lpm: number
 		readonly vs: number
 		readonly adpm: number
 		readonly apl: number | null
@@ -74,25 +77,25 @@ import rank_trending from '@/v2/pages/tetrio/rank/detail/_trending.vue'
 					<n-card class="w-fit text-center" size="small" title="最低数据">
 						<rank_statistic :adpl="data.minimum_data.adpl" :adpm="data.minimum_data.adpm"
 										:apl="data.minimum_data.apl" :apm="data.minimum_data.apm"
-										:apm_holder="data.minimum_data.apm_holder" :pps="data.minimum_data.pps"
-										:pps_holder="data.minimum_data.pps_holder" :vs="data.minimum_data.vs"
-										:vs_holder="data.minimum_data.vs_holder"/>
+										:apm_holder="data.minimum_data.apm_holder" :lpm="data.minimum_data.lpm"
+										:pps="data.minimum_data.pps" :pps_holder="data.minimum_data.pps_holder"
+										:vs="data.minimum_data.vs" :vs_holder="data.minimum_data.vs_holder"/>
 					</n-card>
 
 					<n-card class="w-fit text-center" size="small" title="平均数据">
 						<rank_statistic :adpl="data.average_data.adpl" :adpm="data.average_data.adpm"
 										:apl="data.average_data.apl" :apm="data.average_data.apm"
-										:apm_holder="data.average_data.apm_holder" :pps="data.average_data.pps"
-										:pps_holder="data.average_data.pps_holder" :vs="data.average_data.vs"
-										:vs_holder="data.average_data.vs_holder"/>
+										:apm_holder="data.average_data.apm_holder" :lpm="data.average_data.lpm"
+										:pps="data.average_data.pps" :pps_holder="data.average_data.pps_holder"
+										:vs="data.average_data.vs" :vs_holder="data.average_data.vs_holder"/>
 					</n-card>
 
 					<n-card class="w-fit text-center" size="small" title="最高数据">
 						<rank_statistic :adpl="data.maximum_data.adpl" :adpm="data.maximum_data.adpm"
 										:apl="data.maximum_data.apl" :apm="data.maximum_data.apm"
-										:apm_holder="data.maximum_data.apm_holder" :pps="data.maximum_data.pps"
-										:pps_holder="data.maximum_data.pps_holder" :vs="data.maximum_data.vs"
-										:vs_holder="data.maximum_data.vs_holder"/>
+										:apm_holder="data.maximum_data.apm_holder" :lpm="data.maximum_data.lpm"
+										:pps="data.maximum_data.pps" :pps_holder="data.maximum_data.pps_holder"
+										:vs="data.maximum_data.vs" :vs_holder="data.maximum_data.vs_holder"/>
 					</n-card>
 				</n-flex>
 
