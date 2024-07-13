@@ -6,7 +6,9 @@ const props = defineProps<{
 }>()
 
 const url = asyncComputed(async () => {
-	return await import(`@/shared/assets/images/ranks/${props.rank}.svg?url`)
+	const name = props.rank.toLowerCase()
+
+	return await import(`@/shared/assets/images/ranks/${name}.svg?url`)
 		.then(module => {
 			return module.default
 		})
