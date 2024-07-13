@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { type Data, Type } from '@/v2/pages/tetrio/record/blitz/index.vue'
+import type { Data, Type } from '@/v2/pages/tetrio/record/blitz/index.vue'
 import type { Record, User } from '@/v2/types/tetrio'
 import { isNonNullish } from 'remeda'
 
@@ -23,7 +23,7 @@ const test = async () => {
 		})
 
 	document.querySelector('template#data')!.innerHTML = JSON.stringify({
-		type: Type.BEST,
+		type: 'best' as Type,
 		user: {
 			id: user._id,
 			name: user.username
