@@ -59,6 +59,7 @@ export type Data = typeof data
 import layout from '@/v2/components/common/layout.vue'
 import powered from '@/v2/components/common/footer.vue'
 
+import rank_card from '@/v2/pages/tetrio/rank/detail/_card.vue'
 import rank_info from '@/v2/pages/tetrio/rank/detail/_info.vue'
 import rank_statistic from '@/v2/pages/tetrio/rank/detail/_statistic.vue'
 import rank_trending from '@/v2/pages/tetrio/rank/detail/_trending.vue'
@@ -66,7 +67,7 @@ import rank_trending from '@/v2/pages/tetrio/rank/detail/_trending.vue'
 
 <template>
 	<layout content_class="max-w-320">
-		<n-card size="small">
+		<rank_card :name="data.name" size="small">
 			<n-flex vertical>
 				<n-flex justify="space-between">
 					<rank_info :name="data.name" :players="data.players" :require_tr="data.require_tr"/>
@@ -105,7 +106,7 @@ import rank_trending from '@/v2/pages/tetrio/rank/detail/_trending.vue'
 					</n-text>
 				</div>
 			</n-flex>
-		</n-card>
+		</rank_card>
 
 		<powered/>
 	</layout>
