@@ -9,7 +9,7 @@ defineProps<{
 		<n-flex :size="0" vertical>
 			<n-flex justify="space-between">
 				<n-text>回放 ID</n-text>
-				<n-text>{{ replay_id }}</n-text>
+				<n-text>r:{{ replay_id }}</n-text>
 			</n-flex>
 		</n-flex>
 	</n-card>
