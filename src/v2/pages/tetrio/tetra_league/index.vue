@@ -62,9 +62,17 @@ const winner_user_id = computed(() => {
 						class="text-center" size="small">
 					<n-flex :size="0" vertical>
 						<n-flex align="center" justify="space-evenly">
-							<n-text class="text-8 fw-bold" type="success">{{ game.user.name }}</n-text>
+							<div class="text-left">
+								<n-flex :size="0" vertical>
+									<n-text class="text-8 fw-bold" type="success">{{ game.user.name }}</n-text>
+									<n-text :depth="3" class="text-4 leading-none">{{ game.user.id }}</n-text>
+								</n-flex>
+							</div>
+
 							<n-text class="text-10">{{ game.points }}</n-text>
 						</n-flex>
+
+						<n-divider class="!mt-2 !mb-0"/>
 
 						<div class="scale-75">
 							<n-flex justify="space-evenly">
@@ -146,10 +154,10 @@ const winner_user_id = computed(() => {
 
 		<n-grid :cols="data.games.length" :x-gap="10" :y-gap="10">
 			<n-grid-item v-for="game in data.games">
-				<n-card class="bg-sky bg-opacity-50" size="small">
+				<n-card class="text-center bg-sky bg-opacity-50" size="small">
 					<n-flex justify="space-evenly">
 						<n-statistic :value="game.handling.arr" label="ARR"/>
-						<n-statistic :value="game.handling.das" label="DAS"/>
+						<n-statistic :value="(`${game.handling.das}F`)" label="DAS"/>
 						<n-statistic :value="game.handling.sdf >= 41 ? '∞' : game.handling.sdf" label="SDF"/>
 					</n-flex>
 				</n-card>
