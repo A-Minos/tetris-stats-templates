@@ -116,3 +116,18 @@ export interface Record {
 		readonly score: number
 	}
 }
+
+export interface TetraLeagueRecord {
+	readonly _id: string
+	readonly stream: `${'40l' | 'blitz' | 'any'}_${'global' | 'userbest' | 'userrecent'}${'' | `_${'userbest' | 'userrecent' | string}`}`
+	readonly replayid: string
+
+	readonly user: {
+		readonly _id: string
+		readonly username: string
+	}
+
+	readonly ts: string
+	readonly ismulti?: boolean
+	readonly endcontext: Record<unknown, unknown>[] | Record<unknown, unknown>
+}
