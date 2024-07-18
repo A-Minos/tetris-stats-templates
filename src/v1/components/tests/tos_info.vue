@@ -35,14 +35,23 @@ const test = () => {
 
 		readonly multiplayer = new class {
 			readonly pps = pps
-			readonly lpm = Number(this.pps * 24)
+			readonly lpm = Number(
+				Number(this.pps * 24).toFixed(2)
+			)
 
 			readonly apm = apm
-			readonly apl = Number(this.apm / this.lpm)
+			readonly apl = Number(
+				Number(this.apm / this.lpm).toFixed(2)
+			)
 
 			readonly vs = vs
-			readonly adpm = Number(this.vs * 0.6)
-			readonly adpl = Number(this.adpm / this.lpm)
+			readonly adpm = Number(
+				Number(this.vs * 0.6).toFixed(2)
+			)
+
+			readonly adpl = Number(
+				Number(this.adpm / this.lpm).toFixed(2)
+			)
 		}
 
 		readonly radar = new class {

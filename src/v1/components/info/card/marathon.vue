@@ -4,7 +4,7 @@ import Card from '@/v1/components/info/card/_base.vue'
 </script>
 
 <template>
-	<card :background="background" color="#854e0e">
+	<card :background="background" color="#075A86">
 		<slot/>
 	</card>
 </template>

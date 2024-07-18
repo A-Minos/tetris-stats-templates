@@ -21,18 +21,26 @@ const test = () => {
 
 		readonly today = new class {
 			readonly pps = pps
-			readonly lpm = Number(this.pps * 24)
+			readonly lpm = Number(
+				Number(this.pps * 24).toFixed(2)
+			)
 
 			readonly apm = apm
-			readonly apl = Number(this.apm / this.lpm)
+			readonly apl = Number(
+				Number(this.apm / this.lpm).toFixed(2)
+			)
 		}
 
 		readonly history = new class {
 			readonly pps = pps
-			readonly lpm = Number(this.pps * 24)
+			readonly lpm = Number(
+				Number(this.pps * 24).toFixed(2)
+			)
 
 			readonly apm = apm
-			readonly apl = Number(this.apm / this.lpm)
+			readonly apl = Number(
+				Number(this.apm / this.lpm).toFixed(2)
+			)
 		}
 	} satisfies Data)
 
