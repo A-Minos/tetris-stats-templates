@@ -143,7 +143,7 @@ const rankImageMap = asyncComputed(async () => {
 		</div>
 
 		<div class="tetrio-rank__update_at">
-			Updated on {{ new Date(data.updated_at).toLocaleDateString('zh-CN') }}
+			Updated on {{ new Date(data.updated_at).toLocaleString('zh-CN') }}
 		</div>
 	</div>
 </template>
