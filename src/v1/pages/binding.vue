@@ -1,15 +1,6 @@
 <script lang="ts">
+import User from "@/schemas/user";
 import z from "zod";
-
-const IdenticonAvatar = z.object({
-	type: z.literal("identicon"),
-	hash: z.string(),
-});
-
-const User = z.object({
-	avatar: z.union([IdenticonAvatar, z.string()]),
-	name: z.string(),
-});
 
 const Data = z
 	.object({

@@ -1,4 +1,4 @@
 export interface TetraLeagueHistoryRecord {
-	readonly record_at: number,
+	readonly record_at: Date,
 	readonly tr: number
 }
