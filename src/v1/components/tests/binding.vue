@@ -1,11 +1,12 @@
 <script lang="ts" setup>
+import type { Data } from '@/v1/pages/binding.vue'
 import prompt from '@/v1/utils/prompt'
 
 const path = 'v1/binding'
 
 const test = () => {
 	document.querySelector<HTMLTemplateElement>('template#data')!.innerHTML = JSON.stringify(new class {
-		readonly platform = prompt('平台', 'tetrio')
+		readonly platform = prompt('平台', 'tetrio') as Data['platform']
 		readonly status = prompt('类型 (error, success, unverified, unknown, unlink)', 'unknown')
 
 		readonly user = new class {
@@ -19,7 +20,7 @@ const test = () => {
 		}
 
 		readonly command = prompt('指令', 'fkosk')
-	})
+	} satisfies Data)
 
 	document.querySelector<HTMLTemplateElement>('template#path')!.innerHTML = path
 }
