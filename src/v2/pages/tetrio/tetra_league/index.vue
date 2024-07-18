@@ -104,65 +104,63 @@ const winner_user_id = computed(() => {
 			</n-grid-item>
 		</n-grid>
 
-		<div class="text-6">
+		<n-card class="text-5" size="small">
 			<n-flex justify="space-evenly">
 				<div class="text-center">
-					回放 ID
-				</div>
-
-				<div class="text-center">
-					r:{{ data.replay_id }}
+					回放 ID: r:{{ data.replay_id }}
 				</div>
 			</n-flex>
-		</div>
+		</n-card>
 
-		<n-grid :cols="data.games.length" :x-gap="10" :y-gap="10">
-			<n-grid-item v-for="game in data.games">
-				<n-grid :cols="1" :x-gap="10" :y-gap="10">
-					<n-grid-item v-for="data in game.data">
-						<n-card class="text-center" size="small">
-							<n-flex :size="0" vertical>
-								<n-flex justify="space-evenly">
-									<n-statistic :value="data.pps" label="PPS"/>
+		<n-flex class="[&_*]:!text-4" vertical>
+			<n-grid :cols="data.games.length" :x-gap="10" :y-gap="10">
+				<n-grid-item v-for="game in data.games">
+					<n-grid :cols="1" :x-gap="10" :y-gap="10">
+						<n-grid-item v-for="data in game.data">
+							<n-card class="text-center" size="small">
+								<n-flex :size="0" vertical>
+									<n-flex justify="space-evenly">
+										<n-statistic :value="data.pps" label="PPS"/>
 
-									<n-statistic label="APM">
-										<n-flex :size="0" vertical>
-											<n-text>{{ data.apm }}</n-text>
+										<n-statistic label="APM">
+											<n-flex :size="0" vertical>
+												<n-text>{{ data.apm }}</n-text>
 
-											<n-text :depth="3" class="text-sm">
-												(x{{ data.apl }})
-											</n-text>
-										</n-flex>
-									</n-statistic>
+												<n-text :depth="3" class="text-sm">
+													(x{{ data.apl }})
+												</n-text>
+											</n-flex>
+										</n-statistic>
 
-									<n-statistic label="VS">
-										<n-flex :size="0" vertical>
-											<n-text>{{ data.vs }}</n-text>
+										<n-statistic label="VS">
+											<n-flex :size="0" vertical>
+												<n-text>{{ data.vs }}</n-text>
 
-											<n-text :depth="3" class="text-sm">
-												(x{{ data.adpl }})
-											</n-text>
-										</n-flex>
-									</n-statistic>
+												<n-text :depth="3" class="text-sm">
+													(x{{ data.adpl }})
+												</n-text>
+											</n-flex>
+										</n-statistic>
+									</n-flex>
 								</n-flex>
-							</n-flex>
-						</n-card>
-					</n-grid-item>
-				</n-grid>
-			</n-grid-item>
-		</n-grid>
+							</n-card>
+						</n-grid-item>
+					</n-grid>
+				</n-grid-item>
+			</n-grid>
 
-		<n-grid :cols="data.games.length" :x-gap="10" :y-gap="10">
-			<n-grid-item v-for="game in data.games">
-				<n-card class="text-center bg-sky bg-opacity-50" size="small">
-					<n-flex justify="space-evenly">
-						<n-statistic :value="game.handling.arr" label="ARR"/>
-						<n-statistic :value="(`${game.handling.das}F`)" label="DAS"/>
-						<n-statistic :value="game.handling.sdf >= 41 ? '∞' : game.handling.sdf" label="SDF"/>
-					</n-flex>
-				</n-card>
-			</n-grid-item>
-		</n-grid>
+			<n-grid :cols="data.games.length" :x-gap="10" :y-gap="10">
+				<n-grid-item v-for="game in data.games">
+					<n-card class="text-center bg-sky bg-opacity-50" size="small">
+						<n-flex justify="space-evenly">
+							<n-statistic :value="game.handling.arr" label="ARR"/>
+							<n-statistic :value="(`${game.handling.das}F`)" label="DAS"/>
+							<n-statistic :value="game.handling.sdf >= 41 ? '∞' : game.handling.sdf" label="SDF"/>
+						</n-flex>
+					</n-card>
+				</n-grid-item>
+			</n-grid>
+		</n-flex>
 
 		<powered/>
 	</layout>
