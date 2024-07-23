@@ -19,75 +19,75 @@ const colorMappings: Record<string, {
 	readonly background: string
 	readonly text: string
 }> = {
-	X: {
+	x: {
 		background: 'radial-gradient(95.42% 572.5% at 4.58% 17.5%, #D946EF 0%, #F5CFFE 100%)',
 		text: '#8E23B4CC'
 	},
-	U: {
+	u: {
 		background: 'radial-gradient(95.42% 572.5% at 4.58% 17.5%, #F04444 0%, #FECBCA 100%)',
 		text: '#7F1D1CCC'
 	},
-	SS: {
+	ss: {
 		background: 'radial-gradient(95.42% 572.5% at 4.58% 17.5%, #E9B308 0%, #FEF18B 100%)',
 		text: '#723F12CC'
 	},
-	'S+': {
+	's+': {
 		background: 'radial-gradient(95.42% 572.5% at 4.58% 17.5%, #E9B308 0%, #FEF18B 100%)',
 		text: '#723F12CC'
 	},
-	S: {
+	s: {
 		background: 'radial-gradient(95.42% 572.5% at 4.58% 17.5%, #E9B308 0%, #FEF18B 100%)',
 		text: '#723F12CC'
 	},
-	'S-': {
+	's-': {
 		background: 'radial-gradient(95.42% 572.5% at 4.58% 17.5%, #E9B308 0%, #FEF18B 100%)',
 		text: '#723F12CC'
 	},
-	'A+': {
+	'a+': {
 		background: 'radial-gradient(95.42% 572.5% at 4.58% 17.5%, #23C55E 0%, #BBF7D1 100%)',
 		text: '#15532ECC'
 	},
-	'A': {
+	'a': {
 		background: 'radial-gradient(95.42% 572.5% at 4.58% 17.5%, #23C55E 0%, #BBF7D1 100%)',
 		text: '#15532ECC'
 	},
-	'A-': {
+	'a-': {
 		background: 'radial-gradient(95.42% 572.5% at 4.58% 17.5%, #23C55E 0%, #BBF7D1 100%)',
 		text: '#15532ECC'
 	},
-	'B+': {
+	'b+': {
 		background: 'radial-gradient(95.42% 572.5% at 4.58% 17.5%, #3B82F6 0%, #BFDCFE 100%)',
 		text: '#1F3A8B'
 	},
-	B: {
+	b: {
 		background: 'radial-gradient(95.42% 572.5% at 4.58% 17.5%, #3B82F6 0%, #BFDCFE 100%)',
 		text: '#1F3A8B'
 	},
-	'B-': {
+	'b-': {
 		background: 'radial-gradient(95.42% 572.5% at 4.58% 17.5%, #3B82F6 0%, #BFDCFE 100%)',
 		text: '#1F3A8B'
 	},
-	'C+': {
+	'c+': {
 		background: 'radial-gradient(95.42% 572.5% at 4.58% 17.5%, #A755F7 0%, #EAD5FF 100%)',
 		text: '#571C86'
 	},
-	C: {
+	c: {
 		background: 'radial-gradient(95.42% 572.5% at 4.58% 17.5%, #A755F7 0%, #EAD5FF 100%)',
 		text: '#571C86'
 	},
-	'C-': {
+	'c-': {
 		background: 'radial-gradient(95.42% 572.5% at 4.58% 17.5%, #A755F7 0%, #EAD5FF 100%)',
 		text: '#571C86'
 	},
-	'D+': {
+	'd+': {
 		background: 'radial-gradient(95.42% 572.5% at 4.58% 17.5%, #64748B 0%, #E1E8F0 100%)',
 		text: '#0F172A'
 	},
-	'D': {
+	'd': {
 		background: 'radial-gradient(95.42% 572.5% at 4.58% 17.5%, #64748B 0%, #E1E8F0 100%)',
 		text: '#0F172A'
 	},
-	'Z': {
+	'z': {
 		background: 'radial-gradient(95.42% 572.5% at 4.58% 17.5%, #737373 0%, #E5E5E5 100%)',
 		text: '#171717'
 	}
