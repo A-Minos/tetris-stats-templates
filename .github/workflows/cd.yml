@@ -2,6 +2,8 @@ name: 部署
 
 on:
     push:
+        branches:
+            - main
     workflow_dispatch:
 
 jobs:
@@ -9,16 +11,16 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            -   uses: actions/checkout@v4
-            -   uses: pnpm/action-setup@v3
-                with:
-                    version: latest
-                    run_install: true
+            - uses: actions/checkout@v4
+            - uses: pnpm/action-setup@v3
+              with:
+                  version: latest
+                  run_install: true
 
-            -   run: pnpm run build
-            -   run: pnpm run check
+            - run: pnpm run build
+            - run: pnpm run check
 
-            -   uses: peaceiris/actions-gh-pages@v4
-                with:
-                    github_token: ${{ secrets.GITHUB_TOKEN }}
-                    publish_dir: dist
+            - uses: peaceiris/actions-gh-pages@v4
+              with:
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  publish_dir: dist
