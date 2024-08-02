@@ -16,7 +16,8 @@ const Data = z
 		bot: User,
 		command: z.string(),
 	})
-	.strict();
+	.strict()
+	.readonly();
 </script>
 
 <script lang="ts" setup>

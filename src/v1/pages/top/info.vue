@@ -10,14 +10,19 @@ const DetailData = z.object({
 	apl: z.number(),
 });
 
-const Data = z.object({
-	user: z.object({
-		avatar: Avatar,
-		name: z.string(),
-	}),
-	today: DetailData,
-	history: DetailData,
-});
+const Data = z
+	.object({
+		user: z.object({
+			avatar: Avatar,
+			name: z.string(),
+		}),
+		today: DetailData,
+		history: DetailData,
+	})
+	.strict()
+	.readonly();
+
+export type Data = z.infer<typeof Data>;
 </script>
 
 <script lang="ts" setup>

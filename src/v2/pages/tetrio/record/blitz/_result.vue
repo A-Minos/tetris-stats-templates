@@ -1,17 +1,16 @@
 <script lang="ts" setup>
-import type { BackendTime } from '@/v2/types/utils'
-import { isNonNullish } from 'remeda'
+import { isNonNullish } from "remeda";
 
 defineProps<{
-	readonly type: 'warning' | 'info' | 'error' | 'default'
-	readonly is_best: boolean
-	readonly title: string
+	readonly type: "warning" | "info" | "error" | "default";
+	readonly is_best: boolean;
+	readonly title: string;
 
-	readonly score: number
-	readonly rank: number | null
-	readonly personal_rank: number | null
-	readonly play_at: BackendTime
-}>()
+	readonly score: number;
+	readonly rank: number | null;
+	readonly personal_rank: number | null;
+	readonly play_at: Date;
+}>();
 </script>
 
 <template>
@@ -19,7 +18,7 @@ defineProps<{
 		<n-flex vertical>
 			<div class="text-(center 5xl) fw-bold">
 				<n-text :class="{ 'text-(yellow shadow-[0_0_1rem])': is_best }">
-					{{ new Intl.NumberFormat('zh-CN').format(score) }}
+					{{ new Intl.NumberFormat("zh-CN").format(score) }}
 				</n-text>
 			</div>
 
@@ -38,7 +37,7 @@ defineProps<{
 			</n-flex>
 
 			<div class="text-right">
-				<n-text :depth="3">{{ new Date(play_at).toLocaleString('zh-CN') }}</n-text>
+				<n-text :depth="3">{{ play_at.toLocaleString("zh-CN") }}</n-text>
 			</div>
 		</n-flex>
 	</n-alert>

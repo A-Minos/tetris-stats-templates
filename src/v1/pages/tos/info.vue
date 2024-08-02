@@ -1,34 +1,40 @@
 <script lang="ts">
 import User from "@/schemas/user";
 import { z } from "zod";
-const Data = z.object({
-	user: User,
-	ranking: z.object({
-		rating: z.number(),
-		rd: z.number(),
-	}),
-	multiplayer: z.object({
-		pps: z.number(),
-		lpm: z.number(),
 
-		apm: z.number(),
-		apl: z.number(),
+const Data = z
+	.object({
+		user: User,
+		ranking: z.object({
+			rating: z.number(),
+			rd: z.number(),
+		}),
+		multiplayer: z.object({
+			pps: z.number(),
+			lpm: z.number(),
 
-		vs: z.number(),
-		adpm: z.number(),
-		adpl: z.number(),
-	}),
-	radar: z.object({
-		app: z.number(),
-		or: z.number(),
-		dspp: z.number(),
-		ci: z.number(),
-		ge: z.number(),
-	}),
-	sprint: z.string(),
-	challenge: z.string(),
-	marathon: z.string(),
-});
+			apm: z.number(),
+			apl: z.number(),
+
+			vs: z.number(),
+			adpm: z.number(),
+			adpl: z.number(),
+		}),
+		radar: z.object({
+			app: z.number(),
+			or: z.number(),
+			dspp: z.number(),
+			ci: z.number(),
+			ge: z.number(),
+		}),
+		sprint: z.string(),
+		challenge: z.string(),
+		marathon: z.string(),
+	})
+	.strict()
+	.readonly();
+
+export type Data = z.infer<typeof Data>;
 </script>
 
 <script lang="ts" setup>

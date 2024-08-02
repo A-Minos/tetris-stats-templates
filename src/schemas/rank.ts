@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const Rank = z.union([
+const ValidRank = z.union([
 	z.literal("x"),
 	z.literal("u"),
 	z.literal("ss"),
@@ -18,7 +18,12 @@ const Rank = z.union([
 	z.literal("c-"),
 	z.literal("d+"),
 	z.literal("d"),
-	z.literal("z"),
 ]);
 
+const Rank = z.union([ValidRank, z.literal("z")]);
+
+type ValidRank = z.infer<typeof ValidRank>;
+type Rank = z.infer<typeof Rank>;
+
 export default Rank;
+export { Rank, ValidRank };

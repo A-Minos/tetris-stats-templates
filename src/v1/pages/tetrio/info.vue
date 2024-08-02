@@ -2,54 +2,60 @@
 import Rank from "@/schemas/rank";
 import User from "@/schemas/user";
 import { z } from "zod";
-const Data = z.object({
-	user: User.extend({ bio: z.string().optional() }),
 
-	ranking: z.object({
-		rating: z.number(),
-		rd: z.number(),
-	}),
+const Data = z
+	.object({
+		user: User.extend({ bio: z.string().nullable() }),
 
-	tetra_league: z.object({
-		rank: Rank,
-		tr: z.number(),
-		global_rank: z.number(),
+		ranking: z.object({
+			rating: z.number(),
+			rd: z.number(),
+		}),
 
-		pps: z.number(),
-		lpm: z.number(),
+		tetra_league: z.object({
+			rank: Rank,
+			tr: z.number(),
+			global_rank: z.number(),
 
-		apm: z.number(),
-		apl: z.number(),
+			pps: z.number(),
+			lpm: z.number(),
 
-		vs: z.number(),
-		adpm: z.number(),
-		adpl: z.number(),
-	}),
+			apm: z.number(),
+			apl: z.number(),
 
-	tetra_league_history: z.object({
-		data: z.array(
-			z.object({
-				record_at: z.coerce.date(),
-				tr: z.number(),
-			})
-		),
-		split_interval: z.number(),
-		min_tr: z.number(),
-		max_tr: z.number(),
-		offset: z.number(),
-	}),
+			vs: z.number(),
+			adpm: z.number(),
+			adpl: z.number(),
+		}),
 
-	radar: z.object({
-		app: z.number(),
-		dsps: z.number(),
-		dspp: z.number(),
-		ci: z.number(),
-		ge: z.number(),
-	}),
+		tetra_league_history: z.object({
+			data: z.array(
+				z.object({
+					record_at: z.coerce.date(),
+					tr: z.number(),
+				})
+			),
+			split_interval: z.number(),
+			min_tr: z.number(),
+			max_tr: z.number(),
+			offset: z.number(),
+		}),
 
-	sprint: z.string(),
-	blitz: z.string(),
-});
+		radar: z.object({
+			app: z.number(),
+			dsps: z.number(),
+			dspp: z.number(),
+			ci: z.number(),
+			ge: z.number(),
+		}),
+
+		sprint: z.string(),
+		blitz: z.string(),
+	})
+	.strict()
+	.readonly();
+
+export type Data = z.infer<typeof Data>;
 </script>
 
 <script lang="ts" setup>
