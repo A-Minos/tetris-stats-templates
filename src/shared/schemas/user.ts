@@ -1,5 +1,5 @@
 import { z } from "zod";
-import Avatar from "./avatar";
+import Avatar from "./avatar.ts";
 
 const User = z.object({
 	avatar: Avatar,

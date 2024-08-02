@@ -38,7 +38,7 @@ const data = Data.parse(JSON.parse(document.querySelector<HTMLTemplateElement>("
 </script>
 
 <script lang="ts" setup>
-import Rank from "@/schemas/rank";
+import Rank from "@/shared/schemas/rank";
 import powered from "@/v2/components/common/footer.vue";
 import layout from "@/v2/components/common/layout.vue";
 

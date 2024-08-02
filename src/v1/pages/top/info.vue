@@ -1,5 +1,5 @@
 <script lang="ts">
-import Avatar from "@/schemas/avatar";
+import Avatar from "@/shared/schemas/avatar";
 import z from "zod";
 
 const DetailData = z.object({

@@ -1,6 +1,6 @@
 <script lang="ts">
-import Rank, { ValidRank } from "@/schemas/rank";
-import BaseUser from "@/schemas/user";
+import Rank, { ValidRank } from "@/shared/schemas/rank";
+import BaseUser from "@/shared/schemas/user";
 import { z } from "zod";
 
 const Data = z

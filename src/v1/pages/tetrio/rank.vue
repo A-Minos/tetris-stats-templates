@@ -1,5 +1,5 @@
 <script lang="ts">
-import Rank, { ValidRank } from "@/schemas/rank";
+import Rank, { ValidRank } from "@/shared/schemas/rank";
 import { z } from "zod";
 
 const Data = z

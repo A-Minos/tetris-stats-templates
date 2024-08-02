@@ -1,4 +1,4 @@
-import User from "@/schemas/user";
+import User from "@/shared/schemas/user";
 import { z } from "zod";
 import Statistic from "./statistic";
 import Type from "./type";
