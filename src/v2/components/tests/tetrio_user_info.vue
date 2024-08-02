@@ -33,6 +33,7 @@ const test = async () => {
 		user: {
 			id: user._id,
 			name: user.username,
+			avatar: `https://tetr.io/user-content/avatars/${user._id}.jpg`,
 			role: user.role,
 			banner: isNonNullish(user.banner_revision) && user.banner_revision > 0 ? `https://tetr.io/user-content/banners/${user._id}.jpg?rv=${user.banner_revision}` : null,
 			badges: user.badges.map(badge => {
