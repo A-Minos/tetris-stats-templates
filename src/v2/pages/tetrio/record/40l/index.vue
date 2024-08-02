@@ -1,61 +1,61 @@
 <script lang="ts">
-import { z } from "zod";
-import Data from "../schemas/data";
-import Type from "../schemas/type";
+import { z } from 'zod'
+import Data from '../schemas/data'
+import Type from '../schemas/type'
 
-const SprintData = Data.strict().readonly();
+const SprintData = Data.strict().readonly()
 
 export type SprintData = z.infer<typeof SprintData>;
 const data = SprintData.parse(
-	JSON.parse(document.querySelector<HTMLTemplateElement>("template#data")!.innerHTML.trim())
-);
+	JSON.parse(document.querySelector<HTMLTemplateElement>('template#data')!.innerHTML.trim())
+)
 </script>
 
 <script lang="ts" setup>
-import powered from "@/v2/components/common/footer.vue";
-import layout from "@/v2/components/common/layout.vue";
+import powered from '@/v2/components/common/footer.vue'
+import layout from '@/v2/components/common/layout.vue'
 
-import sprint_result from "@/v2/pages/tetrio/record/40l/_result.vue";
-import sprint_sb from "@/v2/pages/tetrio/record/40l/_statistic-block.vue";
-import sprint_sc from "@/v2/pages/tetrio/record/40l/_statistic-clear.vue";
-import sprint_sf from "@/v2/pages/tetrio/record/40l/_statistic-finesse.vue";
-import sprint_sk from "@/v2/pages/tetrio/record/40l/_statistic-key.vue";
-import sprint_sm from "@/v2/pages/tetrio/record/40l/_statistic-max.vue";
-import sprint_sr from "@/v2/pages/tetrio/record/40l/_statistic-replay.vue";
-import sprint_user from "@/v2/pages/tetrio/record/40l/_user.vue";
-import { isNullish } from "remeda";
+import sprint_result from '@/v2/pages/tetrio/record/40l/_result.vue'
+import sprint_sb from '@/v2/pages/tetrio/record/40l/_statistic-block.vue'
+import sprint_sc from '@/v2/pages/tetrio/record/40l/_statistic-clear.vue'
+import sprint_sf from '@/v2/pages/tetrio/record/40l/_statistic-finesse.vue'
+import sprint_sk from '@/v2/pages/tetrio/record/40l/_statistic-key.vue'
+import sprint_sm from '@/v2/pages/tetrio/record/40l/_statistic-max.vue'
+import sprint_sr from '@/v2/pages/tetrio/record/40l/_statistic-replay.vue'
+import sprint_user from '@/v2/pages/tetrio/record/40l/_user.vue'
+import { isNullish } from 'remeda'
 
 const title = computed(() => {
 	if (data.statistic.tspins.double >= 20) {
-		return "20TSD";
+		return '20TSD'
 	}
 
 	if (data.statistic.all_clear >= 10) {
-		return "10PC";
+		return '10PC'
 	}
 
-	return "40L";
-});
+	return '40L'
+})
 
 const type = computed(() => {
 	if (isNullish(data.type)) {
-		return "default";
+		return 'default'
 	}
 
 	if ([Type.BEST, Type.PERSONAL_BEST].includes(data.type)) {
-		return "warning";
+		return 'warning'
 	}
 
 	if (data.type === Type.RECENT) {
-		return "info";
+		return 'info'
 	}
 
 	if (data.type === Type.DISPUTED) {
-		return "error";
+		return 'error'
 	}
 
-	return "default";
-});
+	return 'default'
+})
 </script>
 
 <template>
@@ -71,13 +71,13 @@ const type = computed(() => {
 		/>
 
 		<n-flex :wrap="false">
-			<sprint_user :id="data.user.id" :name="data.user.name" />
+			<sprint_user :id="data.user.id" :name="data.user.name"/>
 
 			<n-flex class="flex-1" vertical>
 				<n-flex :wrap="false">
 					<n-flex :wrap="false" class="w-1/2" vertical>
-						<sprint_sk :keys="data.statistic.keys" :kpp="data.statistic.kpp" :kps="data.statistic.kps" />
-						<sprint_sm :btb="data.statistic.max.btb" :combo="data.statistic.max.combo" />
+						<sprint_sk :keys="data.statistic.keys" :kpp="data.statistic.kpp" :kps="data.statistic.kps"/>
+						<sprint_sm :btb="data.statistic.max.btb" :combo="data.statistic.max.combo"/>
 					</n-flex>
 
 					<sprint_sb
@@ -100,13 +100,13 @@ const type = computed(() => {
 				</n-flex>
 
 				<n-flex :wrap="false">
-					<sprint_sr :replay_id="data.replay_id" />
-					<sprint_sf :accuracy="data.statistic.finesse.accuracy" :faults="data.statistic.finesse.faults" />
+					<sprint_sr :replay_id="data.replay_id"/>
+					<sprint_sf :accuracy="data.statistic.finesse.accuracy" :faults="data.statistic.finesse.faults"/>
 				</n-flex>
 			</n-flex>
 		</n-flex>
 
-		<powered />
+		<powered/>
 	</layout>
 </template>
 

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { ClockCircleOutlined } from "@vicons/antd";
-import { isNonNullish } from "remeda";
+import { ClockCircleOutlined } from '@vicons/antd'
+import { isNonNullish } from 'remeda'
 
 defineProps<{
 	readonly statistic: {
@@ -10,7 +10,7 @@ defineProps<{
 
 	readonly playtime: string | null;
 	readonly join_at: Date | null;
-}>();
+}>()
 </script>
 
 <template>
@@ -18,7 +18,7 @@ defineProps<{
 		<div class="flex flex-col justify-center items-center h-full">
 			<template v-if="isNonNullish(playtime)">
 				<n-flex align="center" class="!gap-1 mb-5">
-					<n-icon :component="ClockCircleOutlined" class="text-5" />
+					<n-icon :component="ClockCircleOutlined" class="text-5"/>
 					<n-text>{{ playtime }}</n-text>
 				</n-flex>
 			</template>
@@ -32,16 +32,16 @@ defineProps<{
 							}}%)
 						</template>
 
-						<template v-else-if="isNonNullish(statistic.total)"> 游玩次数: {{ statistic.total }} </template>
+						<template v-else-if="isNonNullish(statistic.total)"> 游玩次数: {{ statistic.total }}</template>
 
-						<template v-else-if="isNonNullish(statistic.wins)"> 胜场数: {{ statistic.wins }} </template>
+						<template v-else-if="isNonNullish(statistic.wins)"> 胜场数: {{ statistic.wins }}</template>
 					</n-text>
 				</div>
 			</template>
 
 			<template v-if="isNonNullish(join_at)">
 				<div class="text-center">
-					<n-text :depth="3" class="text-sm"> 注册时间: {{ join_at.toLocaleString("zh-CN") }} </n-text>
+					<n-text :depth="3" class="text-sm"> 注册时间: {{ join_at.toLocaleString('zh-CN') }}</n-text>
 				</div>
 			</template>
 		</div>

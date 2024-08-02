@@ -1,7 +1,7 @@
 export interface User {
 	readonly _id: string;
 	readonly username: string;
-	readonly role: "anon" | "user" | "bot" | "halfmod" | "mod" | "admin" | "sysop" | "banned";
+	readonly role: 'anon' | 'user' | 'bot' | 'halfmod' | 'mod' | 'admin' | 'sysop' | 'banned';
 	readonly ts?: Date;
 	readonly botmaster?: string;
 
@@ -31,25 +31,25 @@ export interface User {
 
 		readonly rating: number;
 		readonly rank:
-			| "d"
-			| "d+"
-			| "c-"
-			| "c"
-			| "c+"
-			| "b-"
-			| "b"
-			| "b+"
-			| "a-"
-			| "a"
-			| "a+"
-			| "s-"
-			| "s"
-			| "s+"
-			| "ss"
-			| "u"
-			| "x"
-			| "z";
-		readonly bestrank: Exclude<User["league"]["rank"], "z">;
+			| 'd'
+			| 'd+'
+			| 'c-'
+			| 'c'
+			| 'c+'
+			| 'b-'
+			| 'b'
+			| 'b+'
+			| 'a-'
+			| 'a'
+			| 'a+'
+			| 's-'
+			| 's'
+			| 's+'
+			| 'ss'
+			| 'u'
+			| 'x'
+			| 'z';
+		readonly bestrank: Exclude<User['league']['rank'], 'z'>;
 
 		readonly glicko?: number;
 		readonly rd?: number;
@@ -69,7 +69,7 @@ export interface User {
 		readonly prev_at: number;
 
 		readonly percentile: number;
-		readonly percentile_rank: User["league"]["rank"];
+		readonly percentile_rank: User['league']['rank'];
 	};
 
 	readonly avatar_revision?: number;
@@ -91,12 +91,12 @@ export interface User {
 
 export interface Record {
 	readonly records: {
-		"40l": {
+		'40l': {
 			readonly record: {
 				readonly _id: string;
-				readonly stream: `${"40l" | "blitz" | "any"}_${"global" | "userbest" | "userrecent"}${
-					| ""
-					| `_${"userbest" | "userrecent" | string}`}`;
+				readonly stream: `${'40l' | 'blitz' | 'any'}_${'global' | 'userbest' | 'userrecent'}${
+					| ''
+					| `_${'userbest' | 'userrecent' | string}`}`;
 				readonly replayid: string;
 
 				readonly user: {
@@ -114,9 +114,9 @@ export interface Record {
 		blitz: {
 			readonly record: {
 				readonly _id: string;
-				readonly stream: `${"40l" | "blitz" | "any"}_${"global" | "userbest" | "userrecent"}${
-					| ""
-					| `_${"userbest" | "userrecent" | string}`}`;
+				readonly stream: `${'40l' | 'blitz' | 'any'}_${'global' | 'userbest' | 'userrecent'}${
+					| ''
+					| `_${'userbest' | 'userrecent' | string}`}`;
 				readonly replayid: string;
 
 				readonly user: {
@@ -141,9 +141,9 @@ export interface Record {
 
 export interface TetraLeagueRecord {
 	readonly _id: string;
-	readonly stream: `${"40l" | "blitz" | "any"}_${"global" | "userbest" | "userrecent"}${
-		| ""
-		| `_${"userbest" | "userrecent" | string}`}`;
+	readonly stream: `${'40l' | 'blitz' | 'any'}_${'global' | 'userbest' | 'userrecent'}${
+		| ''
+		| `_${'userbest' | 'userrecent' | string}`}`;
 	readonly replayid: string;
 
 	readonly user: {

@@ -1,6 +1,6 @@
 <script lang="ts">
-import { ValidRank } from "@/shared/schemas/rank";
-import { z } from "zod";
+import { ValidRank } from '@/shared/schemas/rank'
+import { z } from 'zod'
 
 const SpecialData = z.object({
 	apm: z.number(),
@@ -12,8 +12,8 @@ const SpecialData = z.object({
 	adpl: z.number().nullable(),
 	apm_holder: z.string().nullable(),
 	pps_holder: z.string().nullable(),
-	vs_holder: z.string().nullable(),
-});
+	vs_holder: z.string().nullable()
+})
 
 const Data = z
 	.object({
@@ -26,23 +26,23 @@ const Data = z
 		average_data: SpecialData,
 		maximum_data: SpecialData,
 
-		updated_at: z.coerce.date(),
+		updated_at: z.coerce.date()
 	})
 	.strict()
-	.readonly();
+	.readonly()
 
 export type Data = z.infer<typeof Data>;
-const data = Data.parse(JSON.parse(document.querySelector<HTMLTemplateElement>("template#data")!.innerHTML.trim()));
+const data = Data.parse(JSON.parse(document.querySelector<HTMLTemplateElement>('template#data')!.innerHTML.trim()))
 </script>
 
 <script lang="ts" setup>
-import powered from "@/v2/components/common/footer.vue";
-import layout from "@/v2/components/common/layout.vue";
+import powered from '@/v2/components/common/footer.vue'
+import layout from '@/v2/components/common/layout.vue'
 
-import rank_card from "@/v2/pages/tetrio/rank/detail/_card.vue";
-import rank_info from "@/v2/pages/tetrio/rank/detail/_info.vue";
-import rank_statistic from "@/v2/pages/tetrio/rank/detail/_statistic.vue";
-import rank_trending from "@/v2/pages/tetrio/rank/detail/_trending.vue";
+import rank_card from '@/v2/pages/tetrio/rank/detail/_card.vue'
+import rank_info from '@/v2/pages/tetrio/rank/detail/_info.vue'
+import rank_statistic from '@/v2/pages/tetrio/rank/detail/_statistic.vue'
+import rank_trending from '@/v2/pages/tetrio/rank/detail/_trending.vue'
 </script>
 
 <template>
@@ -50,8 +50,8 @@ import rank_trending from "@/v2/pages/tetrio/rank/detail/_trending.vue";
 		<rank_card :name="data.name" size="small">
 			<n-flex vertical>
 				<n-flex justify="space-between">
-					<rank_info :name="data.name" :players="data.players" :require_tr="data.require_tr" />
-					<rank_trending :value="data.trending" />
+					<rank_info :name="data.name" :players="data.players" :require_tr="data.require_tr"/>
+					<rank_trending :value="data.trending"/>
 				</n-flex>
 
 				<n-flex justify="center">
@@ -102,12 +102,12 @@ import rank_trending from "@/v2/pages/tetrio/rank/detail/_trending.vue";
 				</n-flex>
 
 				<div class="text-center">
-					<n-text :depth="3"> 更新时间: {{ data.updated_at.toLocaleString("zh-CN") }} </n-text>
+					<n-text :depth="3"> 更新时间: {{ data.updated_at.toLocaleString('zh-CN') }}</n-text>
 				</div>
 			</n-flex>
 		</rank_card>
 
-		<powered />
+		<powered/>
 	</layout>
 </template>
 

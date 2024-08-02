@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import type { Data } from "@/v2/pages/tetrio/rank/detail/index.vue";
+import type { Data } from '@/v2/pages/tetrio/rank/detail/index.vue'
 
-const path = "v2/tetrio/rank/detail";
+const path = 'v2/tetrio/rank/detail'
 
 const test = async () => {
-	document.querySelector("template#data")!.innerHTML = JSON.stringify({
-		name: "x",
+	document.querySelector('template#data')!.innerHTML = JSON.stringify({
+		name: 'x',
 		trending: 1.01,
 		require_tr: 1,
 		players: 2,
@@ -18,9 +18,9 @@ const test = async () => {
 			adpm: 18,
 			apl: 6,
 			adpl: 7,
-			apm_holder: "p1",
-			pps_holder: "p2",
-			vs_holder: "p3",
+			apm_holder: 'p1',
+			pps_holder: 'p2',
+			vs_holder: 'p3'
 		},
 		average_data: {
 			apm: 8,
@@ -30,9 +30,9 @@ const test = async () => {
 			adpm: 19,
 			apl: 11,
 			adpl: 12,
-			apm_holder: "p4",
-			pps_holder: "p5",
-			vs_holder: "p6",
+			apm_holder: 'p4',
+			pps_holder: 'p5',
+			vs_holder: 'p6'
 		},
 		maximum_data: {
 			apm: 13,
@@ -42,16 +42,16 @@ const test = async () => {
 			adpm: 20,
 			apl: 16,
 			adpl: 17,
-			apm_holder: "p7",
-			pps_holder: "p8",
-			vs_holder: "p9",
+			apm_holder: 'p7',
+			pps_holder: 'p8',
+			vs_holder: 'p9'
 		},
 
-		updated_at: new Date(),
-	} satisfies Data);
+		updated_at: new Date()
+	} satisfies Data)
 
-	document.querySelector("template#path")!.innerHTML = path;
-};
+	document.querySelector('template#path')!.innerHTML = path
+}
 </script>
 
 <template>

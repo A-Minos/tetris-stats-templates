@@ -1,5 +1,5 @@
 <script lang="ts">
-import { z } from "zod";
+import { z } from 'zod'
 
 const Data = z
 	.object({
@@ -22,39 +22,39 @@ const Data = z
 					apm: z.number().nullable(),
 					apl: z.number().nullable(),
 					vs: z.number().nullable(),
-					adpl: z.number().nullable(),
+					adpl: z.number().nullable()
 				}),
 				xp: z.number(),
-				join_at: z.coerce.date().nullable(),
+				join_at: z.coerce.date().nullable()
 			})
-		),
+		)
 	})
 	.strict()
-	.readonly();
+	.readonly()
 
 export type Data = z.infer<typeof Data>;
 
-const data = Data.parse(JSON.parse(document.querySelector<HTMLTemplateElement>("template#data")!.innerHTML.trim()));
+const data = Data.parse(JSON.parse(document.querySelector<HTMLTemplateElement>('template#data')!.innerHTML.trim()))
 </script>
 
 <script lang="ts" setup>
-import Rank from "@/shared/schemas/rank";
-import powered from "@/v2/components/common/footer.vue";
-import layout from "@/v2/components/common/layout.vue";
+import Rank from '@/shared/schemas/rank'
+import powered from '@/v2/components/common/footer.vue'
+import layout from '@/v2/components/common/layout.vue'
 
-import list_statistic from "@/v2/pages/tetrio/user/list/_statistic.vue";
-import list_tl from "@/v2/pages/tetrio/user/list/_tetra-league.vue";
-import list_user from "@/v2/pages/tetrio/user/list/_user.vue";
+import list_statistic from '@/v2/pages/tetrio/user/list/_statistic.vue'
+import list_tl from '@/v2/pages/tetrio/user/list/_tetra-league.vue'
+import list_user from '@/v2/pages/tetrio/user/list/_user.vue'
 
-import { isNullish } from "remeda";
+import { isNullish } from 'remeda'
 
-const checkDecaying = (user: Data["users"][number]) => {
+const checkDecaying = (user: Data['users'][number]) => {
 	if (isNullish(user.tetra_league.rd)) {
-		return false;
+		return false
 	}
 
-	return user.tetra_league.decaying && user.tetra_league.rd >= 98;
-};
+	return user.tetra_league.decaying && user.tetra_league.rd >= 98
+}
 </script>
 
 <template>
@@ -90,7 +90,7 @@ const checkDecaying = (user: Data["users"][number]) => {
 			</n-card>
 		</template>
 
-		<powered />
+		<powered/>
 	</layout>
 </template>
 

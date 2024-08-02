@@ -1,59 +1,59 @@
 <script lang="ts">
-import User from "@/shared/schemas/user";
-import z from "zod";
+import User from '@/shared/schemas/user'
+import z from 'zod'
 
 const Data = z
 	.object({
-		platform: z.union([z.literal("TETR.IO"), z.literal("TOP"), z.literal("TOS")]),
+		platform: z.union([z.literal('TETR.IO'), z.literal('TOP'), z.literal('TOS')]),
 		status: z.union([
-			z.literal("error"),
-			z.literal("success"),
-			z.literal("unknown"),
-			z.literal("unlink"),
-			z.literal("unverified"),
+			z.literal('error'),
+			z.literal('success'),
+			z.literal('unknown'),
+			z.literal('unlink'),
+			z.literal('unverified')
 		]),
 		user: User,
 		bot: User,
-		command: z.string(),
+		command: z.string()
 	})
 	.strict()
-	.readonly();
+	.readonly()
 </script>
 
 <script lang="ts" setup>
-import Avatar from "@/shared/components/avatar.vue";
-import { isNonNullish } from "remeda";
+import Avatar from '@/shared/components/avatar.vue'
+import { isNonNullish } from 'remeda'
 
-const data = Data.parse(JSON.parse(document.querySelector<HTMLTemplateElement>("template#data")!.innerHTML.trim()));
+const data = Data.parse(JSON.parse(document.querySelector<HTMLTemplateElement>('template#data')!.innerHTML.trim()))
 
 const stateImage = asyncComputed(async () => {
 	return await import(`@/v1/assets/images/status/${data.status}.svg?url`).then((module) => {
-		return module.default;
-	});
-});
+		return module.default
+	})
+})
 </script>
 
 <template>
 	<div id="content" class="binding">
 		<div class="binding__container">
 			<div class="binding__header">
-				<Avatar :avatar="data.user.avatar" alt="玩家头像" class="binding__header__avatar" />
-				<img v-if="isNonNullish(stateImage)" :src="stateImage" alt="状态" class="binding__header__state" />
-				<Avatar :avatar="data.bot.avatar" alt="Bot 头像" class="binding__header__avatar" />
+				<Avatar :avatar="data.user.avatar" alt="玩家头像" class="binding__header__avatar"/>
+				<img v-if="isNonNullish(stateImage)" :src="stateImage" alt="状态" class="binding__header__state"/>
+				<Avatar :avatar="data.bot.avatar" alt="Bot 头像" class="binding__header__avatar"/>
 			</div>
 
-			<div />
+			<div/>
 
 			<div v-if="data.status === 'success'" class="binding__content">
 				<span>已将你在</span>
 				<span class="binding__content__platform">&nbsp;{{ data.platform.toUpperCase() }}&nbsp;</span>
 				<span>上的账号</span>
 
-				<br />
+				<br/>
 
 				<span class="binding__content__user-name">&nbsp;{{ data.user.name }}&nbsp;</span>
 
-				<br />
+				<br/>
 
 				<span>成功验证并绑定至</span>
 				<span class="binding__content__bot-name">&nbsp;{{ data.bot.name }}</span>
@@ -65,11 +65,11 @@ const stateImage = asyncComputed(async () => {
 				<span class="binding__content__platform">&nbsp;{{ data.platform.toUpperCase() }}&nbsp;</span>
 				<span>上的账号</span>
 
-				<br />
+				<br/>
 
 				<span class="binding__content__user-name">&nbsp;{{ data.user.name }}&nbsp;</span>
 
-				<br />
+				<br/>
 
 				<span>绑定至</span>
 				<span class="binding__content__bot-name">&nbsp;{{ data.bot.name }}</span>
@@ -81,16 +81,16 @@ const stateImage = asyncComputed(async () => {
 				<span class="binding__content__platform">&nbsp;{{ data.platform.toUpperCase() }}&nbsp;</span>
 				<span>上的账号</span>
 
-				<br />
+				<br/>
 
 				<span class="binding__content__user-name">&nbsp;{{ data.user.name }}&nbsp;</span>
 
-				<br />
+				<br/>
 
 				<span>绑定至</span>
 				<span class="binding__content__bot-name">&nbsp;{{ data.bot.name }},</span>
 
-				<br />
+				<br/>
 
 				<span>但是我们暂时无法验证您的身份.</span>
 			</div>
@@ -100,11 +100,11 @@ const stateImage = asyncComputed(async () => {
 				<span class="binding__content__platform">&nbsp;{{ data.platform.toUpperCase() }}&nbsp;</span>
 				<span>上的账号</span>
 
-				<br />
+				<br/>
 
 				<span class="binding__content__user-name">&nbsp;{{ data.user.name }}&nbsp;</span>
 
-				<br />
+				<br/>
 
 				<span>成功从</span>
 				<span class="binding__content__bot-name">&nbsp;{{ data.bot.name }}&nbsp;</span>

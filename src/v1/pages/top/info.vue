@@ -1,39 +1,39 @@
 <script lang="ts">
-import Avatar from "@/shared/schemas/avatar";
-import z from "zod";
+import Avatar from '@/shared/schemas/avatar'
+import z from 'zod'
 
 const DetailData = z.object({
 	pps: z.number(),
 	lpm: z.number(),
 
 	apm: z.number(),
-	apl: z.number(),
-});
+	apl: z.number()
+})
 
 const Data = z
 	.object({
 		user: z.object({
 			avatar: Avatar,
-			name: z.string(),
+			name: z.string()
 		}),
 		today: DetailData,
-		history: DetailData,
+		history: DetailData
 	})
 	.strict()
-	.readonly();
+	.readonly()
 
 export type Data = z.infer<typeof Data>;
 </script>
 
 <script lang="ts" setup>
-import logo from "@/v1/assets/images/logo/top.svg";
-import InfoApm from "@/v1/components/info/card/apm.vue";
-import InfoLpm from "@/v1/components/info/card/lpm.vue";
-import { THEME_KEY } from "vue-echarts";
+import logo from '@/v1/assets/images/logo/top.svg'
+import InfoApm from '@/v1/components/info/card/apm.vue'
+import InfoLpm from '@/v1/components/info/card/lpm.vue'
+import { THEME_KEY } from 'vue-echarts'
 
-const data = Data.parse(JSON.parse(document.querySelector<HTMLTemplateElement>("template#data")!.innerHTML.trim()));
+const data = Data.parse(JSON.parse(document.querySelector<HTMLTemplateElement>('template#data')!.innerHTML.trim()))
 
-inject(THEME_KEY, "dark");
+inject(THEME_KEY, 'dark')
 </script>
 
 <template>
@@ -46,7 +46,7 @@ inject(THEME_KEY, "dark");
 					<div class="tos-info__user">
 						<div class="tos-info__user__wrapper">
 							<div class="tos-info__user__container">
-								<Avatar :avatar="data.user.avatar" alt="用户头像" class="tos-info__user__avatar" />
+								<Avatar :avatar="data.user.avatar" alt="用户头像" class="tos-info__user__avatar"/>
 
 								<div class="tos-info__user__name__container">
 									<span class="tos-info__user__name__body">{{ data.user.name }}</span>
@@ -57,10 +57,10 @@ inject(THEME_KEY, "dark");
 
 					<div class="tos-info__game-ranking">
 						<div class="tos-info__game-ranking__container">
-							<img :src="logo" alt="Logo" class="tos-info__game-ranking__game-logo" />
+							<img :src="logo" alt="Logo" class="tos-info__game-ranking__game-logo"/>
 							<span class="tos-info__game-ranking__game-name">
 								Tetris Online
-								<br />
+								<br/>
 								Poland
 							</span>
 						</div>
@@ -118,9 +118,9 @@ inject(THEME_KEY, "dark");
 				<div class="tos-info__footer">
 					<div class="tos-info__footer__powered-by">
 						<span class="tos-info__footer__powered-by__title">Powered by</span>
-						<br />
+						<br/>
 						<span class="tos-info__footer__powered-by__content"
-							>NoneBot2 x nonebot-plugin-tetris-stats</span
+						>NoneBot2 x nonebot-plugin-tetris-stats</span
 						>
 					</div>
 

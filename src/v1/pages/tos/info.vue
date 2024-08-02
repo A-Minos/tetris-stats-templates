@@ -1,13 +1,13 @@
 <script lang="ts">
-import User from "@/shared/schemas/user";
-import { z } from "zod";
+import User from '@/shared/schemas/user'
+import { z } from 'zod'
 
 const Data = z
 	.object({
 		user: User,
 		ranking: z.object({
 			rating: z.number(),
-			rd: z.number(),
+			rd: z.number()
 		}),
 		multiplayer: z.object({
 			pps: z.number(),
@@ -18,67 +18,67 @@ const Data = z
 
 			vs: z.number(),
 			adpm: z.number(),
-			adpl: z.number(),
+			adpl: z.number()
 		}),
 		radar: z.object({
 			app: z.number(),
 			or: z.number(),
 			dspp: z.number(),
 			ci: z.number(),
-			ge: z.number(),
+			ge: z.number()
 		}),
 		sprint: z.string(),
 		challenge: z.string(),
-		marathon: z.string(),
+		marathon: z.string()
 	})
 	.strict()
-	.readonly();
+	.readonly()
 
 export type Data = z.infer<typeof Data>;
 </script>
 
 <script lang="ts" setup>
-import Avatar from "@/shared/components/avatar.vue";
-import logo from "@/v1/assets/images/logo/tos.svg";
-import Info40l from "@/v1/components/info/card/40l.vue";
-import InfoAdpm from "@/v1/components/info/card/adpm.vue";
-import InfoApm from "@/v1/components/info/card/apm.vue";
-import InfoChallenge from "@/v1/components/info/card/challenge.vue";
-import InfoLpm from "@/v1/components/info/card/lpm.vue";
-import InfoMarathon from "@/v1/components/info/card/marathon.vue";
-import InfoRadarChart from "@/v1/components/info/chart/radar-chart.vue";
-import { THEME_KEY } from "vue-echarts";
+import Avatar from '@/shared/components/avatar.vue'
+import logo from '@/v1/assets/images/logo/tos.svg'
+import Info40l from '@/v1/components/info/card/40l.vue'
+import InfoAdpm from '@/v1/components/info/card/adpm.vue'
+import InfoApm from '@/v1/components/info/card/apm.vue'
+import InfoChallenge from '@/v1/components/info/card/challenge.vue'
+import InfoLpm from '@/v1/components/info/card/lpm.vue'
+import InfoMarathon from '@/v1/components/info/card/marathon.vue'
+import InfoRadarChart from '@/v1/components/info/chart/radar-chart.vue'
+import { THEME_KEY } from 'vue-echarts'
 
-const data = Data.parse(JSON.parse(document.querySelector<HTMLTemplateElement>("template#data")!.innerHTML.trim()));
+const data = Data.parse(JSON.parse(document.querySelector<HTMLTemplateElement>('template#data')!.innerHTML.trim()))
 
-inject(THEME_KEY, "dark");
+inject(THEME_KEY, 'dark')
 
 const radar_chart_data = [
 	{
-		label: "APP",
-		value: data.radar.app,
+		label: 'APP',
+		value: data.radar.app
 	},
 	{
-		label: "CI",
-		value: data.radar.ci,
+		label: 'CI',
+		value: data.radar.ci
 	},
 	{
-		label: "DSPP",
-		value: data.radar.dspp,
+		label: 'DSPP',
+		value: data.radar.dspp
 	},
 	{
-		label: "OR",
-		value: data.radar.or,
+		label: 'OR',
+		value: data.radar.or
 	},
 	{
-		label: "GE",
-		value: data.radar.ge,
+		label: 'GE',
+		value: data.radar.ge
 	},
 	{
-		label: "PPS",
-		value: data.multiplayer.pps,
-	},
-];
+		label: 'PPS',
+		value: data.multiplayer.pps
+	}
+]
 </script>
 
 <template>
@@ -91,7 +91,7 @@ const radar_chart_data = [
 					<div class="tos-info__user">
 						<div class="tos-info__user__wrapper">
 							<div class="tos-info__user__container">
-								<Avatar :avatar="data.user.avatar" alt="用户头像" class="tos-info__user__avatar" />
+								<Avatar :avatar="data.user.avatar" alt="用户头像" class="tos-info__user__avatar"/>
 
 								<div class="tos-info__user__name__container">
 									<span class="tos-info__user__name__body">{{ data.user.name }}</span>
@@ -103,12 +103,12 @@ const radar_chart_data = [
 					<div class="tos-info__game-ranking">
 						<div class="tos-info__game-ranking__container">
 							<div class="tos-info__game-ranking__game-logo__container">
-								<img :src="logo" alt="Logo" class="tos-info__game-ranking__game-logo__body" />
+								<img :src="logo" alt="Logo" class="tos-info__game-ranking__game-logo__body"/>
 							</div>
 
 							<span class="tos-info__game-ranking__game-name">T.O.S.</span>
 
-							<div class="tos-info__game-ranking__divider" />
+							<div class="tos-info__game-ranking__divider"/>
 
 							<span class="tos-info__game-ranking__ranking-title">Ranking</span>
 
@@ -149,7 +149,7 @@ const radar_chart_data = [
 								<template #extra>
 									<span class="whitespace-nowrap"> {{ data.multiplayer.vs }} vs </span>
 
-									<br />
+									<br/>
 
 									<span class="whitespace-nowrap"> x{{ data.multiplayer.adpl }} </span>
 								</template>
@@ -158,7 +158,7 @@ const radar_chart_data = [
 					</div>
 
 					<div class="tos-info__radar-chart">
-						<info-radar-chart :data="radar_chart_data" />
+						<info-radar-chart :data="radar_chart_data"/>
 					</div>
 				</div>
 
@@ -185,9 +185,9 @@ const radar_chart_data = [
 				<div class="tos-info__footer">
 					<div class="tos-info__footer__powered-by">
 						<span class="tos-info__footer__powered-by__title">Powered by</span>
-						<br />
+						<br/>
 						<span class="tos-info__footer__powered-by__content"
-							>NoneBot2 x nonebot-plugin-tetris-stats</span
+						>NoneBot2 x nonebot-plugin-tetris-stats</span
 						>
 					</div>
 

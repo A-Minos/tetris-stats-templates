@@ -1,9 +1,9 @@
-import { z } from "zod";
-import Avatar from "./avatar.ts";
+import { z } from 'zod'
+import Avatar from './avatar.ts'
 
 const User = z.object({
 	avatar: Avatar,
-	name: z.string(),
-});
+	name: z.string()
+})
 
-export default User;
+export default User

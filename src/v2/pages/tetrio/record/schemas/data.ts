@@ -1,7 +1,7 @@
-import User from "@/shared/schemas/user";
-import { z } from "zod";
-import Statistic from "./statistic";
-import Type from "./type";
+import User from '@/shared/schemas/user'
+import { z } from 'zod'
+import Statistic from './statistic'
+import Type from './type'
 
 const Data = z.object({
 	type: z.nativeEnum(Type).nullable(),
@@ -14,7 +14,7 @@ const Data = z.object({
 
 	statistic: Statistic,
 
-	play_at: z.coerce.date(),
-});
+	play_at: z.coerce.date()
+})
 
-export default Data;
+export default Data

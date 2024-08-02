@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod'
 
 const Statistic = z.object({
 	keys: z.number(),
@@ -7,7 +7,7 @@ const Statistic = z.object({
 
 	max: z.object({
 		combo: z.number(),
-		btb: z.number(),
+		btb: z.number()
 	}),
 
 	pieces: z.number(),
@@ -31,15 +31,15 @@ const Statistic = z.object({
 		mini: z.object({
 			total: z.number(),
 			single: z.number(),
-			double: z.number(),
-		}),
+			double: z.number()
+		})
 	}),
 	all_clear: z.number(),
 
 	finesse: z.object({
 		faults: z.number(),
-		accuracy: z.number(),
-	}),
-});
+		accuracy: z.number()
+	})
+})
 
-export default Statistic;
+export default Statistic
