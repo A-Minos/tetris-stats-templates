@@ -33,6 +33,7 @@ const test = async () => {
 		user: {
 			id: user._id,
 			name: user.username,
+			avatar: `https://tetr.io/user-content/avatars/${user._id}.jpg`,
 			role: user.role,
 			banner: isNonNullish(user.banner_revision) && user.banner_revision > 0 ? `https://tetr.io/user-content/banners/${user._id}.jpg?rv=${user.banner_revision}` : null,
 			badges: user.badges.map(badge => {
@@ -94,7 +95,7 @@ const test = async () => {
 						record_at: (() => {
 							let date = new Date()
 							date = subDays(date, 10)
-							return date.toLocaleString()
+							return date
 						})(),
 						tr: random(
 							Number(
@@ -121,7 +122,7 @@ const test = async () => {
 								date = setSeconds(date, random(0, 60))
 
 								return {
-									record_at: date.toLocaleString('zh-CN'),
+									record_at: date,
 									tr: random(
 										Number(
 											user.league.rating.toFixed(2)
@@ -138,7 +139,7 @@ const test = async () => {
 						record_at: (() => {
 							let date = new Date()
 							date = resetTime(date)
-							return date.toLocaleString('zh-CN')
+							return date
 						})(),
 						tr: Number(
 							user.league.rating.toFixed(2)

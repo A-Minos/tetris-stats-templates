@@ -1,40 +1,37 @@
 <script lang="ts">
-import type AvatarType from '@/shared/types/avatar'
+import Avatar from '@/shared/schemas/avatar'
+import z from 'zod'
 
-export interface Data {
-	readonly user: {
-		readonly avatar: AvatarType
-		readonly name: string
-	}
+const DetailData = z.object({
+	pps: z.number(),
+	lpm: z.number(),
 
-	readonly today: {
-		readonly pps: number
-		readonly lpm: number
+	apm: z.number(),
+	apl: z.number()
+})
 
-		readonly apm: number
-		readonly apl: number
-	}
+const Data = z
+	.object({
+		user: z.object({
+			avatar: Avatar,
+			name: z.string()
+		}),
+		today: DetailData,
+		history: DetailData
+	})
+	.strict()
+	.readonly()
 
-	readonly history: {
-		readonly pps: number
-		readonly lpm: number
-
-		readonly apm: number
-		readonly apl: number
-	}
-}
+export type Data = z.infer<typeof Data>;
 </script>
 
 <script lang="ts" setup>
-import InfoLpm from '@/v1/components/info/card/lpm.vue'
 import logo from '@/v1/assets/images/logo/top.svg'
-import Avatar from '@/shared/components/avatar.vue'
 import InfoApm from '@/v1/components/info/card/apm.vue'
+import InfoLpm from '@/v1/components/info/card/lpm.vue'
 import { THEME_KEY } from 'vue-echarts'
 
-const data: Data = JSON.parse(
-	document.querySelector<HTMLTemplateElement>('template#data')!.innerHTML.trim()
-)
+const data = Data.parse(JSON.parse(document.querySelector<HTMLTemplateElement>('template#data')!.innerHTML.trim()))
 
 inject(THEME_KEY, 'dark')
 </script>
@@ -78,9 +75,7 @@ inject(THEME_KEY, 'dark')
 							{{ data.today.lpm }}
 
 							<template #extra>
-									<span class="whitespace-nowrap">
-										{{ data.today.pps }} pps
-									</span>
+								<span class="whitespace-nowrap"> {{ data.today.pps }} pps </span>
 							</template>
 						</info-lpm>
 					</div>
@@ -90,9 +85,7 @@ inject(THEME_KEY, 'dark')
 							{{ data.today.apm }}
 
 							<template #extra>
-									<span class="whitespace-nowrap">
-										x{{ data.today.apl }}
-									</span>
+								<span class="whitespace-nowrap"> x{{ data.today.apl }} </span>
 							</template>
 						</info-apm>
 					</div>
@@ -106,9 +99,7 @@ inject(THEME_KEY, 'dark')
 							{{ data.history.lpm }}
 
 							<template #extra>
-									<span class="whitespace-nowrap">
-										{{ data.history.pps }} pps
-									</span>
+								<span class="whitespace-nowrap"> {{ data.history.pps }} pps </span>
 							</template>
 						</info-lpm>
 					</div>
@@ -118,9 +109,7 @@ inject(THEME_KEY, 'dark')
 							{{ data.history.apm }}
 
 							<template #extra>
-									<span class="whitespace-nowrap">
-										x{{ data.history.apl }}
-									</span>
+								<span class="whitespace-nowrap"> x{{ data.history.apl }} </span>
 							</template>
 						</info-apm>
 					</div>
@@ -130,8 +119,9 @@ inject(THEME_KEY, 'dark')
 					<div class="tos-info__footer__powered-by">
 						<span class="tos-info__footer__powered-by__title">Powered by</span>
 						<br/>
-						<span
-							class="tos-info__footer__powered-by__content">NoneBot2 x nonebot-plugin-tetris-stats</span>
+						<span class="tos-info__footer__powered-by__content"
+						>NoneBot2 x nonebot-plugin-tetris-stats</span
+						>
 					</div>
 
 					<div class="tos-info__footer__designer">
@@ -153,11 +143,11 @@ inject(THEME_KEY, 'dark')
 </template>
 
 <style lang="scss">
-@import '@/v1/styles/main';
+@import "@/v1/styles/main";
 </style>
 
 <style lang="scss" scoped>
-@import '@/v1/styles/main';
+@import "@/v1/styles/main";
 
 .tos-info {
 	@extend .font-template;

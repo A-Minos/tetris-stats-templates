@@ -6,7 +6,7 @@ const path = 'v2/tetrio/rank'
 const test = async () => {
 	document.querySelector('template#data')!.innerHTML = JSON.stringify({
 		items: {
-			D: {
+			d: {
 				require_tr: 1,
 				trending: 1.1,
 				average_data: {
@@ -18,7 +18,7 @@ const test = async () => {
 				},
 				players: 86
 			},
-			'D+': {
+			'd+': {
 				require_tr: 2,
 				trending: -1.2,
 				average_data: {
@@ -30,7 +30,7 @@ const test = async () => {
 				},
 				players: 87
 			},
-			'C-': {
+			'c-': {
 				require_tr: 3,
 				trending: 1.3,
 				average_data: {
@@ -42,7 +42,7 @@ const test = async () => {
 				},
 				players: 88
 			},
-			C: {
+			c: {
 				require_tr: 4,
 				trending: -1.4,
 				average_data: {
@@ -54,7 +54,7 @@ const test = async () => {
 				},
 				players: 89
 			},
-			'C+': {
+			'c+': {
 				require_tr: 5,
 				trending: 1.5,
 				average_data: {
@@ -66,7 +66,7 @@ const test = async () => {
 				},
 				players: 90
 			},
-			'B-': {
+			'b-': {
 				require_tr: 6,
 				trending: -1.6,
 				average_data: {
@@ -78,7 +78,7 @@ const test = async () => {
 				},
 				players: 91
 			},
-			B: {
+			b: {
 				require_tr: 7,
 				trending: 1.7,
 				average_data: {
@@ -90,7 +90,7 @@ const test = async () => {
 				},
 				players: 92
 			},
-			'B+': {
+			'b+': {
 				require_tr: 8,
 				trending: -1.8,
 				average_data: {
@@ -102,7 +102,7 @@ const test = async () => {
 				},
 				players: 93
 			},
-			'A-': {
+			'a-': {
 				require_tr: 9,
 				trending: 1.9,
 				average_data: {
@@ -114,9 +114,9 @@ const test = async () => {
 				},
 				players: 94
 			},
-			A: {
+			a: {
 				require_tr: 10,
-				trending: -1.10,
+				trending: -1.1,
 				average_data: {
 					apm: 28,
 					pps: 29,
@@ -126,7 +126,7 @@ const test = async () => {
 				},
 				players: 95
 			},
-			'A+': {
+			'a+': {
 				require_tr: 11,
 				trending: 1.11,
 				average_data: {
@@ -138,7 +138,7 @@ const test = async () => {
 				},
 				players: 96
 			},
-			'S-': {
+			's-': {
 				require_tr: 12,
 				trending: -1.12,
 				average_data: {
@@ -150,7 +150,7 @@ const test = async () => {
 				},
 				players: 97
 			},
-			S: {
+			s: {
 				require_tr: 13,
 				trending: 1.13,
 				average_data: {
@@ -162,7 +162,7 @@ const test = async () => {
 				},
 				players: 98
 			},
-			'S+': {
+			's+': {
 				require_tr: 14,
 				trending: -1.14,
 				average_data: {
@@ -174,7 +174,7 @@ const test = async () => {
 				},
 				players: 99
 			},
-			SS: {
+			ss: {
 				require_tr: 15,
 				trending: 1.15,
 				average_data: {
@@ -186,7 +186,7 @@ const test = async () => {
 				},
 				players: 100
 			},
-			U: {
+			u: {
 				require_tr: 16,
 				trending: -1.16,
 				average_data: {
@@ -198,7 +198,7 @@ const test = async () => {
 				},
 				players: 101
 			},
-			X: {
+			x: {
 				require_tr: 17,
 				trending: 1.17,
 				average_data: {
@@ -211,7 +211,7 @@ const test = async () => {
 				players: 102
 			}
 		},
-		updated_at: new Date().toLocaleString('zh-CN')
+		updated_at: new Date()
 	} satisfies Data)
 
 	document.querySelector('template#path')!.innerHTML = path

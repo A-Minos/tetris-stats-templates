@@ -1,5 +1,6 @@
 <script lang="ts" setup>
-import type { Data, Type } from '@/v2/pages/tetrio/record/40l/index.vue'
+import type { SprintData } from '@/v2/pages/tetrio/record/40l/index.vue'
+import type Type from '@/v2/pages/tetrio/record/schemas/type'
 import type { Record, User } from '@/v2/types/tetrio'
 import { isNonNullish } from 'remeda'
 
@@ -7,18 +8,18 @@ const path = 'v2/tetrio/record/40l'
 
 const test = async () => {
 	const user = await fetch('/_proxy/tetrio/users/5eb3a6530b29196c155074e8')
-		.then(response => {
+		.then((response) => {
 			return response.json()
 		})
-		.then(result => {
+		.then((result) => {
 			return result.data.user as User
 		})
 
 	const records = await fetch(`/_proxy/tetrio/users/${user._id}/records`)
-		.then(response => {
+		.then((response) => {
 			return response.json()
 		})
-		.then(result => {
+		.then((result) => {
 			return result.data as Record
 		})
 
@@ -44,26 +45,34 @@ const test = async () => {
 			pieces: records.records['40l'].record.endcontext.piecesplaced,
 			pps: Number(
 				(
-					records.records['40l'].record.endcontext.piecesplaced / (records.records['40l'].record.endcontext.finalTime / 1000)
+					records.records['40l'].record.endcontext.piecesplaced /
+					(records.records['40l'].record.endcontext.finalTime / 1000)
 				).toFixed(2)
 			),
 			keys: records.records['40l'].record.endcontext.inputs,
 			kpp: Number(
-				(records.records['40l'].record.endcontext.inputs / records.records['40l'].record.endcontext.piecesplaced).toFixed(2)
+				(
+					records.records['40l'].record.endcontext.inputs /
+					records.records['40l'].record.endcontext.piecesplaced
+				).toFixed(2)
 			),
 			kps: Number(
 				(
-					records.records['40l'].record.endcontext.inputs / (records.records['40l'].record.endcontext.finalTime / 1000)
+					records.records['40l'].record.endcontext.inputs /
+					(records.records['40l'].record.endcontext.finalTime / 1000)
 				).toFixed(2)
 			),
 			lpm: Math.trunc(
 				Number(
 					(
-						records.records['40l'].record.endcontext.piecesplaced / (records.records['40l'].record.endcontext.finalTime / 1000)
+						records.records['40l'].record.endcontext.piecesplaced /
+						(records.records['40l'].record.endcontext.finalTime / 1000)
 					).toFixed(2)
 				) * 24
 			),
-			holds: isNonNullish(records.records['40l'].record.endcontext.holds) ? records.records['40l'].record.endcontext.holds : null,
+			holds: isNonNullish(records.records['40l'].record.endcontext.holds)
+				? records.records['40l'].record.endcontext.holds
+				: null,
 			score: records.records['40l'].record.endcontext.score,
 
 			lines: records.records['40l'].record.endcontext.lines,
@@ -87,7 +96,12 @@ const test = async () => {
 
 			finesse: {
 				faults: records.records['40l'].record.endcontext.finesse.faults,
-				accuracy: Math.round(records.records['40l'].record.endcontext.finesse.perfectpieces / records.records['40l'].record.endcontext.piecesplaced * 10000) / 100
+				accuracy:
+					Math.round(
+						(records.records['40l'].record.endcontext.finesse.perfectpieces /
+							records.records['40l'].record.endcontext.piecesplaced) *
+						10000
+					) / 100
 			},
 
 			max: {
@@ -96,7 +110,7 @@ const test = async () => {
 			}
 		},
 		play_at: records.records['40l'].record.ts
-	} satisfies Data)
+	} satisfies SprintData)
 
 	document.querySelector('template#path')!.innerHTML = path
 }

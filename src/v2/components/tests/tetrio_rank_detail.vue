@@ -5,7 +5,7 @@ const path = 'v2/tetrio/rank/detail'
 
 const test = async () => {
 	document.querySelector('template#data')!.innerHTML = JSON.stringify({
-		name: 'X',
+		name: 'x',
 		trending: 1.01,
 		require_tr: 1,
 		players: 2,
@@ -47,7 +47,7 @@ const test = async () => {
 			vs_holder: 'p9'
 		},
 
-		updated_at: new Date().toLocaleString('zh-CN')
+		updated_at: new Date()
 	} satisfies Data)
 
 	document.querySelector('template#path')!.innerHTML = path

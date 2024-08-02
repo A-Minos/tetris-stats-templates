@@ -13,14 +13,14 @@ import { use } from 'echarts/core'
 use([GridComponent, MarkLineComponent, LineChart])
 
 const props = defineProps<{
-	readonly data: TetraLeagueHistoryRecord[]
-	readonly split_interval: number
-	readonly min_tr: number
-	readonly max_tr: number
-	readonly offset: number
+	readonly data: TetraLeagueHistoryRecord[];
+	readonly split_interval: number;
+	readonly min_tr: number;
+	readonly max_tr: number;
+	readonly offset: number;
 }>()
 
-type ChartOption = ComposeOption<GridComponentOption | MarkLineComponentOption | LineSeriesOption>
+type ChartOption = ComposeOption<GridComponentOption | MarkLineComponentOption | LineSeriesOption>;
 
 const option = computed<ChartOption>(() => {
 	const interval = 3600 * 24 * 1000
@@ -55,9 +55,7 @@ const option = computed<ChartOption>(() => {
 						.toString()
 						.padStart(2, '0')
 
-					const day = date.getDate()
-						.toString()
-						.padStart(2, '0')
+					const day = date.getDate().toString().padStart(2, '0')
 
 					if (index === 10) {
 						return `{last_month|${month}}\n{last_day|${day}}`
@@ -115,8 +113,7 @@ const option = computed<ChartOption>(() => {
 			axisLabel: {
 				align: 'right',
 				formatter: (value) => {
-					const tr = value.toString()
-						.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',')
+					const tr = value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',')
 
 					return `{value|${tr}}`
 				},
@@ -135,11 +132,8 @@ const option = computed<ChartOption>(() => {
 		},
 		series: [
 			{
-				data: props.data.map(data => {
-					return [
-						new Date(data.record_at),
-						Number(data.tr)
-					]
+				data: props.data.map((data) => {
+					return [data.record_at, Number(data.tr)]
 				}),
 				type: 'line',
 				smooth: true,
@@ -211,9 +205,7 @@ const option = computed<ChartOption>(() => {
 	<div class="relative w-143.75 h-68.75 bg-[linear-gradient(222.34deg,#525252_11.97%,#1d1916_89.73%)]">
 		<chart :option="option"/>
 
-		<div class="absolute left-6 top-4.75 text-6.25 fw-extrabold text-[#fafafa]">
-			Tetra Rating (TR)
-		</div>
+		<div class="absolute left-6 top-4.75 text-6.25 fw-extrabold text-[#fafafa]">Tetra Rating (TR)</div>
 
 		<div class="absolute left-6 top-22.5">
 			<slot/>

@@ -1,5 +1,6 @@
 <script lang="ts" setup>
-import type { Data, Type } from '@/v2/pages/tetrio/record/blitz/index.vue'
+import type { BlitzData } from '@/v2/pages/tetrio/record/blitz/index.vue'
+import type Type from '@/v2/pages/tetrio/record/schemas/type'
 import type { Record, User } from '@/v2/types/tetrio'
 import { isNonNullish } from 'remeda'
 
@@ -7,18 +8,18 @@ const path = 'v2/tetrio/record/blitz'
 
 const test = async () => {
 	const user = await fetch('/_proxy/tetrio/users/5eb3a6530b29196c155074e8')
-		.then(response => {
+		.then((response) => {
 			return response.json()
 		})
-		.then(result => {
+		.then((result) => {
 			return result.data.user as User
 		})
 
 	const records = await fetch(`/_proxy/tetrio/users/${user._id}/records`)
-		.then(response => {
+		.then((response) => {
 			return response.json()
 		})
-		.then(result => {
+		.then((result) => {
 			return result.data as Record
 		})
 
@@ -44,26 +45,34 @@ const test = async () => {
 			pieces: records.records['blitz'].record.endcontext.piecesplaced,
 			pps: Number(
 				(
-					records.records['blitz'].record.endcontext.piecesplaced / (records.records['blitz'].record.endcontext.finalTime / 1000)
+					records.records['blitz'].record.endcontext.piecesplaced /
+					(records.records['blitz'].record.endcontext.finalTime / 1000)
 				).toFixed(2)
 			),
 			keys: records.records['blitz'].record.endcontext.inputs,
 			kpp: Number(
-				(records.records['blitz'].record.endcontext.inputs / records.records['blitz'].record.endcontext.piecesplaced).toFixed(2)
+				(
+					records.records['blitz'].record.endcontext.inputs /
+					records.records['blitz'].record.endcontext.piecesplaced
+				).toFixed(2)
 			),
 			kps: Number(
 				(
-					records.records['blitz'].record.endcontext.inputs / (records.records['blitz'].record.endcontext.finalTime / 1000)
+					records.records['blitz'].record.endcontext.inputs /
+					(records.records['blitz'].record.endcontext.finalTime / 1000)
 				).toFixed(2)
 			),
 			lpm: Math.trunc(
 				Number(
 					(
-						records.records['blitz'].record.endcontext.piecesplaced / (records.records['blitz'].record.endcontext.finalTime / 1000)
+						records.records['blitz'].record.endcontext.piecesplaced /
+						(records.records['blitz'].record.endcontext.finalTime / 1000)
 					).toFixed(2)
 				) * 24
 			),
-			holds: isNonNullish(records.records['blitz'].record.endcontext.holds) ? records.records['blitz'].record.endcontext.holds : null,
+			holds: isNonNullish(records.records['blitz'].record.endcontext.holds)
+				? records.records['blitz'].record.endcontext.holds
+				: null,
 			score: records.records['blitz'].record.endcontext.score,
 
 			lines: records.records['blitz'].record.endcontext.lines,
@@ -87,7 +96,12 @@ const test = async () => {
 
 			finesse: {
 				faults: records.records['blitz'].record.endcontext.finesse.faults,
-				accuracy: Math.round(records.records['blitz'].record.endcontext.finesse.perfectpieces / records.records['blitz'].record.endcontext.piecesplaced * 10000) / 100
+				accuracy:
+					Math.round(
+						(records.records['blitz'].record.endcontext.finesse.perfectpieces /
+							records.records['blitz'].record.endcontext.piecesplaced) *
+						10000
+					) / 100
 			},
 
 			max: {
@@ -97,11 +111,14 @@ const test = async () => {
 
 			level: records.records['blitz'].record.endcontext.level,
 			spp: Number(
-				(records.records['blitz'].record.endcontext.score / records.records['blitz'].record.endcontext.piecesplaced).toFixed(2)
+				(
+					records.records['blitz'].record.endcontext.score /
+					records.records['blitz'].record.endcontext.piecesplaced
+				).toFixed(2)
 			)
 		},
 		play_at: records.records['blitz'].record.ts
-	} satisfies Data)
+	} satisfies BlitzData)
 
 	document.querySelector('template#path')!.innerHTML = path
 }

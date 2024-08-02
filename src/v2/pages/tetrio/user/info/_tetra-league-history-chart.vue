@@ -3,8 +3,8 @@ import type { TetraLeagueHistory } from '@/v2/types/data'
 import { Chart } from '@antv/g2'
 
 const props = defineProps<{
-	readonly current_tr: number
-	readonly data: TetraLeagueHistory[]
+	readonly current_tr: number;
+	readonly data: TetraLeagueHistory[];
 }>()
 
 const container = ref<HTMLElement>()
@@ -34,7 +34,7 @@ tryOnMounted(() => {
 
 		encode: {
 			x: (data: TetraLeagueHistory) => {
-				return new Date(data.record_at)
+				return data.record_at
 			},
 			y: (data: TetraLeagueHistory) => {
 				return Number(data.tr)

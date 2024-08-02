@@ -1,58 +1,55 @@
 <script lang="ts">
-import type AvatarType from '@/shared/types/avatar'
+import User from '@/shared/schemas/user'
+import { z } from 'zod'
 
-export interface Data {
-	readonly user: {
-		readonly avatar: AvatarType
-		readonly name: string
-	}
+const Data = z
+	.object({
+		user: User,
+		ranking: z.object({
+			rating: z.number(),
+			rd: z.number()
+		}),
+		multiplayer: z.object({
+			pps: z.number(),
+			lpm: z.number(),
 
-	readonly ranking: {
-		readonly rating: number
-		readonly rd: number
-	}
+			apm: z.number(),
+			apl: z.number(),
 
-	readonly multiplayer: {
-		readonly pps: number
-		readonly lpm: number
+			vs: z.number(),
+			adpm: z.number(),
+			adpl: z.number()
+		}),
+		radar: z.object({
+			app: z.number(),
+			or: z.number(),
+			dspp: z.number(),
+			ci: z.number(),
+			ge: z.number()
+		}),
+		sprint: z.string(),
+		challenge: z.string(),
+		marathon: z.string()
+	})
+	.strict()
+	.readonly()
 
-		readonly apm: number
-		readonly apl: number
-
-		readonly vs: number
-		readonly adpm: number
-		readonly adpl: number
-	}
-
-	readonly radar: {
-		readonly app: number
-		readonly or: number
-		readonly dspp: number
-		readonly ci: number
-		readonly ge: number
-	}
-
-	readonly sprint: string
-	readonly challenge: string
-	readonly marathon: string
-}
+export type Data = z.infer<typeof Data>;
 </script>
 
 <script lang="ts" setup>
-import InfoLpm from '@/v1/components/info/card/lpm.vue'
-import logo from '@/v1/assets/images/logo/tos.svg'
 import Avatar from '@/shared/components/avatar.vue'
+import logo from '@/v1/assets/images/logo/tos.svg'
 import Info40l from '@/v1/components/info/card/40l.vue'
-import InfoChallenge from '@/v1/components/info/card/challenge.vue'
-import InfoMarathon from '@/v1/components/info/card/marathon.vue'
 import InfoAdpm from '@/v1/components/info/card/adpm.vue'
 import InfoApm from '@/v1/components/info/card/apm.vue'
+import InfoChallenge from '@/v1/components/info/card/challenge.vue'
+import InfoLpm from '@/v1/components/info/card/lpm.vue'
+import InfoMarathon from '@/v1/components/info/card/marathon.vue'
 import InfoRadarChart from '@/v1/components/info/chart/radar-chart.vue'
 import { THEME_KEY } from 'vue-echarts'
 
-const data: Data = JSON.parse(
-	document.querySelector<HTMLTemplateElement>('template#data')!.innerHTML.trim()
-)
+const data = Data.parse(JSON.parse(document.querySelector<HTMLTemplateElement>('template#data')!.innerHTML.trim()))
 
 inject(THEME_KEY, 'dark')
 
@@ -130,9 +127,7 @@ const radar_chart_data = [
 								{{ data.multiplayer.lpm }}
 
 								<template #extra>
-									<span class="whitespace-nowrap">
-										{{ data.multiplayer.pps }} pps
-									</span>
+									<span class="whitespace-nowrap"> {{ data.multiplayer.pps }} pps </span>
 								</template>
 							</info-lpm>
 						</div>
@@ -142,9 +137,7 @@ const radar_chart_data = [
 								{{ data.multiplayer.apm }}
 
 								<template #extra>
-									<span class="whitespace-nowrap">
-										x{{ data.multiplayer.apl }}
-									</span>
+									<span class="whitespace-nowrap"> x{{ data.multiplayer.apl }} </span>
 								</template>
 							</info-apm>
 						</div>
@@ -154,15 +147,11 @@ const radar_chart_data = [
 								{{ data.multiplayer.adpm }}
 
 								<template #extra>
-									<span class="whitespace-nowrap">
-										{{ data.multiplayer.vs }} vs
-									</span>
+									<span class="whitespace-nowrap"> {{ data.multiplayer.vs }} vs </span>
 
 									<br/>
 
-									<span class="whitespace-nowrap">
-										x{{ data.multiplayer.adpl }}
-									</span>
+									<span class="whitespace-nowrap"> x{{ data.multiplayer.adpl }} </span>
 								</template>
 							</info-adpm>
 						</div>
@@ -197,8 +186,9 @@ const radar_chart_data = [
 					<div class="tos-info__footer__powered-by">
 						<span class="tos-info__footer__powered-by__title">Powered by</span>
 						<br/>
-						<span
-							class="tos-info__footer__powered-by__content">NoneBot2 x nonebot-plugin-tetris-stats</span>
+						<span class="tos-info__footer__powered-by__content"
+						>NoneBot2 x nonebot-plugin-tetris-stats</span
+						>
 					</div>
 
 					<div class="tos-info__footer__designer">
@@ -220,11 +210,11 @@ const radar_chart_data = [
 </template>
 
 <style lang="scss">
-@import '@/v1/styles/main';
+@import "@/v1/styles/main";
 </style>
 
 <style lang="scss" scoped>
-@import '@/v1/styles/main';
+@import "@/v1/styles/main";
 
 .tos-info {
 	@extend .font-template;

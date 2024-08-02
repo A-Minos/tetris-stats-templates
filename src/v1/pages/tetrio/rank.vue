@@ -1,24 +1,35 @@
 <script lang="ts">
-import type { User } from '@/v2/types/tetrio'
+import Rank, { ValidRank } from '@/shared/schemas/rank'
+import { z } from 'zod'
 
-export interface Data {
-	readonly items: Record<Exclude<User['league']['rank'], 'Z'>, {
-		readonly trending: number
-		readonly require_tr: number
-		readonly players: number
-	}>
+const Data = z
+	.object({
+		items: z.record(
+			ValidRank,
+			z.object({
+				trending: z.number(),
+				require_tr: z.number(),
+				players: z.number()
+			})
+		),
+		updated_at: z.coerce.date()
+	})
+	.strict()
+	.readonly()
 
-	readonly updated_at: number
-}
+export type Data = z.infer<typeof Data>;
 </script>
 
 <script lang="ts" setup>
 import { isNonNullish } from 'remeda'
 
-const colorMappings: Record<string, {
-	readonly background: string
-	readonly text: string
-}> = {
+const colorMappings: Record<
+	Rank,
+	{
+		readonly background: string;
+		readonly text: string;
+	}
+> = {
 	x: {
 		background: 'radial-gradient(95.42% 572.5% at 4.58% 17.5%, #D946EF 0%, #F5CFFE 100%)',
 		text: '#8E23B4CC'
@@ -47,7 +58,7 @@ const colorMappings: Record<string, {
 		background: 'radial-gradient(95.42% 572.5% at 4.58% 17.5%, #23C55E 0%, #BBF7D1 100%)',
 		text: '#15532ECC'
 	},
-	'a': {
+	a: {
 		background: 'radial-gradient(95.42% 572.5% at 4.58% 17.5%, #23C55E 0%, #BBF7D1 100%)',
 		text: '#15532ECC'
 	},
@@ -83,32 +94,29 @@ const colorMappings: Record<string, {
 		background: 'radial-gradient(95.42% 572.5% at 4.58% 17.5%, #64748B 0%, #E1E8F0 100%)',
 		text: '#0F172A'
 	},
-	'd': {
+	d: {
 		background: 'radial-gradient(95.42% 572.5% at 4.58% 17.5%, #64748B 0%, #E1E8F0 100%)',
 		text: '#0F172A'
 	},
-	'z': {
+	z: {
 		background: 'radial-gradient(95.42% 572.5% at 4.58% 17.5%, #737373 0%, #E5E5E5 100%)',
 		text: '#171717'
 	}
 }
 
-const data: Data = JSON.parse(
-	document.querySelector<HTMLTemplateElement>('template#data')!.innerHTML.trim()
-)
+const data = Data.parse(JSON.parse(document.querySelector<HTMLTemplateElement>('template#data')!.innerHTML.trim()))
 
 const rankImageMap = asyncComputed(async () => {
 	return Object.fromEntries(
 		await Promise.all(
-			Object.keys(data.items).map(async rank => {
+			Object.keys(data.items).map(async (rank) => {
 				const name = rank.toLowerCase()
 
 				return [
 					rank,
-					await import(`@/shared/assets/images/ranks/${name}.svg?url`)
-						.then(module => {
-							return module.default
-						})
+					await import(`@/shared/assets/images/ranks/${name}.svg?url`).then((module) => {
+						return module.default
+					})
 				]
 			})
 		)
@@ -121,12 +129,19 @@ const rankImageMap = asyncComputed(async () => {
 		<span class="tetrio-rank__title">Rankings</span>
 
 		<div class="tetrio-rank__list">
-			<div v-for="(rank, name) in data.items" :style="{ backgroundImage: colorMappings[name].background }"
-				 class="tetrio-rank__item">
-				<div class="tetrio-rank__item__container">
+			<div
+				v-for="(rank, name) in data.items"
+				:style="{ backgroundImage: colorMappings[name].background }"
+				class="tetrio-rank__item"
+			>
+				<div v-if="rank !== undefined" class="tetrio-rank__item__container">
 					<div class="tetrio-rank__item__rank">
-						<img v-if="isNonNullish(rankImageMap[name])" :alt="name" :src="rankImageMap[name]"
-							 class="w-12.5 h-12.5"/>
+						<img
+							v-if="isNonNullish(rankImageMap[name])"
+							:alt="name"
+							:src="rankImageMap[name]"
+							class="w-12.5 h-12.5"
+						/>
 					</div>
 
 					<div :style="{ color: colorMappings[name].text }" class="tetrio-rank__item__trending">
@@ -135,25 +150,23 @@ const rankImageMap = asyncComputed(async () => {
 
 					<div :style="{ color: colorMappings[name].text }" class="tetrio-rank__item__info">
 						<span class="tetrio-rank__item__info__tr">{{ rank.require_tr }}</span>
-						<br>
+						<br/>
 						<span class="tetrio-rank__item__info__players">{{ rank.players }} players</span>
 					</div>
 				</div>
 			</div>
 		</div>
 
-		<div class="tetrio-rank__update_at">
-			Updated on {{ new Date(data.updated_at).toLocaleString('zh-CN') }}
-		</div>
+		<div class="tetrio-rank__update_at">Updated on {{ data.updated_at.toLocaleString('zh-CN') }}</div>
 	</div>
 </template>
 
 <style lang="scss">
-@import '@/v1/styles/main';
+@import "@/v1/styles/main";
 </style>
 
 <style lang="scss" scoped>
-@import '@/v1/styles/main';
+@import "@/v1/styles/main";
 
 .tetrio-rank {
 	@extend .font-template;

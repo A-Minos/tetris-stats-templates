@@ -1,80 +1,84 @@
 <script lang="ts">
-import type AvatarType from '@/shared/types/avatar'
-import type { TetraLeagueHistoryRecord } from '@/v1/types'
+import Rank from '@/shared/schemas/rank'
+import User from '@/shared/schemas/user'
+import { z } from 'zod'
 
-export interface Data {
-	readonly user: {
-		readonly avatar: AvatarType
-		readonly name: string
-		readonly bio: string
-	}
+const Data = z
+	.object({
+		user: User.extend({ bio: z.string().nullable() }),
 
-	readonly ranking: {
-		readonly rating: number
-		readonly rd: number
-	}
+		ranking: z.object({
+			rating: z.number(),
+			rd: z.number()
+		}),
 
-	readonly tetra_league: {
-		readonly rank: 'x' | 'u' | 'ss' | 's+' | 's' | 's-' | 'a+' | 'a' | 'a-' | 'b+' | 'b' | 'b-' | 'c+' | 'c' | 'c-' | 'd+' | 'd' | 'z'
-		readonly tr: number
-		readonly global_rank: number
+		tetra_league: z.object({
+			rank: Rank,
+			tr: z.number(),
+			global_rank: z.number(),
 
-		readonly pps: number
-		readonly lpm: number
+			pps: z.number(),
+			lpm: z.number(),
 
-		readonly apm: number
-		readonly apl: number
+			apm: z.number(),
+			apl: z.number(),
 
-		readonly vs: number
-		readonly adpm: number
-		readonly adpl: number
-	}
+			vs: z.number(),
+			adpm: z.number(),
+			adpl: z.number()
+		}),
 
-	readonly tetra_league_history: {
-		readonly data: TetraLeagueHistoryRecord[]
-		readonly split_interval: number
-		readonly min_tr: number
-		readonly max_tr: number
-		readonly offset: number
-	}
+		tetra_league_history: z.object({
+			data: z.array(
+				z.object({
+					record_at: z.coerce.date(),
+					tr: z.number()
+				})
+			),
+			split_interval: z.number(),
+			min_tr: z.number(),
+			max_tr: z.number(),
+			offset: z.number()
+		}),
 
-	readonly radar: {
-		readonly app: number
-		readonly dsps: number
-		readonly dspp: number
-		readonly ci: number
-		readonly ge: number
-	}
+		radar: z.object({
+			app: z.number(),
+			dsps: z.number(),
+			dspp: z.number(),
+			ci: z.number(),
+			ge: z.number()
+		}),
 
-	readonly sprint: string
-	readonly blitz: string
-}
+		sprint: z.string(),
+		blitz: z.string()
+	})
+	.strict()
+	.readonly()
+
+export type Data = z.infer<typeof Data>;
 </script>
 
 <script lang="ts" setup>
-import InfoLpm from '@/v1/components/info/card/lpm.vue'
-import logo from '@/v1/assets/images/logo/tetrio.svg'
 import Avatar from '@/shared/components/avatar.vue'
+import logo from '@/v1/assets/images/logo/tetrio.svg'
 import Info40l from '@/v1/components/info/card/40l.vue'
 import InfoAdpm from '@/v1/components/info/card/adpm.vue'
 import InfoApm from '@/v1/components/info/card/apm.vue'
 import InfoBlitz from '@/v1/components/info/card/blitz.vue'
+import InfoLpm from '@/v1/components/info/card/lpm.vue'
 import InfoRadarChart from '@/v1/components/info/chart/radar-chart.vue'
 import InfoTrChart from '@/v1/components/info/chart/tr-chart.vue'
 import { isNonNullish } from 'remeda'
 import { THEME_KEY } from 'vue-echarts'
 
-const data: Data = JSON.parse(
-	document.querySelector<HTMLTemplateElement>('template#data')!.innerHTML.trim()
-)
+const data = Data.parse(JSON.parse(document.querySelector<HTMLTemplateElement>('template#data')!.innerHTML.trim()))
 
 inject(THEME_KEY, 'dark')
 
 const rankImage = asyncComputed(async () => {
-	return await import(`@/shared/assets/images/ranks/${data.tetra_league.rank}.svg?url`)
-		.then(module => {
-			return module.default
-		})
+	return await import(`@/shared/assets/images/ranks/${data.tetra_league.rank}.svg?url`).then((module) => {
+		return module.default
+	})
 })
 
 const unescape = (content: string) => {
@@ -152,12 +156,20 @@ const radar_chart_data = [
 				</div>
 
 				<div class="tetrio-info__tr-chart">
-					<info-tr-chart :data="data.tetra_league_history.data" :max_tr="data.tetra_league_history.max_tr"
-								   :min_tr="data.tetra_league_history.min_tr" :offset="data.tetra_league_history.offset"
-								   :split_interval="data.tetra_league_history.split_interval">
+					<info-tr-chart
+						:data="data.tetra_league_history.data"
+						:max_tr="data.tetra_league_history.max_tr"
+						:min_tr="data.tetra_league_history.min_tr"
+						:offset="data.tetra_league_history.offset"
+						:split_interval="data.tetra_league_history.split_interval"
+					>
 						<div class="flex flex-col">
-							<img v-if="isNonNullish(rankImage)" :alt="data.tetra_league.rank" :src="rankImage"
-								 class="w-12.5 h-12.5"/>
+							<img
+								v-if="isNonNullish(rankImage)"
+								:alt="data.tetra_league.rank"
+								:src="rankImage"
+								class="w-12.5 h-12.5"
+							/>
 
 							<div class="tetrio-info__tr-chart__tr-rank">
 								<span class="tetrio-info__tr-chart__tr-rank__tr">
@@ -181,9 +193,7 @@ const radar_chart_data = [
 								{{ data.tetra_league.lpm }}
 
 								<template #extra>
-									<span class="whitespace-nowrap">
-										{{ data.tetra_league.pps }} pps
-									</span>
+									<span class="whitespace-nowrap"> {{ data.tetra_league.pps }} pps </span>
 								</template>
 							</info-lpm>
 						</div>
@@ -193,9 +203,7 @@ const radar_chart_data = [
 								{{ data.tetra_league.apm }}
 
 								<template #extra>
-									<span class="whitespace-nowrap">
-										x{{ data.tetra_league.apl }}
-									</span>
+									<span class="whitespace-nowrap"> x{{ data.tetra_league.apl }} </span>
 								</template>
 							</info-apm>
 						</div>
@@ -205,15 +213,11 @@ const radar_chart_data = [
 								{{ data.tetra_league.adpm }}
 
 								<template #extra>
-									<span class="whitespace-nowrap">
-										{{ data.tetra_league.vs }} vs
-									</span>
+									<span class="whitespace-nowrap"> {{ data.tetra_league.vs }} vs </span>
 
 									<br/>
 
-									<span class="whitespace-nowrap">
-										x{{ data.tetra_league.adpl }}
-									</span>
+									<span class="whitespace-nowrap"> x{{ data.tetra_league.adpl }} </span>
 								</template>
 							</info-adpm>
 						</div>
@@ -240,8 +244,9 @@ const radar_chart_data = [
 					<div class="tetrio-info__footer__powered-by">
 						<span class="tetrio-info__footer__powered-by__title">Powered by</span>
 						<br/>
-						<span
-							class="tetrio-info__footer__powered-by__content">NoneBot2 x nonebot-plugin-tetris-stats</span>
+						<span class="tetrio-info__footer__powered-by__content"
+						>NoneBot2 x nonebot-plugin-tetris-stats</span
+						>
 					</div>
 
 					<div class="tetrio-info__footer__designer">
@@ -263,11 +268,11 @@ const radar_chart_data = [
 </template>
 
 <style lang="scss">
-@import '@/v1/styles/main';
+@import "@/v1/styles/main";
 </style>
 
 <style lang="scss" scoped>
-@import '@/v1/styles/main';
+@import "@/v1/styles/main";
 
 .tetrio-info {
 	@extend .font-template;
