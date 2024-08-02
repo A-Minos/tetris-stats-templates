@@ -49,7 +49,7 @@ export interface User {
 			| "u"
 			| "x"
 			| "z";
-		readonly bestrank: Exclude<User["league"]["rank"], "Z">;
+		readonly bestrank: Exclude<User["league"]["rank"], "z">;
 
 		readonly glicko?: number;
 		readonly rd?: number;
