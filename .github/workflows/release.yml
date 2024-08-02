@@ -3,7 +3,7 @@ name: 发布
 on:
     push:
         tags:
-            - '**'
+            - "**"
     workflow_dispatch:
 
 jobs:
@@ -20,7 +20,17 @@ jobs:
             - run: pnpm run build
             - run: pnpm run check
 
-            - run: cd dist && zip -q -r -9 ../dist.zip .
+            - shell: bash
+              run: |
+                  sudo apt-get update -y
+                  sudo apt-get install hashdeep -y
+
+            - shell: bash
+              run: |
+                  sha256deep -r -l ./dist > hash.sha256
+                  cd dist
+                  mv ../hash.sha256 .
+                  zip -q -r -9 ../dist.zip .
 
             - uses: softprops/action-gh-release@v2
               with:
