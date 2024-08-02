@@ -94,7 +94,7 @@ const test = async () => {
 						record_at: (() => {
 							let date = new Date()
 							date = subDays(date, 10)
-							return date.toLocaleString()
+							return date
 						})(),
 						tr: random(
 							Number(
@@ -121,7 +121,7 @@ const test = async () => {
 								date = setSeconds(date, random(0, 60))
 
 								return {
-									record_at: date.toLocaleString('zh-CN'),
+									record_at: date,
 									tr: random(
 										Number(
 											user.league.rating.toFixed(2)
@@ -138,7 +138,7 @@ const test = async () => {
 						record_at: (() => {
 							let date = new Date()
 							date = resetTime(date)
-							return date.toLocaleString('zh-CN')
+							return date
 						})(),
 						tr: Number(
 							user.league.rating.toFixed(2)
