@@ -27,8 +27,8 @@ jobs:
 
             - shell: bash
               run: |
-                  sha256deep -r -l ./dist > hash.sha256
                   cd dist
+                  sha256deep -r -l ./ > ../hash.sha256
                   mv ../hash.sha256 .
                   zip -q -r -9 ../dist.zip .
 
