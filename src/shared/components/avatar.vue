@@ -1,21 +1,39 @@
+<script lang="ts">
+import { z } from 'zod'
+
+enum AvatarType {
+	IMAGE = 'image',
+	IDENTICON = 'identicon'
+}
+
+export const Avatar = z.union([
+	z.object({
+		type: z.literal(AvatarType.IMAGE),
+		src: z.string()
+	}),
+	z.object({
+		type: z.literal(AvatarType.IDENTICON),
+		user_id: z.string()
+	})
+])
+</script>
+
 <script lang="ts" setup>
-import Avatar from '@/shared/types/avatar'
+import { md5 } from 'hash-wasm'
 import Identicon from 'identicon.js'
-import { isString } from 'remeda'
+import { isNonNullish } from 'remeda'
 
-const props = defineProps<{
-	readonly avatar: Avatar
-}>()
+const props = defineProps<
+	z.infer<typeof Avatar>
+>()
 
-const url = computed(() => {
-	if (isString(props.avatar)) {
-		return props.avatar
-	}
-
-	switch (props.avatar.type) {
-		case 'identicon':
+const url = asyncComputed(() => {
+	switch (props.type) {
+		case AvatarType.IMAGE:
+			return props.src
+		case AvatarType.IDENTICON:
 			// @ts-ignore
-			const data = new Identicon(props.avatar.hash, {
+			const data = new Identicon(await md5(props.user_id), {
 				background: [8, 10, 6, 255],
 				margin: 0.15,
 				size: 300,
@@ -30,5 +48,9 @@ const url = computed(() => {
 </script>
 
 <template>
-	<img :src="url" alt="头像"/>
+	<template v-if="isNonNullish(url)">
+		<slot :url="url">
+			<img :src="url" alt="头像"/>
+		</slot>
+	</template>
 </template>
