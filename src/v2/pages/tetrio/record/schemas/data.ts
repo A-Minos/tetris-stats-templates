@@ -6,7 +6,7 @@ import Type from './type'
 const Data = z.object({
 	type: z.nativeEnum(Type).nullable(),
 
-	user: User.extend({ id: z.string() }).omit({ avatar: true }),
+	user: User.extend({ id: z.string() }),
 	time: z.string(),
 	replay_id: z.string(),
 	rank: z.number().nullable(),
