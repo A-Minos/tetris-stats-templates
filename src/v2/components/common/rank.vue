@@ -1,20 +1,13 @@
 <script lang="ts" setup>
-import type { User } from '@/v2/types/tetrio'
+import SharedRank from '@/shared/components/rank.vue'
 
-const props = defineProps<{
-	readonly rank: User['league']['rank']
-}>()
-
-const url = asyncComputed(async () => {
-	const name = props.rank.toLowerCase()
-
-	return await import(`@/shared/assets/images/ranks/${name}.svg?url`)
-		.then(module => {
-			return module.default
-		})
-})
+defineProps<InstanceType<typeof SharedRank>['$props']>()
 </script>
 
 <template>
-	<n-image :src="url"/>
+	<SharedRank v-bind="$props">
+		<template v-slot="{ url }">
+			<n-image :src="url"/>
+		</template>
+	</SharedRank>
 </template>
