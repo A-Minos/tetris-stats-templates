@@ -27,17 +27,9 @@ const test = async () => {
 		type: 'best' as Type,
 		user: {
 			id: user._id,
-			name: user.username
+			name: user.username,
+			avatar: ''
 		},
-		time: (() => {
-			const time = records.records['blitz'].record.endcontext.finalTime / 1000
-
-			const hours = Math.trunc(time / 60)
-			const seconds = Math.trunc(time % 60)
-			const milliseconds = Math.trunc((time % 1) * 1000)
-
-			return `${hours}:${seconds}.${milliseconds}`
-		})(),
 		replay_id: records.records['blitz'].record.replayid,
 		rank: records.records['blitz'].rank,
 		personal_rank: 1,

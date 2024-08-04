@@ -27,7 +27,8 @@ const test = async () => {
 		type: 'best' as Type,
 		user: {
 			id: user._id,
-			name: user.username
+			name: user.username,
+			avatar: ''
 		},
 		time: (() => {
 			const time = records.records['40l'].record.endcontext.finalTime / 1000
