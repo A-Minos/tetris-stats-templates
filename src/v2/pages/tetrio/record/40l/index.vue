@@ -3,7 +3,7 @@ import { z } from 'zod'
 import Data from '../schemas/data'
 import Type from '../schemas/type'
 
-const SprintData = Data.strict().readonly()
+const SprintData = Data.extend({ time: z.string() }).strict().readonly()
 
 export type SprintData = z.infer<typeof SprintData>;
 const data = SprintData.parse(

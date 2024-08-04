@@ -7,7 +7,7 @@ const Data = z.object({
 	type: z.nativeEnum(Type).nullable(),
 
 	user: User.extend({ id: z.string() }),
-	time: z.string(),
+
 	replay_id: z.string(),
 	rank: z.number().nullable(),
 	personal_rank: z.number().nullable(),
