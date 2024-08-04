@@ -1,6 +1,6 @@
 <script lang="ts">
 import User from '@/shared/schemas/user'
-import z from 'zod'
+import { z } from 'zod'
 
 const Data = z
 	.object({

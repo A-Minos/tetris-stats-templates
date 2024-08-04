@@ -1,6 +1,6 @@
 <script lang="ts">
 import Avatar from '@/shared/schemas/avatar'
-import z from 'zod'
+import { z } from 'zod'
 
 const DetailData = z.object({
 	pps: z.number(),
