@@ -35,7 +35,7 @@ const Data = z
 					id: z.string(),
 					description: z.string(),
 					group: z.string().nullable(),
-					receive_at: z.string().nullable()
+					receive_at: z.coerce.date().nullable()
 				})
 			),
 
