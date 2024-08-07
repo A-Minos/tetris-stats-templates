@@ -9,7 +9,7 @@ export interface User {
 		readonly id: string;
 		readonly label: string;
 		readonly group?: string;
-		readonly ts?: string;
+		readonly ts?: Date;
 	}[];
 
 	readonly xp: number;
