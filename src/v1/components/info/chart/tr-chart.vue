@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import bubble from '@/v1/assets/images/chart/bubble.svg?url'
 import point from '@/v1/assets/images/chart/point.svg?url'
 import Chart from '@/v1/components/info/chart/_base.vue'
 import type { TetraLeagueHistoryRecord } from '@/v1/types'
@@ -137,6 +138,30 @@ const option = computed<ChartOption>(() => {
 				}),
 				type: 'line',
 				smooth: true,
+				endLabel: {
+					position: 'left',
+					offset: [-20, 20],
+					show: true,
+					formatter: ['{@[1]}', '{textBorder|±340.12}'].join('\n'),
+					align: 'right',
+					backgroundColor: {
+						image: bubble
+					},
+					borderRadius: 5,
+					padding: [15, 20, 10, 10],
+					fontSize: 45,
+					fontWeight: 800,
+					fontFamily: 'CabinetGrotesk-Variable',
+					lineHeight: 40,
+					color: '#1d1916',
+					rich: {
+						textBorder: {
+							fontSize: 30,
+							fontFamily: 'CabinetGrotesk-Variable',
+							color: '#1d1916'
+						}
+					}
+				},
 				symbol: (_, series) => {
 					if (series.dataIndex === props.data.length - 1) {
 						return `image://${point}`
