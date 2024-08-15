@@ -1,5 +1,5 @@
 <script lang="ts">
-import Avatar from '@/shared/schemas/avatar'
+import User from '@/shared/schemas/user'
 import { z } from 'zod'
 
 const DetailData = z.object({
@@ -12,10 +12,7 @@ const DetailData = z.object({
 
 const Data = z
 	.object({
-		user: z.object({
-			avatar: Avatar,
-			name: z.string()
-		}),
+		user: User,
 		today: DetailData,
 		history: DetailData
 	})
@@ -30,6 +27,7 @@ import logo from '@/v1/assets/images/logo/top.svg'
 import InfoApm from '@/v1/components/info/card/apm.vue'
 import InfoLpm from '@/v1/components/info/card/lpm.vue'
 import { THEME_KEY } from 'vue-echarts'
+import Avatar from '@/shared/components/avatar.vue'
 
 const data = Data.parse(JSON.parse(document.querySelector<HTMLTemplateElement>('template#data')!.innerHTML.trim()))
 
