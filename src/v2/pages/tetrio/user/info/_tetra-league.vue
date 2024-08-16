@@ -34,6 +34,11 @@ const props = defineProps<{
 }>()
 
 const highest_rank_url = asyncComputed(async () => {
+	if (props.highest_rank === 'x+') {
+		return await import(`@/shared/assets/images/ranks/${props.highest_rank}.png?url`).then((module) => {
+			return module.default
+		})
+	}
 	return await import(`@/shared/assets/images/ranks/${props.highest_rank}.svg?url`)
 		.then(module => {
 			return module.default
