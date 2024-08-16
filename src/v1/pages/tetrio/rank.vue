@@ -30,6 +30,10 @@ const colorMappings: Record<
 		readonly text: string;
 	}
 > = {
+	'x+': {
+		background: 'radial-gradient(95.42% 572.5% at 4.58% 17.5%, #D946EF 0%, #F5CFFE 100%)',
+		text: '#8E23B4CC'
+	},
 	x: {
 		background: 'radial-gradient(95.42% 572.5% at 4.58% 17.5%, #D946EF 0%, #F5CFFE 100%)',
 		text: '#8E23B4CC'

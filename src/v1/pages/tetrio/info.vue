@@ -76,6 +76,11 @@ const data = Data.parse(JSON.parse(document.querySelector<HTMLTemplateElement>('
 inject(THEME_KEY, 'dark')
 
 const rankImage = asyncComputed(async () => {
+	if (data.tetra_league.rank === 'x+') {
+		return await import(`@/shared/assets/images/ranks/${data.tetra_league.rank}.png?url`).then((module) => {
+			return module.default
+		})
+	}
 	return await import(`@/shared/assets/images/ranks/${data.tetra_league.rank}.svg?url`).then((module) => {
 		return module.default
 	})

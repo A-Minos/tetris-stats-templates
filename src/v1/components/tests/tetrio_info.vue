@@ -43,7 +43,7 @@ const test = () => {
 			})()
 
 			readonly tetra_league = new (class {
-				readonly rank = prompt('用户段位 (d, d+, c-, c, c+, b-, b, b+, a-, a, a+, s-, s, s+, ss, u, x)', 'u')
+				readonly rank = prompt('用户段位 (d, d+, c-, c, c+, b-, b, b+, a-, a, a+, s-, s, s+, ss, u, x)', 'x+')
 
 				readonly tr = tr
 

@@ -1,6 +1,7 @@
 import { z } from 'zod'
 
 const ValidRank = z.union([
+	z.literal('x+'),
 	z.literal('x'),
 	z.literal('u'),
 	z.literal('ss'),

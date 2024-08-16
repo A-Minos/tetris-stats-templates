@@ -48,6 +48,7 @@ export interface User {
 			| 'ss'
 			| 'u'
 			| 'x'
+			| 'x+'
 			| 'z';
 		readonly bestrank: Exclude<User['league']['rank'], 'z'>;
 
