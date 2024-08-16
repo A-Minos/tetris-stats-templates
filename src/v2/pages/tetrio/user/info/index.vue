@@ -1,5 +1,5 @@
 <script lang="ts">
-import Rank, { ValidRank } from '@/shared/schemas/rank'
+import Rank from '@/shared/schemas/rank'
 import BaseUser from '@/shared/schemas/user'
 import { z } from 'zod'
 
@@ -47,7 +47,7 @@ const Data = z
 		tetra_league: z
 			.object({
 				rank: Rank,
-				highest_rank: ValidRank,
+				highest_rank: Rank,
 
 				tr: z.number(),
 
