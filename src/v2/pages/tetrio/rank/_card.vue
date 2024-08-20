@@ -7,13 +7,7 @@ const props = defineProps<{
 }>()
 
 const icon = asyncComputed(async () => {
-	const rank = props.name.toLowerCase()
-	if (rank === 'x+') {
-		return await import(`@/shared/assets/images/ranks/${rank}.png?url`).then((module) => {
-			return module.default
-		})
-	}
-	return await import(`@/shared/assets/images/ranks/${rank}.svg?url`)
+	return await import(`@/shared/assets/images/ranks/${props.name.toLowerCase()}.svg?url`)
 		.then(module => {
 			return module.default
 		})
