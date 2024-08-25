@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import avatar from '@/v2/components/common/avatar.vue'
 import country from '@/v2/components/common/country.vue'
-import verified from '@/v2/components/common/verified.vue'
 
 import { calculateXpLevel } from '@/v2/core/utils/xp.ts'
 import { isNonNullish } from 'remeda'
@@ -12,7 +11,6 @@ const props = defineProps<{
 	readonly id: string
 	readonly name: string
 	readonly country: string | null
-	readonly verified: boolean
 	readonly xp: number
 }>()
 </script>
@@ -41,10 +39,6 @@ const props = defineProps<{
 		<n-flex align="center" size="small" vertical>
 			<template v-if="isNonNullish(props.country)">
 				<country :code="props.country" class="[&>img]:(h-5) rounded-sm"/>
-			</template>
-
-			<template v-if="props.verified">
-				<verified/>
 			</template>
 		</n-flex>
 	</n-flex>

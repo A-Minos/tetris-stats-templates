@@ -2,7 +2,6 @@
 import logo from '@/v2/assets/images/logos/tetrio.svg'
 import avatar from '@/v2/components/common/avatar.vue'
 import country from '@/v2/components/common/country.vue'
-import verified from '@/v2/components/common/verified.vue'
 
 import { HeartFilled, StarFilled } from '@vicons/antd'
 import { isNonNullish } from 'remeda'
@@ -14,7 +13,6 @@ const props = defineProps<{
 	readonly id: string
 
 	readonly country: string | null
-	readonly verified: boolean
 
 	readonly friend_count: number | null
 	readonly supporter_tier: number
@@ -45,9 +43,6 @@ const { define: LogoDefine, reuse: Logo } = createReusableTemplate()
 								<country :code="props.country" class="[&>img]:(h-4) rounded-sm"/>
 							</template>
 
-							<template v-if="props.verified">
-								<verified/>
-							</template>
 						</n-flex>
 					</n-flex>
 

@@ -50,7 +50,6 @@ const test = async () => {
 			playtime: user.gametime !== -1 ? `${Math.trunc(user.gametime / 3600)} 小时` : null,
 			supporter_tier: user.supporter_tier,
 			bad_standing: user.badstanding ?? false,
-			verified: user.verified,
 			bio: user.bio ?? null,
 			join_at: user.ts ?? null
 		},

@@ -17,6 +17,7 @@ const Data = z
 				z.literal('mod'),
 				z.literal('admin'),
 				z.literal('sysop'),
+				z.literal('hidden'),
 				z.literal('banned')
 			]),
 
@@ -27,7 +28,6 @@ const Data = z
 			friend_count: z.number().nullable(),
 			supporter_tier: z.number(),
 
-			verified: z.boolean(),
 			bad_standing: z.boolean(),
 
 			badges: z.array(
@@ -149,7 +149,6 @@ import { isNonNullish } from 'remeda'
 			:friend_count="data.user.friend_count"
 			:name="data.user.name"
 			:supporter_tier="data.user.supporter_tier"
-			:verified="data.user.verified"
 		/>
 
 		<template v-if="data.user.role === 'banned'">

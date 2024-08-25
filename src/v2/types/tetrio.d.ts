@@ -1,7 +1,7 @@
 export interface User {
 	readonly _id: string;
 	readonly username: string;
-	readonly role: 'anon' | 'user' | 'bot' | 'halfmod' | 'mod' | 'admin' | 'sysop' | 'banned';
+	readonly role: 'anon' | 'user' | 'bot' | 'halfmod' | 'mod' | 'admin' | 'sysop' | 'hidden' | 'banned';
 	readonly ts?: Date;
 	readonly botmaster?: string;
 

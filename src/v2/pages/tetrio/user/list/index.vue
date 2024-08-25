@@ -9,7 +9,6 @@ const Data = z
 				id: z.string(),
 				name: z.string(),
 				country: z.string().nullable(),
-				verified: z.boolean(),
 
 				tetra_league: z.object({
 					rank: Rank,
@@ -67,7 +66,6 @@ const checkDecaying = (user: Data['users'][number]) => {
 						:country="user.country"
 						:index="data.show_index ? index + 1 : null"
 						:name="user.name"
-						:verified="user.verified"
 						:xp="user.xp"
 					/>
 
