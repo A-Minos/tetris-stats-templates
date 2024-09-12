@@ -4,21 +4,15 @@ const props = defineProps<{
 	readonly code: string
 }>()
 
-const isTW = computed(() => {
-	return props.code.toLowerCase() === 'tw'
+const isSensitive = computed(() => {
+	return ['tw', 'hk'].includes(props.code.toLowerCase())
 })
 
 const url = computed(() => {
-	let code = props.code.toLowerCase()
-
-	if (isTW.value) {
-		code = 'cn'
-	}
-
-	return `https://tetr.io/res/flags/${code}.png`
+	return `https://tetr.io/res/flags/${isSensitive.value ? 'cn' : props.code.toLowerCase()}.png`
 })
 </script>
 
 <template>
-	<n-image :class="{ 'opacity-50': isTW }" :src="url"/>
+	<n-image :class="{ 'opacity-50': isSensitive }" :src="url"/>
 </template>
