@@ -1,9 +1,11 @@
 <script lang="ts" setup>
-import avatar from '@/v2/components/common/avatar.vue'
+import AvatarCard from '@/shared/components/avatar.vue'
+import type AvatarType from '@/shared/schemas/avatar.ts'
 
 defineProps<{
 	readonly id: string
 	readonly name: string
+	readonly avatar: AvatarType
 }>()
 </script>
 
@@ -11,7 +13,7 @@ defineProps<{
 	<n-card class="w-fit">
 		<div class="flex flex-col justify-center items-center h-full">
 			<n-flex align="center" vertical>
-				<avatar :user_id="id" class="[&,&>img]:size-32"/>
+				<avatar-card :avatar="avatar" class="[&,&>img]:size-32"/>
 
 				<n-text class="text-(6 current) fw-bold leading-none">
 					{{ name }}

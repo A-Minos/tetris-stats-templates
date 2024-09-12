@@ -21,6 +21,7 @@ const test = async () => {
 				return {
 					id: user._id,
 					name: user.username,
+					avatar: '',
 					country: user.country ?? null,
 					verified: user.verified,
 

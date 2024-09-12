@@ -64,7 +64,7 @@ const type = computed(() => {
 		/>
 
 		<n-flex :wrap="false">
-			<blitz_user :id="data.user.id" :name="data.user.name"/>
+			<blitz_user :id="data.user.id" :avatar="data.user.avatar" :name="data.user.name"/>
 
 			<n-flex class="flex-1" vertical>
 				<n-flex :wrap="false">

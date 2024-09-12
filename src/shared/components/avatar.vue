@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import Avatar from '@/shared/types/avatar'
+import Avatar from '@/shared/schemas/avatar.ts'
 import Identicon from 'identicon.js'
 import { isString } from 'remeda'
 

@@ -1,13 +1,13 @@
 <script lang="ts">
+import User from '@/shared/schemas/user.ts'
 import { z } from 'zod'
 
 const Data = z
 	.object({
 		show_index: z.boolean(),
 		users: z.array(
-			z.object({
+			User.extend({
 				id: z.string(),
-				name: z.string(),
 				country: z.string().nullable(),
 
 				tetra_league: z.object({
@@ -63,6 +63,7 @@ const checkDecaying = (user: Data['users'][number]) => {
 				<n-flex justify="space-between">
 					<list_user
 						:id="user.id"
+						:avatar="user.avatar"
 						:country="user.country"
 						:index="data.show_index ? index + 1 : null"
 						:name="user.name"

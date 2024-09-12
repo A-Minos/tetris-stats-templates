@@ -71,7 +71,7 @@ const type = computed(() => {
 		/>
 
 		<n-flex :wrap="false">
-			<sprint_user :id="data.user.id" :name="data.user.name"/>
+			<sprint_user :id="data.user.id" :avatar="data.user.avatar" :name="data.user.name"/>
 
 			<n-flex class="flex-1" vertical>
 				<n-flex :wrap="false">

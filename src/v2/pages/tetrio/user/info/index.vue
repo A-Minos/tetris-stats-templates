@@ -144,6 +144,7 @@ import { isNonNullish } from 'remeda'
 	<layout content_class="max-w-320">
 		<info_header
 			:id="data.user.id"
+			:avatar="data.user.avatar"
 			:banner="data.user.banner"
 			:country="data.user.country"
 			:friend_count="data.user.friend_count"

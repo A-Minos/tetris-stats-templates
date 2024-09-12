@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import avatar from '@/v2/components/common/avatar.vue'
+import AvatarCard from '@/shared/components/avatar.vue'
+import type AvatarType from '@/shared/schemas/avatar.ts'
 import country from '@/v2/components/common/country.vue'
-
 import { calculateXpLevel } from '@/v2/core/utils/xp.ts'
 import { isNonNullish } from 'remeda'
 
@@ -10,6 +10,7 @@ const props = defineProps<{
 
 	readonly id: string
 	readonly name: string
+	readonly avatar: AvatarType
 	readonly country: string | null
 	readonly xp: number
 }>()
@@ -21,7 +22,7 @@ const props = defineProps<{
 			<n-text class="text-4 fw-bold" type="info">#{{ index }}</n-text>
 		</template>
 
-		<avatar :user_id="id" class="[&,&>img]:size-12"/>
+		<avatar-card :avatar="avatar" class="[&,&>img]:size-12"/>
 
 		<n-flex :size="0" vertical>
 			<n-text class="text-(5 current) leading-none fw-bold">
