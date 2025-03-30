@@ -1,9 +1,8 @@
 <script lang="ts" setup>
-import AvatarCard, { generate_identicon } from '@/shared/components/avatar.vue'
-import type AvatarType from '@/shared/schemas/avatar.ts'
+import type AvatarType from '@/shared/schemas/avatar'
+import generateAvatar from '@/shared/utils/generateAvatar'
 import country from '@/v2/components/common/country.vue'
-import { calculateXpLevel } from '@/v2/core/utils/xp.ts'
-import { md5 } from 'hash-wasm'
+import { calculateXpLevel } from '@/v2/core/utils/xp'
 import { isNonNullish } from 'remeda'
 
 const props = defineProps<{
@@ -15,10 +14,6 @@ const props = defineProps<{
 	readonly country: string | null
 	readonly xp: number
 }>()
-
-async function handleError(event: Event) {
-	(event.target as HTMLImageElement).src = generate_identicon(await md5(props.id))
-}
 </script>
 
 <template>
@@ -27,7 +22,7 @@ async function handleError(event: Event) {
 			<n-text class="text-4 fw-bold" type="info">#{{ index }}</n-text>
 		</template>
 
-		<avatar-card :avatar="avatar" class="[&,&>img]:size-12" @error="handleError"/>
+		<n-image :img-props="{ class: 'size-12' }" :src="generateAvatar(avatar)"/>
 
 		<n-flex :size="0" vertical>
 			<n-text class="text-(5 current) leading-none fw-bold">

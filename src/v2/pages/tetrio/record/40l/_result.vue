@@ -2,14 +2,14 @@
 import { isNonNullish } from 'remeda'
 
 defineProps<{
-	readonly type: 'warning' | 'info' | 'error' | 'default';
-	readonly is_best: boolean;
-	readonly title: string;
+	readonly type: 'warning' | 'info' | 'error' | 'default'
+	readonly is_best: boolean
+	readonly title: string
 
-	readonly time: string;
-	readonly rank: number | null;
-	readonly personal_rank: number | null;
-	readonly play_at: Date;
+	readonly time: string
+	readonly rank: number | null
+	readonly personal_rank: number | null
+	readonly play_at: Date
 }>()
 </script>
 

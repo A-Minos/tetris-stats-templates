@@ -5,7 +5,10 @@ import { z } from 'zod'
 
 const Data = z
 	.object({
-		user: User.extend({ bio: z.string().nullable() }),
+		user: User.extend({
+			bio: z.string()
+				.nullable()
+		}),
 
 		ranking: z.object({
 			rating: z.number(),
@@ -55,11 +58,12 @@ const Data = z
 	.strict()
 	.readonly()
 
-export type Data = z.infer<typeof Data>;
+export type Data = z.infer<typeof Data>
 </script>
 
 <script lang="ts" setup>
 import Avatar from '@/shared/components/avatar.vue'
+import generateAvatar from '@/shared/utils/generateAvatar'
 import logo from '@/v1/assets/images/logo/tetrio.svg'
 import Info40l from '@/v1/components/info/card/40l.vue'
 import InfoAdpm from '@/v1/components/info/card/adpm.vue'
@@ -71,7 +75,11 @@ import InfoTrChart from '@/v1/components/info/chart/tr-chart.vue'
 import { isNonNullish } from 'remeda'
 import { THEME_KEY } from 'vue-echarts'
 
-const data = Data.parse(JSON.parse(document.querySelector<HTMLTemplateElement>('template#data')!.innerHTML.trim()))
+const data = Data.parse(
+	JSON.parse(
+		document.querySelector<HTMLTemplateElement>('template#data')!.innerHTML.trim()
+	)
+)
 
 inject(THEME_KEY, 'dark')
 
@@ -125,7 +133,8 @@ const radar_chart_data = [
 					<div class="tetrio-info__user">
 						<div class="tetrio-info__user__wrapper">
 							<div class="tetrio-info__user__container">
-								<Avatar :avatar="data.user.avatar" alt="用户头像" class="tetrio-info__user__avatar"/>
+								<img :src="generateAvatar(data.user.avatar)" alt="用户头像"
+									 class="tetrio-info__user__avatar"/>
 
 								<div class="tetrio-info__user__name__container">
 									<span class="tetrio-info__user__name__body">{{ data.user.name }}</span>
@@ -268,173 +277,173 @@ const radar_chart_data = [
 </template>
 
 <style lang="scss">
-@import "@/v1/styles/main";
+@import "@/v1/styles/main"
 </style>
 
 <style lang="scss" scoped>
-@import "@/v1/styles/main";
+@import "@/v1/styles/main"
 
 .tetrio-info {
-	@extend .font-template;
-	@apply w-fit p-6.25 bg-[#f1f1f1];
+	@extend .font-template
+	@apply w-fit p-6.25 bg-[#f1f1f1]
 
 	&__title {
-		@apply text-8.75 fw-black;
+		@apply text-8.75 fw-black
 	}
 
 	&__container {
-		@apply mt-2.5;
+		@apply mt-2.5
 	}
 
 	&__row {
-		@apply flex gap-6.25;
+		@apply flex gap-6.25
 	}
 
 	&__col {
-		@apply flex flex-col gap-6.25;
+		@apply flex flex-col gap-6.25
 	}
 
 	&__box {
-		@apply w-68.75 max-h-68.75 rounded-7.5 bg-[#fafafa];
-		@apply drop-shadow-[0_0.5625rem_1.5625rem_#00000026];
+		@apply w-68.75 max-h-68.75 rounded-7.5 bg-[#fafafa]
+		@apply drop-shadow-[0_0.5625rem_1.5625rem_#00000026]
 	}
 
 	&__user {
-		@extend .tetrio-info__box;
+		@extend .tetrio-info__box
 
 		&__wrapper {
-			@apply flex flex-col justify-center items-center h-full;
+			@apply flex flex-col justify-center items-center h-full
 		}
 
 		&__container {
-			@apply flex flex-col justify-evenly items-center h-full gap-2.5 p-6.25;
+			@apply flex flex-col justify-evenly items-center h-full gap-2.5 p-6.25
 		}
 
 		&__avatar {
-			@apply w-31.25 h-31.25 drop-shadow-[0_0.6875rem_1.4375rem_#00000038] rounded-full;
+			@apply w-31.25 h-31.25 drop-shadow-[0_0.6875rem_1.4375rem_#00000038] rounded-full
 		}
 
 		&__name {
 			&__container {
-				@apply break-all line-clamp-1;
+				@apply break-all line-clamp-1
 			}
 
 			&__body {
-				@apply text-6.25 font-extrabold;
+				@apply text-6.25 font-extrabold
 			}
 		}
 
 		&__bio {
 			&__container {
-				@apply break-all line-clamp-3;
+				@apply break-all line-clamp-3
 			}
 
 			&__body {
-				@apply text-4.5;
+				@apply text-4.5
 			}
 		}
 	}
 
 	&__game-ranking {
-		@extend .tetrio-info__box;
+		@extend .tetrio-info__box
 
 		&__container {
-			@apply flex flex-col p-6.25;
+			@apply flex flex-col p-6.25
 		}
 
 		&__game-logo {
-			@apply w-15 h-15 rounded-2.5;
+			@apply w-15 h-15 rounded-2.5
 		}
 
 		&__game-name {
-			@apply text-7.5 fw-extrabold;
+			@apply text-7.5 fw-extrabold
 		}
 
 		&__divider {
-			@apply w-full border-b-(1 solid #bababa) my-2.5;
+			@apply w-full border-b-(1 solid #bababa) my-2.5
 		}
 
 		&__ranking-title {
-			@apply text-6.25 fw-extrabold;
+			@apply text-6.25 fw-extrabold
 		}
 
 		&__ranking-rating {
-			@apply text-12.5 leading-15;
+			@apply text-12.5 leading-15
 		}
 
 		&__ranking-rd {
-			@apply text-7.5 leading-9 fw-light -mt-4;
+			@apply text-7.5 leading-9 fw-light -mt-4
 		}
 	}
 
 	&__tr-chart {
-		@apply drop-shadow-[0_0.9375rem_1.875rem_#0000004d] rounded-7.5 overflow-hidden;
+		@apply drop-shadow-[0_0.9375rem_1.875rem_#0000004d] rounded-7.5 overflow-hidden
 
 		&__container {
-			@apply flex flex-col;
+			@apply flex flex-col
 		}
 
 		&__rank-image {
-			@apply w-12.5 h-12.5;
+			@apply w-12.5 h-12.5
 		}
 
 		&__tr-rank {
-			@apply flex items-end;
+			@apply flex items-end
 
 			&__tr {
-				@apply text-11.25 fw-extrabold text-white;
+				@apply text-11.25 fw-extrabold text-white
 			}
 
 			&__rank {
-				@apply text-7.5 align-bottom text-[#fafafa] ml-1 mb-1;
+				@apply text-7.5 align-bottom text-[#fafafa] ml-1 mb-1
 			}
 		}
 	}
 
 	&__multiplayer-stats-title {
-		@extend .tetrio-info__title;
-		@apply mt-4.5;
+		@extend .tetrio-info__title
+		@apply mt-4.5
 	}
 
 	&__card {
-		@apply drop-shadow-[0_0.5625rem_1.5625rem_#00000026];
+		@apply drop-shadow-[0_0.5625rem_1.5625rem_#00000026]
 	}
 
 	&__radar-chart {
-		@apply w-68.75 h-68.75;
-		@apply bg-[linear-gradient(222.34deg,#525252_11.97%,#1d1916_89.73%),linear-gradient(222.34deg,#4f9dff_11.97%,#2563ea_89.73%)];
-		@apply drop-shadow-[0_0.9375rem_1.875rem_#0000004d] rounded-7.5;
+		@apply w-68.75 h-68.75
+		@apply bg-[linear-gradient(222.34deg,#525252_11.97%,#1d1916_89.73%),linear-gradient(222.34deg,#4f9dff_11.97%,#2563ea_89.73%)]
+		@apply drop-shadow-[0_0.9375rem_1.875rem_#0000004d] rounded-7.5
 	}
 
 	&__singleplayer-stats-title {
-		@extend .tetrio-info__title;
-		@apply mt-4.5;
+		@extend .tetrio-info__title
+		@apply mt-4.5
 	}
 
 	&__footer {
-		@apply text-5 text-[#71717b] text-center;
+		@apply text-5 text-[#71717b] text-center
 
 		&__powered-by {
-			@apply leading-5;
+			@apply leading-5
 
 			&__title {
-				@apply fw-black;
+				@apply fw-black
 			}
 
 			&__content {
-				@apply fw-medium;
+				@apply fw-medium
 			}
 		}
 
 		&__designer {
-			@apply mt-1.5 fw-medium;
+			@apply mt-1.5 fw-medium
 
 			&__title {
-				@apply mr-1;
+				@apply mr-1
 			}
 
 			&__sub {
-				@apply text-4 align-sub;
+				@apply text-4 align-sub
 			}
 		}
 	}

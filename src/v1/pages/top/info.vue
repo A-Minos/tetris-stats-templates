@@ -19,17 +19,22 @@ const Data = z
 	.strict()
 	.readonly()
 
-export type Data = z.infer<typeof Data>;
+export type Data = z.infer<typeof Data>
 </script>
 
 <script lang="ts" setup>
+import generateAvatar from '@/shared/utils/generateAvatar'
 import logo from '@/v1/assets/images/logo/top.svg'
 import InfoApm from '@/v1/components/info/card/apm.vue'
 import InfoLpm from '@/v1/components/info/card/lpm.vue'
 import { THEME_KEY } from 'vue-echarts'
 import Avatar from '@/shared/components/avatar.vue'
 
-const data = Data.parse(JSON.parse(document.querySelector<HTMLTemplateElement>('template#data')!.innerHTML.trim()))
+const data = Data.parse(
+	JSON.parse(
+		document.querySelector<HTMLTemplateElement>('template#data')!.innerHTML.trim()
+	)
+)
 
 inject(THEME_KEY, 'dark')
 </script>
@@ -44,7 +49,8 @@ inject(THEME_KEY, 'dark')
 					<div class="tos-info__user">
 						<div class="tos-info__user__wrapper">
 							<div class="tos-info__user__container">
-								<Avatar :avatar="data.user.avatar" alt="用户头像" class="tos-info__user__avatar"/>
+								<img :src="generateAvatar(data.user.avatar)" alt="用户头像"
+									 class="tos-info__user__avatar"/>
 
 								<div class="tos-info__user__name__container">
 									<span class="tos-info__user__name__body">{{ data.user.name }}</span>
@@ -141,125 +147,125 @@ inject(THEME_KEY, 'dark')
 </template>
 
 <style lang="scss">
-@import "@/v1/styles/main";
+@import "@/v1/styles/main"
 </style>
 
 <style lang="scss" scoped>
-@import "@/v1/styles/main";
+@import "@/v1/styles/main"
 
 .tos-info {
-	@extend .font-template;
-	@apply w-fit p-6.25 bg-[#f1f1f1];
+	@extend .font-template
+	@apply w-fit p-6.25 bg-[#f1f1f1]
 
 	&__title {
-		@apply text-8.75 fw-black;
+		@apply text-8.75 fw-black
 	}
 
 	&__container {
-		@apply mt-2.5;
+		@apply mt-2.5
 	}
 
 	&__row {
-		@apply flex gap-6.25;
+		@apply flex gap-6.25
 	}
 
 	&__col {
-		@apply flex flex-col gap-6.25;
+		@apply flex flex-col gap-6.25
 	}
 
 	&__box {
-		@apply w-68.75 h-31.25 rounded-7.5 bg-[#fafafa];
-		@apply drop-shadow-[0_0.5625rem_1.5625rem_#00000026];
+		@apply w-68.75 h-31.25 rounded-7.5 bg-[#fafafa]
+		@apply drop-shadow-[0_0.5625rem_1.5625rem_#00000026]
 	}
 
 	&__user {
-		@extend .tos-info__box;
+		@extend .tos-info__box
 
 		&__wrapper {
-			@apply flex flex-col justify-center items-center h-full;
+			@apply flex flex-col justify-center items-center h-full
 		}
 
 		&__container {
-			@apply flex justify-center items-center h-full gap-7 p-7.5;
+			@apply flex justify-center items-center h-full gap-7 p-7.5
 		}
 
 		&__avatar {
-			@apply w-15 h-15 drop-shadow-[0_0.6875rem_1.4375rem_#00000038] rounded-full;
+			@apply w-15 h-15 drop-shadow-[0_0.6875rem_1.4375rem_#00000038] rounded-full
 		}
 
 		&__name {
 			&__container {
-				@apply break-all line-clamp-2;
+				@apply break-all line-clamp-2
 			}
 
 			&__body {
-				@apply text-7.5 font-extrabold;
+				@apply text-7.5 font-extrabold
 			}
 		}
 	}
 
 	&__game-ranking {
-		@extend .tos-info__box;
+		@extend .tos-info__box
 
-		@apply flex justify-center items-center;
+		@apply flex justify-center items-center
 
 		&__container {
-			@apply flex justify-center gap-5;
+			@apply flex justify-center gap-5
 		}
 
 		&__game-logo {
-			@apply w-15 h-15 rounded-2.5;
+			@apply w-15 h-15 rounded-2.5
 		}
 
 		&__game-name {
-			@apply text-6.25 fw-extrabold;
+			@apply text-6.25 fw-extrabold
 		}
 	}
 
 	&__today-stats-title {
-		@extend .tos-info__title;
-		@apply mt-4.5;
+		@extend .tos-info__title
+		@apply mt-4.5
 	}
 
 	&__card {
-		@apply drop-shadow-[0_0.5625rem_1.5625rem_#00000026];
+		@apply drop-shadow-[0_0.5625rem_1.5625rem_#00000026]
 	}
 
 	&__radar-chart {
-		@apply w-68.75 h-68.75;
-		@apply bg-[linear-gradient(222.34deg,#525252_11.97%,#1d1916_89.73%),linear-gradient(222.34deg,#4f9dff_11.97%,#2563ea_89.73%)];
-		@apply drop-shadow-[0_0.9375rem_1.875rem_#0000004d] rounded-7.5;
+		@apply w-68.75 h-68.75
+		@apply bg-[linear-gradient(222.34deg,#525252_11.97%,#1d1916_89.73%),linear-gradient(222.34deg,#4f9dff_11.97%,#2563ea_89.73%)]
+		@apply drop-shadow-[0_0.9375rem_1.875rem_#0000004d] rounded-7.5
 	}
 
 	&__historical-stats-title {
-		@extend .tos-info__title;
-		@apply mt-4.5;
+		@extend .tos-info__title
+		@apply mt-4.5
 	}
 
 	&__footer {
-		@apply text-5 text-[#71717b] text-center;
+		@apply text-5 text-[#71717b] text-center
 
 		&__powered-by {
-			@apply leading-5;
+			@apply leading-5
 
 			&__title {
-				@apply fw-black;
+				@apply fw-black
 			}
 
 			&__content {
-				@apply fw-medium;
+				@apply fw-medium
 			}
 		}
 
 		&__designer {
-			@apply mt-1.5 fw-medium;
+			@apply mt-1.5 fw-medium
 
 			&__title {
-				@apply mr-1;
+				@apply mr-1
 			}
 
 			&__sub {
-				@apply text-4 align-sub;
+				@apply text-4 align-sub
 			}
 		}
 	}

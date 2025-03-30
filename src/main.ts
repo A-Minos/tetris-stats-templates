@@ -1,11 +1,14 @@
 import 'virtual:uno.css'
 
+import { zhCN } from 'date-fns/locale'
+
 import { type Component } from 'vue'
 import { createRouter, createWebHashHistory, type RouteRecordRaw, RouterView } from 'vue-router'
 
 (async () => {
 	try {
 		const element = document.createElement('div')
+
 		const app = createApp({
 			render: () => h(RouterView)
 		})
@@ -73,5 +76,9 @@ import { createRouter, createWebHashHistory, type RouteRecordRaw, RouterView } f
 		if (import.meta.env.DEV) {
 			console.error(e)
 		}
+	} finally {
+		setDefaultOptions({
+			locale: zhCN
+		})
 	}
 })()

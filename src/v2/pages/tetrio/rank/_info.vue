@@ -3,9 +3,9 @@ import rank from '@/v2/components/common/rank.vue'
 import type { User } from '@/v2/types/tetrio'
 
 defineProps<{
-	readonly name: Exclude<User['league']['rank'], 'Z'>;
-	readonly require_tr: number;
-	readonly trending: number;
+	readonly name: Exclude<User['league']['rank'], 'Z'>
+	readonly require_tr: number
+	readonly trending: number
 }>()
 </script>
 

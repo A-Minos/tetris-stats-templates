@@ -33,7 +33,7 @@ const Data = z
 	.strict()
 	.readonly()
 
-export type Data = z.infer<typeof Data>;
+export type Data = z.infer<typeof Data>
 const data = Data.parse(JSON.parse(document.querySelector<HTMLTemplateElement>('template#data')!.innerHTML.trim()))
 </script>
 

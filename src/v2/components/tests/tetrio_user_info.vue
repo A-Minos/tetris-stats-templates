@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { resetTime } from '@/v1/utils/date.ts'
+import { resetTime } from '@/v1/utils/date'
 import type { Data } from '@/v2/pages/tetrio/user/info/index.vue'
-import type { Record, User } from '@/v2/types/tetrio'
+import type { League, Record, User, ZenRecord } from '@/v2/types/tetrio'
 import { setHours, setMinutes, setSeconds, subDays } from 'date-fns'
 import { isNonNullish, map, pipe, sortBy } from 'remeda'
 
@@ -13,16 +13,53 @@ const test = async () => {
 			return response.json()
 		})
 		.then(result => {
-			return result.data.user as User
+			return result.data as User
 		})
 
-	const records = await fetch(`/_proxy/tetrio/users/${user._id}/records`)
-		.then(response => {
-			return response.json()
-		})
-		.then(result => {
-			return result.data as Record
-		})
+	const [league, _40l, blitz, zen, zenith, zenithex] = await Promise.all([
+		fetch(`/_proxy/tetrio/users/${user._id}/summaries/league`)
+			.then(response => {
+				return response.json()
+			})
+			.then(result => {
+				return result.data as League
+			}),
+		fetch(`/_proxy/tetrio/users/${user._id}/summaries/40l`)
+			.then(response => {
+				return response.json()
+			})
+			.then(result => {
+				return result.data as Record
+			}),
+		fetch(`/_proxy/tetrio/users/${user._id}/summaries/blitz`)
+			.then(response => {
+				return response.json()
+			})
+			.then(result => {
+				return result.data as Record
+			}),
+		fetch(`/_proxy/tetrio/users/${user._id}/summaries/zen`)
+			.then(response => {
+				return response.json()
+			})
+			.then(result => {
+				return result.data as ZenRecord
+			}),
+		fetch(`/_proxy/tetrio/users/${user._id}/summaries/zenith`)
+			.then(response => {
+				return response.json()
+			})
+			.then(result => {
+				return result.data as Record
+			}),
+		fetch(`/_proxy/tetrio/users/${user._id}/summaries/zenithex`)
+			.then(response => {
+				return response.json()
+			})
+			.then(result => {
+				return result.data as Record
+			})
+	])
 
 	const random = (min: number, max: number) => {
 		const range = max - min
@@ -35,6 +72,9 @@ const test = async () => {
 			name: user.username,
 			avatar: `https://tetr.io/user-content/avatars/${user._id}.jpg`,
 			role: user.role,
+			botmaster: user.botmaster ?? null,
+			ar: user.ar,
+			achievements: user.achievements,
 			banner: isNonNullish(user.banner_revision) && user.banner_revision > 0 ? `https://tetr.io/user-content/banners/${user._id}.jpg?rv=${user.banner_revision}` : null,
 			badges: user.badges.map(badge => {
 				return {
@@ -53,40 +93,68 @@ const test = async () => {
 			bio: user.bio ?? null,
 			join_at: user.ts ?? null
 		},
-		tetra_league: user.league.rating !== -1 ? {
-			rank: user.league.rank,
-			highest_rank: user.league.bestrank,
+		zenith: zenith.record || zenith.best ? {
+			week: zenith.record ? {
+				altitude: zenith.record.results.stats.zenith!.altitude,
+				global_rank: zenith.rank,
+				country_rank: zenith.rank_local,
+				play_at: zenith.record.ts
+			} : null,
+
+			best: zenith.best && zenith.best.record ? {
+				altitude: zenith.best.record.results.stats.zenith!.altitude,
+				global_rank: zenith.best.rank,
+				play_at: zenith.best.record.ts
+			} : null
+		} : null,
+		zenithex: zenithex.record || zenithex.best ? {
+			week: zenithex.record ? {
+				altitude: zenithex.record.results.stats.zenith!.altitude,
+				global_rank: zenithex.rank,
+				country_rank: zenithex.rank_local,
+				play_at: zenithex.record.ts
+			} : null,
+
+			best: zenithex.best && zenithex.best.record ? {
+				altitude: zenithex.best.record.results.stats.zenith!.altitude,
+				global_rank: zenithex.best.rank,
+				play_at: zenithex.best.record.ts
+			} : null
+		} : null,
+		tetra_league: league.tr !== -1 ? {
+			rank: league.rank,
+			highest_rank: league.bestrank,
 
 			tr: Number(
-				user.league.rating.toFixed(2)
+				league.tr.toFixed(2)
 			),
-			glicko: isNonNullish(user.league.glicko) ? Number(
-				user.league.glicko.toFixed(2)
+			glicko: isNonNullish(league.glicko) ? Number(
+				league.glicko.toFixed(2)
 			) : null,
-			rd: isNonNullish(user.league.rd) ? Number(
-				user.league.rd.toFixed(2)
+			rd: isNonNullish(league.rd) ? Number(
+				league.rd.toFixed(2)
 			) : null,
-			global_rank: user.league.standing !== -1 ? user.league.standing : null,
-			country_rank: user.league.standing_local !== -1 ? user.league.standing_local : null,
+			global_rank: league.standing !== -1 ? league.standing : null,
+			country_rank: league.standing_local !== -1 ? league.standing_local : null,
 
-			pps: user.league.pps ?? null,
+			pps: league.pps ?? null,
 
-			apm: user.league.apm ?? null,
-			apl: isNonNullish(user.league.apm) && isNonNullish(user.league.pps) ? Number(
-				(user.league.apm / user.league.pps / 24).toFixed(2)
+			apm: league.apm ?? null,
+			apl: isNonNullish(league.apm) && isNonNullish(league.pps) ? Number(
+				(league.apm / league.pps / 24).toFixed(2)
 			) : null,
 
-			vs: user.league.vs ?? null,
-			adpl: isNonNullish(user.league.vs) && isNonNullish(user.league.pps) ? Number(
-				(user.league.vs / user.league.pps / 24 * 0.6).toFixed(2)
+			vs: league.vs ?? null,
+			adpl: isNonNullish(league.vs) && isNonNullish(league.pps) ? Number(
+				(league.vs / league.pps / 24 * 0.6).toFixed(2)
 			) : null,
 
 			statistic: {
-				total: user.league.gamesplayed,
-				wins: user.league.gameswon
+				total: league.gamesplayed,
+				wins: league.gameswon
 			},
 
-			decaying: user.league.decaying,
+			decaying: league.decaying,
 
 			history: pipe(
 				[
@@ -98,10 +166,10 @@ const test = async () => {
 						})(),
 						tr: random(
 							Number(
-								user.league.rating.toFixed(2)
+								league.tr.toFixed(2)
 							) - 50,
 							Number(
-								user.league.rating.toFixed(2)
+								league.tr.toFixed(2)
 							) + 50
 						)
 					},
@@ -124,10 +192,10 @@ const test = async () => {
 									record_at: date,
 									tr: random(
 										Number(
-											user.league.rating.toFixed(2)
+											league.tr.toFixed(2)
 										) - 50,
 										Number(
-											user.league.rating.toFixed(2)
+											league.tr.toFixed(2)
 										) + 50
 									)
 								}
@@ -141,7 +209,7 @@ const test = async () => {
 							return date
 						})(),
 						tr: Number(
-							user.league.rating.toFixed(2)
+							league.tr.toFixed(2)
 						)
 					}
 				],
@@ -154,9 +222,9 @@ const test = async () => {
 			total: user.gamesplayed === -1 ? null : user.gamesplayed,
 			wins: user.gameswon === -1 ? null : user.gameswon
 		},
-		sprint: records.records['40l'].record ? {
+		sprint: _40l.record ? {
 			time: (() => {
-				const time = records.records['40l'].record!.endcontext.finalTime / 1000
+				const time = _40l.record.results.stats.finaltime / 1000
 
 				const hours = Math.trunc(time / 60)
 				const seconds = Math.trunc(time % 60)
@@ -164,17 +232,19 @@ const test = async () => {
 
 				return `${hours}:${seconds}.${milliseconds}`
 			})(),
-			global_rank: records.records['40l'].rank,
-			play_at: records.records['40l'].record.ts
+			global_rank: _40l.rank,
+			country_rank: _40l.rank_local,
+			play_at: _40l.record.ts
 		} : null,
-		blitz: records.records.blitz.record ? {
-			score: records.records.blitz.record.endcontext.score,
-			global_rank: records.records.blitz.rank,
-			play_at: records.records.blitz.record.ts
+		blitz: blitz.record ? {
+			score: blitz.record.results.stats.score,
+			global_rank: blitz.rank,
+			country_rank: blitz.rank_local,
+			play_at: blitz.record.ts
 		} : null,
-		zen: records.zen.score > 0 ? {
-			score: records.zen.score,
-			level: records.zen.level
+		zen: zen.score > 0 ? {
+			score: zen.score,
+			level: zen.level
 		} : null
 	} satisfies Data)
 

@@ -30,25 +30,25 @@ defineProps<{
 
 <style lang="scss" scoped>
 .info-card {
-	@apply relative w-68.75 h-31.25;
+	@apply relative w-68.75 h-31.25
 
 	&__background {
-		@apply w-full h-full;
+		@apply w-full h-full
 	}
 
 	&__container {
-		@apply absolute top-0 left-0 w-full h-full;
+		@apply absolute top-0 left-0 w-full h-full
 	}
 
 	&__content {
-		@apply absolute bottom-4.25 left-6 text-[var(--color)] text-11 font-medium;
+		@apply absolute bottom-4.25 left-6 text-[var(--color)] text-11 font-medium
 
 		&__body {
-			@apply w-45 overflow-hidden text-ellipsis;
-			@apply break-all line-clamp-1;
+			@apply w-45 overflow-hidden text-ellipsis
+			@apply break-all line-clamp-1
 
 			&--no-extra {
-				@apply w-60;
+				@apply w-60
 			}
 		}
 	}
@@ -56,16 +56,16 @@ defineProps<{
 	@container style (--extra: 1) {
 		&__content {
 			&__body {
-				@apply \!w-45;
+				@apply \!w-45
 			}
 		}
 	}
 
 	&__extra {
-		@apply absolute bottom-6.75 right-6.25 text-[var(--color)] text-3.75;
+		@apply absolute bottom-6.75 right-6.25 text-[var(--color)] text-3.75
 
 		&__body {
-			@apply w-25 text-right overflow-hidden text-ellipsis;
+			@apply w-25 text-right overflow-hidden text-ellipsis
 		}
 	}
 }

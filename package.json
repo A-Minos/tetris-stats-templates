@@ -1,38 +1,41 @@
 {
-	"private": true,
-	"type": "module",
-	"scripts": {
-		"dev": "vite",
-		"check": "vue-tsc",
-		"build": "vite build",
-		"preview": "vite preview"
-	},
-	"devDependencies": {
-		"@antv/g2": "^5.2.7",
-		"@types/identicon.js": "^2.3.5",
-		"@types/node": "^20.16.11",
-		"@vicons/antd": "^0.12.0",
-		"@vitejs/plugin-vue": "^5.1.4",
-		"@vueuse/core": "^10.11.1",
-		"date-fns": "^3.6.0",
-		"echarts": "^5.5.1",
-		"hash-wasm": "^4.11.0",
-		"identicon.js": "^2.3.3",
-		"naive-ui": "^2.40.1",
-		"remeda": "^2.15.0",
-		"rgbaster-plus": "^1.1.1",
-		"sass": "^1.79.5",
-		"typescript": "^5.6.3",
-		"unocss": "^0.61.9",
-		"unplugin-auto-import": "^0.18.3",
-		"unplugin-vue-components": "^0.27.4",
-		"vite": "^5.4.8",
-		"vue": "^3.5.12",
-		"vue-echarts": "^6.7.3",
-		"vue-router": "^4.4.5",
-		"vue-tsc": "^2.1.6"
-	},
-	"dependencies": {
-		"zod": "^3.23.8"
-	}
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "check": "vue-tsc",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@antv/g2": "^5.2.12",
+    "@types/identicon.js": "^2.3.5",
+    "@types/node": "^22.13.14",
+    "@vicons/antd": "^0.13.0",
+    "@vitejs/plugin-vue": "^5.2.3",
+    "@vueuse/core": "^13.0.0",
+    "date-fns": "^4.1.0",
+    "echarts": "^5.6.0",
+    "hash-wasm": "^4.12.0",
+    "identicon.js": "^2.3.3",
+    "naive-ui": "^2.41.0",
+    "remeda": "^2.21.2",
+    "rgbaster-plus": "^1.1.1",
+    "sass": "^1.86.0",
+    "typescript": "^5.8.2",
+    "unocss": "^66.1.0-beta.7",
+    "unplugin-auto-import": "^19.1.2",
+    "unplugin-vue-components": "^28.4.1",
+    "vite": "^6.2.3",
+    "vue": "^3.5.13",
+    "vue-echarts": "^7.0.3",
+    "vue-router": "^4.5.0",
+    "vue-tsc": "^2.2.8"
+  },
+  "dependencies": {
+    "zod": "^3.24.2"
+  },
+  "trustedDependencies": [
+    "@parcel/watcher"
+  ]
 }

@@ -29,11 +29,11 @@ defineProps<{
 				<n-text>1 / 2 / 3 / 4</n-text>
 				<n-flex :size="0">
 					<n-text>{{ single }}</n-text>
-					<n-text>&nbsp;/&nbsp;</n-text>
+					<n-text>&nbsp/&nbsp</n-text>
 					<n-text>{{ double }}</n-text>
-					<n-text>&nbsp;/&nbsp;</n-text>
+					<n-text>&nbsp/&nbsp</n-text>
 					<n-text>{{ triple }}</n-text>
-					<n-text>&nbsp;/&nbsp;</n-text>
+					<n-text>&nbsp/&nbsp</n-text>
 					<n-text>{{ quad }}</n-text>
 				</n-flex>
 			</n-flex>
@@ -43,7 +43,7 @@ defineProps<{
 
 				<n-flex :size="0">
 					<n-text>{{ tspins.total }}</n-text>
-					<n-text>&nbsp;/&nbsp;</n-text>
+					<n-text>&nbsp/&nbsp</n-text>
 					<n-text>{{ tspins.mini.total }}</n-text>
 				</n-flex>
 			</n-flex>
@@ -53,9 +53,9 @@ defineProps<{
 
 				<n-flex :size="0">
 					<n-text>{{ tspins.single }}</n-text>
-					<n-text>&nbsp;/&nbsp;</n-text>
+					<n-text>&nbsp/&nbsp</n-text>
 					<n-text>{{ tspins.double }}</n-text>
-					<n-text>&nbsp;/&nbsp;</n-text>
+					<n-text>&nbsp/&nbsp</n-text>
 					<n-text>{{ tspins.triple }}</n-text>
 				</n-flex>
 			</n-flex>
@@ -65,7 +65,7 @@ defineProps<{
 
 				<n-flex :size="0">
 					<n-text>{{ tspins.mini.single }}</n-text>
-					<n-text>&nbsp;/&nbsp;</n-text>
+					<n-text>&nbsp/&nbsp</n-text>
 					<n-text>{{ tspins.mini.double }}</n-text>
 				</n-flex>
 			</n-flex>

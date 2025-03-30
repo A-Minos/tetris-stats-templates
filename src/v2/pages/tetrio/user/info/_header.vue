@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import AvatarCard from '@/shared/components/avatar.vue'
-import type AvatarType from '@/shared/schemas/avatar.ts'
+import type AvatarType from '@/shared/schemas/avatar'
+import generateAvatar from '@/shared/utils/generateAvatar'
 import logo from '@/v2/assets/images/logos/tetrio.svg'
 import country from '@/v2/components/common/country.vue'
 
@@ -30,11 +30,11 @@ const { define: LogoDefine, reuse: Logo } = createReusableTemplate()
 			<div>
 				<n-flex size="small" vertical>
 					<n-flex align="center" size="small">
-						<avatar-card :avatar="avatar" class="[&,&>img]:size-12"/>
+						<n-image :img-props="{ class: 'size-12' }" :src="generateAvatar(avatar)"/>
 
 						<n-flex :size="0" vertical>
 							<n-text class="text-(6 current) fw-bold leading-none">
-								{{ name }}
+								{{ name.toUpperCase() }}
 							</n-text>
 
 							<n-text :depth="3" class="text-xs">{{ id }}</n-text>
@@ -47,6 +47,8 @@ const { define: LogoDefine, reuse: Logo } = createReusableTemplate()
 
 						</n-flex>
 					</n-flex>
+
+					<n-divider class="!my-0"/>
 
 					<template v-if="isNonNullish(friend_count) || supporter_tier > 0">
 						<n-flex :size="0" align="center" justify="space-between">
@@ -75,9 +77,9 @@ const { define: LogoDefine, reuse: Logo } = createReusableTemplate()
 
 		<LogoDefine>
 			<div>
-				<n-flex :size="0" align="center" vertical>
-					<n-image :src="logo" class="[&>img]:size-8"/>
-					<n-text class="text-white mt-2 fw-bold">TETR.IO</n-text>
+				<n-flex :size="0" align="center" class="!gap-1">
+					<n-image :src="logo" class="[&>img]:size-4"/>
+					<n-text class="text-white fw-bold">TETR.IO</n-text>
 				</n-flex>
 			</div>
 		</LogoDefine>
@@ -92,7 +94,7 @@ const { define: LogoDefine, reuse: Logo } = createReusableTemplate()
 							<User/>
 						</div>
 
-						<div class="bg-(black opacity-75) rounded backdrop-(blur-sm brightness-50) p-1">
+						<div class="bg-(black opacity-75) rounded backdrop-(blur-sm brightness-50) p-2">
 							<Logo/>
 						</div>
 					</n-flex>

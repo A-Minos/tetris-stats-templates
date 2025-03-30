@@ -5,7 +5,7 @@ import Type from '../schemas/type'
 
 const SprintData = Data.extend({ time: z.string() }).strict().readonly()
 
-export type SprintData = z.infer<typeof SprintData>;
+export type SprintData = z.infer<typeof SprintData>
 const data = SprintData.parse(
 	JSON.parse(document.querySelector<HTMLTemplateElement>('template#data')!.innerHTML.trim())
 )
@@ -111,5 +111,5 @@ const type = computed(() => {
 </template>
 
 <style lang="scss">
-@import "@/v2/styles/main";
+@import "@/v2/styles/main"
 </style>

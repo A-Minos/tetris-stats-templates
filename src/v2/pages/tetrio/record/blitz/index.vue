@@ -10,7 +10,7 @@ const BlitzData = Data.extend({
 	.strict()
 	.readonly()
 
-export type BlitzData = z.infer<typeof BlitzData>;
+export type BlitzData = z.infer<typeof BlitzData>
 const data = BlitzData.parse(
 	JSON.parse(document.querySelector<HTMLTemplateElement>('template#data')!.innerHTML.trim())
 )
@@ -104,5 +104,5 @@ const type = computed(() => {
 </template>
 
 <style lang="scss">
-@import "@/v2/styles/main";
+@import "@/v2/styles/main"
 </style>

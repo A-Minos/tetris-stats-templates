@@ -31,7 +31,7 @@ const Data = z
 	.strict()
 	.readonly()
 
-export type Data = z.infer<typeof Data>;
+export type Data = z.infer<typeof Data>
 const data = Data.parse(JSON.parse(document.querySelector<HTMLTemplateElement>('template#data')!.innerHTML.trim()))
 </script>
 
@@ -112,5 +112,5 @@ import rank_trending from '@/v2/pages/tetrio/rank/detail/_trending.vue'
 </template>
 
 <style lang="scss">
-@import "@/v2/styles/main";
+@import "@/v2/styles/main"
 </style>

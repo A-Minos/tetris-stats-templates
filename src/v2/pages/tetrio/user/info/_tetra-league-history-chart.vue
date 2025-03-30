@@ -3,8 +3,8 @@ import type { TetraLeagueHistory } from '@/v2/types/data'
 import { Chart } from '@antv/g2'
 
 const props = defineProps<{
-	readonly current_tr: number;
-	readonly data: TetraLeagueHistory[];
+	readonly current_tr: number
+	readonly data: TetraLeagueHistory[]
 }>()
 
 const container = ref<HTMLElement>()

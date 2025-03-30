@@ -21,10 +21,13 @@ const ValidRank = z.union([
 	z.literal('d')
 ])
 
-const Rank = z.union([ValidRank, z.literal('z')])
+const Rank = z.union([
+	ValidRank,
+	z.literal('z')
+])
 
-type ValidRank = z.infer<typeof ValidRank>;
-type Rank = z.infer<typeof Rank>;
+type ValidRank = z.infer<typeof ValidRank>
+type Rank = z.infer<typeof Rank>
 
 export default Rank
 export { Rank, ValidRank }

@@ -1,11 +1,11 @@
 <script lang="ts" setup>
+import type Rank from '@/shared/schemas/rank'
 import rank from '@/v2/components/common/rank.vue'
 import tetra_rating from '@/v2/components/common/tetra_rating.vue'
-import type { User } from '@/v2/types/tetrio'
 import { isNonNullish, isNullish } from 'remeda'
 
 const props = defineProps<{
-	readonly rank: User['league']['rank']
+	readonly rank: Rank
 	readonly tr: number
 
 	readonly glicko: number | null
@@ -30,7 +30,7 @@ const props = defineProps<{
 	} | null
 
 	readonly decaying: boolean
-	readonly highest_rank: User['league']['rank'] | null
+	readonly highest_rank: Rank | null
 }>()
 
 const highest_rank_url = asyncComputed(async () => {

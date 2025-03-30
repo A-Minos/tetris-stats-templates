@@ -1,5 +1,5 @@
 <script lang="ts">
-import User from '@/shared/schemas/user.ts'
+import User from '@/shared/schemas/user'
 import { z } from 'zod'
 
 const Data = z
@@ -31,7 +31,7 @@ const Data = z
 	.strict()
 	.readonly()
 
-export type Data = z.infer<typeof Data>;
+export type Data = z.infer<typeof Data>
 
 const data = Data.parse(JSON.parse(document.querySelector<HTMLTemplateElement>('template#data')!.innerHTML.trim()))
 </script>
@@ -94,5 +94,5 @@ const checkDecaying = (user: Data['users'][number]) => {
 </template>
 
 <style lang="scss">
-@import "@/v2/styles/main";
+@import "@/v2/styles/main"
 </style>

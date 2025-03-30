@@ -13,14 +13,14 @@ import { use } from 'echarts/core'
 use([GridComponent, MarkLineComponent, LineChart])
 
 const props = defineProps<{
-	readonly data: TetraLeagueHistoryRecord[];
-	readonly split_interval: number;
-	readonly min_tr: number;
-	readonly max_tr: number;
-	readonly offset: number;
+	readonly data: TetraLeagueHistoryRecord[]
+	readonly split_interval: number
+	readonly min_tr: number
+	readonly max_tr: number
+	readonly offset: number
 }>()
 
-type ChartOption = ComposeOption<GridComponentOption | MarkLineComponentOption | LineSeriesOption>;
+type ChartOption = ComposeOption<GridComponentOption | MarkLineComponentOption | LineSeriesOption>
 
 const option = computed<ChartOption>(() => {
 	const interval = 3600 * 24 * 1000
