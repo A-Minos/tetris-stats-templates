@@ -31,34 +31,34 @@ const tests = asyncComputed(async () => {
 </template>
 
 <style lang="scss">
-@import '@/v1/styles/main'
+@use '@/v1/styles/main';
 </style>
 
 <style lang="scss" scoped>
 .index {
-	@apply w-screen h-screen bg-black flex flex-col justify-center items-center
+	@apply w-screen h-screen bg-black flex flex-col justify-center items-center;
 
 	&__container {
-		@apply flex flex-col gap-1 p-2 font-sans
+		@apply flex flex-col gap-1 p-2 font-sans;
 	}
 
 	&__title {
-		@apply text-8 text-center text-white
+		@apply text-8 text-center text-white;
 	}
 
 	&__tips {
-		@apply text-5 text-center text-white
+		@apply text-5 text-center text-white;
 	}
 
 	&__divider {
-		@apply w-full border-b-2 border-b-solid border-gray
+		@apply w-full border-b-2 border-b-solid border-gray;
 	}
 
 	&__buttons {
-		@apply flex flex-col items-start gap-1
+		@apply flex flex-col items-start gap-1;
 
 		& > :deep(button) {
-			@apply text-6 transition cursor-pointer text-white hover:opacity-50 bg-transparent border-none
+			@apply text-6 transition cursor-pointer text-white hover:opacity-50 bg-transparent border-none;
 		}
 	}
 }

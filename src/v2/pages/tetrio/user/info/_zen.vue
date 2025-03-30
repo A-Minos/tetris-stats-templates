@@ -38,7 +38,7 @@ const symbols = computed(() => {
 	let level = Math.max(Math.floor(props.level), 0)
 
 	while (level >= 1) {
-		for (let i = keys.length - 1 i >= 0 i--) {
+		for (let i = keys.length - 1; i >= 0; i--) {
 			const key = Number(keys[i])
 
 			if (level / key >= 1) {

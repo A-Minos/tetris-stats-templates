@@ -94,5 +94,5 @@ const checkDecaying = (user: Data['users'][number]) => {
 </template>
 
 <style lang="scss">
-@import "@/v2/styles/main"
+@use "@/v2/styles/main";
 </style>

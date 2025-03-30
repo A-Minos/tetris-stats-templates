@@ -330,5 +330,5 @@ import { isNonNullish } from 'remeda'
 </template>
 
 <style lang="scss">
-@import "@/v2/styles/main"
+@use "@/v2/styles/main";
 </style>

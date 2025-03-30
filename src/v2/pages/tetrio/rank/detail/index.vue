@@ -112,5 +112,5 @@ import rank_trending from '@/v2/pages/tetrio/rank/detail/_trending.vue'
 </template>
 
 <style lang="scss">
-@import "@/v2/styles/main"
+@use "@/v2/styles/main";
 </style>

@@ -170,53 +170,53 @@ const rankImageMap = asyncComputed(async () => {
 </template>
 
 <style lang="scss">
-@import "@/v1/styles/main"
+@use "@/v1/styles/main";
 </style>
 
 <style lang="scss" scoped>
-@import "@/v1/styles/main"
+@use "@/v1/styles/main";
 
 .tetrio-rank {
-	@extend .font-template
-	@apply w-fit p-6.25 bg-[#f1f1f1]
+	@extend .font-template;
+	@apply w-fit p-6.25 bg-[#f1f1f1];
 
 	&__title {
-		@apply text-8.75 fw-black
+		@apply text-8.75 fw-black;
 	}
 
 	&__list {
-		@apply flex flex-col gap-2.5
+		@apply flex flex-col gap-2.5;
 	}
 
 	&__item {
-		box-shadow: 0 1.25rem 3rem 0 #00000026
-		@apply w-150 h-25 rounded-7.5 relative
+		box-shadow: 0 1.25rem 3rem 0 #00000026;
+		@apply w-150 h-25 rounded-7.5 relative;
 
 		&__container {
-			@apply p-6.25 flex gap-21.25 items-center
+			@apply p-6.25 flex gap-21.25 items-center;
 		}
 
 		&__trending {
-			@apply w-25 text-8 fw-700
+			@apply w-25 text-8 fw-700;
 		}
 
 		&__info {
-			@apply w-57.5 text-right leading-none absolute right-6.25
+			@apply w-57.5 text-right leading-none absolute right-6.25;
 
 			&__tr {
-				@apply fw-extrabold text-11.25
+				@apply fw-extrabold text-11.25;
 			}
 
 			&__players {
-				@apply text-7.5
+				@apply text-7.5;
 			}
 		}
 	}
 
 	&__update_at {
-		@apply w-150 h-12.5
-		@apply fw-bold text-7.5
-		@apply flex flex-col justify-center items-center
+		@apply w-150 h-12.5;
+		@apply fw-bold text-7.5;
+		@apply flex flex-col justify-center items-center;
 	}
 }
 </style>

@@ -69,5 +69,5 @@ import rank_statistic from '@/v2/pages/tetrio/rank/_statistic.vue'
 </template>
 
 <style lang="scss">
-@import "@/v2/styles/main"
+@use "@/v2/styles/main";
 </style>

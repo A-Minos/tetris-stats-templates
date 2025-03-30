@@ -137,51 +137,51 @@ const stateImage = asyncComputed(async () => {
 </template>
 
 <style lang="scss">
-@import "@/v1/styles/main"
+@use "@/v1/styles/main";
 </style>
 
 <style lang="scss" scoped>
-@import "@/v1/styles/main"
+@use "@/v1/styles/main";
 
 .binding {
-	@extend .font-template
-	@apply w-fit p-7.5 bg-[#f1f1f1]
+	@extend .font-template;
+	@apply w-fit p-7.5 bg-[#f1f1f1];
 
 	&__container {
-		@apply flex flex-col gap-3.75
+		@apply flex flex-col gap-3.75;
 	}
 
 	&__header {
-		@apply flex justify-center items-center gap-8
+		@apply flex justify-center items-center gap-8;
 
 		&__avatar {
-			@apply w-24 h-24
-			@apply rounded-5
-			@apply drop-shadow-[0_0.6875rem_1.4375rem_#00000038]
+			@apply w-24 h-24;
+			@apply rounded-5;
+			@apply drop-shadow-[0_0.6875rem_1.4375rem_#00000038];
 		}
 
 		&__state {
-			@apply w-32 h-14
-			@apply rounded-5
+			@apply w-32 h-14;
+			@apply rounded-5;
 		}
 	}
 
 	&__content {
-		@apply text-6.25 text-center fw-350
+		@apply text-6.25 text-center fw-350;
 
 		&__bot-name,
 		&__symbol {
-			@apply fw-400
+			@apply fw-400;
 		}
 
 		&__platform,
 		&__user-name {
-			@apply fw-extrabold
+			@apply fw-extrabold;
 		}
 	}
 
 	&__footer {
-		@apply text-[#52525c] text-center
+		@apply text-[#52525c] text-center;
 	}
 }
 </style>
